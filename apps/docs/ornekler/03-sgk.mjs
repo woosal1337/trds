@@ -1,5 +1,5 @@
-// Sosyal Güvenlik Kurumu ana sayfası, birebir. Yalnız TRDS bileşenleri ile.
-// Kaynak: https://www.sgk.gov.tr — 6 Eylül 2026 tarihli içerik.
+// Sosyal Güvenlik Kurumu ana sayfası, birebir. Yalnız Kiriş bileşenleri ile.
+// Kaynak: https://www.sgk.gov.tr · 6 Eylül 2026 tarihli içerik.
 // Bölümler gerçek sayfa ile aynı sırada. Manşet fotoğrafı düşer, slogan kalır.
 
 const duyurular = [
@@ -22,7 +22,7 @@ const haberler = [
 const [ilkHaber, ...digerHaberler] = haberler;
 
 const simgeKart = (simge, ad, aciklama) => `
-      <a class="trds-simge-kart" href="#"><span class="trds-simge-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-${simge}"/></svg></span><span class="trds-simge-kart__ad">${ad}</span><p class="trds-simge-kart__aciklama">${aciklama}</p></a>`;
+      <a class="kiris-simge-kart" href="#"><span class="kiris-simge-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-${simge}"/></svg></span><span class="kiris-simge-kart__ad">${ad}</span><p class="kiris-simge-kart__aciklama">${aciklama}</p></a>`;
 
 export const ornek = {
   slug: 'sgk',
@@ -47,71 +47,71 @@ export const ornek = {
   yasalBaglantilar: ['KVKK', 'Aydınlatma Metni', 'Yasal Uyarı', 'RSS', 'Site Haritası'],
   telif: 'Tüm Hakları Saklıdır © 2025 Basın ve Halkla İlişkiler Müşavirliği / Bilgi Teknolojileri Genel Müdürlüğü',
   govde: `
-<section class="trds-kahraman">
-  <div class="trds-kap">
-    <p class="trds-kahraman__ust">Sosyal Güvenlik Kurumu</p>
-    <h1 class="trds-kahraman__baslik">Daima Yanınızda</h1>
-    <p class="trds-kahraman__metin">Çalışan, işveren, emekli ve hak sahibi için sosyal güvenlik işlemleri tek adreste.</p>
-    <div class="trds-kart-izgara trds-kart-izgara--3 trds-u-alt-0">
-      <div class="trds-kart"><span class="trds-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-user"/></svg></span><h2 class="trds-kart__baslik"><a href="#">Çalışan ve İşveren</a></h2><p class="trds-kart__ozet">Çalışan ve İşveren Hakkında Bilmek İstedikleriniz</p></div>
-      <div class="trds-kart"><span class="trds-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-socialsecurity"/></svg></span><h2 class="trds-kart__baslik"><a href="#">Emeklilik</a></h2><p class="trds-kart__ozet">Emeklilik Hakkında Bilmek İstedikleriniz</p></div>
-      <div class="trds-kart"><span class="trds-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-health"/></svg></span><h2 class="trds-kart__baslik"><a href="#">Genel Sağlık Sigortası</a></h2><p class="trds-kart__ozet">Genel Sağlık Sigortası Hakkında Bilmek İstedikleriniz</p></div>
+<section class="kiris-kahraman">
+  <div class="kiris-kap">
+    <p class="kiris-kahraman__ust">Sosyal Güvenlik Kurumu</p>
+    <h1 class="kiris-kahraman__baslik">Daima Yanınızda</h1>
+    <p class="kiris-kahraman__metin">Çalışan, işveren, emekli ve hak sahibi için sosyal güvenlik işlemleri tek adreste.</p>
+    <div class="kiris-kart-izgara kiris-kart-izgara--3 kiris-u-alt-0">
+      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-user"/></svg></span><h2 class="kiris-kart__baslik"><a href="#">Çalışan ve İşveren</a></h2><p class="kiris-kart__ozet">Çalışan ve İşveren Hakkında Bilmek İstedikleriniz</p></div>
+      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-socialsecurity"/></svg></span><h2 class="kiris-kart__baslik"><a href="#">Emeklilik</a></h2><p class="kiris-kart__ozet">Emeklilik Hakkında Bilmek İstedikleriniz</p></div>
+      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-health"/></svg></span><h2 class="kiris-kart__baslik"><a href="#">Genel Sağlık Sigortası</a></h2><p class="kiris-kart__ozet">Genel Sağlık Sigortası Hakkında Bilmek İstedikleriniz</p></div>
     </div>
   </div>
 </section>
 
-<section class="trds-bolum" aria-labelledby="duyurular">
-  <div class="trds-kap">
-    <div class="trds-bolum__ust">
-      <h2 class="trds-bolum__baslik" id="duyurular">Duyurular</h2>
-      <a class="trds-link" href="#">Tüm Duyurular</a>
+<section class="kiris-bolum" aria-labelledby="duyurular">
+  <div class="kiris-kap">
+    <div class="kiris-bolum__ust">
+      <h2 class="kiris-bolum__baslik" id="duyurular">Duyurular</h2>
+      <a class="kiris-link" href="#">Tüm Duyurular</a>
     </div>
-    <ul class="trds-kayitlar">${duyurular.map((d) => `
-      <li class="trds-kayit"><p class="trds-kayit__ust">${d.tarih} · ${d.birim}</p><h3 class="trds-kayit__baslik"><a href="#">${d.ad}</a></h3></li>`).join('')}
+    <ul class="kiris-kayitlar">${duyurular.map((d) => `
+      <li class="kiris-kayit"><p class="kiris-kayit__ust">${d.tarih} · ${d.birim}</p><h3 class="kiris-kayit__baslik"><a href="#">${d.ad}</a></h3></li>`).join('')}
     </ul>
     </div>
 </section>
 
-<section class="trds-bolum trds-bolum--yumusak" aria-labelledby="ihale">
-  <div class="trds-kap">
-    <h2 class="trds-bolum__baslik" id="ihale">İhale ve Satış İlanları</h2>
-    <div class="trds-kart-izgara trds-kart-izgara--4 trds-kart-izgara--sik">
-      <div class="trds-kart trds-kart--sade"><h3 class="trds-kart__baslik"><a href="#">Gayrimenkul Satış İhaleleri</a></h3></div>
-      <div class="trds-kart trds-kart--sade"><h3 class="trds-kart__baslik"><a href="#">Diğer İhaleler</a></h3></div>
-      <div class="trds-kart trds-kart--sade"><h3 class="trds-kart__baslik"><a href="#">Hacizli Malların Satış İlanları</a></h3></div>
-      <div class="trds-kart trds-kart--sade"><h3 class="trds-kart__baslik"><a href="#">EKAP</a></h3></div>
+<section class="kiris-bolum kiris-bolum--yumusak" aria-labelledby="ihale">
+  <div class="kiris-kap">
+    <h2 class="kiris-bolum__baslik" id="ihale">İhale ve Satış İlanları</h2>
+    <div class="kiris-kart-izgara kiris-kart-izgara--4 kiris-kart-izgara--sik">
+      <div class="kiris-kart kiris-kart--sade"><h3 class="kiris-kart__baslik"><a href="#">Gayrimenkul Satış İhaleleri</a></h3></div>
+      <div class="kiris-kart kiris-kart--sade"><h3 class="kiris-kart__baslik"><a href="#">Diğer İhaleler</a></h3></div>
+      <div class="kiris-kart kiris-kart--sade"><h3 class="kiris-kart__baslik"><a href="#">Hacizli Malların Satış İlanları</a></h3></div>
+      <div class="kiris-kart kiris-kart--sade"><h3 class="kiris-kart__baslik"><a href="#">EKAP</a></h3></div>
     </div>
     </div>
 </section>
 
-<section class="trds-bolum" aria-labelledby="haberler">
-  <div class="trds-kap">
-    <div class="trds-bolum__ust">
-      <h2 class="trds-bolum__baslik" id="haberler">Haberler</h2>
-      <a class="trds-link" href="#">Tüm Haberler</a>
+<section class="kiris-bolum" aria-labelledby="haberler">
+  <div class="kiris-kap">
+    <div class="kiris-bolum__ust">
+      <h2 class="kiris-bolum__baslik" id="haberler">Haberler</h2>
+      <a class="kiris-link" href="#">Tüm Haberler</a>
     </div>
-    <div class="trds-izgara">
-      <div class="trds-sutun trds-sutun--7">
-        <article class="trds-kart">
-          <p class="trds-kart__kurum">${ilkHaber.tarih} · Başkanlık</p>
-          <h3 class="trds-kart__baslik"><a href="#">${ilkHaber.ad}</a></h3>
-          <p class="trds-kart__ozet">${ilkHaber.ozet}</p>
-          <p class="trds-kart__alt"><a class="trds-link" href="#">Devamını Oku<span class="trds-gorsel-gizli">: ${ilkHaber.ad}</span></a></p>
+    <div class="kiris-izgara">
+      <div class="kiris-sutun kiris-sutun--7">
+        <article class="kiris-kart">
+          <p class="kiris-kart__kurum">${ilkHaber.tarih} · Başkanlık</p>
+          <h3 class="kiris-kart__baslik"><a href="#">${ilkHaber.ad}</a></h3>
+          <p class="kiris-kart__ozet">${ilkHaber.ozet}</p>
+          <p class="kiris-kart__alt"><a class="kiris-link" href="#">Devamını Oku<span class="kiris-gorsel-gizli">: ${ilkHaber.ad}</span></a></p>
         </article>
       </div>
-      <div class="trds-sutun trds-sutun--5">
-        <ul class="trds-liste trds-liste--sade trds-liste--aralikli trds-u-ust-0">${digerHaberler.map((h) => `
-          <li><p class="trds-ust-baslik trds-u-alt-0">${h.tarih} · Başkanlık</p><a class="trds-link" href="#">${h.ad}</a></li>`).join('')}
+      <div class="kiris-sutun kiris-sutun--5">
+        <ul class="kiris-liste kiris-liste--sade kiris-liste--aralikli kiris-u-ust-0">${digerHaberler.map((h) => `
+          <li><p class="kiris-ust-baslik kiris-u-alt-0">${h.tarih} · Başkanlık</p><a class="kiris-link" href="#">${h.ad}</a></li>`).join('')}
         </ul>
       </div>
     </div>
     </div>
 </section>
 
-<section class="trds-bolum trds-bolum--yumusak" aria-labelledby="euyg">
-  <div class="trds-kap">
-    <h2 class="trds-bolum__baslik" id="euyg">E-Uygulamalar</h2>
-    <div class="trds-kart-izgara trds-kart-izgara--4 trds-kart-izgara--sik">
+<section class="kiris-bolum kiris-bolum--yumusak" aria-labelledby="euyg">
+  <div class="kiris-kap">
+    <h2 class="kiris-bolum__baslik" id="euyg">E-Uygulamalar</h2>
+    <div class="kiris-kart-izgara kiris-kart-izgara--4 kiris-kart-izgara--sik">
       ${simgeKart('state', 'Kamu', 'Kamu çalışanları için')}
       ${simgeKart('user', 'Vatandaş', 'Bireysel işlemler için')}
       ${simgeKart('business', 'İşveren', 'Kurumsal işlemler için')}
@@ -120,31 +120,31 @@ export const ornek = {
     </div>
 </section>
 
-<section class="trds-bolum" aria-labelledby="sms">
-  <div class="trds-kap">
-    <h2 class="trds-bolum__baslik" id="sms">Cep Telefonu Kayıt</h2>
-    <div class="trds-vurgu">
-      <p class="trds-govde">Kurumumuz tarafından verilen sigortalı, işveren, emekli ve hak sahiplerine ait muhasebe ödemeleri, medula hastane-eczane-optik, emeklilik, hak sahipliği ve sigortalılık işlemleri vb. konularda Cep Telefonunuza Bilgilendirme Mesajı Gelmesi için SGK SMS Bilgilendirme Sistemine Cep Telefonu Numaranızı Kayıt Ediniz.</p>
-      <p class="trds-govde">Sosyal Güvenlik Kurumu SMS Bilgilendirme Sistemi ile aşağıdaki konularda bilgilendirme yapılmaktadır:</p>
-      <ul class="trds-liste trds-liste--madde">
+<section class="kiris-bolum" aria-labelledby="sms">
+  <div class="kiris-kap">
+    <h2 class="kiris-bolum__baslik" id="sms">Cep Telefonu Kayıt</h2>
+    <div class="kiris-vurgu">
+      <p class="kiris-govde">Kurumumuz tarafından verilen sigortalı, işveren, emekli ve hak sahiplerine ait muhasebe ödemeleri, medula hastane-eczane-optik, emeklilik, hak sahipliği ve sigortalılık işlemleri vb. konularda Cep Telefonunuza Bilgilendirme Mesajı Gelmesi için SGK SMS Bilgilendirme Sistemine Cep Telefonu Numaranızı Kayıt Ediniz.</p>
+      <p class="kiris-govde">Sosyal Güvenlik Kurumu SMS Bilgilendirme Sistemi ile aşağıdaki konularda bilgilendirme yapılmaktadır:</p>
+      <ul class="kiris-liste kiris-liste--madde">
         <li>Sigortalılık hizmetleri (işe giriş - çıkış vb.)</li>
         <li>Emeklilik hizmetleri (ikramiye, aylık vb.)</li>
         <li>GSS (e-reçete, hastane optik vb.)</li>
         <li>Ödeme (rapor, cenaze, evlilik vb.)</li>
         <li>Evrak başvuru ve takip vb.</li>
       </ul>
-      <p class="trds-govde trds-u-alt-0">SMS Bilgilendirme Sistemimize kayıt olmak için <a class="trds-link" href="https://www.turkiye.gov.tr/sgk-cep-telefonu-bilgisi-beyan">e-Devlet üzerinden cep telefonu bilgisi beyanı</a> sayfasına gidin.</p>
+      <p class="kiris-govde kiris-u-alt-0">SMS Bilgilendirme Sistemimize kayıt olmak için <a class="kiris-link" href="https://www.turkiye.gov.tr/sgk-cep-telefonu-bilgisi-beyan">e-Devlet üzerinden cep telefonu bilgisi beyanı</a> sayfasına gidin.</p>
     </div>
     </div>
 </section>
 
-<section class="trds-bolum trds-bolum--yumusak" aria-labelledby="iletisim">
-  <div class="trds-kap">
-    <h2 class="trds-bolum__baslik" id="iletisim">İletişim</h2>
-    <p class="trds-govde">Daha fazla bilgi için lütfen <a class="trds-link" href="#">bizimle iletişime geçin</a>. Adres, santral ve Alo 170 hattı sayfanın altındadır.</p>
-    <div class="trds-kart-izgara trds-kart-izgara--2 trds-kart-izgara--sik">
-      <div class="trds-kart trds-kart--sade"><p class="trds-kart__kurum">Merkez birimleri</p><h3 class="trds-kart__baslik"><a href="#">Birimlerin listesi</a></h3></div>
-      <div class="trds-kart trds-kart--sade"><p class="trds-kart__kurum">Taşra teşkilatı</p><h3 class="trds-kart__baslik"><a href="#">İl müdürlüklerinin listesi</a></h3></div>
+<section class="kiris-bolum kiris-bolum--yumusak" aria-labelledby="iletisim">
+  <div class="kiris-kap">
+    <h2 class="kiris-bolum__baslik" id="iletisim">İletişim</h2>
+    <p class="kiris-govde">Daha fazla bilgi için lütfen <a class="kiris-link" href="#">bizimle iletişime geçin</a>. Adres, santral ve Alo 170 hattı sayfanın altındadır.</p>
+    <div class="kiris-kart-izgara kiris-kart-izgara--2 kiris-kart-izgara--sik">
+      <div class="kiris-kart kiris-kart--sade"><p class="kiris-kart__kurum">Merkez birimleri</p><h3 class="kiris-kart__baslik"><a href="#">Birimlerin listesi</a></h3></div>
+      <div class="kiris-kart kiris-kart--sade"><p class="kiris-kart__kurum">Taşra teşkilatı</p><h3 class="kiris-kart__baslik"><a href="#">İl müdürlüklerinin listesi</a></h3></div>
     </div>
     </div>
 </section>

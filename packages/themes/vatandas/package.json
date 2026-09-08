@@ -1,7 +1,7 @@
 {
-  "name": "@tr-ds/theme-vatandas",
+  "name": "@kiris-ds/theme-vatandas",
   "version": "1.0.1",
-  "description": "TRDS Vatandaş teması. Tek bir marka renginden üretilir.",
+  "description": "Kiriş Vatandaş teması. Tek bir marka renginden üretilir.",
   "license": "MIT",
   "main": "dist/tema.css",
   "exports": {
@@ -14,7 +14,7 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "@tr-ds/core": "1.0.1"
+    "@kiris-ds/core": "1.0.1"
   },
   "author": "Ege Chelebi <ege@chele.bi>",
   "homepage": "https://trds.chele.bi",
@@ -22,7 +22,7 @@
     "url": "https://github.com/woosal1337/trds/issues"
   },
   "keywords": [
-    "trds",
+    "kiris",
     "design-system",
     "turkiye",
     "gov",

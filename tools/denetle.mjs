@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// TRDS bütünlük denetimi. Bağımlılık yok.
+// Kiriş bütünlük denetimi. Bağımlılık yok.
 //
 //   node tools/denetle.mjs
 //
@@ -11,7 +11,7 @@
 //   2. Her bileşen kimliği benzersiz mi
 //   3. Her bileşenin en az bir örneği var mı
 //   4. Her örnekteki CSS sınıfı derlenmiş CSS içinde var mı
-//   5. Her `data-trds` davranışı JavaScript içinde başlatılıyor mu
+//   5. Her `data-kiris` davranışı JavaScript içinde başlatılıyor mu
 //   6. Her WCAG ölçütü geçerli bir numara mı
 
 import { readFile } from 'node:fs/promises';
@@ -36,8 +36,8 @@ const GRUP_IDLERI = new Set(GRUPLAR.map((g) => g.id));
 const WCAG_KALIP = /^\d\.\d\.\d{1,2}$/;
 
 async function main() {
-  const css = await oku('packages/core/dist/trds.css');
-  const js = await oku('packages/core/dist/trds.js');
+  const css = await oku('packages/core/dist/kiris.css');
+  const js = await oku('packages/core/dist/kiris.js');
 
   // 1, 2, 3, 6
   const gorulen = new Set();
@@ -64,15 +64,15 @@ async function main() {
     }
   }
 
-  // 4 — örneklerdeki her trds- sınıfı derlenmiş CSS içinde geçmeli
+  // 4 · örneklerdeki her kiris- sınıfı derlenmiş CSS içinde geçmeli
   if (css) {
-    const cssSiniflari = new Set([...css.matchAll(/\.(trds-[a-z0-9_-]+)/g)].map((e) => e[1]));
+    const cssSiniflari = new Set([...css.matchAll(/\.(kiris-[a-z0-9_-]+)/g)].map((e) => e[1]));
     const eksik = new Map();
     for (const b of BILESENLER) {
       for (const ornek of b.ornekler ?? []) {
         for (const eslesme of ornek.html.matchAll(/class="([^"]+)"/g)) {
           for (const sinif of eslesme[1].split(/\s+/)) {
-            if (!sinif.startsWith('trds-')) continue;
+            if (!sinif.startsWith('kiris-')) continue;
             if (cssSiniflari.has(sinif)) continue;
             if (!eksik.has(sinif)) eksik.set(sinif, new Set());
             eksik.get(sinif).add(b.id);
@@ -85,28 +85,28 @@ async function main() {
     }
   }
 
-  // 4b — örnek sayfalardaki her trds- sınıfı da CSS içinde geçmeli
+  // 4b · örnek sayfalardaki her kiris- sınıfı da CSS içinde geçmeli
   if (css) {
     const { readdir } = await import('node:fs/promises');
-    const cssSiniflari = new Set([...css.matchAll(/\.(trds-[a-z0-9_-]+)/g)].map((e) => e[1]));
+    const cssSiniflari = new Set([...css.matchAll(/\.(kiris-[a-z0-9_-]+)/g)].map((e) => e[1]));
     const klasor = join(KOK, 'apps', 'docs', 'ornekler');
     const dosyalar = (await readdir(klasor).catch(() => [])).filter((d) => d.endsWith('.mjs'));
     for (const dosya of dosyalar) {
       const { ornek } = await import(join(klasor, dosya));
       for (const eslesme of ornek.govde.matchAll(/class="([^"]+)"/g)) {
         for (const sinif of eslesme[1].split(/\s+/)) {
-          if (sinif.startsWith('trds-') && !cssSiniflari.has(sinif)) {
+          if (sinif.startsWith('kiris-') && !cssSiniflari.has(sinif)) {
             bildir('ornek-css', `.${sinif} CSS içinde yok. Örnek: ${ornek.slug}`);
           }
-          if (!sinif.startsWith('trds-')) {
-            bildir('ornek-sinif', `${ornek.slug}: "${sinif}" TRDS dışı bir sınıf. Örnekler yalnız TRDS bileşeni kullanır.`);
+          if (!sinif.startsWith('kiris-')) {
+            bildir('ornek-sinif', `${ornek.slug}: "${sinif}" Kiriş dışı bir sınıf. Örnekler yalnız Kiriş bileşeni kullanır.`);
           }
         }
       }
     }
   }
 
-  // 4c — üretilmiş örnek sayfada bir metin çerçevede bir kez durur.
+  // 4c · üretilmiş örnek sayfada bir metin çerçevede bir kez durur.
   // Çerçeve: başlık çubuğu, alt bilgi ve gövdedeki ikinci düzey başlıklar.
   // Aynı bağlantı metni alt bilgide iki kez, veya alt bilgi ile menüde birer
   // kez dursa denetim durur.
@@ -127,8 +127,8 @@ async function main() {
 
       const altMetinler = [
         ...metinler(altBilgi, /<a [^>]*>([\s\S]*?)<\/a>/g),
-        ...metinler(altBilgi, /<p class="trds-alt-bilgi__(?:sutun-baslik|kurum|ust-kurum|not|telif)">([\s\S]*?)<\/p>/g),
-        ...metinler(altBilgi, /<span class="trds-alt-bilgi__iletisim-etiket">([\s\S]*?)<\/span>/g)
+        ...metinler(altBilgi, /<p class="kiris-alt-bilgi__(?:sutun-baslik|kurum|ust-kurum|not|telif)">([\s\S]*?)<\/p>/g),
+        ...metinler(altBilgi, /<span class="kiris-alt-bilgi__iletisim-etiket">([\s\S]*?)<\/span>/g)
       ];
       const gorulen = new Set();
       for (const m of altMetinler) {
@@ -137,7 +137,7 @@ async function main() {
       }
       // Kurum adı sayfanın başında ve sonunda birer kez durur. Bu bir tekrar
       // değil, kimliktir. Menü karşılaştırması marka bağlantısını atlar.
-      const menu = new Set(metinler(baslik.replace(/<a class="trds-baslik-cubugu__marka"[\s\S]*?<\/a>/, ''), /<a [^>]*>([\s\S]*?)<\/a>/g));
+      const menu = new Set(metinler(baslik.replace(/<a class="kiris-baslik-cubugu__marka"[\s\S]*?<\/a>/, ''), /<a [^>]*>([\s\S]*?)<\/a>/g));
       const basliklar = new Set(metinler(govde, /<h[23][^>]*>([\s\S]*?)<\/h[23]>/g));
       for (const m of gorulen) {
         if (menu.has(m)) bildir('alt-bilgi-tekrar', `${slug}: "${m}" hem menüde hem alt bilgide duruyor.`);
@@ -146,7 +146,7 @@ async function main() {
     }
   }
 
-  // 4d — React ve Vue durumu tanım paketiyle örtüşmeli. Tanımı olan parça
+  // 4d · React ve Vue durumu tanım paketiyle örtüşmeli. Tanımı olan parça
   // 'stable', olmayan 'yok'. Her tanım kayıt defterinde bir parçaya bağlanır.
   {
     const { TANIMLAR, SARMALAYICISIZ } = await import(join(KOK, 'packages', 'tanim', 'src', 'index.js'));
@@ -161,7 +161,7 @@ async function main() {
     for (const t of TANIMLAR) if (!BILESENLER.some((b) => b.id === t.id)) bildir('sarmalayici', `${t.id}: tanım var, kayıt defterinde parça yok.`);
   }
 
-  // 4e — Her sayfa sosyal paylaşım etiketlerini taşır. Görsel 1200 × 630 olur.
+  // 4e · Her sayfa sosyal paylaşım etiketlerini taşır. Görsel 1200 × 630 olur.
   {
     const { readdir } = await import('node:fs/promises');
     const siteKlasoru = join(KOK, 'apps', 'docs', 'site');
@@ -183,7 +183,7 @@ async function main() {
       }
     }
 
-    const gorselYolu = join(siteKlasoru, 'varliklar', 'trds-sosyal-onizleme.png');
+    const gorselYolu = join(siteKlasoru, 'varliklar', 'kiris-sosyal-onizleme.png');
     const gorsel = await readFile(gorselYolu).catch(() => null);
     if (!gorsel) {
       bildir('sosyal', 'Sosyal paylaşım görseli yok.');
@@ -192,19 +192,19 @@ async function main() {
     }
   }
 
-  // 5 — her data-trds davranışı JavaScript içinde başlatılmalı
+  // 5 · her data-kiris davranışı JavaScript içinde başlatılmalı
   if (js) {
     const davranislar = new Set();
     for (const b of BILESENLER) {
       for (const ornek of b.ornekler ?? []) {
-        for (const eslesme of ornek.html.matchAll(/data-trds="([a-z-]+)"/g)) {
+        for (const eslesme of ornek.html.matchAll(/data-kiris="([a-z-]+)"/g)) {
           davranislar.add(eslesme[1]);
         }
       }
     }
     for (const davranis of davranislar) {
       if (!js.includes(`'${davranis}'`) && !js.includes(`"${davranis}"`)) {
-        bildir('js', `data-trds="${davranis}" için başlatıcı yok.`);
+        bildir('js', `data-kiris="${davranis}" için başlatıcı yok.`);
       }
     }
   }

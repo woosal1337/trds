@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// TRDS token build. No dependencies. Node 20 or later.
+// Kiriş token build. No dependencies. Node 20 or later.
 //
 //   node packages/tokens/build.mjs
 //
@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const KOK = dirname(fileURLToPath(import.meta.url));
 const KAYNAK = join(KOK, 'src');
 const CIKTI = join(KOK, 'dist');
-const ONEK = '--trds';
+const ONEK = '--kiris';
 
 // ---------------------------------------------------------------- yardımcılar
 
@@ -155,17 +155,17 @@ async function main() {
     .map(([yol, deger]) => [`${ONEK}-${yol}`, deger]);
 
   const css = [
-    '/* TRDS tasarım belirteçleri. Üretilmiş dosya. Elle değiştirmeyin. */',
-    `/* Kaynak: packages/tokens/src — üretim: node packages/tokens/build.mjs */`,
+    '/* Kiriş tasarım belirteçleri. Üretilmiş dosya. Elle değiştirmeyin. */',
+    `/* Kaynak: packages/tokens/src · üretim: node packages/tokens/build.mjs */`,
     '',
     cssBlogu(acikGirdiler, ':root'),
     '',
     '/* Koyu tema. Kullanıcı seçimi açık temayı her zaman kazanır. */',
     '@media (prefers-color-scheme: dark) {',
-    cssBlogu(koyuFarklar, '  :root:not([data-trds-tema="acik"])').replace(/^/gm, '  ').trim(),
+    cssBlogu(koyuFarklar, '  :root:not([data-kiris-tema="acik"])').replace(/^/gm, '  ').trim(),
     '}',
     '',
-    cssBlogu(koyuFarklar, ':root[data-trds-tema="koyu"]'),
+    cssBlogu(koyuFarklar, ':root[data-kiris-tema="koyu"]'),
     '',
     '/* Yüksek karşıtlık kipi. Kenarlıkları kalınlaştırır, tonları kaldırır. */',
     cssBlogu(
@@ -178,18 +178,18 @@ async function main() {
         [`${ONEK}-kenarlik-ince`, '2px'],
         [`${ONEK}-kenarlik-orta`, '3px']
       ],
-      ':root[data-trds-tema="yuksek"]'
+      ':root[data-kiris-tema="yuksek"]'
     ),
     ''
   ].join('\n');
 
-  await writeFile(join(CIKTI, 'trds-belirtecler.css'), css, 'utf8');
+  await writeFile(join(CIKTI, 'kiris-belirtecler.css'), css, 'utf8');
 
   // --- JSON ve JavaScript ---------------------------------------------------
   const duzJson = Object.fromEntries([...acik.cozulmus]);
-  await writeFile(join(CIKTI, 'trds-belirtecler.json'), JSON.stringify(duzJson, null, 2), 'utf8');
+  await writeFile(join(CIKTI, 'kiris-belirtecler.json'), JSON.stringify(duzJson, null, 2), 'utf8');
   await writeFile(
-    join(CIKTI, 'trds-belirtecler.js'),
+    join(CIKTI, 'kiris-belirtecler.js'),
     `// Üretilmiş dosya. Elle değiştirmeyin.\nexport const belirtecler = ${JSON.stringify(duzJson, null, 2)};\nexport default belirtecler;\n`,
     'utf8'
   );

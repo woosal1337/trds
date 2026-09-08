@@ -47,5 +47,5 @@ const sunucu = createServer(async (istek, cevap) => {
 });
 
 sunucu.listen(PORT, () => {
-  console.log(`TRDS belgeleri: http://localhost:${PORT}`);
+  console.log(`Kiriş belgeleri: http://localhost:${PORT}`);
 });

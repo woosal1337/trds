@@ -1,4 +1,4 @@
-// TRDS registry — the single source of truth.
+// Kiriş registry · the single source of truth.
 //
 // The documentation site, the component index, the integrations page, the
 // README table and the coverage report all read this file. Nothing about a
@@ -51,12 +51,12 @@ export const ENTEGRASYONLAR = [
     id: 'html',
     ad: 'Düz HTML ve CSS',
     ozet: 'Yapı taşı budur. Diğer bütün entegrasyonlar bunun üstüne kurulur.',
-    paket: '@tr-ds/core',
+    paket: '@kiris-ds/core',
     durum: 'stable',
-    kurulum: 'npm install @tr-ds/core',
+    kurulum: 'npm install @kiris-ds/core',
     kullanim: [
-      '<link rel="stylesheet" href="/trds/trds.min.css">',
-      '<script type="module" src="/trds/trds.min.js"></script>'
+      '<link rel="stylesheet" href="/kiris/kiris.min.css">',
+      '<script type="module" src="/kiris/kiris.min.js"></script>'
     ].join('\n'),
     notlar: [
       'JavaScript olmadan da her bileşen okunur ve kullanılır.',
@@ -67,12 +67,12 @@ export const ENTEGRASYONLAR = [
     id: 'react',
     ad: 'React',
     ozet: 'Çekirdek sınıfları saran ince bir bileşen katmanı. İş mantığı taşımaz.',
-    paket: '@tr-ds/react',
+    paket: '@kiris-ds/react',
     durum: 'stable',
-    kurulum: 'npm install @tr-ds/react @tr-ds/core',
+    kurulum: 'npm install @kiris-ds/react @kiris-ds/core @kiris-ds/theme-vatandas',
     kullanim: [
-      "import '@tr-ds/core/css';",
-      "import { Dugme, KimlikNoGirisi } from '@tr-ds/react';",
+      "import '@kiris-ds/core/css';",
+      "import { Dugme, KimlikNoGirisi } from '@kiris-ds/react';",
       '',
       'export function Basvuru() {',
       '  return (',
@@ -85,7 +85,7 @@ export const ENTEGRASYONLAR = [
     ].join('\n'),
     notlar: [
       'React 18 ve 19 desteklenir. Paket düz JavaScript’tir, JSX derleyicisi gerektirmez.',
-      'Her bileşen @tr-ds/tanim içindeki tek tanımdan üretilir. React ve Vue çıktısı testte birebir karşılaştırılır.',
+      'Her bileşen @kiris-ds/tanim içindeki tek tanımdan üretilir. React ve Vue çıktısı testte birebir karşılaştırılır.',
       'Form bileşenleri `ref` iletir ve bilinmeyen özellikleri kök öğeye geçirir. Yerleşim ve kimlik bileşenleri sabit bir özellik listesi taşır.'
     ]
   },
@@ -93,13 +93,13 @@ export const ENTEGRASYONLAR = [
     id: 'nextjs',
     ad: 'Next.js',
     ozet: 'App Router ile sunucu tarafında işlenir. Bileşenler istemci tarafına yalnız gerektiğinde iner.',
-    paket: '@tr-ds/react',
+    paket: '@kiris-ds/react',
     durum: 'beta',
-    kurulum: 'npm install @tr-ds/react @tr-ds/core',
+    kurulum: 'npm install @kiris-ds/react @kiris-ds/core @kiris-ds/theme-vatandas',
     kullanim: [
       "// app/layout.tsx",
-      "import '@tr-ds/core/css';",
-      "import '@tr-ds/theme-vatandas';",
+      "import '@kiris-ds/core/css';",
+      "import '@kiris-ds/theme-vatandas';",
       '',
       'export default function RootLayout({ children }) {',
       '  return (',
@@ -118,40 +118,40 @@ export const ENTEGRASYONLAR = [
     id: 'vue',
     ad: 'Vue',
     ozet: 'Çekirdeği saran ince bir bileşen katmanı. Şablon derleyicisi gerektirmez, çizim işlevi taşır.',
-    paket: '@tr-ds/vue',
+    paket: '@kiris-ds/vue',
     durum: 'stable',
-    kurulum: 'npm install @tr-ds/vue @tr-ds/core',
+    kurulum: 'npm install @kiris-ds/vue @kiris-ds/core',
     kullanim: [
       "import { createApp } from 'vue';",
-      "import { Trds } from '@tr-ds/vue';",
-      "import '@tr-ds/core/css';",
+      "import { Kiris } from '@kiris-ds/vue';",
+      "import '@kiris-ds/core/css';",
       '',
-      'createApp(App).use(Trds);',
+      'createApp(App).use(Kiris);',
       '',
       '<!-- App.vue -->',
       '<template>',
       '  <form>',
-      '    <TrdsKimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" />',
-      '    <TrdsDugme>Devam et</TrdsDugme>',
+      '    <KirisKimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" />',
+      '    <KirisDugme>Devam et</KirisDugme>',
       '  </form>',
       '</template>'
     ].join('\n'),
     notlar: [
       'Vue 3.5 ve üstü desteklenir. Bileşenler h() ile çizilir, .vue dosyası yoktur.',
-      'app.use(Trds) bütün bileşenleri Trds öneki ile kaydeder. Tek tek içe aktarmak da olur.',
-      'Davranış bağlandıktan sonra @tr-ds/core baslat() ile gelir. Sunucu tarafında aynı HTML üretilir.'
+      'app.use(Kiris) bütün bileşenleri Kiris öneki ile kaydeder. Tek tek içe aktarmak da olur.',
+      'Davranış bağlandıktan sonra @kiris-ds/core baslat() ile gelir. Sunucu tarafında aynı HTML üretilir.'
     ]
   },
   {
     id: 'angular',
     ad: 'Angular',
     ozet: 'CSS ve HTML bugün çalışır. Davranış için görünüm kurulduktan sonra baslat() çağrılır. Sarmalayıcı paket yol haritasında.',
-    paket: '@tr-ds/core',
+    paket: '@kiris-ds/core',
     durum: 'beta',
-    kurulum: 'npm install @tr-ds/core',
+    kurulum: 'npm install @kiris-ds/core',
     kullanim: [
       "import { AfterViewInit, Component, ElementRef } from '@angular/core';",
-      "import { baslat } from '@tr-ds/core';",
+      "import { baslat } from '@kiris-ds/core';",
       '',
       '@Component({',
       "  selector: 'app-basvuru',",
@@ -163,26 +163,26 @@ export const ENTEGRASYONLAR = [
       '}'
     ].join('\n'),
     notlar: [
-      "`angular.json` içinde styles listesine `node_modules/@tr-ds/core/dist/trds.css` eklenir.",
+      "`angular.json` içinde styles listesine `node_modules/@kiris-ds/core/dist/kiris.css` eklenir.",
       'Angular 17 ve üstü hedeflenir.',
-      'Angular bileşen sarmalayıcıları (`@tr-ds/angular`) yol haritasındadır.'
+      'Angular bileşen sarmalayıcıları (`@kiris-ds/angular`) yol haritasındadır.'
     ]
   },
   {
     id: 'dotnet',
     ad: 'ASP.NET Core',
     ozet: 'Kamu kurumlarında en yaygın sunucu tarafı yığındır. Tag Helper olarak sarılır.',
-    paket: '@tr-ds/core',
+    paket: '@kiris-ds/core',
     durum: 'degerlendiriliyor',
     kurulum: 'CSS ve JS dosyalarını wwwroot altına kopyalayın.',
     kullanim: [
-      '<link rel="stylesheet" href="~/lib/trds/trds.min.css" />',
-      '<script type="module" src="~/lib/trds/trds.min.js"></script>',
+      '<link rel="stylesheet" href="~/lib/kiris/kiris.min.css" />',
+      '<script type="module" src="~/lib/kiris/kiris.min.js"></script>',
       '',
-      '<trds-kimlik-no asp-for="TcKimlikNo" etiket="T.C. kimlik numaranız" />'
+      '<kiris-kimlik-no asp-for="TcKimlikNo" etiket="T.C. kimlik numaranız" />'
     ].join('\n'),
     notlar: [
-      'Sunucu tarafı doğrulaması için `Trds.Validators` NuGet paketi planlanmıştır.',
+      'Sunucu tarafı doğrulaması için `Kiris.Validators` NuGet paketi planlanmıştır.',
       'İstemci doğrulaması sunucu doğrulamasının yerine geçmez.'
     ]
   },
@@ -190,14 +190,14 @@ export const ENTEGRASYONLAR = [
     id: 'java',
     ad: 'Java ve Thymeleaf',
     ozet: 'Bakanlık uygulamalarında yaygındır. Parça şablonları olarak sarılır.',
-    paket: '@tr-ds/core',
+    paket: '@kiris-ds/core',
     durum: 'degerlendiriliyor',
     kurulum: 'CSS ve JS dosyalarını static klasörüne kopyalayın.',
     kullanim: [
-      '<div th:replace="~{trds/kimlik-no :: alan(',
+      '<div th:replace="~{kiris/kimlik-no :: alan(',
       "  ad='tckn', etiket='T.C. kimlik numaranız')}\"></div>"
     ].join('\n'),
-    notlar: ['Sunucu tarafı doğrulaması için `tr.gov.trds:validators` paketi planlanmıştır.']
+    notlar: ['Sunucu tarafı doğrulaması için `tr.gov.kiris:validators` paketi planlanmıştır.']
   }
 ];
 

@@ -1,7 +1,7 @@
 {
-  "name": "@tr-ds/identity",
+  "name": "@kiris-ds/identity",
   "version": "1.0.1",
-  "description": "TRDS simge seti (MIT) ve devlet kimlik parçaları. Kimlik parçaları kısıtlıdır. Bakınız LICENSE-IDENTITY.md.",
+  "description": "Kiriş simge seti ve marka işareti (MIT), devlet kimlik parçaları. Kimlik parçaları kısıtlıdır. Bakınız LICENSE-IDENTITY.md.",
   "type": "module",
   "license": "SEE LICENSE IN dist/LICENSE-IDENTITY.md",
   "files": [
@@ -11,7 +11,10 @@
     "LICENSE"
   ],
   "exports": {
-    "./sprite": "./dist/trds-simgeler.svg",
+    "./sprite": "./dist/kiris-simgeler.svg",
+    "./marka": "./dist/kiris-isaret.svg",
+    "./marka/*": "./dist/kiris-isaret-*.png",
+    "./favicon": "./dist/kiris-favicon.ico",
     "./isaret": "./dist/e-devlet-isaret.png",
     "./bayrak": "./dist/turk-bayragi.svg",
     "./simgeler/*": "./dist/simgeler/*"
@@ -26,7 +29,7 @@
     "url": "https://github.com/woosal1337/trds/issues"
   },
   "keywords": [
-    "trds",
+    "kiris",
     "design-system",
     "turkiye",
     "gov",

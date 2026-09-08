@@ -1,7 +1,7 @@
 {
-  "name": "@tr-ds/vue",
+  "name": "@kiris-ds/vue",
   "version": "1.0.1",
-  "description": "TRDS Vue sarmalayıcıları. İş mantığı taşımaz, çekirdek ile aynı HTML üretir.",
+  "description": "Kiriş Vue sarmalayıcıları. İş mantığı taşımaz, çekirdek ile aynı HTML üretir.",
   "type": "module",
   "license": "MIT",
   "main": "src/index.js",
@@ -17,8 +17,8 @@
     "vue": ">=3.5"
   },
   "dependencies": {
-    "@tr-ds/core": "1.0.1",
-    "@tr-ds/tanim": "1.0.1"
+    "@kiris-ds/core": "1.0.1",
+    "@kiris-ds/tanim": "1.0.1"
   },
   "scripts": {
     "test": "node --test test/"
@@ -29,7 +29,7 @@
     "url": "https://github.com/woosal1337/trds/issues"
   },
   "keywords": [
-    "trds",
+    "kiris",
     "design-system",
     "turkiye",
     "gov",

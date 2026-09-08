@@ -12,7 +12,7 @@ kurumların devralmasına izin verir.
 
 Bileşen henüz yok, ama ihtiyaç açık.
 
-- [ ] Ad, TRDS adlandırma kuralına göre belirlendi.
+- [ ] Ad, Kiriş adlandırma kuralına göre belirlendi.
 - [ ] Kısa açıklama yazıldı.
 - [ ] Bileşeni gösteren bir görsel eklendi.
 - [ ] Bir GitHub tartışması açıldı.
@@ -49,7 +49,7 @@ Ortak sisteme öneri. Görüş toplanıyor.
 - [ ] Alternatif adlar belgede takma ad olarak kaydedildi.
 - [ ] Gerekiyorsa bileşen sadeleştirildi veya bölündü.
 - [ ] Kuruma özgü hiçbir API kalmadı.
-- [ ] API ve belirteçler `trds` önekini taşır.
+- [ ] API ve belirteçler `kiris` önekini taşır.
 - [ ] Erişilebilirlik uzmanı bileşeni doğruladı.
 - [ ] Tasarımcı ve geliştirici birlikte çalışabiliyor.
 

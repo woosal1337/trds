@@ -1,5 +1,5 @@
 {
-  "$schema": "https://tr.gov.trds/schema/tokens.json",
+  "$schema": "https://tr.gov.kiris/schema/tokens.json",
   "$aciklama": "Temel belirteçler. Ham değerler. Bir bileşen bunları doğrudan kullanmaz. Anlamsal belirteçler bunlara bakar.",
   "renk": {
     "notr": {
@@ -85,7 +85,7 @@
     "aile": {
       "govde": {
         "$type": "fontFamily",
-        "$value": "\"TRDS Sans\", \"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "$value": "\"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         "$aciklama": "Her ağırlıkta ş, ğ, ı, İ, ö, ç ve ü harflerini taşımayan bir yazı tipi kullanmayın."
       },
       "tek": {

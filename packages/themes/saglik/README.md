@@ -1,20 +1,20 @@
-# @tr-ds/theme-saglik
+# @kiris-ds/theme-saglik
 
-TRDS Sağlık teması. Tek bir marka renginden üretilir.
+Kiriş Sağlık teması. Tek bir marka renginden üretilir.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/theme-saglik
+npm install @kiris-ds/theme-saglik
 ```
 
 ## Kullanım
 
 ```js
-import '@tr-ds/theme-saglik';
+import '@kiris-ds/theme-saglik';
 ```
 
 ## Lisans

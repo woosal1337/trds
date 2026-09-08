@@ -1,10 +1,10 @@
-// @tr-ds/core — davranış katmanı.
+// @kiris-ds/core · davranış katmanı.
 //
 // Kural: JavaScript bir iyileştirmedir, bir gereklilik değildir. Bu dosya
 // yüklenmezse her bileşen yine okunur ve kullanılır. Akordiyon açık kalır,
 // sekmeler ardışık bölümlere döner, doğrulama sunucuda yapılır.
 //
-// Her başlatıcı `data-trds="<ad>"` özniteliğine bakar. Bir öğe iki kez
+// Her başlatıcı `data-kiris="<ad>"` özniteliğine bakar. Bir öğe iki kez
 // başlatılmaz.
 
 import {
@@ -19,9 +19,9 @@ import {
   tarihDenetle,
   trKucuk,
   trSirala
-} from '@tr-ds/validators';
+} from '@kiris-ds/validators';
 
-const BASLATILDI = 'trdsHazir';
+const BASLATILDI = 'kirisHazir';
 
 const her = (secici, kok = document) => [...kok.querySelectorAll(secici)];
 
@@ -37,12 +37,12 @@ const bir = (eleman, ad, islev) => {
 // ---------------------------------------------------------------------------
 
 const hataGoster = (alan, girdi, mesaj) => {
-  const kutu = alan.querySelector('[data-trds-hata]');
+  const kutu = alan.querySelector('[data-kiris-hata]');
   if (!kutu) return;
   if (mesaj) {
-    kutu.innerHTML = `<span class="trds-gorsel-gizli">Hata:</span> ${mesaj}`;
+    kutu.innerHTML = `<span class="kiris-gorsel-gizli">Hata:</span> ${mesaj}`;
     kutu.hidden = false;
-    alan.classList.add('trds-alan--hata');
+    alan.classList.add('kiris-alan--hata');
     girdi.setAttribute('aria-invalid', 'true');
     if (!kutu.id) kutu.id = `${girdi.id || 'alan'}-hata`;
     const tanim = (girdi.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
@@ -52,7 +52,7 @@ const hataGoster = (alan, girdi, mesaj) => {
   } else {
     kutu.hidden = true;
     kutu.textContent = '';
-    alan.classList.remove('trds-alan--hata');
+    alan.classList.remove('kiris-alan--hata');
     girdi.removeAttribute('aria-invalid');
   }
 };
@@ -76,15 +76,15 @@ const ciktikcaDenetle = (alan, girdi, denetci, bosMesaj = 'Bu alanı doldurun.')
 /**
  * Hane sayacı. Kullanıcı yazarken "7 / 11 hane" gösterir. Yalnız son iki
  * hanede duyurulur, böylece ekran okuyucu her tuşta konuşmaz.
- * Sayacı gösterecek öğe HTML'de durur: <p class="trds-sayac" data-trds-sayac>.
+ * Sayacı gösterecek öğe HTML'de durur: <p class="kiris-sayac" data-kiris-sayac>.
  */
 const haneSayaci = (alan, girdi, hedef, birim = 'hane', sayici = (d) => d.replace(/\D/g, '').length) => {
-  const sayac = alan.querySelector('[data-trds-sayac]');
+  const sayac = alan.querySelector('[data-kiris-sayac]');
   if (!sayac) return;
   const yenile = () => {
     const n = sayici(girdi.value);
     sayac.textContent = n === 0 ? `${hedef} ${birim} girin` : `${n} / ${hedef} ${birim}`;
-    sayac.classList.toggle('trds-sayac--asildi', n > hedef);
+    sayac.classList.toggle('kiris-sayac--asildi', n > hedef);
     sayac.setAttribute('aria-live', n >= hedef - 1 ? 'polite' : 'off');
   };
   girdi.addEventListener('input', yenile);
@@ -96,9 +96,9 @@ const haneSayaci = (alan, girdi, hedef, birim = 'hane', sayici = (d) => d.replac
 // ---------------------------------------------------------------------------
 
 export function akordiyonBaslat(kok = document) {
-  her('[data-trds="akordiyon"]', kok).forEach((el) =>
+  her('[data-kiris="akordiyon"]', kok).forEach((el) =>
     bir(el, 'akordiyon', (akordiyon) => {
-      her('.trds-akordiyon__dugme', akordiyon).forEach((dugme) => {
+      her('.kiris-akordiyon__dugme', akordiyon).forEach((dugme) => {
         const icerik = document.getElementById(dugme.getAttribute('aria-controls'));
         if (!icerik) return;
         dugme.addEventListener('click', () => {
@@ -116,7 +116,7 @@ export function akordiyonBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function sekmelerBaslat(kok = document) {
-  her('[data-trds="sekmeler"]', kok).forEach((el) =>
+  her('[data-kiris="sekmeler"]', kok).forEach((el) =>
     bir(el, 'sekmeler', (sekmeler) => {
       const dugmeler = her('[role="tab"]', sekmeler);
       if (dugmeler.length === 0) return;
@@ -157,16 +157,16 @@ export function sekmelerBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function kipBaslat(kok = document) {
-  // Kip pencerenin kendisi `data-trds="kip"` taşır, açan düğme `data-trds-ac`.
+  // Kip pencerenin kendisi `data-kiris="kip"` taşır, açan düğme `data-kiris-ac`.
   // İkisi de burada ele alınır, böylece bütünlük denetimi ikisini de görür.
-  her('[data-trds="kip"]', kok).forEach((kip) => bir(kip, 'kip', () => {}));
+  her('[data-kiris="kip"]', kok).forEach((kip) => bir(kip, 'kip', () => {}));
 
-  her('[data-trds-ac]', kok).forEach((acici) =>
+  her('[data-kiris-ac]', kok).forEach((acici) =>
     bir(acici, 'kip-acici', (dugme) => {
-      const kip = document.getElementById(dugme.dataset.trdsAc);
+      const kip = document.getElementById(dugme.dataset.kirisAc);
       if (!kip || typeof kip.showModal !== 'function') return;
       dugme.addEventListener('click', () => kip.showModal());
-      her('[data-trds-kapat]', kip).forEach((kapat) =>
+      her('[data-kiris-kapat]', kip).forEach((kapat) =>
         kapat.addEventListener('click', () => kip.close())
       );
       // Kapanınca odak açan düğmeye döner.
@@ -180,7 +180,7 @@ export function kipBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function hataOzetiBaslat(kok = document) {
-  her('[data-trds="hata-ozeti"]', kok).forEach((el) =>
+  her('[data-kiris="hata-ozeti"]', kok).forEach((el) =>
     bir(el, 'hata-ozeti', (ozet) => {
       ozet.focus();
       her('a[href^="#"]', ozet).forEach((baglanti) => {
@@ -201,10 +201,10 @@ export function hataOzetiBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function karakterSayaciBaslat(kok = document) {
-  her('[data-trds="karakter-sayaci"]', kok).forEach((el) =>
+  her('[data-kiris="karakter-sayaci"]', kok).forEach((el) =>
     bir(el, 'karakter-sayaci', (alan) => {
       const girdi = alan.querySelector('textarea, input');
-      const sayac = alan.querySelector('.trds-sayac');
+      const sayac = alan.querySelector('.kiris-sayac');
       const sinir = Number(alan.dataset.sinir || 0);
       if (!girdi || !sayac || !sinir) return;
 
@@ -212,7 +212,7 @@ export function karakterSayaciBaslat(kok = document) {
         const kalan = sinir - girdi.value.length;
         sayac.textContent =
           kalan >= 0 ? `${kalan} karakter kaldı` : `${Math.abs(kalan)} karakter fazla`;
-        sayac.classList.toggle('trds-sayac--asildi', kalan < 0);
+        sayac.classList.toggle('kiris-sayac--asildi', kalan < 0);
         // Ekran okuyucu her tuşta konuşmasın.
         sayac.setAttribute('aria-live', kalan <= 20 ? 'polite' : 'off');
       };
@@ -229,12 +229,12 @@ export function karakterSayaciBaslat(kok = document) {
 export function dosyaBaslat(kok = document) {
   const boyut = (b) => (b >= 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`);
 
-  her('[data-trds="dosya"]', kok).forEach((el) =>
+  her('[data-kiris="dosya"]', kok).forEach((el) =>
     bir(el, 'dosya', (alan) => {
       const girdi = alan.querySelector('input[type="file"]');
-      const bolge = alan.querySelector('.trds-dosya-alani');
-      const liste = alan.querySelector('.trds-dosya-liste');
-      const durum = alan.querySelector('.trds-dosya-durum');
+      const bolge = alan.querySelector('.kiris-dosya-alani');
+      const liste = alan.querySelector('.kiris-dosya-liste');
+      const durum = alan.querySelector('.kiris-dosya-durum');
       if (!girdi) return;
 
       const enBuyuk = Number(alan.dataset.enBuyuk || 0); // bayt
@@ -248,9 +248,9 @@ export function dosyaBaslat(kok = document) {
           liste.innerHTML = dosyalar
             .map(
               (d, i) => `<li>
-  <span class="trds-dosya-liste__ad">${d.name.replace(/</g, '&lt;')}</span>
-  <span class="trds-dosya-liste__boyut">${boyut(d.size)}</span>
-  <button class="trds-dosya-liste__kaldir" type="button" data-indeks="${i}">Kaldır<span class="trds-gorsel-gizli"> ${d.name.replace(/</g, '&lt;')}</span></button>
+  <span class="kiris-dosya-liste__ad">${d.name.replace(/</g, '&lt;')}</span>
+  <span class="kiris-dosya-liste__boyut">${boyut(d.size)}</span>
+  <button class="kiris-dosya-liste__kaldir" type="button" data-indeks="${i}">Kaldır<span class="kiris-gorsel-gizli"> ${d.name.replace(/</g, '&lt;')}</span></button>
 </li>`
             )
             .join('');
@@ -293,11 +293,11 @@ export function dosyaBaslat(kok = document) {
         ['dragenter', 'dragover'].forEach((ad) =>
           bolge.addEventListener(ad, (olay) => {
             olay.preventDefault();
-            bolge.classList.add('trds-dosya-alani--surukleniyor');
+            bolge.classList.add('kiris-dosya-alani--surukleniyor');
           })
         );
         ['dragleave', 'drop'].forEach((ad) =>
-          bolge.addEventListener(ad, () => bolge.classList.remove('trds-dosya-alani--surukleniyor'))
+          bolge.addEventListener(ad, () => bolge.classList.remove('kiris-dosya-alani--surukleniyor'))
         );
         bolge.addEventListener('drop', (olay) => {
           olay.preventDefault();
@@ -313,10 +313,10 @@ export function dosyaBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function parolaBaslat(kok = document) {
-  her('[data-trds="parola"]', kok).forEach((el) =>
+  her('[data-kiris="parola"]', kok).forEach((el) =>
     bir(el, 'parola', (alan) => {
       const girdi = alan.querySelector('input');
-      const dugme = alan.querySelector('.trds-parola__dugme');
+      const dugme = alan.querySelector('.kiris-parola__dugme');
       if (!girdi || !dugme) return;
       dugme.addEventListener('click', () => {
         const acik = girdi.type === 'text';
@@ -334,11 +334,11 @@ export function parolaBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function aranabilirBaslat(kok = document) {
-  her('[data-trds="aranabilir"]', kok).forEach((el) =>
+  her('[data-kiris="aranabilir"]', kok).forEach((el) =>
     bir(el, 'aranabilir', (alan) => {
       const girdi = alan.querySelector('[role="combobox"]');
       const liste = alan.querySelector('[role="listbox"]');
-      const durum = alan.querySelector('.trds-aranabilir__durum');
+      const durum = alan.querySelector('.kiris-aranabilir__durum');
       if (!girdi || !liste) return;
 
       const secenekler = her('[role="option"]', liste);
@@ -382,7 +382,7 @@ export function aranabilirBaslat(kok = document) {
         girdi.dataset.deger = secenek.dataset.deger ?? secenek.textContent.trim();
         kapat();
         if (durum) durum.textContent = `${girdi.value} seçildi`;
-        girdi.dispatchEvent(new CustomEvent('trds:secildi', { bubbles: true, detail: { deger: girdi.dataset.deger } }));
+        girdi.dispatchEvent(new CustomEvent('kiris:secildi', { bubbles: true, detail: { deger: girdi.dataset.deger } }));
       };
 
       girdi.addEventListener('input', suz);
@@ -436,12 +436,12 @@ const vurgula = (metin, ara) => {
 };
 
 export function aramaBaslat(kok = document) {
-  her('[data-trds="arama"]', kok).forEach((el) =>
+  her('[data-kiris="arama"]', kok).forEach((el) =>
     bir(el, 'arama', (kap) => {
       const form = kap.querySelector('form');
       const girdi = kap.querySelector('[role="combobox"]');
       const liste = kap.querySelector('[role="listbox"]');
-      const durum = kap.querySelector('[data-trds-durum]');
+      const durum = kap.querySelector('[data-kiris-durum]');
       if (!form || !girdi || !liste) return;
 
       const enAz = Number(kap.dataset.enAz || 2);
@@ -496,12 +496,12 @@ export function aramaBaslat(kok = document) {
           const baslikId = `${kimlik}-grup-${gi}`;
           const ogeler = grup.ogeler.slice(0, enCok).map((o) => {
             const id = `${kimlik}-oneri-${sayac++}`;
-            return `<div class="trds-arama-onerileri__oge" role="option" id="${id}" aria-selected="false" data-href="${htmlKacis(guvenliGezinmeAdresi(o.href, document.baseURI))}" data-ad="${htmlKacis(o.ad)}"><span class="trds-arama-onerileri__ad">${vurgula(o.ad, sorgu)}</span>${o.ek ? `<span class="trds-arama-onerileri__ek">${htmlKacis(o.ek)}</span>` : ''}</div>`;
+            return `<div class="kiris-arama-onerileri__oge" role="option" id="${id}" aria-selected="false" data-href="${htmlKacis(guvenliGezinmeAdresi(o.href, document.baseURI))}" data-ad="${htmlKacis(o.ad)}"><span class="kiris-arama-onerileri__ad">${vurgula(o.ad, sorgu)}</span>${o.ek ? `<span class="kiris-arama-onerileri__ek">${htmlKacis(o.ek)}</span>` : ''}</div>`;
           }).join('');
-          return `<div class="trds-arama-onerileri__grup" role="group" aria-labelledby="${baslikId}"><p class="trds-arama-onerileri__grup-adi" id="${baslikId}">${htmlKacis(grup.ad)}</p>${ogeler}</div>`;
+          return `<div class="kiris-arama-onerileri__grup" role="group" aria-labelledby="${baslikId}"><p class="kiris-arama-onerileri__grup-adi" id="${baslikId}">${htmlKacis(grup.ad)}</p>${ogeler}</div>`;
         });
         const toplam = sayac;
-        parcalar.push(`<div class="trds-arama-onerileri__oge trds-arama-onerileri__tumu" role="option" id="${kimlik}-oneri-tumu" aria-selected="false" data-tumu>Tüm sonuçları gör: “${htmlKacis(sorgu)}”</div>`);
+        parcalar.push(`<div class="kiris-arama-onerileri__oge kiris-arama-onerileri__tumu" role="option" id="${kimlik}-oneri-tumu" aria-selected="false" data-tumu>Tüm sonuçları gör: “${htmlKacis(sorgu)}”</div>`);
         liste.innerHTML = parcalar.join('');
         liste.hidden = false;
         girdi.setAttribute('aria-expanded', 'true');
@@ -539,7 +539,7 @@ export function aramaBaslat(kok = document) {
         kapat();
         if (durum) durum.textContent = `${girdi.value} seçildi.`;
         const href = guvenliGezinmeAdresi(oge.dataset.href, document.baseURI);
-        girdi.dispatchEvent(new CustomEvent('trds:secildi', { bubbles: true, detail: { ad: girdi.value, href } }));
+        girdi.dispatchEvent(new CustomEvent('kiris:secildi', { bubbles: true, detail: { ad: girdi.value, href } }));
         if (href) window.location.assign(href);
       };
 
@@ -570,7 +570,7 @@ export function aramaBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function geciciBaslat(kok = document) {
-  her('[data-trds="gecici"]', kok).forEach((el) =>
+  her('[data-kiris="gecici"]', kok).forEach((el) =>
     bir(el, 'gecici', (alan) => {
       let disOdak = null;
       alan.addEventListener('focusin', (olay) => { if (olay.relatedTarget && !alan.contains(olay.relatedTarget)) disOdak = olay.relatedTarget; });
@@ -578,16 +578,16 @@ export function geciciBaslat(kok = document) {
         const odakIcerde = bildirim.contains(document.activeElement);
         bildirim.hidden = true;
         if (odakIcerde) {
-          const sonraki = alan.querySelector('.trds-gecici:not([hidden]) .trds-gecici__kapat');
+          const sonraki = alan.querySelector('.kiris-gecici:not([hidden]) .kiris-gecici__kapat');
           (sonraki || (disOdak?.isConnected ? disOdak : null) || document.getElementById('ana-icerik') || document.body).focus?.();
         }
-        bildirim.dispatchEvent(new CustomEvent('trds:kapandi', { bubbles: true }));
+        bildirim.dispatchEvent(new CustomEvent('kiris:kapandi', { bubbles: true }));
       };
       alan.addEventListener('click', (olay) => {
-        const dugme = olay.target.closest('.trds-gecici__kapat');
-        if (dugme) kapat(dugme.closest('.trds-gecici'));
+        const dugme = olay.target.closest('.kiris-gecici__kapat');
+        if (dugme) kapat(dugme.closest('.kiris-gecici'));
       });
-      her('.trds-gecici[data-sure]', alan).forEach((bildirim) => {
+      her('.kiris-gecici[data-sure]', alan).forEach((bildirim) => {
         const sure = Math.max(8000, Number(bildirim.dataset.sure) || 0);
         let zamanlayici = setTimeout(() => kapat(bildirim), sure);
         const durdur = () => clearTimeout(zamanlayici);
@@ -607,34 +607,34 @@ export function geciciBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function cipBaslat(kok = document) {
-  her('[data-trds="cip"]', kok).forEach((el) =>
+  her('[data-kiris="cip"]', kok).forEach((el) =>
     bir(el, 'cip', (grup) => {
-      let durum = grup.querySelector('[data-trds-durum]');
+      let durum = grup.querySelector('[data-kiris-durum]');
       if (!durum) {
         durum = document.createElement('p');
-        durum.className = 'trds-gorsel-gizli';
+        durum.className = 'kiris-gorsel-gizli';
         durum.setAttribute('aria-live', 'polite');
-        durum.setAttribute('data-trds-durum', '');
+        durum.setAttribute('data-kiris-durum', '');
         grup.append(durum);
       }
       grup.addEventListener('click', (olay) => {
-        const kaldir = olay.target.closest('.trds-cip__kaldir');
+        const kaldir = olay.target.closest('.kiris-cip__kaldir');
         if (kaldir) {
-          const cip = kaldir.closest('.trds-cip');
+          const cip = kaldir.closest('.kiris-cip');
           const ad = cip.textContent.trim();
-          const sonraki = cip.nextElementSibling?.querySelector?.('button') ?? grup.querySelector('.trds-cip');
+          const sonraki = cip.nextElementSibling?.querySelector?.('button') ?? grup.querySelector('.kiris-cip');
           cip.remove();
           durum.textContent = `${ad} kaldırıldı.`;
           (sonraki ?? grup).focus?.();
-          grup.dispatchEvent(new CustomEvent('trds:kaldirildi', { bubbles: true, detail: { ad } }));
+          grup.dispatchEvent(new CustomEvent('kiris:kaldirildi', { bubbles: true, detail: { ad } }));
           return;
         }
-        const suzgec = olay.target.closest('.trds-cip[aria-pressed]');
+        const suzgec = olay.target.closest('.kiris-cip[aria-pressed]');
         if (suzgec) {
           const acik = suzgec.getAttribute('aria-pressed') !== 'true';
           suzgec.setAttribute('aria-pressed', String(acik));
           durum.textContent = `${suzgec.textContent.trim()} ${acik ? 'seçildi' : 'kaldırıldı'}.`;
-          grup.dispatchEvent(new CustomEvent('trds:suzgecDegisti', { bubbles: true, detail: { ad: suzgec.textContent.trim(), acik } }));
+          grup.dispatchEvent(new CustomEvent('kiris:suzgecDegisti', { bubbles: true, detail: { ad: suzgec.textContent.trim(), acik } }));
         }
       });
     })
@@ -647,16 +647,16 @@ export function cipBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function acilirBilgiBaslat(kok = document) {
-  her('[data-trds="acilir-bilgi"]', kok).forEach((el) =>
+  her('[data-kiris="acilir-bilgi"]', kok).forEach((el) =>
     bir(el, 'acilir-bilgi', (kap) => {
       const dugme = kap.querySelector('[aria-expanded]');
-      const panel = kap.querySelector('.trds-acilir-bilgi__panel');
+      const panel = kap.querySelector('.kiris-acilir-bilgi__panel');
       if (!dugme || !panel) return;
       const ayarla = (acik) => { panel.hidden = !acik; dugme.setAttribute('aria-expanded', String(acik)); };
       dugme.addEventListener('click', () => ayarla(panel.hidden));
       kap.addEventListener('keydown', (olay) => { if (olay.key === 'Escape' && !panel.hidden) { ayarla(false); dugme.focus(); } });
       document.addEventListener('click', (olay) => { if (!kap.contains(olay.target)) ayarla(false); });
-      const kapat = panel.querySelector('[data-trds-kapat]');
+      const kapat = panel.querySelector('[data-kiris-kapat]');
       if (kapat) kapat.addEventListener('click', () => { ayarla(false); dugme.focus(); });
     })
   );
@@ -667,12 +667,12 @@ export function acilirBilgiBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function yanPanelBaslat(kok = document) {
-  her('[data-trds="yan-panel"]', kok).forEach((el) =>
+  her('[data-kiris="yan-panel"]', kok).forEach((el) =>
     bir(el, 'yan-panel', (kap) => {
       const panel = kap.querySelector('dialog');
       if (!panel) return;
-      her('[data-trds-panel-ac]', kap).forEach((d) => d.addEventListener('click', () => panel.showModal()));
-      her('[data-trds-kapat]', panel).forEach((d) => d.addEventListener('click', () => panel.close()));
+      her('[data-kiris-panel-ac]', kap).forEach((d) => d.addEventListener('click', () => panel.showModal()));
+      her('[data-kiris-kapat]', panel).forEach((d) => d.addEventListener('click', () => panel.close()));
       panel.addEventListener('click', (olay) => { if (olay.target === panel) panel.close(); });
     })
   );
@@ -683,7 +683,7 @@ export function yanPanelBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function eylemMenusuBaslat(kok = document) {
-  her('[data-trds="eylem-menusu"]', kok).forEach((el) =>
+  her('[data-kiris="eylem-menusu"]', kok).forEach((el) =>
     bir(el, 'eylem-menusu', (kap) => {
       const dugme = kap.querySelector('[aria-haspopup]');
       const menu = kap.querySelector('[role="menu"]');
@@ -727,7 +727,7 @@ export function eylemMenusuBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function basaDonBaslat(kok = document) {
-  her('[data-trds="basa-don"]', kok).forEach((el) =>
+  her('[data-kiris="basa-don"]', kok).forEach((el) =>
     bir(el, 'basa-don', (dugme) => {
       const esik = () => window.innerHeight * 2;
       const guncelle = () => { dugme.hidden = window.scrollY < esik(); };
@@ -751,13 +751,13 @@ export function basaDonBaslat(kok = document) {
 // bildirim bir onay cümlesine döner. Tercih varsa afiş hiç görünmez.
 // ---------------------------------------------------------------------------
 
-const CEREZ_ANAHTAR = 'trds-cerez';
+const CEREZ_ANAHTAR = 'kiris-cerez';
 
 export function cerezBaslat(kok = document) {
-  her('[data-trds="cerez"]', kok).forEach((el) =>
+  her('[data-kiris="cerez"]', kok).forEach((el) =>
     bir(el, 'cerez', (afis) => {
-      const soru = afis.querySelector('.trds-cerez__soru');
-      const onay = afis.querySelector('.trds-cerez__onay');
+      const soru = afis.querySelector('.kiris-cerez__soru');
+      const onay = afis.querySelector('.kiris-cerez__onay');
       let tercih = null;
       try { tercih = localStorage.getItem(CEREZ_ANAHTAR); } catch { /* özel pencere */ }
       if (tercih && !afis.hasAttribute('data-hep-goster')) { afis.hidden = true; return; }
@@ -775,7 +775,7 @@ export function cerezBaslat(kok = document) {
           } else {
             afis.hidden = true;
           }
-          afis.dispatchEvent(new CustomEvent('trds:cerezSecildi', { bubbles: true, detail: { deger } }));
+          afis.dispatchEvent(new CustomEvent('kiris:cerezSecildi', { bubbles: true, detail: { deger } }));
           return;
         }
         if (olay.target.closest('[data-cerez-gizle]')) afis.hidden = true;
@@ -790,7 +790,7 @@ export function cerezBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function cikisBaslat(kok = document) {
-  her('[data-trds="cikis"]', kok).forEach((el) =>
+  her('[data-kiris="cikis"]', kok).forEach((el) =>
     bir(el, 'cikis', (kap) => {
       const baglanti = kap.querySelector('a');
       if (!baglanti) return;
@@ -807,7 +807,7 @@ export function cikisBaslat(kok = document) {
         const simdi = Date.now();
         sayac = simdi - zaman < 1000 ? sayac + 1 : 1;
         zaman = simdi;
-        const durum = kap.querySelector('[data-trds-durum]');
+        const durum = kap.querySelector('[data-kiris-durum]');
         if (durum) durum.textContent = sayac < 3 ? `Çıkmak için Shift tuşuna ${3 - sayac} kez daha basın.` : '';
         if (sayac >= 3) cik();
       });
@@ -821,16 +821,16 @@ export function cikisBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function siralaBaslat(kok = document) {
-  her('[data-trds="sirala"]', kok).forEach((el) =>
+  her('[data-kiris="sirala"]', kok).forEach((el) =>
     bir(el, 'sirala', (tablo) => {
       const govde = tablo.tBodies[0];
       const basliklar = her('th[aria-sort]', tablo);
-      let durum = tablo.parentElement?.querySelector('[data-trds-durum]');
+      let durum = tablo.parentElement?.querySelector('[data-kiris-durum]');
       if (!durum) {
         durum = document.createElement('p');
-        durum.className = 'trds-gorsel-gizli';
+        durum.className = 'kiris-gorsel-gizli';
         durum.setAttribute('aria-live', 'polite');
-        durum.setAttribute('data-trds-durum', '');
+        durum.setAttribute('data-kiris-durum', '');
         tablo.insertAdjacentElement('afterend', durum);
       }
       if (!govde) return;
@@ -865,7 +865,7 @@ export function siralaBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function aralikBaslat(kok = document) {
-  her('[data-trds="aralik"]', kok).forEach((el) =>
+  her('[data-kiris="aralik"]', kok).forEach((el) =>
     bir(el, 'aralik', (alan) => {
       const girdi = alan.querySelector('input[type="range"]');
       const cikti = alan.querySelector('output');
@@ -883,7 +883,7 @@ export function aralikBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function adetBaslat(kok = document) {
-  her('[data-trds="adet"]', kok).forEach((el) =>
+  her('[data-kiris="adet"]', kok).forEach((el) =>
     bir(el, 'adet', (alan) => {
       const girdi = alan.querySelector('input');
       const eksi = alan.querySelector('[data-adet="eksi"]');
@@ -892,12 +892,12 @@ export function adetBaslat(kok = document) {
       const enAz = Number(girdi.min || 0);
       const enCok = girdi.max === '' ? Infinity : Number(girdi.max);
       const adim = Number(girdi.step || 1);
-      let durum = alan.querySelector('[data-trds-durum]');
+      let durum = alan.querySelector('[data-kiris-durum]');
       if (!durum) {
         durum = document.createElement('p');
-        durum.className = 'trds-gorsel-gizli';
+        durum.className = 'kiris-gorsel-gizli';
         durum.setAttribute('aria-live', 'polite');
-        durum.setAttribute('data-trds-durum', '');
+        durum.setAttribute('data-kiris-durum', '');
         alan.append(durum);
       }
       // Sınırdaki düğme devre dışı kalmaz, odağı kaybetmez. aria-disabled ile
@@ -923,7 +923,7 @@ export function adetBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function yazdirBaslat(kok = document) {
-  her('[data-trds="yazdir"]', kok).forEach((el) =>
+  her('[data-kiris="yazdir"]', kok).forEach((el) =>
     bir(el, 'yazdir', (dugme) => {
       dugme.addEventListener('click', (olay) => { olay.preventDefault(); window.print(); });
     })
@@ -936,7 +936,7 @@ export function yazdirBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function maskeBaslat(kok = document) {
-  her('[data-trds="maske"]', kok).forEach((el) =>
+  her('[data-kiris="maske"]', kok).forEach((el) =>
     bir(el, 'maske', (girdi) => {
       const kalip = girdi.dataset.maske || '';
       if (!kalip) return;
@@ -987,11 +987,11 @@ const isoOku = (metin) => (metin ? new Date(`${metin}T00:00:00`) : null);
 const ayniGun = (a, b) => a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 
 export function takvimBaslat(kok = document) {
-  her('[data-trds="takvim"]', kok).forEach((el) =>
+  her('[data-kiris="takvim"]', kok).forEach((el) =>
     bir(el, 'takvim', (alan) => {
       const girdi = alan.querySelector('input');
-      const dugme = alan.querySelector('.trds-takvim__ac');
-      const panel = alan.querySelector('.trds-takvim__panel');
+      const dugme = alan.querySelector('.kiris-takvim__ac');
+      const panel = alan.querySelector('.kiris-takvim__panel');
       if (!girdi || !dugme || !panel) return;
       const enAz = isoOku(alan.dataset.enAz);
       const enCok = isoOku(alan.dataset.enCok);
@@ -1001,12 +1001,12 @@ export function takvimBaslat(kok = document) {
 
       const disarida = (t) => (enAz && t < enAz) || (enCok && t > enCok);
       const sinirla = (t) => (enAz && t < enAz ? new Date(enAz) : enCok && t > enCok ? new Date(enCok) : t);
-      let durum = alan.querySelector('[data-trds-durum]');
+      let durum = alan.querySelector('[data-kiris-durum]');
       if (!durum) {
         durum = document.createElement('p');
-        durum.className = 'trds-gorsel-gizli';
+        durum.className = 'kiris-gorsel-gizli';
         durum.setAttribute('aria-live', 'polite');
-        durum.setAttribute('data-trds-durum', '');
+        durum.setAttribute('data-kiris-durum', '');
         alan.append(durum);
       }
 
@@ -1018,22 +1018,22 @@ export function takvimBaslat(kok = document) {
       const yillar = [];
       for (let y = yilBasi; y <= yilSonu; y += 1) yillar.push(y);
       panel.innerHTML = `
-          <div class="trds-takvim__ust">
-            <button class="trds-takvim__yon" type="button" data-ay="-1" aria-label="Önceki ay">‹</button>
-            <div class="trds-takvim__secimler">
-              <label class="trds-gorsel-gizli" for="${girdi.id}-ay-secim">Ay</label>
-              <select class="trds-secim trds-takvim__secim" id="${girdi.id}-ay-secim" data-ay-secim>${TAKVIM_AYLAR.map((a, i) => `<option value="${i}">${a}</option>`).join('')}</select>
-              <label class="trds-gorsel-gizli" for="${girdi.id}-yil-secim">Yıl</label>
-              <select class="trds-secim trds-takvim__secim" id="${girdi.id}-yil-secim" data-yil-secim>${yillar.map((y) => `<option value="${y}">${y}</option>`).join('')}</select>
+          <div class="kiris-takvim__ust">
+            <button class="kiris-takvim__yon" type="button" data-ay="-1" aria-label="Önceki ay">‹</button>
+            <div class="kiris-takvim__secimler">
+              <label class="kiris-gorsel-gizli" for="${girdi.id}-ay-secim">Ay</label>
+              <select class="kiris-secim kiris-takvim__secim" id="${girdi.id}-ay-secim" data-ay-secim>${TAKVIM_AYLAR.map((a, i) => `<option value="${i}">${a}</option>`).join('')}</select>
+              <label class="kiris-gorsel-gizli" for="${girdi.id}-yil-secim">Yıl</label>
+              <select class="kiris-secim kiris-takvim__secim" id="${girdi.id}-yil-secim" data-yil-secim>${yillar.map((y) => `<option value="${y}">${y}</option>`).join('')}</select>
             </div>
-            <button class="trds-takvim__yon" type="button" data-ay="1" aria-label="Sonraki ay">›</button>
+            <button class="kiris-takvim__yon" type="button" data-ay="1" aria-label="Sonraki ay">›</button>
           </div>
-          <table class="trds-takvim__izgara" role="grid">
+          <table class="kiris-takvim__izgara" role="grid">
             <thead><tr>${TAKVIM_GUNLER.map((g, i) => `<th scope="col" abbr="${TAKVIM_GUNLER_UZUN[i]}">${g}</th>`).join('')}</tr></thead>
             <tbody></tbody>
           </table>
-          <div class="trds-takvim__alt"><button class="trds-link trds-takvim__bugun" type="button" data-bugun>Bugün</button><button class="trds-link" type="button" data-trds-kapat>Kapat</button></div>`;
-      const izgara = panel.querySelector('.trds-takvim__izgara');
+          <div class="kiris-takvim__alt"><button class="kiris-link kiris-takvim__bugun" type="button" data-bugun>Bugün</button><button class="kiris-link" type="button" data-kiris-kapat>Kapat</button></div>`;
+      const izgara = panel.querySelector('.kiris-takvim__izgara');
       const govde = panel.querySelector('tbody');
       const aySecim = panel.querySelector('[data-ay-secim]');
       const yilSecim = panel.querySelector('[data-yil-secim]');
@@ -1054,7 +1054,7 @@ export function takvimBaslat(kok = document) {
           for (let sutun = 0; sutun < 7; sutun += 1, gun += 1) {
             if (gun < 1 || gun > gunSayisi) { hucreler += '<td></td>'; continue; }
             const t = new Date(yil, ay, gun);
-            const sinif = ['trds-takvim__gun', ayniGun(t, bugun) ? 'trds-takvim__gun--bugun' : '', ayniGun(t, secili) ? 'trds-takvim__gun--secili' : ''].filter(Boolean).join(' ');
+            const sinif = ['kiris-takvim__gun', ayniGun(t, bugun) ? 'kiris-takvim__gun--bugun' : '', ayniGun(t, secili) ? 'kiris-takvim__gun--secili' : ''].filter(Boolean).join(' ');
             const etiket = `${gun} ${TAKVIM_AYLAR[ay]} ${yil} ${TAKVIM_GUNLER_UZUN[sutun]}`;
             hucreler += `<td><button class="${sinif}" type="button" tabindex="${ayniGun(t, odak) ? 0 : -1}" data-gun="${gun}" aria-label="${etiket}"${ayniGun(t, secili) ? ' aria-pressed="true"' : ''}${disarida(t) ? ' disabled' : ''}>${gun}</button></td>`;
           }
@@ -1117,7 +1117,7 @@ export function takvimBaslat(kok = document) {
           return;
         }
         if (olay.target.closest('[data-bugun]')) { if (!disarida(bugun)) sec(new Date()); return; }
-        if (olay.target.closest('[data-trds-kapat]')) kapat();
+        if (olay.target.closest('[data-kiris-kapat]')) kapat();
       });
       // Ay ve yıl listesi. Uzun geçmişe giden bir tarih için ok düğmesi yetmez.
       panel.addEventListener('change', (olay) => {
@@ -1129,7 +1129,7 @@ export function takvimBaslat(kok = document) {
       panel.addEventListener('keydown', (olay) => {
         const gun = olay.target.closest('[data-gun]');
         if (olay.key === 'Escape') { olay.preventDefault(); kapat(); return; }
-        if (olay.key === 'Tab' && !olay.target.closest('.trds-takvim__ust')) { kapat(false); return; }
+        if (olay.key === 'Tab' && !olay.target.closest('.kiris-takvim__ust')) { kapat(false); return; }
         if (!gun) return;
         const t = new Date(odak);
         const adim = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[olay.key];
@@ -1151,13 +1151,13 @@ export function takvimBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function cokluSecimBaslat(kok = document) {
-  her('[data-trds="coklu-secim"]', kok).forEach((el) =>
+  her('[data-kiris="coklu-secim"]', kok).forEach((el) =>
     bir(el, 'coklu-secim', (alan) => {
       const girdi = alan.querySelector('[role="combobox"]');
       const liste = alan.querySelector('[role="listbox"]');
-      const secilenler = alan.querySelector('.trds-coklu__secilenler');
+      const secilenler = alan.querySelector('.kiris-coklu__secilenler');
       const gizli = alan.querySelector('select');
-      const durum = alan.querySelector('[data-trds-durum]');
+      const durum = alan.querySelector('[data-kiris-durum]');
       if (!girdi || !liste || !secilenler || !gizli) return;
       const secenekler = her('[role="option"]', liste);
       let etkin = -1;
@@ -1175,7 +1175,7 @@ export function cokluSecimBaslat(kok = document) {
 
       const cizSecilenler = () => {
         secilenler.innerHTML = secenekler.filter(seciliMi).map((o) =>
-          `<span class="trds-cip trds-cip--secili">${htmlKacis(o.textContent.trim())}<button class="trds-cip__kaldir" type="button" data-deger="${htmlKacis(degeri(o))}" aria-label="${htmlKacis(o.textContent.trim())} seçimini kaldır"><svg class="trds-simge" aria-hidden="true"><use href="#trds-close"/></svg></button></span>`
+          `<span class="kiris-cip kiris-cip--secili">${htmlKacis(o.textContent.trim())}<button class="kiris-cip__kaldir" type="button" data-deger="${htmlKacis(degeri(o))}" aria-label="${htmlKacis(o.textContent.trim())} seçimini kaldır"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-close"/></svg></button></span>`
         ).join('');
         her('option', gizli).forEach((opt) => { opt.selected = secenekler.some((o) => degeri(o) === opt.value && seciliMi(o)); });
       };
@@ -1183,10 +1183,10 @@ export function cokluSecimBaslat(kok = document) {
       const kapat = () => { liste.hidden = true; girdi.setAttribute('aria-expanded', 'false'); girdi.removeAttribute('aria-activedescendant'); etkin = -1; };
       const isaretle = (i) => {
         const g = gorunenler();
-        secenekler.forEach((o) => o.classList.remove('trds-coklu__oge--etkin'));
+        secenekler.forEach((o) => o.classList.remove('kiris-coklu__oge--etkin'));
         if (i < 0 || i >= g.length) { etkin = -1; girdi.removeAttribute('aria-activedescendant'); return; }
         etkin = i;
-        g[i].classList.add('trds-coklu__oge--etkin');
+        g[i].classList.add('kiris-coklu__oge--etkin');
         girdi.setAttribute('aria-activedescendant', g[i].id);
         g[i].scrollIntoView({ block: 'nearest' });
       };
@@ -1203,7 +1203,7 @@ export function cokluSecimBaslat(kok = document) {
         o.setAttribute('aria-selected', String(yeni));
         cizSecilenler();
         if (durum) durum.textContent = `${o.textContent.trim()} ${yeni ? 'seçildi' : 'kaldırıldı'}.`;
-        girdi.dispatchEvent(new CustomEvent('trds:secildi', { bubbles: true, detail: { deger: degeri(o), secili: yeni } }));
+        girdi.dispatchEvent(new CustomEvent('kiris:secildi', { bubbles: true, detail: { deger: degeri(o), secili: yeni } }));
       };
 
       girdi.addEventListener('input', suz);
@@ -1236,7 +1236,7 @@ export function cokluSecimBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function genisMenuBaslat(kok = document) {
-  her('[data-trds="genis-menu"]', kok).forEach((el) =>
+  her('[data-kiris="genis-menu"]', kok).forEach((el) =>
     bir(el, 'genis-menu', (menu) => {
       const dugmeler = her('[aria-expanded][aria-controls]', menu);
       const kapatHepsi = () => dugmeler.forEach((d) => { d.setAttribute('aria-expanded', 'false'); const p = document.getElementById(d.getAttribute('aria-controls')); if (p) p.hidden = true; });
@@ -1263,15 +1263,15 @@ export function genisMenuBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function kayanPanoBaslat(kok = document) {
-  her('[data-trds="kayan-pano"]', kok).forEach((el) =>
+  her('[data-kiris="kayan-pano"]', kok).forEach((el) =>
     bir(el, 'kayan-pano', (pano) => {
-      const serit = pano.querySelector('.trds-kayan-pano__serit');
-      const slaytlar = her('.trds-kayan-pano__slayt', pano);
+      const serit = pano.querySelector('.kiris-kayan-pano__serit');
+      const slaytlar = her('.kiris-kayan-pano__slayt', pano);
       const geri = pano.querySelector('[data-yon="geri"]');
       const ileri = pano.querySelector('[data-yon="ileri"]');
-      const noktalar = pano.querySelector('.trds-kayan-pano__noktalar');
+      const noktalar = pano.querySelector('.kiris-kayan-pano__noktalar');
       const durdur = pano.querySelector('[data-durdur]');
-      const durum = pano.querySelector('[data-trds-durum]');
+      const durum = pano.querySelector('[data-kiris-durum]');
       if (!serit || slaytlar.length === 0) return;
       let indeks = 0;
       let zamanlayici = 0;
@@ -1322,7 +1322,7 @@ export function kayanPanoBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function yonlendirmeBaslat(kok = document) {
-  her('[data-trds="yonlendirme"]', kok).forEach((el) =>
+  her('[data-kiris="yonlendirme"]', kok).forEach((el) =>
     bir(el, 'yonlendirme', (kap) => {
       const baslat = kap.querySelector('[data-yonlendirme-baslat]');
       const adimlar = her('[data-yonlendirme-adim]', document).sort((a, b) => Number(a.dataset.yonlendirmeAdim) - Number(b.dataset.yonlendirmeAdim));
@@ -1330,30 +1330,30 @@ export function yonlendirmeBaslat(kok = document) {
       let kutu = null;
       let i = 0;
 
-      const temizle = () => { adimlar.forEach((a) => a.classList.remove('trds-yonlendirme__hedef')); };
+      const temizle = () => { adimlar.forEach((a) => a.classList.remove('kiris-yonlendirme__hedef')); };
       const bitir = () => { temizle(); kutu?.remove(); kutu = null; baslat.focus(); };
       const goster = (n) => {
         i = n;
         temizle();
         const hedef = adimlar[i];
-        hedef.classList.add('trds-yonlendirme__hedef');
+        hedef.classList.add('kiris-yonlendirme__hedef');
         hedef.scrollIntoView({ block: 'center', behavior: 'smooth' });
         if (!kutu) {
           kutu = document.createElement('div');
-          kutu.className = 'trds-yonlendirme__kutu';
+          kutu.className = 'kiris-yonlendirme__kutu';
           kutu.setAttribute('role', 'dialog');
           kutu.setAttribute('aria-modal', 'false');
-          kutu.setAttribute('aria-labelledby', 'trds-yonlendirme-baslik');
+          kutu.setAttribute('aria-labelledby', 'kiris-yonlendirme-baslik');
           document.body.append(kutu);
         }
         kutu.innerHTML = `
-          <p class="trds-yonlendirme__adim">Adım ${i + 1} / ${adimlar.length}</p>
-          <h2 class="trds-yonlendirme__baslik" id="trds-yonlendirme-baslik">${hedef.dataset.yonlendirmeBaslik || ''}</h2>
-          <p class="trds-yonlendirme__metin">${hedef.dataset.yonlendirmeMetin || ''}</p>
-          <div class="trds-button-grubu">
-            ${i > 0 ? '<button class="trds-button trds-button--ikincil trds-button--kucuk" type="button" data-geri>Geri</button>' : ''}
-            <button class="trds-button trds-button--kucuk" type="button" data-ileri>${i === adimlar.length - 1 ? 'Bitir' : 'İleri'}</button>
-            <button class="trds-link" type="button" data-bitir>Atla</button>
+          <p class="kiris-yonlendirme__adim">Adım ${i + 1} / ${adimlar.length}</p>
+          <h2 class="kiris-yonlendirme__baslik" id="kiris-yonlendirme-baslik">${hedef.dataset.yonlendirmeBaslik || ''}</h2>
+          <p class="kiris-yonlendirme__metin">${hedef.dataset.yonlendirmeMetin || ''}</p>
+          <div class="kiris-button-grubu">
+            ${i > 0 ? '<button class="kiris-button kiris-button--ikincil kiris-button--kucuk" type="button" data-geri>Geri</button>' : ''}
+            <button class="kiris-button kiris-button--kucuk" type="button" data-ileri>${i === adimlar.length - 1 ? 'Bitir' : 'İleri'}</button>
+            <button class="kiris-link" type="button" data-bitir>Atla</button>
           </div>`;
         const r = hedef.getBoundingClientRect();
         const genislik = kutu.offsetWidth || 320;
@@ -1378,7 +1378,7 @@ export function yonlendirmeBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function ipucuBaslat(kok = document) {
-  her('[data-trds="ipucu"]', kok).forEach((el) =>
+  her('[data-kiris="ipucu"]', kok).forEach((el) =>
     bir(el, 'ipucu', (kap) => {
       const tetik = kap.querySelector('[aria-describedby]');
       const ipucu = kap.querySelector('[role="tooltip"]');
@@ -1399,14 +1399,14 @@ export function ipucuBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function baslikCubuguBaslat(kok = document) {
-  her('[data-trds="baslik-cubugu"]', kok).forEach((el) =>
+  her('[data-kiris="baslik-cubugu"]', kok).forEach((el) =>
     bir(el, 'baslik-cubugu', (cubuk) => {
-      const dugme = cubuk.querySelector('.trds-baslik-cubugu__menu-dugmesi');
+      const dugme = cubuk.querySelector('.kiris-baslik-cubugu__menu-dugmesi');
       if (!dugme) return;
       dugme.addEventListener('click', () => {
         const acik = dugme.getAttribute('aria-expanded') === 'true';
         dugme.setAttribute('aria-expanded', String(!acik));
-        cubuk.classList.toggle('trds-baslik-cubugu--acik', !acik);
+        cubuk.classList.toggle('kiris-baslik-cubugu--acik', !acik);
       });
     })
   );
@@ -1417,10 +1417,10 @@ export function baslikCubuguBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function resmiAfisBaslat(kok = document) {
-  her('[data-trds="resmi-afis"]', kok).forEach((el) =>
+  her('[data-kiris="resmi-afis"]', kok).forEach((el) =>
     bir(el, 'resmi-afis', (afis) => {
-      const dugme = afis.querySelector('.trds-resmi-afis__dugme');
-      const panel = afis.querySelector('.trds-resmi-afis__panel');
+      const dugme = afis.querySelector('.kiris-resmi-afis__dugme');
+      const panel = afis.querySelector('.kiris-resmi-afis__panel');
       if (!dugme || !panel) return;
       dugme.addEventListener('click', () => {
         const acik = dugme.getAttribute('aria-expanded') === 'true';
@@ -1456,21 +1456,21 @@ export function erisimMenusuBaslat(kok = document) {
     // Yazı boyutunda "normal" özniteliği kaldırır. Temada her seçim açıkça
     // yazılır, böylece "açık" seçimi işletim sistemi tercihini ezer.
     const kaldir = (tur === 'yazi' && deger === 'normal') || deger === 'sistem';
-    if (kaldir) document.documentElement.removeAttribute(`data-trds-${tur}`);
-    else document.documentElement.setAttribute(`data-trds-${tur}`, deger);
-    ayarYaz(`trds-${tur}`, deger);
+    if (kaldir) document.documentElement.removeAttribute(`data-kiris-${tur}`);
+    else document.documentElement.setAttribute(`data-kiris-${tur}`, deger);
+    ayarYaz(`kiris-${tur}`, deger);
   };
 
   // Sayfa açılır açılmaz saklanan ayarı uygula.
   for (const tur of ['yazi', 'tema']) {
-    const kayitli = ayarOku(`trds-${tur}`);
+    const kayitli = ayarOku(`kiris-${tur}`);
     if (kayitli) uygula(tur, kayitli);
   }
 
-  her('[data-trds="erisim-menusu"]', kok).forEach((el) =>
+  her('[data-kiris="erisim-menusu"]', kok).forEach((el) =>
     bir(el, 'erisim-menusu', (menu) => {
-      const dugme = menu.querySelector('.trds-erisim__dugme');
-      const panel = menu.querySelector('.trds-erisim__panel');
+      const dugme = menu.querySelector('.kiris-erisim__dugme');
+      const panel = menu.querySelector('.kiris-erisim__panel');
       if (!dugme || !panel) return;
 
       dugme.addEventListener('click', () => {
@@ -1485,7 +1485,7 @@ export function erisimMenusuBaslat(kok = document) {
       };
       // Görünür kapat düğmesi. Dışarı tıklamayı veya Esc tuşunu bilmeyen
       // kullanıcı için tek tıklık çıkış.
-      const kapatDugmesi = menu.querySelector('.trds-erisim__kapat');
+      const kapatDugmesi = menu.querySelector('.kiris-erisim__kapat');
       if (kapatDugmesi) kapatDugmesi.addEventListener('click', () => { kapat(); dugme.focus(); });
       document.addEventListener('keydown', (olay) => {
         if (olay.key === 'Escape' && !panel.hidden) {
@@ -1498,17 +1498,17 @@ export function erisimMenusuBaslat(kok = document) {
         if (!panel.hidden && !menu.contains(olay.target)) kapat();
       });
 
-      her('.trds-erisim__secenek', menu).forEach((secenek) => {
+      her('.kiris-erisim__secenek', menu).forEach((secenek) => {
         const tur = 'yazi' in secenek.dataset ? 'yazi' : 'tema';
         secenek.addEventListener('click', () => {
           const deger = secenek.dataset[tur];
-          her(`.trds-erisim__secenek[data-${tur}]`, menu).forEach((k) =>
+          her(`.kiris-erisim__secenek[data-${tur}]`, menu).forEach((k) =>
             k.setAttribute('aria-pressed', String(k === secenek))
           );
           uygula(tur, deger);
         });
         // Sayfa yüklendiğinde basılı durumu saklanan ayara göre kur.
-        const kayitli = ayarOku(`trds-${tur}`);
+        const kayitli = ayarOku(`kiris-${tur}`);
         if (kayitli) secenek.setAttribute('aria-pressed', String(secenek.dataset[tur] === kayitli));
       });
     })
@@ -1520,7 +1520,7 @@ export function erisimMenusuBaslat(kok = document) {
 // ---------------------------------------------------------------------------
 
 export function kimlikNoBaslat(kok = document) {
-  her('[data-trds="kimlik-no"]', kok).forEach((el) =>
+  her('[data-kiris="kimlik-no"]', kok).forEach((el) =>
     bir(el, 'kimlik-no', (alan) => {
       const girdi = alan.querySelector('input');
       if (!girdi) return;
@@ -1535,7 +1535,7 @@ export function kimlikNoBaslat(kok = document) {
 }
 
 export function vergiNoBaslat(kok = document) {
-  her('[data-trds="vergi-no"]', kok).forEach((el) =>
+  her('[data-kiris="vergi-no"]', kok).forEach((el) =>
     bir(el, 'vergi-no', (alan) => {
       const girdi = alan.querySelector('input');
       if (!girdi) return;
@@ -1558,7 +1558,7 @@ export function vergiNoBaslat(kok = document) {
 }
 
 export function ibanBaslat(kok = document) {
-  her('[data-trds="iban"]', kok).forEach((el) =>
+  her('[data-kiris="iban"]', kok).forEach((el) =>
     bir(el, 'iban', (alan) => {
       const girdi = alan.querySelector('input');
       if (!girdi) return;
@@ -1621,7 +1621,7 @@ export function ibanBaslat(kok = document) {
 }
 
 export function telefonBaslat(kok = document) {
-  her('[data-trds="telefon"]', kok).forEach((el) =>
+  her('[data-kiris="telefon"]', kok).forEach((el) =>
     bir(el, 'telefon', (alan) => {
       const girdi = alan.querySelector('input');
       if (!girdi) return;
@@ -1671,7 +1671,7 @@ export function telefonBaslat(kok = document) {
 }
 
 export function plakaBaslat(kok = document) {
-  her('[data-trds="plaka"]', kok).forEach((el) =>
+  her('[data-kiris="plaka"]', kok).forEach((el) =>
     bir(el, 'plaka', (alan) => {
       const girdi = alan.querySelector('input');
       if (!girdi) return;
@@ -1689,7 +1689,7 @@ export function plakaBaslat(kok = document) {
 }
 
 export function tarihBaslat(kok = document) {
-  her('[data-trds="tarih"]', kok).forEach((el) =>
+  her('[data-kiris="tarih"]', kok).forEach((el) =>
     bir(el, 'tarih', (alan) => {
       const gun = alan.querySelector('[name="gun"]');
       const ay = alan.querySelector('[name="ay"]');
@@ -1732,7 +1732,7 @@ export function tarihBaslat(kok = document) {
  * @param {(ilKodu: string) => Promise<{kod: string, ad: string}[]>} [ilceGetir]
  */
 export function adresBaslat(kok = document, ilceGetir) {
-  her('[data-trds="adres"]', kok).forEach((el) =>
+  her('[data-kiris="adres"]', kok).forEach((el) =>
     bir(el, 'adres', (alan) => {
       const il = alan.querySelector('[data-adres="il"]');
       const ilce = alan.querySelector('[data-adres="ilce"]');
@@ -1764,26 +1764,26 @@ export function adresBaslat(kok = document, ilceGetir) {
 // metni onay kutusunun üstünde görünür ve odak onay kutusuna gider.
 // Kullanıcı kutuyu işaretleyince hata kalkar.
 export function kvkkBaslat(kok = document) {
-  her('[data-trds="kvkk"]', kok).forEach((el) =>
+  her('[data-kiris="kvkk"]', kok).forEach((el) =>
     bir(el, 'kvkk', (kutu) => {
       const form = kutu.closest('form');
-      const onay = kutu.querySelector('.trds-onay[required]');
+      const onay = kutu.querySelector('.kiris-onay[required]');
       if (!form || !onay) return;
       const metin = kutu.dataset.hataMetni || 'Devam etmek için verilerinizin işlenmesine izin vermeniz gerekir.';
-      let hata = kutu.querySelector('.trds-hata');
+      let hata = kutu.querySelector('.kiris-hata');
       if (!hata) {
         hata = document.createElement('p');
-        hata.className = 'trds-hata';
+        hata.className = 'kiris-hata';
         hata.hidden = true;
-        onay.closest('.trds-secenek').insertAdjacentElement('beforebegin', hata);
+        onay.closest('.kiris-secenek').insertAdjacentElement('beforebegin', hata);
       }
       const hataId = hata.id || `${onay.id || 'kvkk'}-hata`;
       hata.id = hataId;
       const goster = (acik) => {
-        kutu.classList.toggle('trds-kvkk--hata', acik);
+        kutu.classList.toggle('kiris-kvkk--hata', acik);
         hata.hidden = !acik;
         if (acik) {
-          hata.innerHTML = `<span class="trds-gorsel-gizli">Hata:</span> ${metin}`;
+          hata.innerHTML = `<span class="kiris-gorsel-gizli">Hata:</span> ${metin}`;
           onay.setAttribute('aria-invalid', 'true');
           onay.setAttribute('aria-describedby', [onay.getAttribute('aria-describedby'), hataId].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).join(' '));
         } else {

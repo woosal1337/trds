@@ -6,7 +6,7 @@
 //   node tools/llms.mjs
 //
 // Çıktı: llms.txt ve llms-full.txt, depo kökünde ve belge sitesinde.
-// Biçim: https://llmstxt.org — H1, özet alıntısı, bölümler ve bağlantılar.
+// Biçim: https://llmstxt.org · H1, özet alıntısı, bölümler ve bağlantılar.
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -39,19 +39,19 @@ const vueOrnek = (ad, ornek) => {
   const { children, ...kalan } = ornek ?? {};
   const ozellikler = Object.entries(kalan).map(([k, v]) => (typeof v === 'string' ? ` ${k}="${v.replace(/"/g, '&quot;')}"` : ` :${k}='${JSON.stringify(v)}'`)).join('');
   return children !== undefined && typeof children === 'string'
-    ? `<Trds${ad}${ozellikler}>${children}</Trds${ad}>`
-    : `<Trds${ad}${ozellikler} />`;
+    ? `<Kiris${ad}${ozellikler}>${children}</Kiris${ad}>`
+    : `<Kiris${ad}${ozellikler} />`;
 };
-const varlikYolu = (html) => html.replace(/\{\{VARLIK\}\}/g, '/trds/');
+const varlikYolu = (html) => html.replace(/\{\{VARLIK\}\}/g, '/kiris/');
 
 const davranisOznitelikleri = (html) => {
   const bulunan = new Set();
   for (const m of html.matchAll(/\s(data-[a-z-]+)(?:="[^"]*")?/g)) bulunan.add(m[1]);
-  return [...bulunan].filter((d) => d !== 'data-trds');
+  return [...bulunan].filter((d) => d !== 'data-kiris');
 };
 
 // ------------------------------------------------------------------ kaynak
-const cekirdekJs = await oku('packages/core/src/scripts/trds.js');
+const cekirdekJs = await oku('packages/core/src/scripts/kiris.js');
 const baslaticilar = [...cekirdekJs.matchAll(/^export function ([a-zA-Z]+)Baslat\(/gm)].map((m) => `${m[1]}Baslat`);
 const dogrulayiciKaynak = await oku('packages/validators/src/index.js');
 const dogrulayicilar = [...dogrulayiciKaynak.matchAll(/\/\*\*\n((?: \*.*\n)+?) \*\/\nexport function ([a-zA-Z]+)\(([^)]*)\)/g)].map((m) => ({
@@ -59,9 +59,9 @@ const dogrulayicilar = [...dogrulayiciKaynak.matchAll(/\/\*\*\n((?: \*.*\n)+?) \
   imza: m[3].trim(),
   aciklama: m[1].split('\n').map((s) => s.replace(/^\s*\*\s?/, '').trim()).filter(Boolean).join(' ')
 }));
-const belirtecCss = await oku('packages/tokens/dist/trds-belirtecler.css').catch(() => '');
+const belirtecCss = await oku('packages/tokens/dist/kiris-belirtecler.css').catch(() => '');
 const kokBlok = belirtecCss.slice(belirtecCss.indexOf(':root {'), belirtecCss.indexOf('}', belirtecCss.indexOf(':root {')));
-const belirtecler = [...kokBlok.matchAll(/\s(--trds-[a-z0-9-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]);
+const belirtecler = [...kokBlok.matchAll(/\s(--kiris-[a-z0-9-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]);
 const belirtecGruplari = {};
 for (const [ad, deger] of belirtecler) {
   const grup = ad.split('-')[2];
@@ -71,16 +71,16 @@ const kimlikLisans = await oku('LICENSE-IDENTITY.md');
 const paketSurumu = JSON.parse(await oku('packages/core/package.json')).version;
 
 // --------------------------------------------------------------- llms.txt
-const ozet = `TRDS (Türkiye Kamu Tasarım Sistemi) is an open design system for Turkish public services. It has ${BILESENLER.length} HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. TRDS has no government endorsement.`;
+const ozet = `Kiriş (Türkiye kamu hizmetleri için tasarım sistemi) is an open design system for Turkish public services. It has ${BILESENLER.length} HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.`;
 
 const bilesenSatiri = (b) => {
   const t = tanimHaritasi.get(b.id);
   const kok = t?.kok ?? ((b.ornekler[0]?.html.match(/class="([^"\s]+)/) ?? [])[1] ?? '');
-  const davranis = (b.ornekler[0]?.html.match(/data-trds="([a-z-]+)"/) ?? [])[1];
-  return `- [${b.ad} (${b.name})](${SITE}/bilesenler/${b.id}.html): ${b.ozet} Root class \`${kok}\`${davranis ? `, behaviour \`data-trds="${davranis}"\`` : ''}${t ? `, React/Vue \`${t.ad}\`` : ''}.`;
+  const davranis = (b.ornekler[0]?.html.match(/data-kiris="([a-z-]+)"/) ?? [])[1];
+  return `- [${b.ad} (${b.name})](${SITE}/bilesenler/${b.id}.html): ${b.ozet} Root class \`${kok}\`${davranis ? `, behaviour \`data-kiris="${davranis}"\`` : ''}${t ? `, React/Vue \`${t.ad}\`` : ''}.`;
 };
 
-const kisa = `# TRDS — Türkiye Kamu Tasarım Sistemi
+const kisa = `# Kiriş · Türkiye kamu hizmetleri için tasarım sistemi
 
 > ${ozet}
 
@@ -88,41 +88,41 @@ Version ${paketSurumu}. Source: ${DEPO}. Docs: ${SITE}. For a local site, run \`
 
 ## How to integrate in 60 seconds
 
-**Plain HTML.** Include the two files from \`packages/core/dist/\` and call \`baslat()\` once. Every behaviour is keyed by a \`data-trds="<name>"\` attribute and enhances working HTML.
+**Plain HTML.** Include the two files from \`packages/core/dist/\` and call \`baslat()\` once. Every behaviour is keyed by a \`data-kiris="<name>"\` attribute and enhances working HTML.
 
 \`\`\`html
-<link rel="stylesheet" href="/trds/trds.min.css">
+<link rel="stylesheet" href="/kiris/kiris.min.css">
 <script type="module">
-  import { baslat } from '/trds/trds.min.js';
+  import { baslat } from '/kiris/kiris.min.js';
   baslat(); // or baslat(document.getElementById('form'))
 </script>
 \`\`\`
 
-**React.** \`npm install @tr-ds/react @tr-ds/core\`. Plain JavaScript, no JSX build needed for the library. Components take Turkish prop names and render the exact HTML of the docs.
+**React.** \`npm install @kiris-ds/react @kiris-ds/core\`. Plain JavaScript, no JSX build needed for the library. Components take Turkish prop names and render the exact HTML of the docs.
 
 \`\`\`jsx
-import '@tr-ds/core/css';
-import { KimlikNoGirisi, Dugme } from '@tr-ds/react';
+import '@kiris-ds/core/css';
+import { KimlikNoGirisi, Dugme } from '@kiris-ds/react';
 <form><KimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" /><Dugme>Devam et</Dugme></form>
 \`\`\`
 
-**Vue 3.5 or later.** \`npm install @tr-ds/vue @tr-ds/core\`. Render functions, no template compiler. \`app.use(Trds)\` registers every component with the \`Trds\` prefix.
+**Vue 3.5 or later.** \`npm install @kiris-ds/vue @kiris-ds/core\`. Render functions, no template compiler. \`app.use(Kiris)\` registers every component with the \`Kiris\` prefix.
 
 \`\`\`js
 import { createApp } from 'vue';
-import { Trds } from '@tr-ds/vue';
-import '@tr-ds/core/css';
-createApp(App).use(Trds); // <TrdsKimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" />
+import { Kiris } from '@kiris-ds/vue';
+import '@kiris-ds/core/css';
+createApp(App).use(Kiris); // <KirisKimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" />
 \`\`\`
 
 ## Rules an AI must follow
 
-- Class names are Turkish BEM: \`trds-<block>__<element>--<modifier>\`. Never invent a class; every class in this file exists in \`trds.css\`.
-- Colour, spacing, type and radius come only from tokens \`--trds-*\`. Themes: \`<html data-trds-tema="acik|koyu|yuksek">\`, font size \`data-trds-yazi="normal|buyuk|cok-buyuk"\`. Do not write raw hex values.
+- Class names are Turkish BEM: \`kiris-<block>__<element>--<modifier>\`. Never invent a class; every class in this file exists in \`kiris.css\`.
+- Colour, spacing, type and radius come only from tokens \`--kiris-*\`. Themes: \`<html data-kiris-tema="acik|koyu|yuksek">\`, font size \`data-kiris-yazi="normal|buyuk|cok-buyuk"\`. Do not write raw hex values.
 - Every interactive part works without JavaScript. Script adds behaviour after \`baslat()\`; it never replaces markup.
-- Form fields: label + optional \`.trds-yardim\` + optional \`.trds-hata\` + input inside \`.trds-alan\`. Errors also go to the page-top \`.trds-hata-ozeti\`. Touch targets are 44 px.
-- Icons: inline the sprite \`packages/identity/dist/trds-simgeler.svg\` once, then \`<svg class="trds-simge" aria-hidden="true"><use href="#trds-health"/></svg>\`. 74 icons from Tabler Icons (MIT), one 24-unit grid, 2-unit stroke; do not add other icon sets.
-- State identity assets have separate terms in LICENSE-IDENTITY.md. TRDS cannot grant permission for third-party logos. Code and Tabler icons use MIT licences.
+- Form fields: label + optional \`.kiris-yardim\` + optional \`.kiris-hata\` + input inside \`.kiris-alan\`. Errors also go to the page-top \`.kiris-hata-ozeti\`. Touch targets are 44 px.
+- Icons: inline the sprite \`packages/identity/dist/kiris-simgeler.svg\` once, then \`<svg class="kiris-simge" aria-hidden="true"><use href="#kiris-health"/></svg>\`. 74 icons from Tabler Icons (MIT), one 24-unit grid, 2-unit stroke; do not add other icon sets.
+- State identity assets have separate terms in LICENSE-IDENTITY.md. Kiriş cannot grant permission for third-party logos. Code and Tabler icons use MIT licences.
 - Turkish text rules: \`İ/ı\` case with \`trBuyuk()/trKucuk()\`, sorting with \`trSirala()\`, money with \`tlBicimle()\`, dates as \`gg.aa.yyyy\`.
 
 ## Components (${BILESENLER.length})
@@ -131,14 +131,14 @@ ${GRUPLAR.map((g) => `### ${g.ad}\n\n${BILESENLER.filter((b) => b.grup === g.id)
 
 ## Packages
 
-- [@tr-ds/core](${DEPO}/tree/main/packages/core): \`dist/trds.css\`, \`dist/trds.js\` (ESM, exports \`baslat\` and ${baslaticilar.length} \`*Baslat\` initialisers). Exports map: \`@tr-ds/core\`, \`@tr-ds/core/css\`, \`@tr-ds/core/css/min\`, \`@tr-ds/core/js/min\`.
-- [@tr-ds/react](${DEPO}/tree/main/packages/react): ${TANIMLAR.length} components, \`useTrdsForm\`, \`DugmeGrubu\`, \`Sutun\`, \`BILESENLER\` map by registry id.
-- [@tr-ds/vue](${DEPO}/tree/main/packages/vue): ${TANIMLAR.length} components, \`Trds\` plugin, \`DugmeGrubu\`, \`Sutun\`, \`BILESENLER\` map by registry id.
-- [@tr-ds/tanim](${DEPO}/tree/main/packages/tanim): framework-free draw functions; React and Vue are generated from it.
-- [@tr-ds/validators](${DEPO}/tree/main/packages/validators): ${dogrulayicilar.length} Turkish validators and formatters, zero dependencies, 36 tests.
-- [@tr-ds/tokens](${DEPO}/tree/main/packages/tokens): ${belirtecler.length} tokens (DTCG JSON → CSS, JSON, JS), light and dark themes, 36 contrast guarantees checked at build.
-- [@tr-ds/identity](${DEPO}/tree/main/packages/identity): e-Devlet mark, flag SVG, institution logos, icon sprite. Restricted licence.
-- [@tr-ds/theme-vatandas, theme-kurumsal, theme-saglik](${DEPO}/tree/main/packages/themes): institution themes from one brand colour.
+- [@kiris-ds/core](${DEPO}/tree/main/packages/core): \`dist/kiris.css\`, \`dist/kiris.js\` (ESM, exports \`baslat\` and ${baslaticilar.length} \`*Baslat\` initialisers). Exports map: \`@kiris-ds/core\`, \`@kiris-ds/core/css\`, \`@kiris-ds/core/css/min\`, \`@kiris-ds/core/js/min\`.
+- [@kiris-ds/react](${DEPO}/tree/main/packages/react): ${TANIMLAR.length} components, \`useKirisForm\`, \`DugmeGrubu\`, \`Sutun\`, \`BILESENLER\` map by registry id.
+- [@kiris-ds/vue](${DEPO}/tree/main/packages/vue): ${TANIMLAR.length} components, \`Kiris\` plugin, \`DugmeGrubu\`, \`Sutun\`, \`BILESENLER\` map by registry id.
+- [@kiris-ds/tanim](${DEPO}/tree/main/packages/tanim): framework-free draw functions; React and Vue are generated from it.
+- [@kiris-ds/validators](${DEPO}/tree/main/packages/validators): ${dogrulayicilar.length} Turkish validators and formatters, zero dependencies, 36 tests.
+- [@kiris-ds/tokens](${DEPO}/tree/main/packages/tokens): ${belirtecler.length} tokens (DTCG JSON → CSS, JSON, JS), light and dark themes, 36 contrast guarantees checked at build.
+- [@kiris-ds/identity](${DEPO}/tree/main/packages/identity): e-Devlet mark, flag SVG, institution logos, icon sprite. Restricted licence.
+- [@kiris-ds/theme-vatandas, theme-kurumsal, theme-saglik](${DEPO}/tree/main/packages/themes): institution themes from one brand colour.
 
 ## Integrations
 
@@ -150,7 +150,7 @@ ${ENTEGRASYONLAR.map((e) => `- ${e.ad} (${e.durum}): ${e.ozet}`).join('\n')}
 - [Architecture decisions](${DEPO}/blob/main/docs/mimari.md): eight decisions, from zero dependencies to the split licence.
 - [Component lifecycle](${DEPO}/blob/main/docs/bilesen-yasam-dongusu.md): how a part enters and leaves the system.
 - [Identity licence](${DEPO}/blob/main/LICENSE-IDENTITY.md): who may use the state identity parts.
-- [Example pages](${SITE}/ornekler/): six government home pages built only from TRDS parts, three of them 1:1 copies of real sites.
+- [Example pages](${SITE}/ornekler/): six government home pages built only from Kiriş parts, three of them 1:1 copies of real sites.
 `;
 
 // ---------------------------------------------------------- llms-full.txt
@@ -158,7 +158,7 @@ const bilesenBolumu = (b) => {
   const t = tanimHaritasi.get(b.id);
   const ornekler = b.ornekler.map((o) => `**${o.baslik}**\n\n\`\`\`html\n${varlikYolu(o.html)}\n\`\`\``).join('\n\n');
   const veri = davranisOznitelikleri(b.ornekler.map((o) => o.html).join('\n'));
-  return `### ${b.ad} (${b.name}) — \`${b.id}\`
+  return `### ${b.ad} (${b.name}) · \`${b.id}\`
 
 Group: ${grupAdi[b.grup]}${b.ozgun ? ' · unique to Türkiye' : ''}. Status: CSS ${b.durum.css}, JS ${b.durum.js}, React ${b.durum.react}, Vue ${b.durum.vue}. WCAG: ${b.wcag.join(', ')}.${b.kaynak.length ? ` Also in: ${b.kaynak.join(', ')}.` : ''}
 
@@ -172,13 +172,13 @@ ${b.erisilebilirlik.map((s) => `- ${s}`).join('\n')}
 ${b.neden ? `\nWhy it exists: ${b.neden}\n` : ''}${veri.length ? `\nData attributes used by the markup: ${veri.map((d) => `\`${d}\``).join(', ')}.\n` : ''}
 ${ornekler}
 ${t ? `
-**React** (\`import { ${t.ad} } from '@tr-ds/react'\`):
+**React** (\`import { ${t.ad} } from '@kiris-ds/react'\`):
 
 \`\`\`jsx
 ${jsxOrnek(t.ad, t.ornek)}
 \`\`\`
 
-**Vue** (\`import { ${t.ad} } from '@tr-ds/vue'\` or \`app.use(Trds)\`):
+**Vue** (\`import { ${t.ad} } from '@kiris-ds/vue'\` or \`app.use(Kiris)\`):
 
 \`\`\`html
 ${vueOrnek(t.ad, t.ornek)}
@@ -188,7 +188,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 `;
 };
 
-const tam = `# TRDS — Türkiye Kamu Tasarım Sistemi (full reference)
+const tam = `# Kiriş · Türkiye kamu hizmetleri için tasarım sistemi (full reference)
 
 > ${ozet}
 
@@ -197,64 +197,64 @@ This file is generated by \`node tools/llms.mjs\` from the registry, the compone
 ${kisa.slice(kisa.indexOf('## How to integrate'), kisa.indexOf('## Components'))}
 ## Page skeleton
 
-A TRDS page has this order. Full-width parts carry their own \`.trds-kap\` container. The identifier and the footer never stand together; the corporate footer carries the institution.
+A Kiriş page has this order. Full-width parts carry their own \`.kiris-kap\` container. The identifier and the footer never stand together; the corporate footer carries the institution.
 
 \`\`\`html
 <!doctype html>
-<html lang="tr" data-trds-tema="acik">
+<html lang="tr" data-kiris-tema="acik">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hizmet adı — Kurum adı</title>
-  <link rel="stylesheet" href="/trds/trds.min.css">
+  <title>Hizmet adı · Kurum adı</title>
+  <link rel="stylesheet" href="/kiris/kiris.min.css">
 </head>
 <body>
-  <a class="trds-atla" href="#ana-icerik">Ana içeriğe geç</a>
-  <!-- svg sprite: packages/identity/dist/trds-simgeler.svg, inline once, display:none -->
-  <div class="trds-resmi-afis" data-trds="resmi-afis">…</div>      <!-- masthead -->
-  <header class="trds-baslik-cubugu" data-trds="baslik-cubugu">…</header>
+  <a class="kiris-atla" href="#ana-icerik">Ana içeriğe geç</a>
+  <!-- svg sprite: packages/identity/dist/kiris-simgeler.svg, inline once, display:none -->
+  <div class="kiris-resmi-afis" data-kiris="resmi-afis">…</div>      <!-- masthead -->
+  <header class="kiris-baslik-cubugu" data-kiris="baslik-cubugu">…</header>
   <main id="ana-icerik" tabindex="-1">
-    <div class="trds-kap">…</div>
+    <div class="kiris-kap">…</div>
   </main>
-  <footer class="trds-alt-bilgi">…</footer>
-  <script type="module">import { baslat } from '/trds/trds.min.js'; baslat();</script>
+  <footer class="kiris-alt-bilgi">…</footer>
+  <script type="module">import { baslat } from '/kiris/kiris.min.js'; baslat();</script>
 </body>
 </html>
 \`\`\`
 
-## JavaScript API (@tr-ds/core)
+## JavaScript API (@kiris-ds/core)
 
 \`baslat(kok = document, secenek = {})\` runs every initialiser below on the descendants of \`kok\`. Call it once after the DOM exists, and again after you insert new markup. Each element is initialised once (idempotent). \`secenek.ilceGetir(ilKodu)\` may return a promise of districts for the address part.
 
-Initialisers, each exported and each keyed by a \`data-trds\` attribute:
+Initialisers, each exported and each keyed by a \`data-kiris\` attribute:
 
 ${baslaticilar.map((b) => `- \`${b}(kok)\``).join('\n')}
 
-Conventions: a live region is \`[data-trds-durum]\` (or \`.trds-*__durum\` in older parts); an error slot is \`[data-trds-hata]\`; a counter is \`[data-trds-sayac]\`; \`data-zorunlu\` makes an empty field an error; custom events are \`trds:secildi\`, \`trds:kapandi\`, \`trds:kaldirildi\`, \`trds:suzgecDegisti\`, \`trds:cerezSecildi\`.
+Conventions: a live region is \`[data-kiris-durum]\` (or \`.kiris-*__durum\` in older parts); an error slot is \`[data-kiris-hata]\`; a counter is \`[data-kiris-sayac]\`; \`data-zorunlu\` makes an empty field an error; custom events are \`kiris:secildi\`, \`kiris:kapandi\`, \`kiris:kaldirildi\`, \`kiris:suzgecDegisti\`, \`kiris:cerezSecildi\`.
 
-## Validators (@tr-ds/validators)
+## Validators (@kiris-ds/validators)
 
 Pure functions, no DOM. The same functions run in the browser and on the server.
 
-${dogrulayicilar.map((d) => `- \`${d.ad}(${d.imza})\` — ${d.aciklama}`).join('\n')}
+${dogrulayicilar.map((d) => `- \`${d.ad}(${d.imza})\` · ${d.aciklama}`).join('\n')}
 
 Also exported: \`AYLAR\` (Turkish month names).
 
-## Design tokens (@tr-ds/tokens)
+## Design tokens (@kiris-ds/tokens)
 
-${belirtecler.length} tokens. Light values below; the dark theme redefines ${(belirtecCss.match(/\[data-trds-tema="koyu"\]/) ? 'the colour tokens' : 'colours')} under \`[data-trds-tema="koyu"]\` and \`prefers-color-scheme: dark\`. High contrast \`[data-trds-tema="yuksek"]\` thickens borders and removes muted tones. Never hard-code a colour: use the token.
+${belirtecler.length} tokens. Light values below; the dark theme redefines ${(belirtecCss.match(/\[data-kiris-tema="koyu"\]/) ? 'the colour tokens' : 'colours')} under \`[data-kiris-tema="koyu"]\` and \`prefers-color-scheme: dark\`. High contrast \`[data-kiris-tema="yuksek"]\` thickens borders and removes muted tones. Never hard-code a colour: use the token.
 
 ${Object.entries(belirtecGruplari).map(([grup, liste]) => `### ${grup}\n\n${liste.map(([ad, deger]) => `- \`${ad}\`: \`${deger}\``).join('\n')}`).join('\n\n')}
 
 ## Themes
 
-Three institution themes override the brand tokens from one colour: \`@tr-ds/theme-vatandas\` (default, #1e4785), \`@tr-ds/theme-kurumsal\`, \`@tr-ds/theme-saglik\`. Include the theme CSS after \`trds.css\`. A new theme is one JSON file with a brand colour; the build checks contrast.
+Three institution themes override the brand tokens from one colour: \`@kiris-ds/theme-vatandas\` (default, #1e4785), \`@kiris-ds/theme-kurumsal\`, \`@kiris-ds/theme-saglik\`. Include the theme CSS after \`kiris.css\`. A new theme is one JSON file with a brand colour; the build checks contrast.
 
 ## Identity licence
 
 ${kimlikLisans.split('\n').slice(0, 40).join('\n')}
 
-## Components — complete reference (${BILESENLER.length})
+## Components · complete reference (${BILESENLER.length})
 
 ${GRUPLAR.map((g) => `## ${g.ad}\n\n${g.ozet}\n\n${BILESENLER.filter((b) => b.grup === g.id).map(bilesenBolumu).join('\n')}`).join('\n')}
 

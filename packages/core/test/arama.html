@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="tr">
 <meta charset="utf-8">
-<title>TRDS arama güvenlik testi</title>
+<title>Kiriş arama güvenlik testi</title>
 <h1>Arama güvenlik testi</h1>
 <p id="sonuc" role="status">Test çalışıyor.</p>
 <div id="sahne"></div>
@@ -12,17 +12,17 @@
   const bekle = () => new Promise((tamam) => setTimeout(tamam, 30));
   let toplam = 0;
   try {
-    for (const dosya of ['trds.js', 'trds.min.js']) {
+    for (const dosya of ['kiris.js', 'kiris.min.js']) {
       const { aramaBaslat } = await import(`../dist/${dosya}`);
       for (const adres of gecersiz) {
         for (const yol of ['klavye', 'fare']) {
-          sahne.innerHTML = '<div data-trds="arama" data-kaynak-id="veri"><form><label for="sorgu">Arama</label><input id="sorgu" role="combobox"><div role="listbox" hidden></div><p data-trds-durum></p></form></div><script id="veri" type="application/json"><\/script>';
+          sahne.innerHTML = '<div data-kiris="arama" data-kaynak-id="veri"><form><label for="sorgu">Arama</label><input id="sorgu" role="combobox"><div role="listbox" hidden></div><p data-kiris-durum></p></form></div><script id="veri" type="application/json"><\/script>';
           document.getElementById('veri').textContent = JSON.stringify({ gruplar: [{ ad: 'Deneme', ogeler: [{ ad: 'ikamet', href: adres }] }] });
           aramaBaslat(sahne);
           window.calisti = false;
           const girdi = document.getElementById('sorgu');
           let secim;
-          girdi.addEventListener('trds:secildi', (olay) => { secim = olay.detail; });
+          girdi.addEventListener('kiris:secildi', (olay) => { secim = olay.detail; });
           girdi.value = 'ikamet';
           girdi.dispatchEvent(new Event('input', { bubbles: true }));
           await bekle();

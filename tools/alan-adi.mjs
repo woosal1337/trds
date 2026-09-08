@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Belge sitesinin alan adını bütün depoda değiştirir.
 //
-//   node tools/alan-adi.mjs trds.example.tr
+//   node tools/alan-adi.mjs kiris.example.tr
 //
 // Paket alanları, README dosyaları, llms üreticisi ve PROJECT.json güncellenir.
 // Değişiklikten sonra `npm run yapi` ve `node tools/readme.mjs` çalıştırın.

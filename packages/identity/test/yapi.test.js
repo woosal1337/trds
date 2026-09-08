@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const kaynak = fileURLToPath(new URL('..', import.meta.url));
 
 test('kimlik yapısı eski çıktıları siler ve lisansı pakete ekler', async () => {
-  const gecici = await mkdtemp(join(tmpdir(), 'trds-kimlik-test-'));
+  const gecici = await mkdtemp(join(tmpdir(), 'kiris-kimlik-test-'));
   try {
     const paket = join(gecici, 'packages', 'identity');
     await mkdir(join(paket, 'dist', 'simgeler'), { recursive: true });

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://tr.gov.trds/schema/tokens.json",
+  "$schema": "https://tr.gov.kiris/schema/tokens.json",
   "$aciklama": "Anlamsal belirteçler. Ad üç parçadan kurulur: ölçek, grup, çeşit. Norveç Designsystemet adlandırma kuralı temel alındı. Bir bileşen YALNIZ bu belirteçleri kullanır.",
   "$adlandirma": {
     "kalip": "renk-<olcek>-<grup>-<cesit>",

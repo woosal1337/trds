@@ -1,4 +1,4 @@
-/* TRDS çekirdek — temel katman.
+/* Kiriş çekirdek · temel katman.
    Sıfırlama, tipografi, yerleşim ve odak. Hiçbir kural ham renk kullanmaz.
    Her değer bir anlamsal belirteçten gelir. */
 
@@ -16,18 +16,18 @@ html {
 
 body {
   margin: 0;
-  background: var(--trds-renk-notr-zemin-varsayilan);
-  color: var(--trds-renk-notr-metin-varsayilan);
-  font-family: var(--trds-yazi-aile-govde);
-  font-size: var(--trds-metin-govde);
-  line-height: var(--trds-yazi-satir-normal);
+  background: var(--kiris-renk-notr-zemin-varsayilan);
+  color: var(--kiris-renk-notr-metin-varsayilan);
+  font-family: var(--kiris-yazi-aile-govde);
+  font-size: var(--kiris-metin-govde);
+  line-height: var(--kiris-yazi-satir-normal);
   /* Türkçe metinde kesme işareti ve tırnak doğru görünsün. */
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
 /* Yazı boyutu kademeleri. Erişilebilirlik menüsü bu değeri değiştirir. */
-:root[data-trds-yazi='buyuk'] body { font-size: calc(var(--trds-metin-govde) * 1.125); }
-:root[data-trds-yazi='cok-buyuk'] body { font-size: calc(var(--trds-metin-govde) * 1.25); }
+:root[data-kiris-yazi='buyuk'] body { font-size: calc(var(--kiris-metin-govde) * 1.125); }
+:root[data-kiris-yazi='cok-buyuk'] body { font-size: calc(var(--kiris-metin-govde) * 1.25); }
 
 img,
 svg,
@@ -38,56 +38,56 @@ video {
 
 /* --------------------------------------------------------------- tipografi */
 
-.trds-baslik {
-  font-family: var(--trds-yazi-aile-govde);
-  font-weight: var(--trds-yazi-kalinlik-kalin);
-  line-height: var(--trds-yazi-satir-sik);
-  color: var(--trds-renk-notr-metin-varsayilan);
-  margin: 0 0 var(--trds-aralik-4);
+.kiris-baslik {
+  font-family: var(--kiris-yazi-aile-govde);
+  font-weight: var(--kiris-yazi-kalinlik-kalin);
+  line-height: var(--kiris-yazi-satir-sik);
+  color: var(--kiris-renk-notr-metin-varsayilan);
+  margin: 0 0 var(--kiris-aralik-4);
   text-wrap: balance;
 }
 
-.trds-baslik--1 { font-size: var(--trds-metin-baslik-1); margin-bottom: var(--trds-aralik-6); }
-.trds-baslik--2 { font-size: var(--trds-metin-baslik-2); margin-top: var(--trds-aralik-8); }
-.trds-baslik--3 { font-size: var(--trds-metin-baslik-3); margin-top: var(--trds-aralik-7); }
-.trds-baslik--4 { font-size: var(--trds-metin-baslik-4); margin-top: var(--trds-aralik-6); }
+.kiris-baslik--1 { font-size: var(--kiris-metin-baslik-1); margin-bottom: var(--kiris-aralik-6); }
+.kiris-baslik--2 { font-size: var(--kiris-metin-baslik-2); margin-top: var(--kiris-aralik-8); }
+.kiris-baslik--3 { font-size: var(--kiris-metin-baslik-3); margin-top: var(--kiris-aralik-7); }
+.kiris-baslik--4 { font-size: var(--kiris-metin-baslik-4); margin-top: var(--kiris-aralik-6); }
 
 /* Küçük ekranda büyük kademeler küçülür. Bir başlık asla taşmaz. */
 @media (max-width: 30rem) {
-  .trds-baslik--1 { font-size: var(--trds-yazi-boyut-30); }
-  .trds-baslik--2 { font-size: var(--trds-yazi-boyut-24); }
-  .trds-baslik--3 { font-size: var(--trds-yazi-boyut-20); }
+  .kiris-baslik--1 { font-size: var(--kiris-yazi-boyut-30); }
+  .kiris-baslik--2 { font-size: var(--kiris-yazi-boyut-24); }
+  .kiris-baslik--3 { font-size: var(--kiris-yazi-boyut-20); }
 }
 
-.trds-govde {
-  margin: 0 0 var(--trds-aralik-4);
-  max-width: var(--trds-olcu-satir-uzunluk);
+.kiris-govde {
+  margin: 0 0 var(--kiris-aralik-4);
+  max-width: var(--kiris-olcu-satir-uzunluk);
 }
 
-.trds-kucuk { font-size: var(--trds-metin-kucuk); }
-.trds-silik { color: var(--trds-renk-notr-metin-silik); }
+.kiris-kucuk { font-size: var(--kiris-metin-kucuk); }
+.kiris-silik { color: var(--kiris-renk-notr-metin-silik); }
 
 /* Sınıfsız bağlantı da sistem rengini alır. Tarayıcı mavisi hiçbir yerde
    görünmez. :where() özgüllüğü sıfırlar, bileşen kuralları serbestçe ezer. */
 a:where(:not([class])) {
-  color: var(--trds-renk-birincil-metin-varsayilan);
+  color: var(--kiris-renk-birincil-metin-varsayilan);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.15em;
 }
 a:where(:not([class])):hover { text-decoration-thickness: 2px; }
-a:where(:not([class])):visited { color: var(--trds-renk-birincil-metin-ziyaret); }
+a:where(:not([class])):visited { color: var(--kiris-renk-birincil-metin-ziyaret); }
 
-.trds-link {
-  color: var(--trds-renk-birincil-metin-varsayilan);
+.kiris-link {
+  color: var(--kiris-renk-birincil-metin-varsayilan);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.15em;
 }
-.trds-link:hover { text-decoration-thickness: 2px; }
-.trds-link:visited { color: var(--trds-renk-birincil-metin-ziyaret); }
+.kiris-link:hover { text-decoration-thickness: 2px; }
+.kiris-link:visited { color: var(--kiris-renk-birincil-metin-ziyaret); }
 
-.trds-sayi {
+.kiris-sayi {
   text-align: end;
   font-variant-numeric: tabular-nums;
 }
@@ -97,11 +97,11 @@ a:where(:not([class])):visited { color: var(--trds-renk-birincil-metin-ziyaret);
 /* Odak halkası her yerde aynıdır: sarı dolgu, siyah alt çizgi.
    Bu birleşim koyu ve açık her zemin üstünde görünür. Kaldırmayın. */
 :focus-visible {
-  outline: var(--trds-olcu-odak-kalinlik) solid var(--trds-renk-odak-dolgu);
+  outline: var(--kiris-olcu-odak-kalinlik) solid var(--kiris-renk-odak-dolgu);
   outline-offset: 0;
-  box-shadow: 0 var(--trds-olcu-odak-kalinlik) 0 var(--trds-renk-odak-kenar);
-  background-color: var(--trds-renk-odak-dolgu);
-  color: var(--trds-renk-odak-kenar);
+  box-shadow: 0 var(--kiris-olcu-odak-kalinlik) 0 var(--kiris-renk-odak-kenar);
+  background-color: var(--kiris-renk-odak-dolgu);
+  color: var(--kiris-renk-odak-kenar);
 }
 
 /* Bağlantı ve düğme odakta kendi rengini bırakır. */
@@ -112,31 +112,31 @@ button:focus-visible {
 
 /* --------------------------------------------------------------- yerleşim */
 
-.trds-kap {
+.kiris-kap {
   width: 100%;
-  max-width: var(--trds-olcu-kap-genislik);
+  max-width: var(--kiris-olcu-kap-genislik);
   margin-inline: auto;
-  padding-inline: var(--trds-aralik-4);
+  padding-inline: var(--kiris-aralik-4);
 }
 
 @media (min-width: 48rem) {
-  .trds-kap { padding-inline: var(--trds-aralik-6); }
+  .kiris-kap { padding-inline: var(--kiris-aralik-6); }
 }
 
-.trds-yigin > * + * { margin-block-start: var(--trds-aralik-4); }
-.trds-yigin--genis > * + * { margin-block-start: var(--trds-aralik-7); }
+.kiris-yigin > * + * { margin-block-start: var(--kiris-aralik-4); }
+.kiris-yigin--genis > * + * { margin-block-start: var(--kiris-aralik-7); }
 
-.trds-ana {
-  padding-block: var(--trds-aralik-7) var(--trds-aralik-10);
+.kiris-ana {
+  padding-block: var(--kiris-aralik-7) var(--kiris-aralik-10);
 }
 
 /* Okuma sütunu. Uzun metin bunun içine girer. */
-.trds-okuma { max-width: var(--trds-olcu-satir-uzunluk); }
+.kiris-okuma { max-width: var(--kiris-olcu-satir-uzunluk); }
 
 /* --------------------------------------------------------- yardımcı sınıf */
 
 /* Ekranda görünmez, ekran okuyucu okur. `display: none` KULLANMAYIN. */
-.trds-gorsel-gizli {
+.kiris-gorsel-gizli {
   position: absolute !important;
   width: 1px;
   height: 1px;
@@ -152,21 +152,21 @@ button:focus-visible {
 
 /* ------------------------------------------------- içeriğe atlama bağlantısı */
 
-.trds-atla {
+.kiris-atla {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
   z-index: 100;
   display: block;
-  padding: var(--trds-aralik-3) var(--trds-aralik-4);
-  background: var(--trds-renk-odak-dolgu);
-  color: var(--trds-renk-odak-kenar);
-  font-weight: var(--trds-yazi-kalinlik-kalin);
+  padding: var(--kiris-aralik-3) var(--kiris-aralik-4);
+  background: var(--kiris-renk-odak-dolgu);
+  color: var(--kiris-renk-odak-kenar);
+  font-weight: var(--kiris-yazi-kalinlik-kalin);
   text-decoration: underline;
   transform: translateY(-120%);
 }
 
-.trds-atla:focus {
+.kiris-atla:focus {
   transform: translateY(0);
 }
 
@@ -186,14 +186,14 @@ button:focus-visible {
 /* ------------------------------------------------------------------ yazdırma */
 
 @media print {
-  .trds-atla,
-  .trds-baslik-cubugu__menu-dugmesi,
-  .trds-erisim { display: none !important; }
+  .kiris-atla,
+  .kiris-baslik-cubugu__menu-dugmesi,
+  .kiris-erisim { display: none !important; }
 
   body { background: #fff; color: #000; }
 
   /* Bağlantı hedefi kâğıtta görünür. Bir vatandaş çıktıyı saklar. */
-  .trds-okuma a[href^='http']::after {
+  .kiris-okuma a[href^='http']::after {
     content: ' (' attr(href) ')';
     font-size: 0.85em;
     word-break: break-all;

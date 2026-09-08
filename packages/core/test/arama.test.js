@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { guvenliGezinmeAdresi } from '../src/scripts/trds.js';
+import { guvenliGezinmeAdresi } from '../src/scripts/kiris.js';
 
 const taban = 'https://example.gov.tr/hizmetler/';
 

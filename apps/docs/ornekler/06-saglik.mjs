@@ -1,5 +1,5 @@
-// T.C. Sağlık Bakanlığı ana sayfası, birebir. Yalnız TRDS bileşenleri ile.
-// Kaynak: https://www.saglik.gov.tr — 6 Eylül 2026 tarihli içerik.
+// T.C. Sağlık Bakanlığı ana sayfası, birebir. Yalnız Kiriş bileşenleri ile.
+// Kaynak: https://www.saglik.gov.tr · 6 Eylül 2026 tarihli içerik.
 // Manşet fotoğrafları düşer, başlıklar kalır. İki kayan pano kayan pano kalır.
 
 const manset = [
@@ -33,26 +33,26 @@ const hatlar = [
 ];
 
 const liste = (ogeler) => ogeler.map((o) => `
-      <li class="trds-kayit"><p class="trds-kayit__ust">${o.tarih}</p><h3 class="trds-kayit__baslik"><a href="#">${o.ad}</a></h3>${o.yeni ? '<p class="trds-kayit__etiketler"><span class="trds-etiket trds-etiket--kirmizi">Yeni</span></p>' : ''}</li>`).join('');
+      <li class="kiris-kayit"><p class="kiris-kayit__ust">${o.tarih}</p><h3 class="kiris-kayit__baslik"><a href="#">${o.ad}</a></h3>${o.yeni ? '<p class="kiris-kayit__etiketler"><span class="kiris-etiket kiris-etiket--kirmizi">Yeni</span></p>' : ''}</li>`).join('');
 
 const pano = (ad, slaytlar) => `
-    <div class="trds-kayan-pano trds-u-ust-0" data-trds="kayan-pano" data-ad="${ad}">
-      <div class="trds-kayan-pano__ust"><p class="trds-gorsel-gizli" data-trds-durum aria-live="polite"></p><div class="trds-kayan-pano__dugmeler"><button class="trds-button trds-button--ikincil trds-button--simge" type="button" data-yon="geri" aria-label="Önceki"><svg class="trds-simge" aria-hidden="true"><use href="#trds-arrow-left"/></svg></button><button class="trds-button trds-button--ikincil trds-button--simge" type="button" data-yon="ileri" aria-label="Sonraki"><svg class="trds-simge" aria-hidden="true"><use href="#trds-arrow-right"/></svg></button><button class="trds-button trds-button--ikincil trds-button--kucuk" type="button" data-durdur aria-pressed="false">Durdur</button></div></div>
-      <ul class="trds-kayan-pano__serit">${slaytlar.map((h) => `
-        <li class="trds-kayan-pano__slayt" tabindex="-1">${h}</li>`).join('')}
+    <div class="kiris-kayan-pano kiris-u-ust-0" data-kiris="kayan-pano" data-ad="${ad}">
+      <div class="kiris-kayan-pano__ust"><p class="kiris-gorsel-gizli" data-kiris-durum aria-live="polite"></p><div class="kiris-kayan-pano__dugmeler"><button class="kiris-button kiris-button--ikincil kiris-button--simge" type="button" data-yon="geri" aria-label="Önceki"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-arrow-left"/></svg></button><button class="kiris-button kiris-button--ikincil kiris-button--simge" type="button" data-yon="ileri" aria-label="Sonraki"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-arrow-right"/></svg></button><button class="kiris-button kiris-button--ikincil kiris-button--kucuk" type="button" data-durdur aria-pressed="false">Durdur</button></div></div>
+      <ul class="kiris-kayan-pano__serit">${slaytlar.map((h) => `
+        <li class="kiris-kayan-pano__slayt" tabindex="-1">${h}</li>`).join('')}
       </ul>
-      <div class="trds-kayan-pano__noktalar" aria-label="Slaytlar"></div>
+      <div class="kiris-kayan-pano__noktalar" aria-label="Slaytlar"></div>
     </div>`;
 
 const simgeKart = (simge, ad) => `
-      <a class="trds-simge-kart" href="#"><span class="trds-simge-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-${simge}"/></svg></span><span class="trds-simge-kart__ad">${ad}</span></a>`;
+      <a class="kiris-simge-kart" href="#"><span class="kiris-simge-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-${simge}"/></svg></span><span class="kiris-simge-kart__ad">${ad}</span></a>`;
 
 const sutunlar = (ogeler, n = 3) => {
   const boy = Math.ceil(ogeler.length / n);
   return Array.from({ length: n }, (_, i) => ogeler.slice(i * boy, (i + 1) * boy))
     .map((parca) => `
-      <div class="trds-sutun trds-sutun--4">
-        <ul class="trds-liste trds-liste--sade trds-liste--aralikli trds-u-ust-0">${parca.map((a) => `<li><a class="trds-link" href="#">${a}</a></li>`).join('')}</ul>
+      <div class="kiris-sutun kiris-sutun--4">
+        <ul class="kiris-liste kiris-liste--sade kiris-liste--aralikli kiris-u-ust-0">${parca.map((a) => `<li><a class="kiris-link" href="#">${a}</a></li>`).join('')}</ul>
       </div>`).join('');
 };
 
@@ -83,26 +83,26 @@ export const ornek = {
   yasalBaglantilar: ['Çerez Politikası', 'Bilgi Güvenliği İhlal Bildirimi', 'Site Haritası', 'English'],
   telif: '© 2026 T.C. Sağlık Bakanlığı Tüm hakları saklıdır.',
   govde: `
-<div class="trds-cerez" role="region" aria-label="Çerez tercihi" data-trds="cerez">
-  <div class="trds-kap">
-    <div class="trds-cerez__soru">
-      <h2 class="trds-cerez__baslik">T.C. Sağlık Bakanlığı Çerez Politikası</h2>
-      <p class="trds-govde">Sitemizde sizlere daha iyi hizmet verebilmek için gizliliğe uygun şekilde çerezler kullanmaktayız. <a class="trds-link" href="#">Çerez politikamızı inceleyin.</a></p>
-      <div class="trds-button-grubu"><button class="trds-button" type="button" data-cerez="kabul">Kabul et</button><button class="trds-button" type="button" data-cerez="ret">Reddet</button></div>
+<div class="kiris-cerez" role="region" aria-label="Çerez tercihi" data-kiris="cerez">
+  <div class="kiris-kap">
+    <div class="kiris-cerez__soru">
+      <h2 class="kiris-cerez__baslik">T.C. Sağlık Bakanlığı Çerez Politikası</h2>
+      <p class="kiris-govde">Sitemizde sizlere daha iyi hizmet verebilmek için gizliliğe uygun şekilde çerezler kullanmaktayız. <a class="kiris-link" href="#">Çerez politikamızı inceleyin.</a></p>
+      <div class="kiris-button-grubu"><button class="kiris-button" type="button" data-cerez="kabul">Kabul et</button><button class="kiris-button" type="button" data-cerez="ret">Reddet</button></div>
     </div>
-    <div class="trds-cerez__onay" hidden>
-      <p class="trds-govde"><span data-cerez-metin></span> Tercihinizi <a class="trds-link" href="#">çerez sayfasından</a> değiştirebilirsiniz.</p>
-      <button class="trds-button trds-button--ikincil" type="button" data-cerez-gizle>Mesajı gizle</button>
+    <div class="kiris-cerez__onay" hidden>
+      <p class="kiris-govde"><span data-cerez-metin></span> Tercihinizi <a class="kiris-link" href="#">çerez sayfasından</a> değiştirebilirsiniz.</p>
+      <button class="kiris-button kiris-button--ikincil" type="button" data-cerez-gizle>Mesajı gizle</button>
     </div>
   </div>
 </div>
 
-<section class="trds-kahraman">
-  <div class="trds-kap">
-    <p class="trds-kahraman__ust">Manşet</p>
-    <h1 class="trds-kahraman__baslik">${manset[0]}</h1>
-    ${pano('Manşet', manset.map((m) => `<div class="trds-kart"><h2 class="trds-kart__baslik"><a href="#">${m}</a></h2></div>`))}
-    <div class="trds-kart-izgara trds-kart-izgara--5 trds-kart-izgara--sik trds-u-alt-0">
+<section class="kiris-kahraman">
+  <div class="kiris-kap">
+    <p class="kiris-kahraman__ust">Manşet</p>
+    <h1 class="kiris-kahraman__baslik">${manset[0]}</h1>
+    ${pano('Manşet', manset.map((m) => `<div class="kiris-kart"><h2 class="kiris-kart__baslik"><a href="#">${m}</a></h2></div>`))}
+    <div class="kiris-kart-izgara kiris-kart-izgara--5 kiris-kart-izgara--sik kiris-u-alt-0">
       ${simgeKart('health', 'e-Nabız')}
       ${simgeKart('fastresponse', 'Acil Sağlık')}
       ${simgeKart('complaints', 'SABİM')}
@@ -113,57 +113,57 @@ export const ornek = {
   </div>
 </section>
 
-<section class="trds-bolum" aria-label="Haberler ve duyurular">
-  <div class="trds-kap">
-    <div class="trds-izgara">
-      <section class="trds-sutun trds-sutun--4" aria-labelledby="haberler">
-        <div class="trds-bolum__ust">
-          <h2 class="trds-bolum__baslik" id="haberler">Haberler</h2>
-          <a class="trds-link" href="#">Tümü<span class="trds-gorsel-gizli">: haberler</span></a>
+<section class="kiris-bolum" aria-label="Haberler ve duyurular">
+  <div class="kiris-kap">
+    <div class="kiris-izgara">
+      <section class="kiris-sutun kiris-sutun--4" aria-labelledby="haberler">
+        <div class="kiris-bolum__ust">
+          <h2 class="kiris-bolum__baslik" id="haberler">Haberler</h2>
+          <a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: haberler</span></a>
         </div>
-        <ul class="trds-kayitlar">${liste([{ tarih: '6 Ağustos 2026', ad: 'Sağlık Bakanı Memişoğlu AFAD Başkanı Vali Pehlivan ile Bir Araya Geldi' }])}
+        <ul class="kiris-kayitlar">${liste([{ tarih: '6 Ağustos 2026', ad: 'Sağlık Bakanı Memişoğlu AFAD Başkanı Vali Pehlivan ile Bir Araya Geldi' }])}
         </ul>
       </section>
-      <section class="trds-sutun trds-sutun--4" aria-labelledby="duyurular">
-        <div class="trds-bolum__ust">
-          <h2 class="trds-bolum__baslik" id="duyurular">Duyurular</h2>
-          <a class="trds-link" href="#">Tümü<span class="trds-gorsel-gizli">: duyurular</span></a>
+      <section class="kiris-sutun kiris-sutun--4" aria-labelledby="duyurular">
+        <div class="kiris-bolum__ust">
+          <h2 class="kiris-bolum__baslik" id="duyurular">Duyurular</h2>
+          <a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: duyurular</span></a>
         </div>
-        <ul class="trds-kayitlar">${liste(duyurular)}
+        <ul class="kiris-kayitlar">${liste(duyurular)}
         </ul>
       </section>
-      <section class="trds-sutun trds-sutun--4" aria-labelledby="personel">
-        <div class="trds-bolum__ust">
-          <h2 class="trds-bolum__baslik" id="personel">Personel Duyuruları</h2>
-          <a class="trds-link" href="#">Tümü<span class="trds-gorsel-gizli">: personel duyuruları</span></a>
+      <section class="kiris-sutun kiris-sutun--4" aria-labelledby="personel">
+        <div class="kiris-bolum__ust">
+          <h2 class="kiris-bolum__baslik" id="personel">Personel Duyuruları</h2>
+          <a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: personel duyuruları</span></a>
         </div>
-        <ul class="trds-kayitlar">${liste(personel)}
+        <ul class="kiris-kayitlar">${liste(personel)}
         </ul>
       </section>
     </div>
   </div>
 </section>
 
-<section class="trds-bolum trds-bolum--yumusak" aria-labelledby="tanitim">
-  <div class="trds-kap">
-    <h2 class="trds-gorsel-gizli" id="tanitim">Tanıtımlar</h2>
-    ${pano('Tanıtımlar', tanitimlar.map((t) => `<div class="trds-kart"><h3 class="trds-kart__baslik">${t}</h3><p class="trds-kart__alt"><a class="trds-link" href="#">Detaylı Bilgi<span class="trds-gorsel-gizli">: ${t}</span></a></p></div>`))}
+<section class="kiris-bolum kiris-bolum--yumusak" aria-labelledby="tanitim">
+  <div class="kiris-kap">
+    <h2 class="kiris-gorsel-gizli" id="tanitim">Tanıtımlar</h2>
+    ${pano('Tanıtımlar', tanitimlar.map((t) => `<div class="kiris-kart"><h3 class="kiris-kart__baslik">${t}</h3><p class="kiris-kart__alt"><a class="kiris-link" href="#">Detaylı Bilgi<span class="kiris-gorsel-gizli">: ${t}</span></a></p></div>`))}
     </div>
 </section>
 
-<section class="trds-bolum" aria-labelledby="hizli">
-  <div class="trds-kap">
-    <h2 class="trds-bolum__baslik" id="hizli">Hızlı Erişim</h2>
-    <div class="trds-izgara">${sutunlar(hizliErisim)}
+<section class="kiris-bolum" aria-labelledby="hizli">
+  <div class="kiris-kap">
+    <h2 class="kiris-bolum__baslik" id="hizli">Hızlı Erişim</h2>
+    <div class="kiris-izgara">${sutunlar(hizliErisim)}
     </div>
     </div>
 </section>
 
-<section class="trds-bolum trds-bolum--yumusak" aria-labelledby="hatlar">
-  <div class="trds-kap">
-    <h2 class="trds-gorsel-gizli" id="hatlar">Çağrı hatları</h2>
-    <div class="trds-kart-izgara trds-kart-izgara--4 trds-u-ust-0">${hatlar.map((h) => `
-      <div class="trds-kart"><p class="trds-kart__kurum">${h.ad}</p><span class="trds-kart__buyuk-deger">${h.no}</span><p class="trds-kart__alt"><a class="trds-button trds-button--ikincil" href="tel:${h.tel}"><svg class="trds-simge" aria-hidden="true"><use href="#trds-phone"/></svg> Hemen Ara<span class="trds-gorsel-gizli">: ${h.ad}</span></a></p></div>`).join('')}
+<section class="kiris-bolum kiris-bolum--yumusak" aria-labelledby="hatlar">
+  <div class="kiris-kap">
+    <h2 class="kiris-gorsel-gizli" id="hatlar">Çağrı hatları</h2>
+    <div class="kiris-kart-izgara kiris-kart-izgara--4 kiris-u-ust-0">${hatlar.map((h) => `
+      <div class="kiris-kart"><p class="kiris-kart__kurum">${h.ad}</p><span class="kiris-kart__buyuk-deger">${h.no}</span><p class="kiris-kart__alt"><a class="kiris-button kiris-button--ikincil" href="tel:${h.tel}"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-phone"/></svg> Hemen Ara<span class="kiris-gorsel-gizli">: ${h.ad}</span></a></p></div>`).join('')}
     </div>
     </div>
 </section>

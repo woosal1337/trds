@@ -27,7 +27,7 @@ const ENCOK_BOY = 460; // CSS pikseli. Uzun bileşen kırpılır.
 const chrome = spawn(CHROME, [
   '--headless=new', `--remote-debugging-port=${PORT}`, `--window-size=${EN},${BOY}`,
   '--hide-scrollbars', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
-  '--user-data-dir=/tmp/trds-chrome-goruntu', 'about:blank'
+  '--user-data-dir=/tmp/kiris-chrome-goruntu', 'about:blank'
 ], { stdio: 'ignore' });
 
 const bekle = (ms) => new Promise((r) => setTimeout(r, ms));

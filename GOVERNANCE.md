@@ -33,7 +33,7 @@ Bu sistemi şu amaçlarla kullanmak hukuka aykırı olabilir:
 - kullanıcıyı yanıltmak
 - uygunluk veya onay iddiasında bulunmak
 
-`@tr-ds/identity` paketi bu yüzden ayrı ve kısıtlı lisans taşır. Arma, resmî
+`@kiris-ds/identity` paketi bu yüzden ayrı ve kısıtlı lisans taşır. Arma, resmî
 afiş, e-Devlet giriş düğmesi ve kurum tanıtıcısı o pakettedir.
 
 ## Devir

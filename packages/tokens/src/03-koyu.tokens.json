@@ -1,5 +1,5 @@
 {
-  "$schema": "https://tr.gov.trds/schema/tokens.json",
+  "$schema": "https://tr.gov.kiris/schema/tokens.json",
   "$aciklama": "Koyu tema. YALNIZ anlamsal belirteçleri yeniden tanımlar. Bir bileşen dosyası hiçbir zaman koyu tema için ayrı kural yazmaz.",
   "$kip": "koyu",
   "renk": {

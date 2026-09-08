@@ -12,7 +12,7 @@ body:
     id: ad
     attributes:
       label: Bileşenin adı
-      placeholder: Örnek — Randevu seçici
+      placeholder: Örnek · Randevu seçici
     validations: { required: true }
 
   - type: textarea

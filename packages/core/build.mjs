@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-// @tr-ds/core yapı betiği. Bağımlılık yok.
+// @kiris-ds/core yapı betiği. Bağımlılık yok.
 //
 //   node packages/core/build.mjs
 //
 // Üretir:
-//   dist/trds.css       belirteçler + dört katman, sırayla
-//   dist/trds.min.css   boşlukları ve yorumları alınmış sürüm
-//   dist/trds.js        @tr-ds/validators içine katılmış tek dosya
-//   dist/trds.min.js    yorumları alınmış sürüm
+//   dist/kiris.css       belirteçler + dört katman, sırayla
+//   dist/kiris.min.css   boşlukları ve yorumları alınmış sürüm
+//   dist/kiris.js        @kiris-ds/validators içine katılmış tek dosya
+//   dist/kiris.min.js    yorumları alınmış sürüm
 //
 // Küçültme kasıtlı olarak basittir. Amaç bağımlılıksız kalmaktır. Üretim
 // dağıtımında sunucunuzun gzip veya brotli sıkıştırması asıl kazancı verir.
@@ -24,7 +24,7 @@ const CIKTI = join(KOK, 'dist');
 const oku = (yol) => readFile(yol, 'utf8');
 
 // CSS içindeki yorumları ve fazla boşluğu alır. Dize içindeki içeriği bozmaz,
-// çünkü TRDS CSS dosyalarında `content` yalnız boş dize kullanır.
+// çünkü Kiriş CSS dosyalarında `content` yalnız boş dize kullanır.
 const cssKucult = (css) =>
   css
     .replace(/\/\*[\s\S]*?\*\//g, '')
@@ -58,22 +58,22 @@ const jsKucult = (js) => {
   return cikti.replace(/\n{2,}/g, '\n').replace(/^[ \t]+/gm, '').trim();
 };
 
-/** Replace the single bare import of @tr-ds/validators with its source. */
+/** Replace the single bare import of @kiris-ds/validators with its source. */
 const validatorlariKat = async (kaynak) => {
   const yol = join(PAKETLER, 'validators', 'src', 'index.js');
   const govde = (await oku(yol))
     .replace(/^export\s+(?=(function|const|class))/gm, '')
     .trim();
 
-  const kalip = /import\s*\{[\s\S]*?\}\s*from\s*'@tr-ds\/validators';?/;
-  if (!kalip.test(kaynak)) throw new Error('@tr-ds/validators içe aktarımı bulunamadı.');
+  const kalip = /import\s*\{[\s\S]*?\}\s*from\s*'@kiris-ds\/validators';?/;
+  if (!kalip.test(kaynak)) throw new Error('@kiris-ds/validators içe aktarımı bulunamadı.');
 
   return kaynak.replace(
     kalip,
     [
-      '// ---- @tr-ds/validators, yapı sırasında içeri katıldı ----',
+      '// ---- @kiris-ds/validators, yapı sırasında içeri katıldı ----',
       govde,
-      '// ---- @tr-ds/validators sonu ----'
+      '// ---- @kiris-ds/validators sonu ----'
     ].join('\n')
   );
 };
@@ -82,7 +82,7 @@ async function main() {
   await mkdir(CIKTI, { recursive: true });
 
   // --- CSS ------------------------------------------------------------------
-  const belirtecler = await oku(join(PAKETLER, 'tokens', 'dist', 'trds-belirtecler.css')).catch(
+  const belirtecler = await oku(join(PAKETLER, 'tokens', 'dist', 'kiris-belirtecler.css')).catch(
     () => {
       throw new Error('Önce belirteçleri üretin: node packages/tokens/build.mjs');
     }
@@ -94,23 +94,23 @@ async function main() {
   for (const dosya of stilDosyalari) katmanlar.push(await oku(join(stilKlasoru, dosya)));
 
   const css = [
-    '/*! TRDS — Türkiye Kamu Tasarım Sistemi. Üretilmiş dosya, elle değiştirmeyin. */',
+    '/*! Kiriş · Türkiye kamu hizmetleri için tasarım sistemi. Üretilmiş dosya, elle değiştirmeyin. */',
     belirtecler,
     ...katmanlar
   ].join('\n\n');
 
-  await writeFile(join(CIKTI, 'trds.css'), css, 'utf8');
-  await writeFile(join(CIKTI, 'trds.min.css'), cssKucult(css), 'utf8');
+  await writeFile(join(CIKTI, 'kiris.css'), css, 'utf8');
+  await writeFile(join(CIKTI, 'kiris.min.css'), cssKucult(css), 'utf8');
 
   // --- JavaScript -----------------------------------------------------------
-  const kaynak = await oku(join(KOK, 'src', 'scripts', 'trds.js'));
+  const kaynak = await oku(join(KOK, 'src', 'scripts', 'kiris.js'));
   const js = await validatorlariKat(kaynak);
-  await writeFile(join(CIKTI, 'trds.js'), js, 'utf8');
-  await writeFile(join(CIKTI, 'trds.min.js'), jsKucult(js), 'utf8');
+  await writeFile(join(CIKTI, 'kiris.js'), js, 'utf8');
+  await writeFile(join(CIKTI, 'kiris.min.js'), jsKucult(js), 'utf8');
 
   // Paket, doğrulayıcıları içine kattığı için bir ad çakışması yalnız burada
   // görünür. Çıktı ayrıştırılamıyorsa yapı durur.
-  for (const dosya of ['trds.js', 'trds.min.js']) {
+  for (const dosya of ['kiris.js', 'kiris.min.js']) {
     try {
       execFileSync(process.execPath, ['--check', join(CIKTI, dosya)], { stdio: 'pipe' });
     } catch (hata) {

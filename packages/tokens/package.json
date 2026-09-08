@@ -1,14 +1,14 @@
 {
-  "name": "@tr-ds/tokens",
+  "name": "@kiris-ds/tokens",
   "version": "1.0.1",
-  "description": "TRDS tasarım belirteçleri. Kontrast garantileri yapı sırasında denetlenir.",
+  "description": "Kiriş tasarım belirteçleri. Kontrast garantileri yapı sırasında denetlenir.",
   "type": "module",
   "license": "MIT",
-  "main": "dist/trds-belirtecler.js",
+  "main": "dist/kiris-belirtecler.js",
   "exports": {
-    ".": "./dist/trds-belirtecler.js",
-    "./css": "./dist/trds-belirtecler.css",
-    "./json": "./dist/trds-belirtecler.json"
+    ".": "./dist/kiris-belirtecler.js",
+    "./css": "./dist/kiris-belirtecler.css",
+    "./json": "./dist/kiris-belirtecler.json"
   },
   "files": [
     "dist",
@@ -26,7 +26,7 @@
     "url": "https://github.com/woosal1337/trds/issues"
   },
   "keywords": [
-    "trds",
+    "kiris",
     "design-system",
     "turkiye",
     "gov",

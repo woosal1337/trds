@@ -9,7 +9,7 @@ const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PAKETLER = ['tokens', 'validators', 'tanim', 'identity', 'core', 'react', 'vue', 'themes/vatandas', 'themes/kurumsal', 'themes/saglik'];
 const denetle = process.argv.includes('--denetle');
 const kokPaket = JSON.parse(await readFile(join(KOK, 'package.json'), 'utf8'));
-const gecici = await mkdtemp(join(tmpdir(), 'trds-yayin-'));
+const gecici = await mkdtemp(join(tmpdir(), 'kiris-yayin-'));
 const npm = (komut) => execFileSync('npm', komut, { cwd: KOK, encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
 const hedefler = (deger) => typeof deger === 'string' ? [deger] : Object.values(deger ?? {}).flatMap(hedefler);
 
@@ -24,7 +24,7 @@ try {
     assert.equal(paket.version, kokPaket.version, `${paket.name}: sürümler eşleşmiyor.`);
     for (const bolum of ['dependencies', 'devDependencies', 'peerDependencies']) {
       for (const [ad, surum] of Object.entries(paket[bolum] ?? {})) {
-        if (ad.startsWith('@tr-ds/')) assert.equal(surum, kokPaket.version, `${paket.name}: ${ad} sürümü eşleşmiyor.`);
+        if (ad.startsWith('@kiris-ds/')) assert.equal(surum, kokPaket.version, `${paket.name}: ${ad} sürümü eşleşmiyor.`);
       }
     }
     const [arsiv] = JSON.parse(npm(['pack', `--workspace=${paket.name}`, '--json', '--ignore-scripts', `--pack-destination=${gecici}`]));
@@ -37,7 +37,7 @@ try {
     const lisans = paket.license.startsWith('SEE LICENSE IN ') ? paket.license.slice(15) : 'LICENSE';
     assert.ok(dosyalar.has(lisans), `${paket.name}: lisans arşivde yok.`);
     assert.ok(dosyalar.has('README.md'), `${paket.name}: README arşivde yok.`);
-    if (paket.name === '@tr-ds/identity') {
+    if (paket.name === '@kiris-ds/identity') {
       assert.ok(dosyalar.has('src/simgeler/LICENSE-TABLER.txt'));
       assert.ok(![...dosyalar].some((dosya) => /(?:edk\.|instagram3\.svg|\.woff2?$)/i.test(dosya)), 'Kimlik arşivinde eski simge dosyası var.');
     }

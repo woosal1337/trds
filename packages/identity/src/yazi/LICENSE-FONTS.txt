@@ -1,0 +1,22 @@
+Bu klasördeki yazı tipleri SIL Open Font License 1.1 ile dağıtılır.
+Serbestçe kullanılır, değiştirilir ve yeniden dağıtılır.
+
+Public Sans
+  public-sans-latin.woff2, public-sans-latin-ext.woff2
+  public-sans-italic-latin.woff2, public-sans-italic-latin-ext.woff2
+  Telif: Copyright 2020 The Public Sans Project Authors
+  Kaynak: https://github.com/uswds/public-sans
+  Lisans: https://github.com/uswds/public-sans/blob/master/LICENSE.md
+
+IBM Plex Mono
+  ibm-plex-mono-400-latin.woff2, ibm-plex-mono-400-latin-ext.woff2
+  ibm-plex-mono-500-latin.woff2, ibm-plex-mono-500-latin-ext.woff2
+  Telif: Copyright 2017 IBM Corp.
+  Kaynak: https://github.com/IBM/plex
+  Lisans: https://github.com/IBM/plex/blob/master/LICENSE.txt
+
+Dosyalar Google Fonts'un woff2 alt kümelerinden alındı. Yalnız latin ve
+latin-ext alt kümeleri tutuldu; Türkçe için ikisi yeterlidir. Kiril, Yunan
+ve Vietnamca alt kümeleri indirilmedi.
+
+Neden yerelde durduğu docs/mimari.md içindeki 0009 numaralı kararda yazılıdır.

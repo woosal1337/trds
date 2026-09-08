@@ -1,4 +1,4 @@
-// TRDS component registry — the components that exist only because this is
+// Kiriş component registry · the components that exist only because this is
 // Türkiye. No foreign design system supplies these. They carry the national
 // identity, the national identifiers and the national legal obligations.
 
@@ -16,7 +16,7 @@ export const turkiyeBilesenleri = [
     neZaman: [
       'Her kamu sayfasında, her zaman en üstte kullanın.',
       'Metni değiştirmeyin. Tek bir metin her sitede aynıdır.',
-      'Bu bileşen `@tr-ds/identity` paketindedir ve kısıtlı lisans taşır.'
+      'Bu bileşen `@kiris-ds/identity` paketindedir ve kısıtlı lisans taşır.'
     ],
     erisilebilirlik: [
       'Ekran okuyucu için sayfanın ilk bölgesidir.',
@@ -30,7 +30,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-resmi-afis" data-trds="resmi-afis">\n  <div class="trds-kap trds-resmi-afis__ic">\n    <img class="trds-resmi-afis__bayrak" src="{{VARLIK}}turk-bayragi.svg" alt="">\n    <p class="trds-resmi-afis__metin">Bu, Türkiye Cumhuriyeti’ne ait resmî bir devlet sitesidir.</p>\n    <button class="trds-resmi-afis__dugme" type="button" aria-expanded="false" aria-controls="afis-nasil">Nasıl anlarım?</button>\n  </div>\n  <div class="trds-resmi-afis__panel" id="afis-nasil" hidden>\n    <div class="trds-kap trds-resmi-afis__panel-ic">\n      <div>\n        <p class="trds-resmi-afis__panel-baslik">Adres <strong>gov.tr</strong> ile biter</p>\n        <p>Resmî devlet siteleri gov.tr uzantısını kullanır. Adres çubuğunu her zaman kontrol edin.</p>\n      </div>\n      <div>\n        <p class="trds-resmi-afis__panel-baslik">Bağlantı <strong>güvenlidir</strong></p>\n        <p>Adresin başında https ve kilit simgesi bulunur. Kimlik bilgilerinizi yalnız böyle sayfalara girin.</p>\n      </div>\n    </div>\n  </div>\n</div>'
+        html: '<div class="kiris-resmi-afis" data-kiris="resmi-afis">\n  <div class="kiris-kap kiris-resmi-afis__ic">\n    <img class="kiris-resmi-afis__bayrak" src="{{VARLIK}}turk-bayragi.svg" alt="">\n    <p class="kiris-resmi-afis__metin">Bu, Türkiye Cumhuriyeti’ne ait resmî bir devlet sitesidir.</p>\n    <button class="kiris-resmi-afis__dugme" type="button" aria-expanded="false" aria-controls="afis-nasil">Nasıl anlarım?</button>\n  </div>\n  <div class="kiris-resmi-afis__panel" id="afis-nasil" hidden>\n    <div class="kiris-kap kiris-resmi-afis__panel-ic">\n      <div>\n        <p class="kiris-resmi-afis__panel-baslik">Adres <strong>gov.tr</strong> ile biter</p>\n        <p>Resmî devlet siteleri gov.tr uzantısını kullanır. Adres çubuğunu her zaman kontrol edin.</p>\n      </div>\n      <div>\n        <p class="kiris-resmi-afis__panel-baslik">Bağlantı <strong>güvenlidir</strong></p>\n        <p>Adresin başında https ve kilit simgesi bulunur. Kimlik bilgilerinizi yalnız böyle sayfalara girin.</p>\n      </div>\n    </div>\n  </div>\n</div>'
       }
     ]
   },
@@ -59,7 +59,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<section class="trds-tanitici" aria-label="Kurum bilgisi">\n  <div class="trds-kap trds-tanitici__ic">\n    <div>\n      <p class="trds-tanitici__kurum">Sosyal Güvenlik Kurumu</p>\n      <p class="trds-tanitici__ust">Çalışma ve Sosyal Güvenlik Bakanlığı bağlı kuruluşudur.</p>\n    </div>\n    <nav class="trds-tanitici__baglantilar" aria-label="Kurum bağlantıları">\n      <a href="#">Hakkımızda</a>\n      <a href="#">Bilgi edinme</a>\n      <a href="#">CİMER</a>\n    </nav>\n  </div>\n</section>'
+        html: '<section class="kiris-tanitici" aria-label="Kurum bilgisi">\n  <div class="kiris-kap kiris-tanitici__ic">\n    <div>\n      <p class="kiris-tanitici__kurum">Sosyal Güvenlik Kurumu</p>\n      <p class="kiris-tanitici__ust">Çalışma ve Sosyal Güvenlik Bakanlığı bağlı kuruluşudur.</p>\n    </div>\n    <nav class="kiris-tanitici__baglantilar" aria-label="Kurum bağlantıları">\n      <a href="#">Hakkımızda</a>\n      <a href="#">Bilgi edinme</a>\n      <a href="#">CİMER</a>\n    </nav>\n  </div>\n</section>'
       }
     ]
   },
@@ -91,11 +91,11 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan" data-trds="kimlik-no" data-zorunlu>\n  <label class="trds-etiket" for="tckn">T.C. kimlik numaranız</label>\n  <p class="trds-yardim" id="tckn-yardim">Nüfus cüzdanınızın ön yüzünde yazan 11 haneli numara.</p>\n  <p class="trds-hata" data-trds-hata hidden></p>\n  <input class="trds-girdi trds-girdi--11" id="tckn" name="tckn" type="text"\n         inputmode="numeric" maxlength="11" autocomplete="off"\n         aria-describedby="tckn-yardim tckn-sayac">\n  <p class="trds-sayac" id="tckn-sayac" data-trds-sayac aria-live="off"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="kimlik-no" data-zorunlu>\n  <label class="kiris-etiket" for="tckn">T.C. kimlik numaranız</label>\n  <p class="kiris-yardim" id="tckn-yardim">Nüfus cüzdanınızın ön yüzünde yazan 11 haneli numara.</p>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n  <input class="kiris-girdi kiris-girdi--11" id="tckn" name="tckn" type="text"\n         inputmode="numeric" maxlength="11" autocomplete="off"\n         aria-describedby="tckn-yardim tckn-sayac">\n  <p class="kiris-sayac" id="tckn-sayac" data-kiris-sayac aria-live="off"></p>\n</div>'
       },
       {
         baslik: 'Yabancı kimlik numarası da kabul eder',
-        html: '<div class="trds-alan" data-trds="kimlik-no" data-ykn="acik">\n  <label class="trds-etiket" for="kn">Kimlik numaranız</label>\n  <p class="trds-yardim" id="kn-yardim">T.C. vatandaşı iseniz 11 haneli T.C. kimlik numaranızı, değilseniz 99 ile başlayan yabancı kimlik numaranızı yazın.</p>\n  <p class="trds-hata" data-trds-hata hidden></p>\n  <input class="trds-girdi trds-girdi--11" id="kn" name="kn" type="text" inputmode="numeric" maxlength="11" autocomplete="off" aria-describedby="kn-yardim kn-sayac">\n  <p class="trds-sayac" id="kn-sayac" data-trds-sayac aria-live="off"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="kimlik-no" data-ykn="acik">\n  <label class="kiris-etiket" for="kn">Kimlik numaranız</label>\n  <p class="kiris-yardim" id="kn-yardim">T.C. vatandaşı iseniz 11 haneli T.C. kimlik numaranızı, değilseniz 99 ile başlayan yabancı kimlik numaranızı yazın.</p>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n  <input class="kiris-girdi kiris-girdi--11" id="kn" name="kn" type="text" inputmode="numeric" maxlength="11" autocomplete="off" aria-describedby="kn-yardim kn-sayac">\n  <p class="kiris-sayac" id="kn-sayac" data-kiris-sayac aria-live="off"></p>\n</div>'
       }
     ]
   },
@@ -125,7 +125,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Doğum tarihi',
-        html: '<fieldset class="trds-alan-grubu" data-trds="tarih">\n  <legend class="trds-baslik-legend">Doğum tarihiniz nedir?</legend>\n  <p class="trds-yardim" id="dt-yardim">Örnek: 27 03 1997</p>\n  <div class="trds-tarih" role="group" aria-describedby="dt-yardim">\n    <div class="trds-tarih__parca">\n      <label class="trds-etiket trds-etiket--kucuk" for="dt-gun">Gün</label>\n      <input class="trds-girdi trds-girdi--2" id="dt-gun" name="gun" type="text" inputmode="numeric" maxlength="2">\n    </div>\n    <div class="trds-tarih__parca">\n      <label class="trds-etiket trds-etiket--kucuk" for="dt-ay">Ay</label>\n      <input class="trds-girdi trds-girdi--2" id="dt-ay" name="ay" type="text" inputmode="numeric" maxlength="2">\n    </div>\n    <div class="trds-tarih__parca">\n      <label class="trds-etiket trds-etiket--kucuk" for="dt-yil">Yıl</label>\n      <input class="trds-girdi trds-girdi--4" id="dt-yil" name="yil" type="text" inputmode="numeric" maxlength="4">\n    </div>\n  </div>\n  <p class="trds-hata" data-trds-hata hidden></p>\n</fieldset>'
+        html: '<fieldset class="kiris-alan-grubu" data-kiris="tarih">\n  <legend class="kiris-baslik-legend">Doğum tarihiniz nedir?</legend>\n  <p class="kiris-yardim" id="dt-yardim">Örnek: 27 03 1997</p>\n  <div class="kiris-tarih" role="group" aria-describedby="dt-yardim">\n    <div class="kiris-tarih__parca">\n      <label class="kiris-etiket kiris-etiket--kucuk" for="dt-gun">Gün</label>\n      <input class="kiris-girdi kiris-girdi--2" id="dt-gun" name="gun" type="text" inputmode="numeric" maxlength="2">\n    </div>\n    <div class="kiris-tarih__parca">\n      <label class="kiris-etiket kiris-etiket--kucuk" for="dt-ay">Ay</label>\n      <input class="kiris-girdi kiris-girdi--2" id="dt-ay" name="ay" type="text" inputmode="numeric" maxlength="2">\n    </div>\n    <div class="kiris-tarih__parca">\n      <label class="kiris-etiket kiris-etiket--kucuk" for="dt-yil">Yıl</label>\n      <input class="kiris-girdi kiris-girdi--4" id="dt-yil" name="yil" type="text" inputmode="numeric" maxlength="4">\n    </div>\n  </div>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n</fieldset>'
       }
     ]
   },
@@ -155,7 +155,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Cep telefonu',
-        html: '<div class="trds-alan" data-trds="telefon" data-cep="zorunlu" data-zorunlu>\n  <label class="trds-etiket" for="tel">Cep telefonu numaranız</label>\n  <p class="trds-yardim" id="tel-yardim">Doğrulama kodu bu numaraya gönderilecek.</p>\n  <p class="trds-hata" data-trds-hata hidden></p>\n  <div class="trds-telefon">\n    <span class="trds-telefon__kod" aria-hidden="true">+90</span>\n    <input class="trds-girdi trds-girdi--10" id="tel" name="tel" type="tel"\n           inputmode="tel" autocomplete="tel-national" maxlength="13" aria-describedby="tel-yardim tel-sayac">\n  </div>\n  <p class="trds-sayac" id="tel-sayac" data-trds-sayac aria-live="off"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="telefon" data-cep="zorunlu" data-zorunlu>\n  <label class="kiris-etiket" for="tel">Cep telefonu numaranız</label>\n  <p class="kiris-yardim" id="tel-yardim">Doğrulama kodu bu numaraya gönderilecek.</p>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n  <div class="kiris-telefon">\n    <span class="kiris-telefon__kod" aria-hidden="true">+90</span>\n    <input class="kiris-girdi kiris-girdi--10" id="tel" name="tel" type="tel"\n           inputmode="tel" autocomplete="tel-national" maxlength="13" aria-describedby="tel-yardim tel-sayac">\n  </div>\n  <p class="kiris-sayac" id="tel-sayac" data-kiris-sayac aria-live="off"></p>\n</div>'
       }
     ]
   },
@@ -185,7 +185,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan" data-trds="iban">\n  <label class="trds-etiket" for="iban">IBAN numaranız</label>\n  <p class="trds-yardim" id="iban-yardim">TR hazır yazılıdır. 24 rakam yazın. Boşluklu yapıştırabilirsiniz.</p>\n  <p class="trds-hata" data-trds-hata hidden></p>\n  <input class="trds-girdi trds-girdi--iban" id="iban" name="iban" type="text"\n         autocomplete="off" spellcheck="false" maxlength="32" aria-describedby="iban-yardim iban-sayac">\n  <p class="trds-sayac" id="iban-sayac" data-trds-sayac aria-live="off"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="iban">\n  <label class="kiris-etiket" for="iban">IBAN numaranız</label>\n  <p class="kiris-yardim" id="iban-yardim">TR hazır yazılıdır. 24 rakam yazın. Boşluklu yapıştırabilirsiniz.</p>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n  <input class="kiris-girdi kiris-girdi--iban" id="iban" name="iban" type="text"\n         autocomplete="off" spellcheck="false" maxlength="32" aria-describedby="iban-yardim iban-sayac">\n  <p class="kiris-sayac" id="iban-sayac" data-kiris-sayac aria-live="off"></p>\n</div>'
       }
     ]
   },
@@ -211,7 +211,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan" data-trds="vergi-no">\n  <label class="trds-etiket" for="vkn">Vergi kimlik numarası</label>\n  <p class="trds-hata" data-trds-hata hidden></p>\n  <input class="trds-girdi trds-girdi--10" id="vkn" name="vkn" type="text" inputmode="numeric" maxlength="10" autocomplete="off" aria-describedby="vkn-sayac">\n  <p class="trds-sayac" id="vkn-sayac" data-trds-sayac aria-live="off"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="vergi-no">\n  <label class="kiris-etiket" for="vkn">Vergi kimlik numarası</label>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n  <input class="kiris-girdi kiris-girdi--10" id="vkn" name="vkn" type="text" inputmode="numeric" maxlength="10" autocomplete="off" aria-describedby="vkn-sayac">\n  <p class="kiris-sayac" id="vkn-sayac" data-kiris-sayac aria-live="off"></p>\n</div>'
       }
     ]
   },
@@ -234,11 +234,11 @@ export const turkiyeBilesenleri = [
     wcag: ['1.3.5', '3.3.1'],
     kaynak: [],
     neden:
-      'Türkçe büyük harf kuralı burada gerçek bir hata kaynağıdır. `toUpperCase()` ile "34 iz 1234" plakası "34 IZ 1234" olur ve yanlış plaka sorgulanır. TRDS bu dönüşümü Türkçe kuralına göre yapar.',
+      'Türkçe büyük harf kuralı burada gerçek bir hata kaynağıdır. `toUpperCase()` ile "34 iz 1234" plakası "34 IZ 1234" olur ve yanlış plaka sorgulanır. Kiriş bu dönüşümü Türkçe kuralına göre yapar.',
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan" data-trds="plaka">\n  <label class="trds-etiket" for="plaka">Araç plakası</label>\n  <p class="trds-yardim" id="plaka-yardim">Örnek: 34 ABC 123</p>\n  <p class="trds-hata" data-trds-hata hidden></p>\n  <input class="trds-girdi trds-girdi--plaka" id="plaka" name="plaka" type="text" autocomplete="off" spellcheck="false" aria-describedby="plaka-yardim">\n</div>'
+        html: '<div class="kiris-alan" data-kiris="plaka">\n  <label class="kiris-etiket" for="plaka">Araç plakası</label>\n  <p class="kiris-yardim" id="plaka-yardim">Örnek: 34 ABC 123</p>\n  <p class="kiris-hata" data-kiris-hata hidden></p>\n  <input class="kiris-girdi kiris-girdi--plaka" id="plaka" name="plaka" type="text" autocomplete="off" spellcheck="false" aria-describedby="plaka-yardim">\n</div>'
       }
     ]
   },
@@ -267,7 +267,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Bağlı listeler',
-        html: '<fieldset class="trds-alan-grubu" data-trds="adres">\n  <legend class="trds-baslik-legend">Tebligat adresiniz</legend>\n  <div class="trds-alan">\n    <label class="trds-etiket" for="a-il">İl</label>\n    <select class="trds-secim" id="a-il" name="il" data-adres="il"><option value="">Seçiniz</option></select>\n  </div>\n  <div class="trds-alan">\n    <label class="trds-etiket" for="a-ilce">İlçe</label>\n    <select class="trds-secim" id="a-ilce" name="ilce" data-adres="ilce"><option value="">Önce il seçiniz</option></select>\n  </div>\n  <div class="trds-alan">\n    <label class="trds-etiket" for="a-acik">Açık adres</label>\n    <p class="trds-yardim" id="a-acik-yardim">Mahalle, cadde veya sokak, bina no ve daire no.</p>\n    <textarea class="trds-metin-alani" id="a-acik" name="acik_adres" rows="3" aria-describedby="a-acik-yardim"></textarea>\n  </div>\n  <div class="trds-alan">\n    <label class="trds-etiket" for="a-posta">Posta kodu <span class="trds-etiket__istege-bagli">(isteğe bağlı)</span></label>\n    <input class="trds-girdi trds-girdi--5" id="a-posta" name="posta_kodu" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code">\n  </div>\n</fieldset>'
+        html: '<fieldset class="kiris-alan-grubu" data-kiris="adres">\n  <legend class="kiris-baslik-legend">Tebligat adresiniz</legend>\n  <div class="kiris-alan">\n    <label class="kiris-etiket" for="a-il">İl</label>\n    <select class="kiris-secim" id="a-il" name="il" data-adres="il"><option value="">Seçiniz</option></select>\n  </div>\n  <div class="kiris-alan">\n    <label class="kiris-etiket" for="a-ilce">İlçe</label>\n    <select class="kiris-secim" id="a-ilce" name="ilce" data-adres="ilce"><option value="">Önce il seçiniz</option></select>\n  </div>\n  <div class="kiris-alan">\n    <label class="kiris-etiket" for="a-acik">Açık adres</label>\n    <p class="kiris-yardim" id="a-acik-yardim">Mahalle, cadde veya sokak, bina no ve daire no.</p>\n    <textarea class="kiris-metin-alani" id="a-acik" name="acik_adres" rows="3" aria-describedby="a-acik-yardim"></textarea>\n  </div>\n  <div class="kiris-alan">\n    <label class="kiris-etiket" for="a-posta">Posta kodu <span class="kiris-etiket__istege-bagli">(isteğe bağlı)</span></label>\n    <input class="kiris-girdi kiris-girdi--5" id="a-posta" name="posta_kodu" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code">\n  </div>\n</fieldset>'
       }
     ]
   },
@@ -282,7 +282,7 @@ export const turkiyeBilesenleri = [
     neZaman: [
       'Kimlik doğrulaması gereken her hizmette birincil giriş yolu olarak kullanın.',
       'Görünümünü değiştirmeyin. Her sitede aynı görünmesi güven işaretidir.',
-      'Bu bileşen `@tr-ds/identity` paketindedir ve kısıtlı lisans taşır.'
+      'Bu bileşen `@kiris-ds/identity` paketindedir ve kısıtlı lisans taşır.'
     ],
     erisilebilirlik: [
       'Bir `<a>` öğesidir, çünkü kullanıcıyı başka bir alan adına götürür.',
@@ -296,7 +296,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-edevlet">\n  <a class="trds-edevlet__dugme" href="#">\n    <span class="trds-edevlet__isaret" aria-hidden="true"><img src="{{VARLIK}}e-devlet-isaret.png" alt=""></span>\n    <span>e-Devlet ile giriş yap</span>\n  </a>\n  <p class="trds-edevlet__yardim">e-Devlet şifreniz yoksa <a class="trds-link" href="#">PTT şubelerinden alabilirsiniz</a>.</p>\n</div>'
+        html: '<div class="kiris-edevlet">\n  <a class="kiris-edevlet__dugme" href="#">\n    <span class="kiris-edevlet__isaret" aria-hidden="true"><img src="{{VARLIK}}e-devlet-isaret.png" alt=""></span>\n    <span>e-Devlet ile giriş yap</span>\n  </a>\n  <p class="kiris-edevlet__yardim">e-Devlet şifreniz yoksa <a class="kiris-link" href="#">PTT şubelerinden alabilirsiniz</a>.</p>\n</div>'
       }
     ]
   },
@@ -326,16 +326,16 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-kvkk">\n  <h2 class="trds-kvkk__baslik">Kişisel verilerinizin işlenmesi</h2>\n  <p class="trds-govde">Başvurunuzu değerlendirmek için kimlik ve iletişim bilgilerinizi işliyoruz. Ayrıntılar <a class="trds-link" href="#" target="_blank" rel="noopener">aydınlatma metninde</a> yazılıdır (yeni sekmede açılır).</p>\n  <div class="trds-secenek">\n    <input class="trds-onay" id="kvkk-zorunlu" name="kvkk" type="checkbox" required>\n    <label class="trds-secenek-etiket" for="kvkk-zorunlu">Başvurumun değerlendirilmesi için verilerimin işlenmesine izin veriyorum.</label>\n  </div>\n  <div class="trds-secenek">\n    <input class="trds-onay" id="kvkk-istege" name="kvkk_bilgilendirme" type="checkbox">\n    <label class="trds-secenek-etiket" for="kvkk-istege">Yeni hizmetler hakkında bilgilendirme almak istiyorum <span class="trds-etiket__istege-bagli">(isteğe bağlı)</span>.</label>\n  </div>\n</div>'
+        html: '<div class="kiris-kvkk">\n  <h2 class="kiris-kvkk__baslik">Kişisel verilerinizin işlenmesi</h2>\n  <p class="kiris-govde">Başvurunuzu değerlendirmek için kimlik ve iletişim bilgilerinizi işliyoruz. Ayrıntılar <a class="kiris-link" href="#" target="_blank" rel="noopener">aydınlatma metninde</a> yazılıdır (yeni sekmede açılır).</p>\n  <div class="kiris-secenek">\n    <input class="kiris-onay" id="kvkk-zorunlu" name="kvkk" type="checkbox" required>\n    <label class="kiris-secenek-etiket" for="kvkk-zorunlu">Başvurumun değerlendirilmesi için verilerimin işlenmesine izin veriyorum.</label>\n  </div>\n  <div class="kiris-secenek">\n    <input class="kiris-onay" id="kvkk-istege" name="kvkk_bilgilendirme" type="checkbox">\n    <label class="kiris-secenek-etiket" for="kvkk-istege">Yeni hizmetler hakkında bilgilendirme almak istiyorum <span class="kiris-etiket__istege-bagli">(isteğe bağlı)</span>.</label>\n  </div>\n</div>'
       },
       {
         baslik: 'Gönderim denetimi',
         aciklama: 'Onay kutusu boşken "Başvuruyu gönder" düğmesine basın. Form gönderilmez, hata görünür.',
-        html: '<form action="#" method="post" novalidate>\n  <div class="trds-kvkk" data-trds="kvkk">\n    <h2 class="trds-kvkk__baslik">Kişisel verilerinizin işlenmesi</h2>\n    <p class="trds-govde">Başvurunuzu değerlendirmek için kimlik ve iletişim bilgilerinizi işliyoruz. Ayrıntılar <a class="trds-link" href="#" target="_blank" rel="noopener">aydınlatma metninde</a> yazılıdır (yeni sekmede açılır).</p>\n    <p class="trds-hata" id="kvkk-g-hata" hidden></p>\n    <div class="trds-secenek">\n      <input class="trds-onay" id="kvkk-g-zorunlu" name="kvkk" type="checkbox" required>\n      <label class="trds-secenek-etiket" for="kvkk-g-zorunlu">Başvurumun değerlendirilmesi için verilerimin işlenmesine izin veriyorum.</label>\n    </div>\n    <div class="trds-secenek">\n      <input class="trds-onay" id="kvkk-g-istege" name="kvkk_bilgilendirme" type="checkbox">\n      <label class="trds-secenek-etiket" for="kvkk-g-istege">Yeni hizmetler hakkında bilgilendirme almak istiyorum <span class="trds-etiket__istege-bagli">(isteğe bağlı)</span>.</label>\n    </div>\n  </div>\n  <button class="trds-button" type="submit">Başvuruyu gönder</button>\n</form>'
+        html: '<form action="#" method="post" novalidate>\n  <div class="kiris-kvkk" data-kiris="kvkk">\n    <h2 class="kiris-kvkk__baslik">Kişisel verilerinizin işlenmesi</h2>\n    <p class="kiris-govde">Başvurunuzu değerlendirmek için kimlik ve iletişim bilgilerinizi işliyoruz. Ayrıntılar <a class="kiris-link" href="#" target="_blank" rel="noopener">aydınlatma metninde</a> yazılıdır (yeni sekmede açılır).</p>\n    <p class="kiris-hata" id="kvkk-g-hata" hidden></p>\n    <div class="kiris-secenek">\n      <input class="kiris-onay" id="kvkk-g-zorunlu" name="kvkk" type="checkbox" required>\n      <label class="kiris-secenek-etiket" for="kvkk-g-zorunlu">Başvurumun değerlendirilmesi için verilerimin işlenmesine izin veriyorum.</label>\n    </div>\n    <div class="kiris-secenek">\n      <input class="kiris-onay" id="kvkk-g-istege" name="kvkk_bilgilendirme" type="checkbox">\n      <label class="kiris-secenek-etiket" for="kvkk-g-istege">Yeni hizmetler hakkında bilgilendirme almak istiyorum <span class="kiris-etiket__istege-bagli">(isteğe bağlı)</span>.</label>\n    </div>\n  </div>\n  <button class="kiris-button" type="submit">Başvuruyu gönder</button>\n</form>'
       },
       {
         baslik: 'Hata durumu',
-        html: '<div class="trds-kvkk trds-kvkk--hata">\n  <h2 class="trds-kvkk__baslik">Kişisel verilerinizin işlenmesi</h2>\n  <p class="trds-govde">Başvurunuzu değerlendirmek için kimlik ve iletişim bilgilerinizi işliyoruz. Ayrıntılar <a class="trds-link" href="#" target="_blank" rel="noopener">aydınlatma metninde</a> yazılıdır (yeni sekmede açılır).</p>\n  <p class="trds-hata" id="kvkk-h-hata"><span class="trds-gorsel-gizli">Hata:</span> Devam etmek için verilerinizin işlenmesine izin vermeniz gerekir.</p>\n  <div class="trds-secenek">\n    <input class="trds-onay" id="kvkk-h-zorunlu" name="kvkk" type="checkbox" required aria-invalid="true" aria-describedby="kvkk-h-hata">\n    <label class="trds-secenek-etiket" for="kvkk-h-zorunlu">Başvurumun değerlendirilmesi için verilerimin işlenmesine izin veriyorum.</label>\n  </div>\n  <div class="trds-secenek">\n    <input class="trds-onay" id="kvkk-h-istege" name="kvkk_bilgilendirme" type="checkbox">\n    <label class="trds-secenek-etiket" for="kvkk-h-istege">Yeni hizmetler hakkında bilgilendirme almak istiyorum <span class="trds-etiket__istege-bagli">(isteğe bağlı)</span>.</label>\n  </div>\n</div>'
+        html: '<div class="kiris-kvkk kiris-kvkk--hata">\n  <h2 class="kiris-kvkk__baslik">Kişisel verilerinizin işlenmesi</h2>\n  <p class="kiris-govde">Başvurunuzu değerlendirmek için kimlik ve iletişim bilgilerinizi işliyoruz. Ayrıntılar <a class="kiris-link" href="#" target="_blank" rel="noopener">aydınlatma metninde</a> yazılıdır (yeni sekmede açılır).</p>\n  <p class="kiris-hata" id="kvkk-h-hata"><span class="kiris-gorsel-gizli">Hata:</span> Devam etmek için verilerinizin işlenmesine izin vermeniz gerekir.</p>\n  <div class="kiris-secenek">\n    <input class="kiris-onay" id="kvkk-h-zorunlu" name="kvkk" type="checkbox" required aria-invalid="true" aria-describedby="kvkk-h-hata">\n    <label class="kiris-secenek-etiket" for="kvkk-h-zorunlu">Başvurumun değerlendirilmesi için verilerimin işlenmesine izin veriyorum.</label>\n  </div>\n  <div class="kiris-secenek">\n    <input class="kiris-onay" id="kvkk-h-istege" name="kvkk_bilgilendirme" type="checkbox">\n    <label class="kiris-secenek-etiket" for="kvkk-h-istege">Yeni hizmetler hakkında bilgilendirme almak istiyorum <span class="kiris-etiket__istege-bagli">(isteğe bağlı)</span>.</label>\n  </div>\n</div>'
       }
     ]
   },
@@ -365,7 +365,7 @@ export const turkiyeBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-erisim" data-trds="erisim-menusu">\n  <button class="trds-erisim__dugme" type="button" aria-expanded="false" aria-controls="erisim-panel">Görünüm ayarları</button>\n  <div class="trds-erisim__panel" id="erisim-panel" hidden>\n    <button class="trds-erisim__kapat" type="button" aria-label="Menüyü kapat"><svg class="trds-simge" aria-hidden="true"><use href="#trds-close"/></svg></button>\n    <fieldset class="trds-erisim__grup">\n      <legend>Yazı boyutu</legend>\n      <button class="trds-erisim__secenek" type="button" data-yazi="normal" aria-pressed="true">Normal</button>\n      <button class="trds-erisim__secenek" type="button" data-yazi="buyuk" aria-pressed="false">Büyük</button>\n      <button class="trds-erisim__secenek" type="button" data-yazi="cok-buyuk" aria-pressed="false">Çok büyük</button>\n    </fieldset>\n    <fieldset class="trds-erisim__grup">\n      <legend>Tema</legend>\n      <button class="trds-erisim__secenek" type="button" data-tema="acik" aria-pressed="true">Açık</button>\n      <button class="trds-erisim__secenek" type="button" data-tema="koyu" aria-pressed="false">Koyu</button>\n      <button class="trds-erisim__secenek" type="button" data-tema="yuksek" aria-pressed="false">Yüksek karşıtlık</button>\n    </fieldset>\n  </div>\n</div>'
+        html: '<div class="kiris-erisim" data-kiris="erisim-menusu">\n  <button class="kiris-erisim__dugme" type="button" aria-expanded="false" aria-controls="erisim-panel">Görünüm ayarları</button>\n  <div class="kiris-erisim__panel" id="erisim-panel" hidden>\n    <button class="kiris-erisim__kapat" type="button" aria-label="Menüyü kapat"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-close"/></svg></button>\n    <fieldset class="kiris-erisim__grup">\n      <legend>Yazı boyutu</legend>\n      <button class="kiris-erisim__secenek" type="button" data-yazi="normal" aria-pressed="true">Normal</button>\n      <button class="kiris-erisim__secenek" type="button" data-yazi="buyuk" aria-pressed="false">Büyük</button>\n      <button class="kiris-erisim__secenek" type="button" data-yazi="cok-buyuk" aria-pressed="false">Çok büyük</button>\n    </fieldset>\n    <fieldset class="kiris-erisim__grup">\n      <legend>Tema</legend>\n      <button class="kiris-erisim__secenek" type="button" data-tema="acik" aria-pressed="true">Açık</button>\n      <button class="kiris-erisim__secenek" type="button" data-tema="koyu" aria-pressed="false">Koyu</button>\n      <button class="kiris-erisim__secenek" type="button" data-tema="yuksek" aria-pressed="false">Yüksek karşıtlık</button>\n    </fieldset>\n  </div>\n</div>'
       }
     ]
   }

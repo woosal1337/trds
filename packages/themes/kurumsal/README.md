@@ -1,20 +1,20 @@
-# @tr-ds/theme-kurumsal
+# @kiris-ds/theme-kurumsal
 
-TRDS Kurumsal teması. Tek bir marka renginden üretilir.
+Kiriş Kurumsal teması. Tek bir marka renginden üretilir.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/theme-kurumsal
+npm install @kiris-ds/theme-kurumsal
 ```
 
 ## Kullanım
 
 ```js
-import '@tr-ds/theme-kurumsal';
+import '@kiris-ds/theme-kurumsal';
 ```
 
 ## Lisans

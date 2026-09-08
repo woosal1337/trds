@@ -1,5 +1,5 @@
 {
-  "name": "@tr-ds/validators",
+  "name": "@kiris-ds/validators",
   "version": "1.0.1",
   "type": "module",
   "main": "src/index.js",
@@ -21,7 +21,7 @@
     "url": "https://github.com/woosal1337/trds/issues"
   },
   "keywords": [
-    "trds",
+    "kiris",
     "design-system",
     "turkiye",
     "gov",

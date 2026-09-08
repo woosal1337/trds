@@ -1,12 +1,19 @@
 # Kimlik parçaları için kullanım koşulları
 
-Bu belge `@tr-ds/identity` paketi için geçerlidir. Depodaki diğer paketler MIT
+Bu belge `@kiris-ds/identity` paketi için geçerlidir. Depodaki diğer paketler MIT
 lisanslıdır ve bu kısıtlamalara tabi değildir.
 
-TRDS bir kamu kurumu değildir. Bu belge, üçüncü taraf marka ve logoları için
+Kiriş bir kamu kurumu değildir. Bu belge, üçüncü taraf marka ve logoları için
 izin vermez. Haklar ilgili kurumlara aittir. Bu dosyaların depoda bulunması
 resmî onay veya kullanım izni anlamına gelmez. Kullanım ve dağıtım için
 gerekli izinleri ilgili hak sahibinden alın.
+
+## Kiriş marka işareti bu belgenin dışındadır
+
+Kiriş'in kendi marka işareti (`kiris-isaret.svg` ve PNG, ICO türevleri) özgün bir
+çizimdir. Hiçbir devlet sembolü, kurum logosu ya da resmî işaret içermez. Deponun
+MIT lisansı kapsamındadır ve serbestçe kullanılır. Türevleri kaynaktan
+`node tools/marka-turev.mjs` ile yeniden üretilir.
 
 ## Simgeler bu belgenin dışındadır
 
@@ -19,15 +26,15 @@ lisanslıdır. Her simge serbestçe kullanılır. Lisans metni
 Aşağıdaki parçalar bu belgeye tabidir:
 
 - Türkiye Cumhuriyeti arması ve her türevi
-- Resmî site afişi (`trds-resmi-afis`) ve metni
-- e-Devlet giriş düğmesi (`trds-edevlet`) ve işareti
-- Kurum tanıtıcısı (`trds-tanitici`) ve kurum armaları
-- Favicon ve uygulama simgeleri
+- Resmî site afişi (`kiris-resmi-afis`) ve metni
+- e-Devlet giriş düğmesi (`kiris-edevlet`) ve işareti
+- Kurum tanıtıcısı (`kiris-tanitici`) ve kurum armaları
+- Kurum favicon'ları ve uygulama simgeleri. Kiriş'in kendi işareti hariçtir
 - `kurumlar/` altındaki kurum logoları. Her biri kurumun kendi sitesinden
   alınmıştır ve yalnız o kurumu göstermek için kullanılır:
-  - `e-devlet-kapisi-beyaz.svg` — cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu
-  - `sgk.svg`, `sgk-beyaz.svg` — www.sgk.gov.tr
-  - `saglik-bakanligi.svg` — www.saglik.gov.tr
+  - `e-devlet-kapisi-beyaz.svg` · cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu
+  - `sgk.svg`, `sgk-beyaz.svg` · www.sgk.gov.tr
+  - `saglik-bakanligi.svg` · www.saglik.gov.tr
 
 ## İzin verilen kullanım
 
@@ -47,7 +54,7 @@ Bu parçalar şu amaçlarla kullanılamaz:
 - Kamu dışı bir hizmete resmî görünüm vermek
 - Uygunluk veya onay iddiasında bulunmak
 
-TRDS, ilgili kurumlar adına yaptırım veya izin yetkisi taşımaz.
+Kiriş, ilgili kurumlar adına yaptırım veya izin yetkisi taşımaz.
 
 ## Gerekçe
 

@@ -1,16 +1,16 @@
 {
-  "name": "@tr-ds/core",
+  "name": "@kiris-ds/core",
   "version": "1.0.1",
-  "description": "TRDS çekirdek. HTML, CSS ve ilerlemeli iyileştirme katmanı.",
+  "description": "Kiriş çekirdek. HTML, CSS ve ilerlemeli iyileştirme katmanı.",
   "type": "module",
   "license": "MIT",
-  "main": "dist/trds.js",
-  "style": "dist/trds.css",
+  "main": "dist/kiris.js",
+  "style": "dist/kiris.css",
   "exports": {
-    ".": "./dist/trds.js",
-    "./css": "./dist/trds.css",
-    "./css/min": "./dist/trds.min.css",
-    "./js/min": "./dist/trds.min.js"
+    ".": "./dist/kiris.js",
+    "./css": "./dist/kiris.css",
+    "./css/min": "./dist/kiris.min.css",
+    "./js/min": "./dist/kiris.min.js"
   },
   "files": [
     "dist",
@@ -20,13 +20,13 @@
   ],
   "sideEffects": [
     "*.css",
-    "./dist/trds.js"
+    "./dist/kiris.js"
   ],
   "dependencies": {
-    "@tr-ds/validators": "1.0.1"
+    "@kiris-ds/validators": "1.0.1"
   },
   "devDependencies": {
-    "@tr-ds/tokens": "1.0.1"
+    "@kiris-ds/tokens": "1.0.1"
   },
   "scripts": {
     "build": "node build.mjs",
@@ -38,7 +38,7 @@
     "url": "https://github.com/woosal1337/trds/issues"
   },
   "keywords": [
-    "trds",
+    "kiris",
     "design-system",
     "turkiye",
     "gov",

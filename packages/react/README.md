@@ -1,21 +1,21 @@
-# @tr-ds/react
+# @kiris-ds/react
 
-TRDS React bileşenleri. Çekirdeği saran ince bir katman. Aynı HTML çıkar.
+Kiriş React bileşenleri. Çekirdeği saran ince bir katman. Aynı HTML çıkar.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/react
+npm install @kiris-ds/react
 ```
 
 ## Kullanım
 
 ```js
-import { TrdsKimlikNoGirisi, TrdsDugme } from '@tr-ds/react';
-import '@tr-ds/core/css';
+import { KirisKimlikNoGirisi, KirisDugme } from '@kiris-ds/react';
+import '@kiris-ds/core/css';
 ```
 
 ## Lisans
