@@ -41,7 +41,7 @@ const GORUNTULER = tekSayfa ? [{ ad: 'inceleme', yol: tekSayfa, kaydir: tekKaydi
 const chrome = spawn(CHROME, [
   '--headless=new', `--remote-debugging-port=${PORT}`, `--window-size=${EN},${BOY}`,
   '--hide-scrollbars', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
-  '--user-data-dir=/tmp/trds-chrome-profile', 'about:blank'
+  '--user-data-dir=/tmp/kiris-chrome-profile', 'about:blank'
 ], { stdio: 'ignore' });
 
 const bekle = (ms) => new Promise((r) => setTimeout(r, ms));

@@ -1,13 +1,13 @@
-// @tr-ds/react — çekirdeği saran ince React katmanı.
+// @kiris-ds/react — çekirdeği saran ince React katmanı.
 //
-// Kural: bu paket iş mantığı taşımaz. Her bileşen @tr-ds/tanim içindeki tek
-// tanımı React'ın createElement'i ile çizer. Ürettiği HTML, @tr-ds/core
-// belgelerindeki HTML ile birebir aynıdır. Davranış @tr-ds/core baslat() ile
+// Kural: bu paket iş mantığı taşımaz. Her bileşen @kiris-ds/tanim içindeki tek
+// tanımı React'ın createElement'i ile çizer. Ürettiği HTML, @kiris-ds/core
+// belgelerindeki HTML ile birebir aynıdır. Davranış @kiris-ds/core baslat() ile
 // bağlanır. Böylece bir bileşen React ile düz HTML arasında farklı davranmaz.
 
 import { createElement, forwardRef, useEffect, useId, useRef, cloneElement, isValidElement, Fragment, useState, useCallback } from 'react';
-import { TANIMLAR, KARSILIK, SARMALAYICISIZ, bir } from '@tr-ds/tanim';
-import { baslat } from '@tr-ds/core';
+import { TANIMLAR, KARSILIK, SARMALAYICISIZ, bir } from '@kiris-ds/tanim';
+import { baslat } from '@kiris-ds/core';
 
 export { KARSILIK, SARMALAYICISIZ, baslat };
 
@@ -48,7 +48,7 @@ const h = (tag, attrs, ...cocuklar) => {
   return createElement(tag, props, ...temiz);
 };
 
-const simge = (ad, sinif) => h('svg', { class: bir('trds-simge', sinif), 'aria-hidden': 'true' }, h('use', { href: `#trds-${ad}` }));
+const simge = (ad, sinif) => h('svg', { class: bir('kiris-simge', sinif), 'aria-hidden': 'true' }, h('use', { href: `#kiris-${ad}` }));
 
 const koklendir = (agac, ref) => {
   if (isValidElement(agac)) return cloneElement(agac, { ref });
@@ -60,7 +60,7 @@ const koklendir = (agac, ref) => {
 };
 
 const uret = (tanim) => {
-  const Bilesen = forwardRef(function TrdsBilesen(props, disRef) {
+  const Bilesen = forwardRef(function KirisBilesen(props, disRef) {
     const kok = useRef(null);
     const onek = useId().replace(/[^a-zA-Z0-9_-]/g, '');
     let sayac = 0;
@@ -103,12 +103,12 @@ export const SecenekGrubu = forwardRef(function SecenekGrubu({ tur = 'radyo', ..
 
 /** Düğme grubu. Kayıt defterinde düğmenin bir örneğidir. */
 export function DugmeGrubu({ children, className }) {
-  return createElement('div', { className: bir('trds-button-grubu', className) }, children);
+  return createElement('div', { className: bir('kiris-button-grubu', className) }, children);
 }
 
 /** Sütun. Izgaranın içinde 1 ile 12 arası genişlik. */
 export function Sutun({ genislik = 12, children, className }) {
-  return createElement('div', { className: bir('trds-sutun', `trds-sutun--${genislik}`, className) }, children);
+  return createElement('div', { className: bir('kiris-sutun', `kiris-sutun--${genislik}`, className) }, children);
 }
 
 /** Bütün bileşenler, kayıt defteri kimliği ile. */
@@ -118,7 +118,7 @@ export const BILESENLER = Object.fromEntries(TANIMLAR.map((t) => [t.id, bilesenl
  * Form durumu. Alan değerlerini ve hatalarını tek nesnede tutar. Gönderimde
  * hata özeti için listeyi verir.
  */
-export function useTrdsForm(baslangic = {}) {
+export function useKirisForm(baslangic = {}) {
   const [degerler, setDegerler] = useState(baslangic);
   const [hatalar, setHatalar] = useState({});
   const degistir = useCallback((ad) => (olay) => {

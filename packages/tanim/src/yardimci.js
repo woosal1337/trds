@@ -20,13 +20,13 @@ export const alan = (h, y, { id, etiket, yardim, hata, grup = false, class: sini
   return h(
     Kok,
     {
-      class: y.bir(grup ? 'trds-alan-grubu' : 'trds-alan', hata && 'trds-alan--hata', sinif),
-      'data-trds': davranis,
+      class: y.bir(grup ? 'kiris-alan-grubu' : 'kiris-alan', hata && 'kiris-alan--hata', sinif),
+      'data-kiris': davranis,
       ...ek
     },
-    h(Etiket, { class: grup ? 'trds-baslik-legend' : 'trds-etiket', for: grup ? undefined : id }, etiket),
-    yardim ? h('p', { class: 'trds-yardim', id: `${id}-yardim` }, yardim) : null,
-    davranis || hata ? h('p', { class: 'trds-hata', id: `${id}-hata`, 'data-trds-hata': davranis ? '' : undefined, hidden: !hata }, hata ? [h('span', { class: 'trds-gorsel-gizli' }, 'Hata:'), ' ', hata] : null) : null,
+    h(Etiket, { class: grup ? 'kiris-baslik-legend' : 'kiris-etiket', for: grup ? undefined : id }, etiket),
+    yardim ? h('p', { class: 'kiris-yardim', id: `${id}-yardim` }, yardim) : null,
+    davranis || hata ? h('p', { class: 'kiris-hata', id: `${id}-hata`, 'data-kiris-hata': davranis ? '' : undefined, hidden: !hata }, hata ? [h('span', { class: 'kiris-gorsel-gizli' }, 'Hata:'), ' ', hata] : null) : null,
     ...cocuklar
   );
 };
@@ -41,25 +41,25 @@ export const girdiAlani = (h, y, p, girdiEk = {}) => {
     h('input', {
       id,
       type: 'text',
-      class: y.bir('trds-girdi', genislik && `trds-girdi--${genislik}`, hata && 'trds-girdi--hata', sinif),
+      class: y.bir('kiris-girdi', genislik && `kiris-girdi--${genislik}`, hata && 'kiris-girdi--hata', sinif),
       'aria-describedby': tanimlar(id, yardim, hata, sayac ? `${id}-sayac` : undefined),
       'aria-invalid': hata ? 'true' : undefined,
       ...girdiEk,
       ...kalan
     }),
-    sayac ? h('p', { class: 'trds-sayac', id: `${id}-sayac`, 'data-trds-sayac': '', 'aria-live': 'off' }) : null
+    sayac ? h('p', { class: 'kiris-sayac', id: `${id}-sayac`, 'data-kiris-sayac': '', 'aria-live': 'off' }) : null
   );
 };
 
 export const secenekler = (h, y, { id, ad, tur, secenekler: liste = [], deger }) =>
-  h('div', { class: 'trds-secenekler' },
+  h('div', { class: 'kiris-secenekler' },
     ...liste.map((s, i) => {
       const secenekId = `${id}-${s.deger ?? i}`;
       const secili = tur === 'radio' ? deger === s.deger : (Array.isArray(deger) ? deger.includes(s.deger) : Boolean(s.secili));
-      return h('div', { class: 'trds-secenek' },
-        h('input', { class: tur === 'radio' ? 'trds-radyo' : 'trds-onay', id: secenekId, name: ad, type: tur, value: s.deger, checked: secili || undefined, 'aria-describedby': s.yardim ? `${secenekId}-yardim` : undefined }),
-        h('label', { class: 'trds-secenek-etiket', for: secenekId }, s.ad),
-        s.yardim ? h('p', { class: 'trds-secenek-yardim', id: `${secenekId}-yardim` }, s.yardim) : null
+      return h('div', { class: 'kiris-secenek' },
+        h('input', { class: tur === 'radio' ? 'kiris-radyo' : 'kiris-onay', id: secenekId, name: ad, type: tur, value: s.deger, checked: secili || undefined, 'aria-describedby': s.yardim ? `${secenekId}-yardim` : undefined }),
+        h('label', { class: 'kiris-secenek-etiket', for: secenekId }, s.ad),
+        s.yardim ? h('p', { class: 'kiris-secenek-yardim', id: `${secenekId}-yardim` }, s.yardim) : null
       );
     })
   );

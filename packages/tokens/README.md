@@ -1,20 +1,20 @@
-# @tr-ds/tokens
+# @kiris-ds/tokens
 
-TRDS tasarım belirteçleri. 161 belirteç. Kontrast garantileri yapı sırasında denetlenir.
+Kiriş tasarım belirteçleri. 161 belirteç. Kontrast garantileri yapı sırasında denetlenir.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/tokens
+npm install @kiris-ds/tokens
 ```
 
 ## Kullanım
 
 ```js
-import '@tr-ds/tokens/css';
+import '@kiris-ds/tokens/css';
 ```
 
 ## Lisans

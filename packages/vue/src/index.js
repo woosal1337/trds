@@ -1,18 +1,18 @@
-// @tr-ds/vue — çekirdeği saran ince Vue katmanı.
+// @kiris-ds/vue — çekirdeği saran ince Vue katmanı.
 //
-// Kural: bu paket iş mantığı taşımaz. Her bileşen @tr-ds/tanim içindeki tek
-// tanımı Vue'nun h'si ile çizer. Ürettiği HTML, @tr-ds/core belgelerindeki
-// HTML ile birebir aynıdır. Davranış bağlandıktan sonra @tr-ds/core baslat()
+// Kural: bu paket iş mantığı taşımaz. Her bileşen @kiris-ds/tanim içindeki tek
+// tanımı Vue'nun h'si ile çizer. Ürettiği HTML, @kiris-ds/core belgelerindeki
+// HTML ile birebir aynıdır. Davranış bağlandıktan sonra @kiris-ds/core baslat()
 // ile gelir. Şablon derleyicisi gerekmez: bileşenler çizim işlevi taşır.
 //
 //   import { createApp } from 'vue';
-//   import { Trds, KimlikNoGirisi } from '@tr-ds/vue';
-//   createApp(App).use(Trds);            // bütün bileşenler küresel
+//   import { Kiris, KimlikNoGirisi } from '@kiris-ds/vue';
+//   createApp(App).use(Kiris);            // bütün bileşenler küresel
 //   // veya tek tek: components: { KimlikNoGirisi }
 
 import { defineComponent, h as vueH, onMounted, getCurrentInstance, useId } from 'vue';
-import { TANIMLAR, KARSILIK, SARMALAYICISIZ, bir } from '@tr-ds/tanim';
-import { baslat } from '@tr-ds/core';
+import { TANIMLAR, KARSILIK, SARMALAYICISIZ, bir } from '@kiris-ds/tanim';
+import { baslat } from '@kiris-ds/core';
 
 export { KARSILIK, SARMALAYICISIZ, baslat };
 
@@ -29,7 +29,7 @@ const temizle = (attrs) => {
 
 const h = (tag, attrs, ...cocuklar) => vueH(tag, temizle(attrs), duzlestir(cocuklar));
 
-const simge = (ad, sinif) => h('svg', { class: bir('trds-simge', sinif), 'aria-hidden': 'true' }, h('use', { href: `#trds-${ad}` }));
+const simge = (ad, sinif) => h('svg', { class: bir('kiris-simge', sinif), 'aria-hidden': 'true' }, h('use', { href: `#kiris-${ad}` }));
 
 const deveBoynu = (ad) => ad.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 
@@ -77,22 +77,22 @@ export const {
 /** Düğme grubu. Kayıt defterinde düğmenin bir örneğidir. */
 export const DugmeGrubu = defineComponent({
   name: 'DugmeGrubu',
-  setup(_, { slots, attrs }) { return () => vueH('div', { class: bir('trds-button-grubu', attrs.class) }, slots.default?.()); }
+  setup(_, { slots, attrs }) { return () => vueH('div', { class: bir('kiris-button-grubu', attrs.class) }, slots.default?.()); }
 });
 
 /** Sütun. Izgaranın içinde 1 ile 12 arası genişlik. */
 export const Sutun = defineComponent({
   name: 'Sutun',
   props: { genislik: { type: [Number, String], default: 12 } },
-  setup(props, { slots, attrs }) { return () => vueH('div', { class: bir('trds-sutun', `trds-sutun--${props.genislik}`, attrs.class) }, slots.default?.()); }
+  setup(props, { slots, attrs }) { return () => vueH('div', { class: bir('kiris-sutun', `kiris-sutun--${props.genislik}`, attrs.class) }, slots.default?.()); }
 });
 
 /** Bütün bileşenler, kayıt defteri kimliği ile. */
 export const BILESENLER = Object.fromEntries(TANIMLAR.map((t) => [t.id, bilesenler[t.ad]]));
 
-/** Eklenti: app.use(Trds) bütün bileşenleri Trds öneki ile kaydeder: <TrdsDugme>. */
-export const Trds = {
-  install(app, { onek = 'Trds' } = {}) {
+/** Eklenti: app.use(Kiris) bütün bileşenleri Kiris öneki ile kaydeder: <KirisDugme>. */
+export const Kiris = {
+  install(app, { onek = 'Kiris' } = {}) {
     for (const [ad, b] of Object.entries(bilesenler)) app.component(`${onek}${ad}`, b);
     app.component(`${onek}DugmeGrubu`, DugmeGrubu);
     app.component(`${onek}Sutun`, Sutun);

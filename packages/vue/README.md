@@ -1,23 +1,23 @@
-# @tr-ds/vue
+# @kiris-ds/vue
 
-TRDS Vue bileşenleri. Çekirdeği saran ince bir katman. Şablon derleyicisi gerekmez.
+Kiriş Vue bileşenleri. Çekirdeği saran ince bir katman. Şablon derleyicisi gerekmez.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/vue
+npm install @kiris-ds/vue
 ```
 
 ## Kullanım
 
 ```js
-import { Trds } from '@tr-ds/vue';
-import '@tr-ds/core/css';
+import { Kiris } from '@kiris-ds/vue';
+import '@kiris-ds/core/css';
 
-createApp(App).use(Trds);
+createApp(App).use(Kiris);
 ```
 
 ## Lisans

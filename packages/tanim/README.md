@@ -1,20 +1,20 @@
-# @tr-ds/tanim
+# @kiris-ds/tanim
 
-TRDS bileşen tanımları. Çerçeveden bağımsız çizim işlevleri. React ve Vue paketleri buradan üretilir.
+Kiriş bileşen tanımları. Çerçeveden bağımsız çizim işlevleri. React ve Vue paketleri buradan üretilir.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/tanim
+npm install @kiris-ds/tanim
 ```
 
 ## Kullanım
 
 ```js
-import { TANIMLAR } from '@tr-ds/tanim';
+import { TANIMLAR } from '@kiris-ds/tanim';
 ```
 
 ## Lisans

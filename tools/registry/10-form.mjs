@@ -1,4 +1,4 @@
-// TRDS component registry — form and action components.
+// Kiriş component registry — form and action components.
 // One source of truth. The documentation site, the component index, the
 // integrations page and the README table are all generated from this file.
 
@@ -26,10 +26,10 @@ export const formBilesenleri = [
     wcag: ['1.4.11', '2.4.7', '2.5.5', '2.5.8'],
     kaynak: ['UK', 'US', 'FR', 'IE', 'KR', 'JP', 'DK', 'DE', 'NO'],
     ornekler: [
-      { baslik: 'Birincil', html: '<button class="trds-button" type="button">Başvuruyu gönder</button>' },
-      { baslik: 'İkincil', html: '<button class="trds-button trds-button--ikincil" type="button">Taslağı kaydet</button>' },
-      { baslik: 'Tehlike', html: '<button class="trds-button trds-button--tehlike" type="button">Başvuruyu sil</button>' },
-      { baslik: 'Düğme grubu', html: '<div class="trds-button-grubu">\n  <button class="trds-button" type="button">Devam et</button>\n  <button class="trds-button trds-button--ikincil" type="button">İptal</button>\n</div>' }
+      { baslik: 'Birincil', html: '<button class="kiris-button" type="button">Başvuruyu gönder</button>' },
+      { baslik: 'İkincil', html: '<button class="kiris-button kiris-button--ikincil" type="button">Taslağı kaydet</button>' },
+      { baslik: 'Tehlike', html: '<button class="kiris-button kiris-button--tehlike" type="button">Başvuruyu sil</button>' },
+      { baslik: 'Düğme grubu', html: '<div class="kiris-button-grubu">\n  <button class="kiris-button" type="button">Devam et</button>\n  <button class="kiris-button kiris-button--ikincil" type="button">İptal</button>\n</div>' }
     ]
   },
   {
@@ -52,8 +52,8 @@ export const formBilesenleri = [
     wcag: ['1.4.1', '2.4.4', '2.4.7'],
     kaynak: ['US', 'FR', 'IE', 'KR', 'DK', 'DE', 'NO'],
     ornekler: [
-      { baslik: 'Metin içi', html: '<p class="trds-govde">Ayrıntılar için <a class="trds-link" href="#">başvuru koşullarını okuyun</a>.</p>' },
-      { baslik: 'Yeni sekme', html: '<a class="trds-link" href="#" target="_blank" rel="noopener">Kılavuzu indirin (PDF, yeni sekmede açılır)</a>' }
+      { baslik: 'Metin içi', html: '<p class="kiris-govde">Ayrıntılar için <a class="kiris-link" href="#">başvuru koşullarını okuyun</a>.</p>' },
+      { baslik: 'Yeni sekme', html: '<a class="kiris-link" href="#" target="_blank" rel="noopener">Kılavuzu indirin (PDF, yeni sekmede açılır)</a>' }
     ]
   },
   {
@@ -79,11 +79,11 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Etiket ve yardım metni ile',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="ad">Adınız</label>\n  <p class="trds-yardim" id="ad-yardim">Nüfus cüzdanınızda yazdığı gibi yazın.</p>\n  <input class="trds-girdi" id="ad" name="ad" type="text" aria-describedby="ad-yardim" autocomplete="given-name">\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="ad">Adınız</label>\n  <p class="kiris-yardim" id="ad-yardim">Nüfus cüzdanınızda yazdığı gibi yazın.</p>\n  <input class="kiris-girdi" id="ad" name="ad" type="text" aria-describedby="ad-yardim" autocomplete="given-name">\n</div>'
       },
       {
         baslik: 'Hata durumu',
-        html: '<div class="trds-alan trds-alan--hata">\n  <label class="trds-etiket" for="eposta">E-posta adresiniz</label>\n  <p class="trds-hata" id="eposta-hata"><span class="trds-gorsel-gizli">Hata:</span> E-posta adresi bir @ işareti içermelidir.</p>\n  <input class="trds-girdi trds-girdi--hata" id="eposta" name="eposta" type="email" aria-describedby="eposta-hata">\n</div>'
+        html: '<div class="kiris-alan kiris-alan--hata">\n  <label class="kiris-etiket" for="eposta">E-posta adresiniz</label>\n  <p class="kiris-hata" id="eposta-hata"><span class="kiris-gorsel-gizli">Hata:</span> E-posta adresi bir @ işareti içermelidir.</p>\n  <input class="kiris-girdi kiris-girdi--hata" id="eposta" name="eposta" type="email" aria-describedby="eposta-hata">\n</div>'
       }
     ]
   },
@@ -108,7 +108,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Karakter sayacı ile',
-        html: '<div class="trds-alan" data-trds="karakter-sayaci" data-sinir="200">\n  <label class="trds-etiket" for="aciklama">Başvuru gerekçeniz</label>\n  <textarea class="trds-metin-alani" id="aciklama" name="aciklama" rows="5" aria-describedby="aciklama-sayac"></textarea>\n  <p class="trds-sayac" id="aciklama-sayac" aria-live="polite">200 karakter kaldı</p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="karakter-sayaci" data-sinir="200">\n  <label class="kiris-etiket" for="aciklama">Başvuru gerekçeniz</label>\n  <textarea class="kiris-metin-alani" id="aciklama" name="aciklama" rows="5" aria-describedby="aciklama-sayac"></textarea>\n  <p class="kiris-sayac" id="aciklama-sayac" aria-live="polite">200 karakter kaldı</p>\n</div>'
       }
     ]
   },
@@ -134,7 +134,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="il">İl</label>\n  <select class="trds-secim" id="il" name="il">\n    <option value="">Seçiniz</option>\n    <option value="34">İstanbul</option>\n    <option value="06">Ankara</option>\n    <option value="35">İzmir</option>\n    <option value="16">Bursa</option>\n  </select>\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="il">İl</label>\n  <select class="kiris-secim" id="il" name="il">\n    <option value="">Seçiniz</option>\n    <option value="34">İstanbul</option>\n    <option value="06">Ankara</option>\n    <option value="35">İzmir</option>\n    <option value="16">Bursa</option>\n  </select>\n</div>'
       }
     ]
   },
@@ -160,7 +160,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Grup',
-        html: '<fieldset class="trds-alan-grubu">\n  <legend class="trds-baslik-legend">Hangi belgeleri yükleyeceksiniz?</legend>\n  <div class="trds-secenekler">\n    <div class="trds-secenek">\n      <input class="trds-onay" id="b1" name="belge" type="checkbox" value="kimlik">\n      <label class="trds-secenek-etiket" for="b1">Kimlik fotokopisi</label>\n    </div>\n    <div class="trds-secenek">\n      <input class="trds-onay" id="b2" name="belge" type="checkbox" value="ikametgah">\n      <label class="trds-secenek-etiket" for="b2">İkametgâh belgesi</label>\n    </div>\n  </div>\n</fieldset>'
+        html: '<fieldset class="kiris-alan-grubu">\n  <legend class="kiris-baslik-legend">Hangi belgeleri yükleyeceksiniz?</legend>\n  <div class="kiris-secenekler">\n    <div class="kiris-secenek">\n      <input class="kiris-onay" id="b1" name="belge" type="checkbox" value="kimlik">\n      <label class="kiris-secenek-etiket" for="b1">Kimlik fotokopisi</label>\n    </div>\n    <div class="kiris-secenek">\n      <input class="kiris-onay" id="b2" name="belge" type="checkbox" value="ikametgah">\n      <label class="kiris-secenek-etiket" for="b2">İkametgâh belgesi</label>\n    </div>\n  </div>\n</fieldset>'
       }
     ]
   },
@@ -186,7 +186,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Grup',
-        html: '<fieldset class="trds-alan-grubu">\n  <legend class="trds-baslik-legend">Başvuru türü</legend>\n  <div class="trds-secenekler">\n    <div class="trds-secenek">\n      <input class="trds-radyo" id="t1" name="tur" type="radio" value="bireysel">\n      <label class="trds-secenek-etiket" for="t1">Bireysel</label>\n    </div>\n    <div class="trds-secenek">\n      <input class="trds-radyo" id="t2" name="tur" type="radio" value="kurumsal">\n      <label class="trds-secenek-etiket" for="t2">Kurumsal</label>\n    </div>\n  </div>\n</fieldset>'
+        html: '<fieldset class="kiris-alan-grubu">\n  <legend class="kiris-baslik-legend">Başvuru türü</legend>\n  <div class="kiris-secenekler">\n    <div class="kiris-secenek">\n      <input class="kiris-radyo" id="t1" name="tur" type="radio" value="bireysel">\n      <label class="kiris-secenek-etiket" for="t1">Bireysel</label>\n    </div>\n    <div class="kiris-secenek">\n      <input class="kiris-radyo" id="t2" name="tur" type="radio" value="kurumsal">\n      <label class="kiris-secenek-etiket" for="t2">Kurumsal</label>\n    </div>\n  </div>\n</fieldset>'
       }
     ]
   },
@@ -212,7 +212,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan" data-trds="dosya">\n  <label class="trds-etiket" for="ek">İkametgâh belgesi</label>\n  <p class="trds-yardim" id="ek-yardim">PDF veya JPG. En çok 5 MB.</p>\n  <div class="trds-dosya-alani">\n    <input class="trds-dosya" id="ek" name="ek" type="file" accept=".pdf,.jpg,.jpeg" aria-describedby="ek-yardim">\n    <span class="trds-button trds-button--ikincil trds-dosya-alani__dugme" aria-hidden="true">Dosya seç</span>\n    <p class="trds-dosya-alani__metin">veya dosyayı buraya sürükleyin</p>\n  </div>\n  <ul class="trds-dosya-liste" aria-label="Seçilen dosyalar"></ul>\n  <p class="trds-dosya-durum trds-gorsel-gizli" aria-live="polite"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="dosya">\n  <label class="kiris-etiket" for="ek">İkametgâh belgesi</label>\n  <p class="kiris-yardim" id="ek-yardim">PDF veya JPG. En çok 5 MB.</p>\n  <div class="kiris-dosya-alani">\n    <input class="kiris-dosya" id="ek" name="ek" type="file" accept=".pdf,.jpg,.jpeg" aria-describedby="ek-yardim">\n    <span class="kiris-button kiris-button--ikincil kiris-dosya-alani__dugme" aria-hidden="true">Dosya seç</span>\n    <p class="kiris-dosya-alani__metin">veya dosyayı buraya sürükleyin</p>\n  </div>\n  <ul class="kiris-dosya-liste" aria-label="Seçilen dosyalar"></ul>\n  <p class="kiris-dosya-durum kiris-gorsel-gizli" aria-live="polite"></p>\n</div>'
       }
     ]
   },
@@ -234,7 +234,7 @@ export const formBilesenleri = [
     wcag: ['1.3.1', '3.3.2'],
     kaynak: ['UK', 'DE', 'NO'],
     ornekler: [
-      { baslik: 'Temel', html: '<fieldset class="trds-alan-grubu">\n  <legend class="trds-baslik-legend trds-baslik-legend--buyuk">Doğum tarihiniz nedir?</legend>\n  <p class="trds-yardim">Örnek: 27 03 1997</p>\n</fieldset>' }
+      { baslik: 'Temel', html: '<fieldset class="kiris-alan-grubu">\n  <legend class="kiris-baslik-legend kiris-baslik-legend--buyuk">Doğum tarihiniz nedir?</legend>\n  <p class="kiris-yardim">Örnek: 27 03 1997</p>\n</fieldset>' }
     ]
   },
   {
@@ -255,7 +255,7 @@ export const formBilesenleri = [
     wcag: ['1.4.3', '3.3.2'],
     kaynak: ['UK', 'IE', 'DK', 'NO'],
     ornekler: [
-      { baslik: 'Temel', html: '<p class="trds-yardim">Nüfus cüzdanınızın ön yüzünde yazan 11 haneli numara.</p>' }
+      { baslik: 'Temel', html: '<p class="kiris-yardim">Nüfus cüzdanınızın ön yüzünde yazan 11 haneli numara.</p>' }
     ]
   },
   {
@@ -277,7 +277,7 @@ export const formBilesenleri = [
     wcag: ['1.4.1', '3.3.1', '3.3.3'],
     kaynak: ['UK', 'US', 'DK', 'NO'],
     ornekler: [
-      { baslik: 'Temel', html: '<p class="trds-hata"><span class="trds-gorsel-gizli">Hata:</span> T.C. kimlik numarası 11 hane olmalıdır.</p>' }
+      { baslik: 'Temel', html: '<p class="kiris-hata"><span class="kiris-gorsel-gizli">Hata:</span> T.C. kimlik numarası 11 hane olmalıdır.</p>' }
     ]
   },
   {
@@ -302,7 +302,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-hata-ozeti" data-trds="hata-ozeti" role="alert" tabindex="-1">\n  <h2 class="trds-hata-ozeti__baslik">Bir sorun var</h2>\n  <ul class="trds-hata-ozeti__liste">\n    <li><a href="#kimlik">T.C. kimlik numarası 11 hane olmalıdır</a></li>\n    <li><a href="#dogum">Doğum tarihi bugünden sonra olamaz</a></li>\n  </ul>\n</div>'
+        html: '<div class="kiris-hata-ozeti" data-kiris="hata-ozeti" role="alert" tabindex="-1">\n  <h2 class="kiris-hata-ozeti__baslik">Bir sorun var</h2>\n  <ul class="kiris-hata-ozeti__liste">\n    <li><a href="#kimlik">T.C. kimlik numarası 11 hane olmalıdır</a></li>\n    <li><a href="#dogum">Doğum tarihi bugünden sonra olamaz</a></li>\n  </ul>\n</div>'
       }
     ]
   }

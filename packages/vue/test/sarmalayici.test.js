@@ -5,9 +5,9 @@ import { createSSRApp, h } from 'vue';
 import { renderToString } from '@vue/server-renderer';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { TANIMLAR } from '@tr-ds/tanim';
-import * as V from '@tr-ds/vue';
-import * as R from '@tr-ds/react';
+import { TANIMLAR } from '@kiris-ds/tanim';
+import * as V from '@kiris-ds/vue';
+import * as R from '@kiris-ds/react';
 
 const vueCiz = async (t) => renderToString(createSSRApp({ render: () => h(V[t.ad], t.ornek) }));
 const reactCiz = (t) => renderToStaticMarkup(createElement(R[t.ad], t.ornek));
@@ -38,7 +38,7 @@ test('her tanım Vue ile çizilir ve kök sınıfı taşır', async () => {
     const html = await vueCiz(t);
     assert.ok(html.includes(t.kok), `${t.id}: kök sınıf ${t.kok} yok:\n${html.slice(0, 200)}`);
     assert.ok(!html.includes('undefined'), `${t.id}: çıktıda "undefined":\n${html.slice(0, 300)}`);
-    if (t.davranis) assert.ok(html.includes(`data-trds="${t.davranis}"`), `${t.id}: data-trds yok`);
+    if (t.davranis) assert.ok(html.includes(`data-kiris="${t.davranis}"`), `${t.id}: data-kiris yok`);
   }
 });
 
@@ -54,7 +54,7 @@ test('Vue ve React aynı HTML ağacını üretir', async () => {
 
 test('eklenti bütün bileşenleri kaydeder', () => {
   const kayitli = [];
-  V.Trds.install({ component: (ad) => kayitli.push(ad) });
+  V.Kiris.install({ component: (ad) => kayitli.push(ad) });
   assert.equal(kayitli.length, TANIMLAR.length + 2);
-  assert.ok(kayitli.includes('TrdsDugme'));
+  assert.ok(kayitli.includes('KirisDugme'));
 });

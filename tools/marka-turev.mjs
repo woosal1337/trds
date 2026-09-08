@@ -1,8 +1,8 @@
-// TRDS işaretinin PNG ve ICO türevlerini kaynak SVG'den üretir.
+// Kiriş işaretinin PNG ve ICO türevlerini kaynak SVG'den üretir.
 // Elle çalıştırılır, yapı hattının parçası değildir:
 //   node tools/marka-turev.mjs
-// Kaynak: packages/identity/src/kaynak/trds-isaret.svg
-// Çıktı:  aynı klasöre trds-isaret-<boyut>.png ve trds-favicon.ico
+// Kaynak: packages/identity/src/kaynak/kiris-isaret.svg
+// Çıktı:  aynı klasöre kiris-isaret-<boyut>.png ve kiris-favicon.ico
 //
 // Bağımlılık yok. Yalnız <rect> okur, yuvarlak köşeyi (rx) hesaba katar ve
 // süper örneklemeyle kenar yumuşatma uygular.
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const KOK = dirname(dirname(fileURLToPath(import.meta.url)));
 const KAYNAK = join(KOK, 'packages', 'identity', 'src', 'kaynak');
-const ISARET = join(KAYNAK, 'trds-isaret.svg');
+const ISARET = join(KAYNAK, 'kiris-isaret.svg');
 
 // İşaretin sabit rengi. Birincil güçlü mavi belirtecinin değeri.
 const RENK = [17, 42, 81];
@@ -134,10 +134,10 @@ const png = (boyut) => {
 
 for (const boyut of PNG_BOYUTLAR) {
   const { veri, opak } = png(boyut);
-  await writeFile(join(KAYNAK, `trds-isaret-${boyut}.png`), veri);
-  console.log(`trds-isaret-${boyut}.png · ${veri.length} bayt · opak ${opak}/${boyut * boyut}`);
+  await writeFile(join(KAYNAK, `kiris-isaret-${boyut}.png`), veri);
+  console.log(`kiris-isaret-${boyut}.png · ${veri.length} bayt · opak ${opak}/${boyut * boyut}`);
 }
 
 const ico = icoKur(ICO_BOYUTLAR.map((b) => [b, png(b).veri]));
-await writeFile(join(KAYNAK, 'trds-favicon.ico'), ico);
-console.log(`trds-favicon.ico · ${ico.length} bayt · ${ICO_BOYUTLAR.join(', ')} piksel`);
+await writeFile(join(KAYNAK, 'kiris-favicon.ico'), ico);
+console.log(`kiris-favicon.ico · ${ico.length} bayt · ${ICO_BOYUTLAR.join(', ')} piksel`);

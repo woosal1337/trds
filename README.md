@@ -1,4 +1,4 @@
-# TRDS — Türkiye Kamu Tasarım Sistemi
+# Kiriş — Türkiye Kamu Tasarım Sistemi
 
 Türkiye'deki kamu hizmetleri için bileşen kütüphanesi, tasarım belirteçleri ve
 uygulama rehberi. HTML/CSS çekirdeği, React ve Vue sarmalayıcıları içerir.
@@ -16,7 +16,7 @@ uygulama rehberi. HTML/CSS çekirdeği, React ve Vue sarmalayıcıları içerir.
 
 ```bash
 git clone https://github.com/woosal1337/trds.git
-cd trds
+cd kiris
 npm ci
 npm run yapi
 npm test
@@ -31,14 +31,14 @@ Yerel site: <http://localhost:4173>.
 Bir projede kullanmak için:
 
 ```html
-<link rel="stylesheet" href="trds.min.css">
-<script type="module" src="trds.min.js"></script>
+<link rel="stylesheet" href="kiris.min.css">
+<script type="module" src="kiris.min.js"></script>
 ```
 
 ## Mimari
 
 ```
-trds/
+kiris/
 ├── tools/registry/          tek doğruluk kaynağı — her bileşenin tanımı
 │   ├── 10-form.mjs          form ve eylem bileşenleri
 │   ├── 20-yapi.mjs          yerleşim, gezinme, içerik, geri bildirim
@@ -64,7 +64,7 @@ bileşen hakkında hiçbir bilgi iki kez yazılmaz.
 
 1. **Belirteçler** — renk, aralık, tipografi. Bir bileşen ham değer kullanmaz.
 2. **Çekirdek** — HTML ve CSS. JavaScript olmadan da çalışır.
-3. **Davranış** — `data-trds` ile bağlanan ilerlemeli iyileştirme.
+3. **Davranış** — `data-kiris` ile bağlanan ilerlemeli iyileştirme.
 4. **Saramalar** — React ve diğerleri. Aynı HTML'i üretir, iş mantığı taşımaz.
 
 Bu sıra bilerek seçildi. JavaScript çalışmazsa hizmet çalışmaya devam eder.
@@ -122,7 +122,7 @@ Bunları hiçbir yabancı tasarım sisteminden kopyalayamazsınız.
 trBuyuk('34 iz 1234')        // '34 İZ 1234'  — doğru
 ```
 
-`@tr-ds/validators` paketi bu kuralı, T.C. kimlik numarası sağlamasını, vergi
+`@kiris-ds/validators` paketi bu kuralı, T.C. kimlik numarası sağlamasını, vergi
 kimlik numarası sağlamasını, IBAN mod 97 denetimini, telefon normalleştirmesini,
 plaka biçimini ve Türkçe alfabe sıralamasını **36 test ile** kapsar.
 
@@ -328,13 +328,13 @@ Türk mevzuatından ve altyapısından doğan parçalar.
 
 | Teknoloji | Paket | Durum | Kurulum |
 |---|---|---|---|
-| Düz HTML ve CSS | `@tr-ds/core` | kararlı | `npm install @tr-ds/core` |
-| React | `@tr-ds/react` | kararlı | `npm install @tr-ds/react @tr-ds/core` |
-| Next.js | `@tr-ds/react` | beta | `npm install @tr-ds/react @tr-ds/core` |
-| Vue | `@tr-ds/vue` | kararlı | `npm install @tr-ds/vue @tr-ds/core` |
-| Angular | `@tr-ds/core` | beta | `npm install @tr-ds/core` |
-| ASP.NET Core | `@tr-ds/core` | değerlendiriliyor | `CSS ve JS dosyalarını wwwroot altına kopyalayın.` |
-| Java ve Thymeleaf | `@tr-ds/core` | değerlendiriliyor | `CSS ve JS dosyalarını static klasörüne kopyalayın.` |
+| Düz HTML ve CSS | `@kiris-ds/core` | kararlı | `npm install @kiris-ds/core` |
+| React | `@kiris-ds/react` | kararlı | `npm install @kiris-ds/react @kiris-ds/core` |
+| Next.js | `@kiris-ds/react` | beta | `npm install @kiris-ds/react @kiris-ds/core` |
+| Vue | `@kiris-ds/vue` | kararlı | `npm install @kiris-ds/vue @kiris-ds/core` |
+| Angular | `@kiris-ds/core` | beta | `npm install @kiris-ds/core` |
+| ASP.NET Core | `@kiris-ds/core` | değerlendiriliyor | `CSS ve JS dosyalarını wwwroot altına kopyalayın.` |
+| Java ve Thymeleaf | `@kiris-ds/core` | değerlendiriliyor | `CSS ve JS dosyalarını static klasörüne kopyalayın.` |
 
 <!-- ENTEGRASYON:BITIR -->
 
@@ -342,14 +342,14 @@ Türk mevzuatından ve altyapısından doğan parçalar.
 
 | Paket | Lisans | Kim kullanabilir |
 |---|---|---|
-| `@tr-ds/core` | MIT | Herkes |
-| `@tr-ds/tokens` | MIT | Herkes |
-| `@tr-ds/validators` | MIT | Herkes |
-| `@tr-ds/react` | MIT | Herkes |
-| `@tr-ds/vue`, `@tr-ds/tanim` | MIT | Herkes |
-| `@tr-ds/theme-*` | MIT | Herkes |
-| `@tr-ds/identity` simgeleri | MIT (Tabler Icons) | Herkes |
-| `@tr-ds/identity` devlet kimliği | Ayrı koşullar | Hak sahibinin izni gerekir |
+| `@kiris-ds/core` | MIT | Herkes |
+| `@kiris-ds/tokens` | MIT | Herkes |
+| `@kiris-ds/validators` | MIT | Herkes |
+| `@kiris-ds/react` | MIT | Herkes |
+| `@kiris-ds/vue`, `@kiris-ds/tanim` | MIT | Herkes |
+| `@kiris-ds/theme-*` | MIT | Herkes |
+| `@kiris-ds/identity` simgeleri | MIT (Tabler Icons) | Herkes |
+| `@kiris-ds/identity` devlet kimliği | Ayrı koşullar | Hak sahibinin izni gerekir |
 
 Kod herkese açıktır, böylece tedarikçi, üniversite ve belediye izin istemeden
 kullanır. Devlet kimliği kısıtlıdır, böylece sahte site kuranlar resmî görünmek

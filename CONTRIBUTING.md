@@ -26,8 +26,8 @@ yayımdan önce denetlenir.
 
 3. **Kullanılabilir.** Engelli kullanıcıları da kapsayan temsili bir örneklemle
    test edildi ve çalıştığı görüldü.
-4. **Tutarlı.** Var olan belirteçleri ve bileşenleri kullanır. Metni TRDS dil
-   kuralına uyar. Kodu TRDS kodlama kuralına uyar.
+4. **Tutarlı.** Var olan belirteçleri ve bileşenleri kullanır. Metni Kiriş dil
+   kuralına uyar. Kodu Kiriş kodlama kuralına uyar.
 5. **Çok yönlü.** Farklı hizmetlerde, tarayıcılarda, yardımcı teknolojilerde ve
    cihazlarda çalışır.
 
@@ -80,7 +80,7 @@ Vue testleri için `npm ci` gerekir.
 ## Kod kuralları
 
 - Girinti 2 boşluk. Sekme yok.
-- CSS sınıf adı `trds-` ile başlar. Bileşen adı Türkçedir.
+- CSS sınıf adı `kiris-` ile başlar. Bileşen adı Türkçedir.
 - Bir bileşen **ham renk veya ölçü kullanamaz.** Her değer bir belirteçten gelir.
 - Bir bileşen JavaScript olmadan da okunur ve kullanılır olmalıdır.
 - Odak halkasını kaldırmayın.

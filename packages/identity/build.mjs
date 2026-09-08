@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @tr-ds/identity yapı betiği. Bağımlılık yok.
+// @kiris-ds/identity yapı betiği. Bağımlılık yok.
 //
 //   node packages/identity/build.mjs
 //
@@ -51,7 +51,7 @@ async function main() {
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${KUTU} ${KUTU}" ${CIZIM} aria-hidden="true" focusable="false">${govde}</svg>\n`,
       'utf8'
     );
-    sembolller.push(`  <symbol id="trds-${ad}" viewBox="0 0 ${KUTU} ${KUTU}" ${CIZIM}>${govde}</symbol>`);
+    sembolller.push(`  <symbol id="kiris-${ad}" viewBox="0 0 ${KUTU} ${KUTU}" ${CIZIM}>${govde}</symbol>`);
   }
 
   const sprite = [
@@ -60,15 +60,15 @@ async function main() {
     '</svg>',
     ''
   ].join('\n');
-  await writeFile(join(CIKTI, 'trds-simgeler.svg'), sprite, 'utf8');
+  await writeFile(join(CIKTI, 'kiris-simgeler.svg'), sprite, 'utf8');
   await writeFile(join(CIKTI, 'simgeler.json'), JSON.stringify(adlar, null, 2) + '\n', 'utf8');
 
-  // TRDS'nin kendi marka işareti. Devlet kimliği taşımaz, LICENSE-IDENTITY.md
-  // kapsamı dışındadır. Kaynağı trds-isaret.svg, türevleri tools/marka-turev.mjs üretir.
-  await copyFile(join(KAYNAK, 'trds-isaret.svg'), join(CIKTI, 'trds-isaret.svg'));
-  await copyFile(join(KAYNAK, 'trds-favicon.ico'), join(CIKTI, 'trds-favicon.ico'));
+  // Kiriş'in kendi marka işareti. Devlet kimliği taşımaz, LICENSE-IDENTITY.md
+  // kapsamı dışındadır. Kaynağı kiris-isaret.svg, türevleri tools/marka-turev.mjs üretir.
+  await copyFile(join(KAYNAK, 'kiris-isaret.svg'), join(CIKTI, 'kiris-isaret.svg'));
+  await copyFile(join(KAYNAK, 'kiris-favicon.ico'), join(CIKTI, 'kiris-favicon.ico'));
   for (const boyut of [16, 32, 48, 64, 128, 196]) {
-    await copyFile(join(KAYNAK, `trds-isaret-${boyut}.png`), join(CIKTI, `trds-isaret-${boyut}.png`));
+    await copyFile(join(KAYNAK, `kiris-isaret-${boyut}.png`), join(CIKTI, `kiris-isaret-${boyut}.png`));
   }
 
   await copyFile(join(KAYNAK, 'favicon-196x196.1.8.0.png'), join(CIKTI, 'e-devlet-isaret.png'));

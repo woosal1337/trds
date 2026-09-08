@@ -1,206 +1,206 @@
-# TRDS — Türkiye Kamu Tasarım Sistemi
+# Kiriş — Türkiye Kamu Tasarım Sistemi
 
-> TRDS (Türkiye Kamu Tasarım Sistemi) is an open design system for Turkish public services. It has 116 HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. TRDS has no government endorsement.
+> Kiriş (Türkiye Kamu Tasarım Sistemi) is an open design system for Turkish public services. It has 116 HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.
 
 Version 1.0.1. Source: https://github.com/woosal1337/trds. Docs: https://trds.chele.bi. For a local site, run `npm ci && npm run yapi && npm run sun` and open http://localhost:4173. The docs use `tools/registry/*.mjs` as their source. Read `llms-full.txt` for the markup of each component.
 
 ## How to integrate in 60 seconds
 
-**Plain HTML.** Include the two files from `packages/core/dist/` and call `baslat()` once. Every behaviour is keyed by a `data-trds="<name>"` attribute and enhances working HTML.
+**Plain HTML.** Include the two files from `packages/core/dist/` and call `baslat()` once. Every behaviour is keyed by a `data-kiris="<name>"` attribute and enhances working HTML.
 
 ```html
-<link rel="stylesheet" href="/trds/trds.min.css">
+<link rel="stylesheet" href="/kiris/kiris.min.css">
 <script type="module">
-  import { baslat } from '/trds/trds.min.js';
+  import { baslat } from '/kiris/kiris.min.js';
   baslat(); // or baslat(document.getElementById('form'))
 </script>
 ```
 
-**React.** `npm install @tr-ds/react @tr-ds/core`. Plain JavaScript, no JSX build needed for the library. Components take Turkish prop names and render the exact HTML of the docs.
+**React.** `npm install @kiris-ds/react @kiris-ds/core`. Plain JavaScript, no JSX build needed for the library. Components take Turkish prop names and render the exact HTML of the docs.
 
 ```jsx
-import '@tr-ds/core/css';
-import { KimlikNoGirisi, Dugme } from '@tr-ds/react';
+import '@kiris-ds/core/css';
+import { KimlikNoGirisi, Dugme } from '@kiris-ds/react';
 <form><KimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" /><Dugme>Devam et</Dugme></form>
 ```
 
-**Vue 3.5 or later.** `npm install @tr-ds/vue @tr-ds/core`. Render functions, no template compiler. `app.use(Trds)` registers every component with the `Trds` prefix.
+**Vue 3.5 or later.** `npm install @kiris-ds/vue @kiris-ds/core`. Render functions, no template compiler. `app.use(Kiris)` registers every component with the `Kiris` prefix.
 
 ```js
 import { createApp } from 'vue';
-import { Trds } from '@tr-ds/vue';
-import '@tr-ds/core/css';
-createApp(App).use(Trds); // <TrdsKimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" />
+import { Kiris } from '@kiris-ds/vue';
+import '@kiris-ds/core/css';
+createApp(App).use(Kiris); // <KirisKimlikNoGirisi etiket="T.C. kimlik numaranız" name="tckn" />
 ```
 
 ## Rules an AI must follow
 
-- Class names are Turkish BEM: `trds-<block>__<element>--<modifier>`. Never invent a class; every class in this file exists in `trds.css`.
-- Colour, spacing, type and radius come only from tokens `--trds-*`. Themes: `<html data-trds-tema="acik|koyu|yuksek">`, font size `data-trds-yazi="normal|buyuk|cok-buyuk"`. Do not write raw hex values.
+- Class names are Turkish BEM: `kiris-<block>__<element>--<modifier>`. Never invent a class; every class in this file exists in `kiris.css`.
+- Colour, spacing, type and radius come only from tokens `--kiris-*`. Themes: `<html data-kiris-tema="acik|koyu|yuksek">`, font size `data-kiris-yazi="normal|buyuk|cok-buyuk"`. Do not write raw hex values.
 - Every interactive part works without JavaScript. Script adds behaviour after `baslat()`; it never replaces markup.
-- Form fields: label + optional `.trds-yardim` + optional `.trds-hata` + input inside `.trds-alan`. Errors also go to the page-top `.trds-hata-ozeti`. Touch targets are 44 px.
-- Icons: inline the sprite `packages/identity/dist/trds-simgeler.svg` once, then `<svg class="trds-simge" aria-hidden="true"><use href="#trds-health"/></svg>`. 74 icons from Tabler Icons (MIT), one 24-unit grid, 2-unit stroke; do not add other icon sets.
-- State identity assets have separate terms in LICENSE-IDENTITY.md. TRDS cannot grant permission for third-party logos. Code and Tabler icons use MIT licences.
+- Form fields: label + optional `.kiris-yardim` + optional `.kiris-hata` + input inside `.kiris-alan`. Errors also go to the page-top `.kiris-hata-ozeti`. Touch targets are 44 px.
+- Icons: inline the sprite `packages/identity/dist/kiris-simgeler.svg` once, then `<svg class="kiris-simge" aria-hidden="true"><use href="#kiris-health"/></svg>`. 74 icons from Tabler Icons (MIT), one 24-unit grid, 2-unit stroke; do not add other icon sets.
+- State identity assets have separate terms in LICENSE-IDENTITY.md. Kiriş cannot grant permission for third-party logos. Code and Tabler icons use MIT licences.
 - Turkish text rules: `İ/ı` case with `trBuyuk()/trKucuk()`, sorting with `trSirala()`, money with `tlBicimle()`, dates as `gg.aa.yyyy`.
 
 ## Components (116)
 
 ### Kimlik
 
-- [Alt bilgi (Footer)](https://trds.chele.bi/bilesenler/footer.html): Sayfanın sonunda kurumu, zorunlu bağlantıları ve iletişim bilgisini taşır. Kurum logosunu girdi olarak alır. Root class `trds-alt-bilgi`, React/Vue `AltBilgi`.
-- [Aşama afişi (Phase banner)](https://trds.chele.bi/bilesenler/phase-banner.html): Hizmetin deneme aşamasında olduğunu söyler ve geri bildirim ister. Başlık çubuğunun hemen altında durur. Root class `trds-asama`, React/Vue `AsamaAfisi`.
-- [Başlık (Header)](https://trds.chele.bi/bilesenler/header.html): Her sayfanın en üstünde durur, kurumu adlandırır ve ana menüyü taşır. Root class `trds-baslik-cubugu`, behaviour `data-trds="baslik-cubugu"`, React/Vue `BaslikCubugu`.
-- [Çerez bildirimi (Cookie banner)](https://trds.chele.bi/bilesenler/cookie-banner.html): İsteğe bağlı çerezler için izin ister. Kabul ve ret eşit büyüklüktedir. Tercih saklanır. Root class `trds-cerez`, behaviour `data-trds="cerez"`, React/Vue `CerezBildirimi`.
-- [Kurum logosu (Logo lockup)](https://trds.chele.bi/bilesenler/logo.html): Kurumun kendi logosu, tek bir bağlantıda ve sabit yükseklikte. Logosu olmayan kurum için bayrak ve ad kilidi. Root class `trds-logo`, React/Vue `KurumLogosu`.
-- [Kurum tanıtıcısı (Identifier)](https://trds.chele.bi/bilesenler/identifier.html): Sayfanın sonunda hizmeti işleten kurumu ve bağlı olduğu bakanlığı adlandırır. Root class `trds-tanitici`, React/Vue `KurumTanitici`.
-- [Resmî site afişi (Masthead)](https://trds.chele.bi/bilesenler/masthead.html): Sayfanın en üstünde durur ve kullanıcıya bu sitenin resmî bir devlet sitesi olduğunu söyler. Root class `trds-resmi-afis`, behaviour `data-trds="resmi-afis"`, React/Vue `ResmiAfis`.
-- [Sekme simgesi (Favicon)](https://trds.chele.bi/bilesenler/favicon.html): Tarayıcı sekmesinde ve yer imlerinde duran küçük simge. Kurumun arması, iki boyutta. Root class `trds-u-satir`.
+- [Alt bilgi (Footer)](https://trds.chele.bi/bilesenler/footer.html): Sayfanın sonunda kurumu, zorunlu bağlantıları ve iletişim bilgisini taşır. Kurum logosunu girdi olarak alır. Root class `kiris-alt-bilgi`, React/Vue `AltBilgi`.
+- [Aşama afişi (Phase banner)](https://trds.chele.bi/bilesenler/phase-banner.html): Hizmetin deneme aşamasında olduğunu söyler ve geri bildirim ister. Başlık çubuğunun hemen altında durur. Root class `kiris-asama`, React/Vue `AsamaAfisi`.
+- [Başlık (Header)](https://trds.chele.bi/bilesenler/header.html): Her sayfanın en üstünde durur, kurumu adlandırır ve ana menüyü taşır. Root class `kiris-baslik-cubugu`, behaviour `data-kiris="baslik-cubugu"`, React/Vue `BaslikCubugu`.
+- [Çerez bildirimi (Cookie banner)](https://trds.chele.bi/bilesenler/cookie-banner.html): İsteğe bağlı çerezler için izin ister. Kabul ve ret eşit büyüklüktedir. Tercih saklanır. Root class `kiris-cerez`, behaviour `data-kiris="cerez"`, React/Vue `CerezBildirimi`.
+- [Kurum logosu (Logo lockup)](https://trds.chele.bi/bilesenler/logo.html): Kurumun kendi logosu, tek bir bağlantıda ve sabit yükseklikte. Logosu olmayan kurum için bayrak ve ad kilidi. Root class `kiris-logo`, React/Vue `KurumLogosu`.
+- [Kurum tanıtıcısı (Identifier)](https://trds.chele.bi/bilesenler/identifier.html): Sayfanın sonunda hizmeti işleten kurumu ve bağlı olduğu bakanlığı adlandırır. Root class `kiris-tanitici`, React/Vue `KurumTanitici`.
+- [Resmî site afişi (Masthead)](https://trds.chele.bi/bilesenler/masthead.html): Sayfanın en üstünde durur ve kullanıcıya bu sitenin resmî bir devlet sitesi olduğunu söyler. Root class `kiris-resmi-afis`, behaviour `data-kiris="resmi-afis"`, React/Vue `ResmiAfis`.
+- [Sekme simgesi (Favicon)](https://trds.chele.bi/bilesenler/favicon.html): Tarayıcı sekmesinde ve yer imlerinde duran küçük simge. Kurumun arması, iki boyutta. Root class `kiris-u-satir`.
 
 ### Gezinme
 
-- [Adım göstergesi (Step indicator)](https://trds.chele.bi/bilesenler/step-indicator.html): Çok adımlı bir akışta kullanıcının kaçıncı adımda olduğunu gösterir. Root class `trds-adimlar`, React/Vue `AdimGostergesi`.
-- [Alt gezinme (Bottom navigation)](https://trds.chele.bi/bilesenler/bottom-navigation.html): Telefonda ekranın altına yapışan üç ile beş ana bölüm. Uygulama benzeri hizmetler için. Root class `trds-alt-gezinme`, React/Vue `AltGezinme`.
-- [Arama (Search)](https://trds.chele.bi/bilesenler/search.html): Site içi arama alanı ve düğmesi. İsteğe bağlı öneri listesi: kullanıcı yazarken gruplu sonuçlar açılır. Root class `trds-arama`, React/Vue `Arama`.
-- [Başa dön (Back to top)](https://trds.chele.bi/bilesenler/back-to-top.html): Uzun sayfada iki ekran aşağı inince beliren bağlantı. Başa kaydırır ve odağı ana içeriğe verir. Root class `trds-basa-don`, behaviour `data-trds="basa-don"`, React/Vue `BasaDon`.
-- [Dil seçici (Language selector)](https://trds.chele.bi/bilesenler/language-selector.html): Kullanıcının içerik dilini değiştirmesini sağlar. Her dil kendi adıyla ve kendi yazısıyla yazılır. Root class `trds-dil`, React/Vue `DilSecici`.
-- [Geniş menü (Mega menu)](https://trds.chele.bi/bilesenler/mega-menu.html): Başlık çubuğunun altında, her ana konu için tam genişlikte bir bağlantı paneli. Bir kerede bir panel açık. Root class `trds-genis-menu`, behaviour `data-trds="genis-menu"`, React/Vue `GenisMenu`.
-- [Geri bağlantısı (Back link)](https://trds.chele.bi/bilesenler/back-link.html): Çok adımlı bir akışta kullanıcıyı bir önceki adıma götürür. Root class `trds-geri`, React/Vue `GeriBaglantisi`.
-- [Hizmet gezinmesi (Service navigation)](https://trds.chele.bi/bilesenler/service-navigation.html): Bir hizmetin adını ve kendi bölümlerini taşıyan ikinci çubuk. Başlık çubuğu kurumu, bu çubuk hizmeti söyler. Root class `trds-hizmet-gezinme`, React/Vue `HizmetGezinmesi`.
-- [İçeriğe atlama bağlantısı (Skip link)](https://trds.chele.bi/bilesenler/skip-link.html): Klavye kullanıcısının menüyü atlayıp doğrudan ana içeriğe gitmesini sağlar. Root class `trds-atla`, React/Vue `IceriyeAtla`.
-- [Sayfa içi gezinme (In-page navigation)](https://trds.chele.bi/bilesenler/in-page-navigation.html): Uzun bir sayfanın bölümlerini listeler ve her birine bağlantı verir. Root class `trds-icindekiler`, React/Vue `SayfaIciGezinme`.
-- [Sayfa yolu (Breadcrumb)](https://trds.chele.bi/bilesenler/breadcrumb.html): Kullanıcının site yapısında nerede olduğunu gösterir ve üst seviyeye dönmeyi sağlar. Root class `trds-yol`, React/Vue `SayfaYolu`.
-- [Sayfalama (Pagination)](https://trds.chele.bi/bilesenler/pagination.html): Uzun bir listeyi sayfalara böler ve sayfalar arasında gezinmeyi sağlar. Root class `trds-sayfalama`, React/Vue `Sayfalama`.
-- [Yan menü (Side navigation)](https://trds.chele.bi/bilesenler/side-navigation.html): Bir bölümün alt sayfaları arasında gezinmeyi sağlar. İçeriğin solunda durur. Root class `trds-yan-menu`, React/Vue `YanMenu`.
+- [Adım göstergesi (Step indicator)](https://trds.chele.bi/bilesenler/step-indicator.html): Çok adımlı bir akışta kullanıcının kaçıncı adımda olduğunu gösterir. Root class `kiris-adimlar`, React/Vue `AdimGostergesi`.
+- [Alt gezinme (Bottom navigation)](https://trds.chele.bi/bilesenler/bottom-navigation.html): Telefonda ekranın altına yapışan üç ile beş ana bölüm. Uygulama benzeri hizmetler için. Root class `kiris-alt-gezinme`, React/Vue `AltGezinme`.
+- [Arama (Search)](https://trds.chele.bi/bilesenler/search.html): Site içi arama alanı ve düğmesi. İsteğe bağlı öneri listesi: kullanıcı yazarken gruplu sonuçlar açılır. Root class `kiris-arama`, React/Vue `Arama`.
+- [Başa dön (Back to top)](https://trds.chele.bi/bilesenler/back-to-top.html): Uzun sayfada iki ekran aşağı inince beliren bağlantı. Başa kaydırır ve odağı ana içeriğe verir. Root class `kiris-basa-don`, behaviour `data-kiris="basa-don"`, React/Vue `BasaDon`.
+- [Dil seçici (Language selector)](https://trds.chele.bi/bilesenler/language-selector.html): Kullanıcının içerik dilini değiştirmesini sağlar. Her dil kendi adıyla ve kendi yazısıyla yazılır. Root class `kiris-dil`, React/Vue `DilSecici`.
+- [Geniş menü (Mega menu)](https://trds.chele.bi/bilesenler/mega-menu.html): Başlık çubuğunun altında, her ana konu için tam genişlikte bir bağlantı paneli. Bir kerede bir panel açık. Root class `kiris-genis-menu`, behaviour `data-kiris="genis-menu"`, React/Vue `GenisMenu`.
+- [Geri bağlantısı (Back link)](https://trds.chele.bi/bilesenler/back-link.html): Çok adımlı bir akışta kullanıcıyı bir önceki adıma götürür. Root class `kiris-geri`, React/Vue `GeriBaglantisi`.
+- [Hizmet gezinmesi (Service navigation)](https://trds.chele.bi/bilesenler/service-navigation.html): Bir hizmetin adını ve kendi bölümlerini taşıyan ikinci çubuk. Başlık çubuğu kurumu, bu çubuk hizmeti söyler. Root class `kiris-hizmet-gezinme`, React/Vue `HizmetGezinmesi`.
+- [İçeriğe atlama bağlantısı (Skip link)](https://trds.chele.bi/bilesenler/skip-link.html): Klavye kullanıcısının menüyü atlayıp doğrudan ana içeriğe gitmesini sağlar. Root class `kiris-atla`, React/Vue `IceriyeAtla`.
+- [Sayfa içi gezinme (In-page navigation)](https://trds.chele.bi/bilesenler/in-page-navigation.html): Uzun bir sayfanın bölümlerini listeler ve her birine bağlantı verir. Root class `kiris-icindekiler`, React/Vue `SayfaIciGezinme`.
+- [Sayfa yolu (Breadcrumb)](https://trds.chele.bi/bilesenler/breadcrumb.html): Kullanıcının site yapısında nerede olduğunu gösterir ve üst seviyeye dönmeyi sağlar. Root class `kiris-yol`, React/Vue `SayfaYolu`.
+- [Sayfalama (Pagination)](https://trds.chele.bi/bilesenler/pagination.html): Uzun bir listeyi sayfalara böler ve sayfalar arasında gezinmeyi sağlar. Root class `kiris-sayfalama`, React/Vue `Sayfalama`.
+- [Yan menü (Side navigation)](https://trds.chele.bi/bilesenler/side-navigation.html): Bir bölümün alt sayfaları arasında gezinmeyi sağlar. İçeriğin solunda durur. Root class `kiris-yan-menu`, React/Vue `YanMenu`.
 
 ### Form
 
-- [Açılır liste (Select)](https://trds.chele.bi/bilesenler/select.html): Kullanıcının bir listeden tek bir seçenek seçmesini sağlar. Root class `trds-alan`, React/Vue `AcilirListe`.
-- [Adet seçici (Quantity stepper)](https://trds.chele.bi/bilesenler/quantity.html): Eksi ve artı düğmeli sayı alanı. Küçük sayılar için: bilet, kişi, adet. Root class `trds-alan`, behaviour `data-trds="adet"`, React/Vue `AdetSecici`.
-- [Alan grubu (Fieldset)](https://trds.chele.bi/bilesenler/fieldset.html): Birbirine bağlı form alanlarını tek bir soru altında toplar. Root class `trds-alan-grubu`, React/Vue `AlanGrubu`.
-- [Aralık seçici (Range slider)](https://trds.chele.bi/bilesenler/range.html): Bir aralıktan yaklaşık bir sayı seçtirir. Seçilen değer her zaman yazıyla görünür. Root class `trds-alan`, behaviour `data-trds="aralik"`, React/Vue `AralikSecici`.
-- [Çok satırlı metin (Textarea)](https://trds.chele.bi/bilesenler/textarea.html): Kullanıcının birden çok satır metin girmesini sağlar. Root class `trds-alan`, behaviour `data-trds="karakter-sayaci"`, React/Vue `MetinAlani`.
-- [Dosya yükleme (File upload)](https://trds.chele.bi/bilesenler/file-upload.html): Kullanıcının cihazından bir veya daha çok dosya seçmesini sağlar. Sürükle ve bırak alanı ve dosya listesi ile. Root class `trds-alan`, behaviour `data-trds="dosya"`, React/Vue `DosyaYukleme`.
-- [E-posta girişi (Email input)](https://trds.chele.bi/bilesenler/email-input.html): E-posta adresi için tek satırlık alan. Telefonda @ tuşlu klavye açılır. Root class `trds-alan`, React/Vue `EPostaGirisi`.
-- [Girdi grubu (Input group)](https://trds.chele.bi/bilesenler/input-group.html): Bir alanın başına veya sonuna birim, para işareti veya sabit metin ekler. Root class `trds-alan`, React/Vue `GirdiGrubu`.
-- [Girdi maskesi (Input mask)](https://trds.chele.bi/bilesenler/input-mask.html): Yazarken boşluk ve ayraçları kendisi koyar. Kart numarası, referans numarası. Root class `trds-alan`, behaviour `data-trds="maske"`, React/Vue `GirdiMaskesi`.
-- [Metin girişi (Text input)](https://trds.chele.bi/bilesenler/text-input.html): Kullanıcının tek satırlık kısa bir metin girmesini sağlar. Root class `trds-alan`, React/Vue `MetinGirisi`.
-- [Parola girişi (Password input)](https://trds.chele.bi/bilesenler/password-input.html): Parola alanı. Kullanıcı yazdığını görmek için "Göster" düğmesine basar. Root class `trds-alan`, behaviour `data-trds="parola"`, React/Vue `ParolaGirisi`.
-- [Saat girişi (Time input)](https://trds.chele.bi/bilesenler/time-input.html): Saat ve dakika için iki kısa alan. Tarih girişiyle aynı kalıp. Root class `trds-alan-grubu`, React/Vue `SaatGirisi`.
-- [Sayı girişi (Number input)](https://trds.chele.bi/bilesenler/number-input.html): Sayı için tek satırlık alan. Metin türü ve sayısal klavye kullanır, sayı türü kullanmaz. Root class `trds-alan`, React/Vue `SayiGirisi`.
-- [Takvim (Date picker)](https://trds.chele.bi/bilesenler/date-picker.html): Tarih alanının yanında bir takvim düğmesi. Alan yazılabilir kalır, takvim yardımcıdır. Root class `trds-alan`, behaviour `data-trds="takvim"`, React/Vue `Takvim`.
-- [Web adresi girişi (URL input)](https://trds.chele.bi/bilesenler/url-input.html): Web adresi için tek satırlık alan. Telefonda nokta ve eğik çizgi tuşlu klavye açılır. Root class `trds-alan`, React/Vue `WebAdresiGirisi`.
-- [Yardım metni (Hint)](https://trds.chele.bi/bilesenler/hint.html): Bir alanın nasıl doldurulacağını kısaca anlatır. Root class `trds-yardim`, React/Vue `YardimMetni`.
+- [Açılır liste (Select)](https://trds.chele.bi/bilesenler/select.html): Kullanıcının bir listeden tek bir seçenek seçmesini sağlar. Root class `kiris-alan`, React/Vue `AcilirListe`.
+- [Adet seçici (Quantity stepper)](https://trds.chele.bi/bilesenler/quantity.html): Eksi ve artı düğmeli sayı alanı. Küçük sayılar için: bilet, kişi, adet. Root class `kiris-alan`, behaviour `data-kiris="adet"`, React/Vue `AdetSecici`.
+- [Alan grubu (Fieldset)](https://trds.chele.bi/bilesenler/fieldset.html): Birbirine bağlı form alanlarını tek bir soru altında toplar. Root class `kiris-alan-grubu`, React/Vue `AlanGrubu`.
+- [Aralık seçici (Range slider)](https://trds.chele.bi/bilesenler/range.html): Bir aralıktan yaklaşık bir sayı seçtirir. Seçilen değer her zaman yazıyla görünür. Root class `kiris-alan`, behaviour `data-kiris="aralik"`, React/Vue `AralikSecici`.
+- [Çok satırlı metin (Textarea)](https://trds.chele.bi/bilesenler/textarea.html): Kullanıcının birden çok satır metin girmesini sağlar. Root class `kiris-alan`, behaviour `data-kiris="karakter-sayaci"`, React/Vue `MetinAlani`.
+- [Dosya yükleme (File upload)](https://trds.chele.bi/bilesenler/file-upload.html): Kullanıcının cihazından bir veya daha çok dosya seçmesini sağlar. Sürükle ve bırak alanı ve dosya listesi ile. Root class `kiris-alan`, behaviour `data-kiris="dosya"`, React/Vue `DosyaYukleme`.
+- [E-posta girişi (Email input)](https://trds.chele.bi/bilesenler/email-input.html): E-posta adresi için tek satırlık alan. Telefonda @ tuşlu klavye açılır. Root class `kiris-alan`, React/Vue `EPostaGirisi`.
+- [Girdi grubu (Input group)](https://trds.chele.bi/bilesenler/input-group.html): Bir alanın başına veya sonuna birim, para işareti veya sabit metin ekler. Root class `kiris-alan`, React/Vue `GirdiGrubu`.
+- [Girdi maskesi (Input mask)](https://trds.chele.bi/bilesenler/input-mask.html): Yazarken boşluk ve ayraçları kendisi koyar. Kart numarası, referans numarası. Root class `kiris-alan`, behaviour `data-kiris="maske"`, React/Vue `GirdiMaskesi`.
+- [Metin girişi (Text input)](https://trds.chele.bi/bilesenler/text-input.html): Kullanıcının tek satırlık kısa bir metin girmesini sağlar. Root class `kiris-alan`, React/Vue `MetinGirisi`.
+- [Parola girişi (Password input)](https://trds.chele.bi/bilesenler/password-input.html): Parola alanı. Kullanıcı yazdığını görmek için "Göster" düğmesine basar. Root class `kiris-alan`, behaviour `data-kiris="parola"`, React/Vue `ParolaGirisi`.
+- [Saat girişi (Time input)](https://trds.chele.bi/bilesenler/time-input.html): Saat ve dakika için iki kısa alan. Tarih girişiyle aynı kalıp. Root class `kiris-alan-grubu`, React/Vue `SaatGirisi`.
+- [Sayı girişi (Number input)](https://trds.chele.bi/bilesenler/number-input.html): Sayı için tek satırlık alan. Metin türü ve sayısal klavye kullanır, sayı türü kullanmaz. Root class `kiris-alan`, React/Vue `SayiGirisi`.
+- [Takvim (Date picker)](https://trds.chele.bi/bilesenler/date-picker.html): Tarih alanının yanında bir takvim düğmesi. Alan yazılabilir kalır, takvim yardımcıdır. Root class `kiris-alan`, behaviour `data-kiris="takvim"`, React/Vue `Takvim`.
+- [Web adresi girişi (URL input)](https://trds.chele.bi/bilesenler/url-input.html): Web adresi için tek satırlık alan. Telefonda nokta ve eğik çizgi tuşlu klavye açılır. Root class `kiris-alan`, React/Vue `WebAdresiGirisi`.
+- [Yardım metni (Hint)](https://trds.chele.bi/bilesenler/hint.html): Bir alanın nasıl doldurulacağını kısaca anlatır. Root class `kiris-yardim`, React/Vue `YardimMetni`.
 
 ### Seçim
 
-- [Anahtar (Switch)](https://trds.chele.bi/bilesenler/switch.html): Bir ayarı açar veya kapatır. Etkisi hemen görülür, form gönderimi beklemez. Root class `trds-anahtar`, React/Vue `Anahtar`.
-- [Aranabilir liste (Combobox)](https://trds.chele.bi/bilesenler/combobox.html): Uzun bir listeden yazarak seçim yaptırır. 81 il ve 973 ilçe için açılır liste yerine bunu kullanın. Root class `trds-alan`, behaviour `data-trds="aranabilir"`, React/Vue `AranabilirListe`.
-- [Bölümlü seçim (Segmented control)](https://trds.chele.bi/bilesenler/segmented-control.html): İki ile dört seçenek, yan yana ve tek satırda. Görünüm veya sıralama seçmek için. Root class `trds-bolumlu`, React/Vue `BolumluSecim`.
-- [Çoklu seçim (Multi-select)](https://trds.chele.bi/bilesenler/multi-select.html): Uzun bir listeden birden çok seçim. Yazarak süzülür, seçilenler etiket olur. Root class `trds-alan`, behaviour `data-trds="coklu-secim"`, React/Vue `CokluSecim`.
-- [Onay kutusu (Checkbox)](https://trds.chele.bi/bilesenler/checkbox.html): Kullanıcının bir listeden birden çok seçenek seçmesini sağlar. Root class `trds-alan-grubu`, React/Vue `OnayKutusu`.
-- [Puanlama (Rating)](https://trds.chele.bi/bilesenler/rating.html): Bir hizmeti 1 ile 5 arasında puanlar. Beş seçenek düğmesi, yıldız görünümünde. Root class `trds-puan`, React/Vue `Puanlama`.
-- [Seçenek düğmesi (Radio)](https://trds.chele.bi/bilesenler/radio.html): Kullanıcının birbirini dışlayan seçeneklerden birini seçmesini sağlar. Root class `trds-alan-grubu`, React/Vue `SecenekDugmesi`.
-- [Seçim etiketi (Chip)](https://trds.chele.bi/bilesenler/chip.html): Basılabilen küçük etiket. Süzgeç seçmek veya seçileni kaldırmak için. Root class `trds-cip-grubu`, behaviour `data-trds="cip"`, React/Vue `SecimEtiketi`.
+- [Anahtar (Switch)](https://trds.chele.bi/bilesenler/switch.html): Bir ayarı açar veya kapatır. Etkisi hemen görülür, form gönderimi beklemez. Root class `kiris-anahtar`, React/Vue `Anahtar`.
+- [Aranabilir liste (Combobox)](https://trds.chele.bi/bilesenler/combobox.html): Uzun bir listeden yazarak seçim yaptırır. 81 il ve 973 ilçe için açılır liste yerine bunu kullanın. Root class `kiris-alan`, behaviour `data-kiris="aranabilir"`, React/Vue `AranabilirListe`.
+- [Bölümlü seçim (Segmented control)](https://trds.chele.bi/bilesenler/segmented-control.html): İki ile dört seçenek, yan yana ve tek satırda. Görünüm veya sıralama seçmek için. Root class `kiris-bolumlu`, React/Vue `BolumluSecim`.
+- [Çoklu seçim (Multi-select)](https://trds.chele.bi/bilesenler/multi-select.html): Uzun bir listeden birden çok seçim. Yazarak süzülür, seçilenler etiket olur. Root class `kiris-alan`, behaviour `data-kiris="coklu-secim"`, React/Vue `CokluSecim`.
+- [Onay kutusu (Checkbox)](https://trds.chele.bi/bilesenler/checkbox.html): Kullanıcının bir listeden birden çok seçenek seçmesini sağlar. Root class `kiris-alan-grubu`, React/Vue `OnayKutusu`.
+- [Puanlama (Rating)](https://trds.chele.bi/bilesenler/rating.html): Bir hizmeti 1 ile 5 arasında puanlar. Beş seçenek düğmesi, yıldız görünümünde. Root class `kiris-puan`, React/Vue `Puanlama`.
+- [Seçenek düğmesi (Radio)](https://trds.chele.bi/bilesenler/radio.html): Kullanıcının birbirini dışlayan seçeneklerden birini seçmesini sağlar. Root class `kiris-alan-grubu`, React/Vue `SecenekDugmesi`.
+- [Seçim etiketi (Chip)](https://trds.chele.bi/bilesenler/chip.html): Basılabilen küçük etiket. Süzgeç seçmek veya seçileni kaldırmak için. Root class `kiris-cip-grubu`, behaviour `data-kiris="cip"`, React/Vue `SecimEtiketi`.
 
 ### Eylem
 
-- [Bağlantı (Link)](https://trds.chele.bi/bilesenler/link.html): Kullanıcıyı başka bir sayfaya veya aynı sayfadaki bir bölüme götürür. Root class `trds-link`, React/Vue `Baglanti`.
-- [Düğme (Button)](https://trds.chele.bi/bilesenler/button.html): Kullanıcının bir işlemi başlatmasını sağlar. Her ekranda tek bir birincil düğme bulunur. Root class `trds-button`, React/Vue `Dugme`.
-- [Eylem menüsü (Action menu)](https://trds.chele.bi/bilesenler/action-menu.html): Bir düğmenin altında açılan eylem listesi. Düzenle, indir, sil. Root class `trds-eylem-menusu`, behaviour `data-trds="eylem-menusu"`, React/Vue `EylemMenusu`.
-- [İndirme bağlantısı (Download link)](https://trds.chele.bi/bilesenler/download-link.html): Bir dosyaya giden bağlantı. Dosya türünü ve boyutunu bağlantı metninin içinde söyler. Root class `trds-indir`, React/Vue `IndirmeBaglantisi`.
-- [Paylaş (Share)](https://trds.chele.bi/bilesenler/share.html): Sayfayı sosyal medyada veya e-posta ile paylaşan bağlantılar. Haber ve duyuru sayfasının sonunda durur. Root class `trds-paylas`, React/Vue `Paylas`.
-- [Sayfadan çık (Exit this page)](https://trds.chele.bi/bilesenler/exit-this-page.html): Şiddet ve istismar konulu sayfalarda kullanıcının sayfayı bir dokunuşla terk etmesini sağlar. Root class `trds-cikis`, behaviour `data-trds="cikis"`, React/Vue `SayfadanCik`.
-- [Yazdır (Print button)](https://trds.chele.bi/bilesenler/print.html): Tarayıcının yazdırma penceresini açan düğme. Onay sayfasında ve belgelerde. Root class `trds-button`, behaviour `data-trds="yazdir"`, React/Vue `Yazdir`.
-- [Yüzen düğme (Floating action button)](https://trds.chele.bi/bilesenler/fab.html): Ekranın köşesinde her zaman görünen tek eylem. Telefonda "Randevu al" gibi. Root class `trds-yuzen`, React/Vue `YuzenDugme`.
+- [Bağlantı (Link)](https://trds.chele.bi/bilesenler/link.html): Kullanıcıyı başka bir sayfaya veya aynı sayfadaki bir bölüme götürür. Root class `kiris-link`, React/Vue `Baglanti`.
+- [Düğme (Button)](https://trds.chele.bi/bilesenler/button.html): Kullanıcının bir işlemi başlatmasını sağlar. Her ekranda tek bir birincil düğme bulunur. Root class `kiris-button`, React/Vue `Dugme`.
+- [Eylem menüsü (Action menu)](https://trds.chele.bi/bilesenler/action-menu.html): Bir düğmenin altında açılan eylem listesi. Düzenle, indir, sil. Root class `kiris-eylem-menusu`, behaviour `data-kiris="eylem-menusu"`, React/Vue `EylemMenusu`.
+- [İndirme bağlantısı (Download link)](https://trds.chele.bi/bilesenler/download-link.html): Bir dosyaya giden bağlantı. Dosya türünü ve boyutunu bağlantı metninin içinde söyler. Root class `kiris-indir`, React/Vue `IndirmeBaglantisi`.
+- [Paylaş (Share)](https://trds.chele.bi/bilesenler/share.html): Sayfayı sosyal medyada veya e-posta ile paylaşan bağlantılar. Haber ve duyuru sayfasının sonunda durur. Root class `kiris-paylas`, React/Vue `Paylas`.
+- [Sayfadan çık (Exit this page)](https://trds.chele.bi/bilesenler/exit-this-page.html): Şiddet ve istismar konulu sayfalarda kullanıcının sayfayı bir dokunuşla terk etmesini sağlar. Root class `kiris-cikis`, behaviour `data-kiris="cikis"`, React/Vue `SayfadanCik`.
+- [Yazdır (Print button)](https://trds.chele.bi/bilesenler/print.html): Tarayıcının yazdırma penceresini açan düğme. Onay sayfasında ve belgelerde. Root class `kiris-button`, behaviour `data-kiris="yazdir"`, React/Vue `Yazdir`.
+- [Yüzen düğme (Floating action button)](https://trds.chele.bi/bilesenler/fab.html): Ekranın köşesinde her zaman görünen tek eylem. Telefonda "Randevu al" gibi. Root class `kiris-yuzen`, React/Vue `YuzenDugme`.
 
 ### Geri bildirim
 
-- [Açılır bilgi (Popover)](https://trds.chele.bi/bilesenler/popover.html): Bir düğmeye basınca açılan küçük panel. İpucundan farkı: dokunmayla çalışır ve bağlantı taşıyabilir. Root class `trds-acilir-bilgi`, behaviour `data-trds="acilir-bilgi"`, React/Vue `AcilirBilgi`.
-- [Bildirim afişi (Notification banner)](https://trds.chele.bi/bilesenler/notification-banner.html): Sayfanın en üstünde önemli veya acil bir duyuru gösterir. Root class `trds-afis`, React/Vue `BildirimAfisi`.
-- [Geçici bildirim (Toast)](https://trds.chele.bi/bilesenler/toast.html): Bir işlemin sonucunu köşede, kısa süre gösterir. Kaydedildi, gönderildi, silindi. Root class `trds-gecici-alan`, behaviour `data-trds="gecici"`, React/Vue `GeciciBildirim`.
-- [Hata mesajı (Error message)](https://trds.chele.bi/bilesenler/error-message.html): Tek bir alandaki hatayı alanın yanında anlatır. Root class `trds-hata`, React/Vue `HataMesaji`.
-- [Hata özeti (Error summary)](https://trds.chele.bi/bilesenler/error-summary.html): Sayfadaki tüm hataları en üstte toplar ve her birine bağlantı verir. Root class `trds-hata-ozeti`, behaviour `data-trds="hata-ozeti"`, React/Vue `HataOzeti`.
-- [İlerleme çubuğu (Progress)](https://trds.chele.bi/bilesenler/progress.html): Süresi bilinen bir işlemin ne kadarının bittiğini gösterir. Root class `trds-ilerleme`, React/Vue `Ilerleme`.
-- [İpucu (Tooltip)](https://trds.chele.bi/bilesenler/tooltip.html): Bir düğme veya simge için kısa bir açıklama gösterir. Odak veya işaretçi ile açılır. Root class `trds-ipucu-kap`, behaviour `data-trds="ipucu"`, React/Vue `Ipucu`.
-- [İskelet (Skeleton)](https://trds.chele.bi/bilesenler/skeleton.html): İçerik yüklenirken yerini tutan gri şekiller. Sayfa zıplamaz. Root class `trds-iskelet`, React/Vue `Iskelet`.
-- [Sonuç paneli (Panel)](https://trds.chele.bi/bilesenler/panel.html): Bir işlemin bittiğini büyük ve yeşil söyler. Başvuru numarası bu kutuda durur. Root class `trds-panel`, React/Vue `SonucPaneli`.
-- [Uyarı (Alert)](https://trds.chele.bi/bilesenler/alert.html): Sayfa içinde bilgi, başarı, uyarı veya hata mesajı gösterir. Root class `trds-uyari`, React/Vue `Uyari`.
-- [Uyarı metni (Warning text)](https://trds.chele.bi/bilesenler/warning-text.html): Kullanıcının atlamaması gereken bir sonucu söyler. Para cezası, hak kaybı, süre. Root class `trds-uyari-metni`, React/Vue `UyariMetni`.
-- [Yönlendirme (Coach mark)](https://trds.chele.bi/bilesenler/coach-mark.html): İlk kullanımda sayfanın parçalarını sırayla tanıtır. Her adım bir hedefi halkalar ve yanında bir kutu açar. Root class `trds-yonlendirme`, behaviour `data-trds="yonlendirme"`, React/Vue `Yonlendirme`.
-- [Yükleniyor (Spinner)](https://trds.chele.bi/bilesenler/spinner.html): Bir işlemin sürdüğünü ve süresinin bilinmediğini gösterir. Root class `trds-yukleniyor`, React/Vue `Yukleniyor`.
+- [Açılır bilgi (Popover)](https://trds.chele.bi/bilesenler/popover.html): Bir düğmeye basınca açılan küçük panel. İpucundan farkı: dokunmayla çalışır ve bağlantı taşıyabilir. Root class `kiris-acilir-bilgi`, behaviour `data-kiris="acilir-bilgi"`, React/Vue `AcilirBilgi`.
+- [Bildirim afişi (Notification banner)](https://trds.chele.bi/bilesenler/notification-banner.html): Sayfanın en üstünde önemli veya acil bir duyuru gösterir. Root class `kiris-afis`, React/Vue `BildirimAfisi`.
+- [Geçici bildirim (Toast)](https://trds.chele.bi/bilesenler/toast.html): Bir işlemin sonucunu köşede, kısa süre gösterir. Kaydedildi, gönderildi, silindi. Root class `kiris-gecici-alan`, behaviour `data-kiris="gecici"`, React/Vue `GeciciBildirim`.
+- [Hata mesajı (Error message)](https://trds.chele.bi/bilesenler/error-message.html): Tek bir alandaki hatayı alanın yanında anlatır. Root class `kiris-hata`, React/Vue `HataMesaji`.
+- [Hata özeti (Error summary)](https://trds.chele.bi/bilesenler/error-summary.html): Sayfadaki tüm hataları en üstte toplar ve her birine bağlantı verir. Root class `kiris-hata-ozeti`, behaviour `data-kiris="hata-ozeti"`, React/Vue `HataOzeti`.
+- [İlerleme çubuğu (Progress)](https://trds.chele.bi/bilesenler/progress.html): Süresi bilinen bir işlemin ne kadarının bittiğini gösterir. Root class `kiris-ilerleme`, React/Vue `Ilerleme`.
+- [İpucu (Tooltip)](https://trds.chele.bi/bilesenler/tooltip.html): Bir düğme veya simge için kısa bir açıklama gösterir. Odak veya işaretçi ile açılır. Root class `kiris-ipucu-kap`, behaviour `data-kiris="ipucu"`, React/Vue `Ipucu`.
+- [İskelet (Skeleton)](https://trds.chele.bi/bilesenler/skeleton.html): İçerik yüklenirken yerini tutan gri şekiller. Sayfa zıplamaz. Root class `kiris-iskelet`, React/Vue `Iskelet`.
+- [Sonuç paneli (Panel)](https://trds.chele.bi/bilesenler/panel.html): Bir işlemin bittiğini büyük ve yeşil söyler. Başvuru numarası bu kutuda durur. Root class `kiris-panel`, React/Vue `SonucPaneli`.
+- [Uyarı (Alert)](https://trds.chele.bi/bilesenler/alert.html): Sayfa içinde bilgi, başarı, uyarı veya hata mesajı gösterir. Root class `kiris-uyari`, React/Vue `Uyari`.
+- [Uyarı metni (Warning text)](https://trds.chele.bi/bilesenler/warning-text.html): Kullanıcının atlamaması gereken bir sonucu söyler. Para cezası, hak kaybı, süre. Root class `kiris-uyari-metni`, React/Vue `UyariMetni`.
+- [Yönlendirme (Coach mark)](https://trds.chele.bi/bilesenler/coach-mark.html): İlk kullanımda sayfanın parçalarını sırayla tanıtır. Her adım bir hedefi halkalar ve yanında bir kutu açar. Root class `kiris-yonlendirme`, behaviour `data-kiris="yonlendirme"`, React/Vue `Yonlendirme`.
+- [Yükleniyor (Spinner)](https://trds.chele.bi/bilesenler/spinner.html): Bir işlemin sürdüğünü ve süresinin bilinmediğini gösterir. Root class `kiris-yukleniyor`, React/Vue `Yukleniyor`.
 
 ### Yerleşim
 
-- [Akordiyon (Accordion)](https://trds.chele.bi/bilesenler/accordion.html): Uzun içeriği başlıklara böler ve her bölümü istek üzerine açar. Root class `trds-akordiyon`, behaviour `data-trds="akordiyon"`, React/Vue `Akordiyon`.
-- [Ayraç (Divider)](https://trds.chele.bi/bilesenler/divider.html): İki içerik bölümünü ince bir çizgiyle ayırır. Root class `trds-ayrac`, React/Vue `Ayrac`.
-- [Ayrıntılar (Details)](https://trds.chele.bi/bilesenler/details.html): Tek bir yardımcı açıklamayı istek üzerine gösterir. Root class `trds-ayrinti`, React/Vue `Ayrintilar`.
-- [Bölüm (Section)](https://trds.chele.bi/bilesenler/section.html): Ana sayfayı yatay şeritlere böler. Her şeridin bir başlığı ve isteğe bağlı "Tümü" bağlantısı vardır. Root class `trds-bolum`, React/Vue `Bolum`.
-- [Izgara (Grid)](https://trds.chele.bi/bilesenler/grid.html): On iki sütunlu yerleşim. Küçük ekranda sütunlar alt alta iner. Root class `trds-izgara`, React/Vue `Izgara`.
-- [Kap (Container)](https://trds.chele.bi/bilesenler/container.html): İçeriği ortalar ve genişliğini sınırlar. Her sayfa bloğu bir kap içinde durur. Root class `trds-kap`, React/Vue `Kap`.
-- [Karo (Tile)](https://trds.chele.bi/bilesenler/tile.html): Bir konuya giden büyük bağlantı kutusu. Simge, başlık ve bir cümle. Kartın bağlantı olan hali. Root class `trds-karo`, React/Vue `Karo`.
-- [Karşılama bloğu (Hero)](https://trds.chele.bi/bilesenler/hero.html): Ana sayfanın ilk bloğu. Bir başlık, bir cümle ve bir arama veya düğme. Fotoğraf yok. Root class `trds-kahraman`, React/Vue `KarsilamaBlogu`.
-- [Kart (Card)](https://trds.chele.bi/bilesenler/card.html): Bir hizmeti veya duyuruyu başlık, açıklama ve bağlantı ile tanıtır. Root class `trds-kart`, React/Vue `Kart`.
-- [Kayan pano (Carousel)](https://trds.chele.bi/bilesenler/carousel.html): Yan yana kartlardan bir şerit. Kendiliğinden dönmez. Düğmeler bir kart kaydırır. Root class `trds-kayan-pano`, behaviour `data-trds="kayan-pano"`, React/Vue `KayanPano`.
-- [Kip pencere (Modal)](https://trds.chele.bi/bilesenler/modal.html): Kullanıcıdan tek bir onay veya küçük bir karar ister. Root class `trds-kip`, behaviour `data-trds="kip"`, React/Vue `KipPencere`.
-- [Sekmeler (Tabs)](https://trds.chele.bi/bilesenler/tabs.html): Aynı alanda birbirini dışlayan içerik bölümleri arasında geçiş yapar. Root class `trds-sekmeler`, behaviour `data-trds="sekmeler"`, React/Vue `Sekmeler`.
-- [Simge kartı (Icon card)](https://trds.chele.bi/bilesenler/icon-card.html): Bir portalın ana bölümlerine giden büyük simgeli bağlantı. e-Devlet’in beş temel işlevi bu kalıptadır. Root class `trds-simge-kart`, React/Vue `SimgeKarti`.
-- [Yan panel (Drawer)](https://trds.chele.bi/bilesenler/drawer.html): Kenardan kayan panel. Yardım metni, süzgeçler veya telefonda alt sayfa için. Altta açılan hali alt sayfadır. Root class `trds-yan-panel`, behaviour `data-trds="yan-panel"`, React/Vue `YanPanel`.
-- [Yardımcı sınıflar (Utility classes)](https://trds.chele.bi/bilesenler/utilities.html): Boşluk, hizalama ve görünürlük için tek işli sınıflar. Bileşen olmayan yerde kullanılır. Root class `trds-govde`.
+- [Akordiyon (Accordion)](https://trds.chele.bi/bilesenler/accordion.html): Uzun içeriği başlıklara böler ve her bölümü istek üzerine açar. Root class `kiris-akordiyon`, behaviour `data-kiris="akordiyon"`, React/Vue `Akordiyon`.
+- [Ayraç (Divider)](https://trds.chele.bi/bilesenler/divider.html): İki içerik bölümünü ince bir çizgiyle ayırır. Root class `kiris-ayrac`, React/Vue `Ayrac`.
+- [Ayrıntılar (Details)](https://trds.chele.bi/bilesenler/details.html): Tek bir yardımcı açıklamayı istek üzerine gösterir. Root class `kiris-ayrinti`, React/Vue `Ayrintilar`.
+- [Bölüm (Section)](https://trds.chele.bi/bilesenler/section.html): Ana sayfayı yatay şeritlere böler. Her şeridin bir başlığı ve isteğe bağlı "Tümü" bağlantısı vardır. Root class `kiris-bolum`, React/Vue `Bolum`.
+- [Izgara (Grid)](https://trds.chele.bi/bilesenler/grid.html): On iki sütunlu yerleşim. Küçük ekranda sütunlar alt alta iner. Root class `kiris-izgara`, React/Vue `Izgara`.
+- [Kap (Container)](https://trds.chele.bi/bilesenler/container.html): İçeriği ortalar ve genişliğini sınırlar. Her sayfa bloğu bir kap içinde durur. Root class `kiris-kap`, React/Vue `Kap`.
+- [Karo (Tile)](https://trds.chele.bi/bilesenler/tile.html): Bir konuya giden büyük bağlantı kutusu. Simge, başlık ve bir cümle. Kartın bağlantı olan hali. Root class `kiris-karo`, React/Vue `Karo`.
+- [Karşılama bloğu (Hero)](https://trds.chele.bi/bilesenler/hero.html): Ana sayfanın ilk bloğu. Bir başlık, bir cümle ve bir arama veya düğme. Fotoğraf yok. Root class `kiris-kahraman`, React/Vue `KarsilamaBlogu`.
+- [Kart (Card)](https://trds.chele.bi/bilesenler/card.html): Bir hizmeti veya duyuruyu başlık, açıklama ve bağlantı ile tanıtır. Root class `kiris-kart`, React/Vue `Kart`.
+- [Kayan pano (Carousel)](https://trds.chele.bi/bilesenler/carousel.html): Yan yana kartlardan bir şerit. Kendiliğinden dönmez. Düğmeler bir kart kaydırır. Root class `kiris-kayan-pano`, behaviour `data-kiris="kayan-pano"`, React/Vue `KayanPano`.
+- [Kip pencere (Modal)](https://trds.chele.bi/bilesenler/modal.html): Kullanıcıdan tek bir onay veya küçük bir karar ister. Root class `kiris-kip`, behaviour `data-kiris="kip"`, React/Vue `KipPencere`.
+- [Sekmeler (Tabs)](https://trds.chele.bi/bilesenler/tabs.html): Aynı alanda birbirini dışlayan içerik bölümleri arasında geçiş yapar. Root class `kiris-sekmeler`, behaviour `data-kiris="sekmeler"`, React/Vue `Sekmeler`.
+- [Simge kartı (Icon card)](https://trds.chele.bi/bilesenler/icon-card.html): Bir portalın ana bölümlerine giden büyük simgeli bağlantı. e-Devlet’in beş temel işlevi bu kalıptadır. Root class `kiris-simge-kart`, React/Vue `SimgeKarti`.
+- [Yan panel (Drawer)](https://trds.chele.bi/bilesenler/drawer.html): Kenardan kayan panel. Yardım metni, süzgeçler veya telefonda alt sayfa için. Altta açılan hali alt sayfadır. Root class `kiris-yan-panel`, behaviour `data-kiris="yan-panel"`, React/Vue `YanPanel`.
+- [Yardımcı sınıflar (Utility classes)](https://trds.chele.bi/bilesenler/utilities.html): Boşluk, hizalama ve görünürlük için tek işli sınıflar. Bileşen olmayan yerde kullanılır. Root class `kiris-govde`.
 
 ### İçerik
 
-- [Alıntı (Blockquote)](https://trds.chele.bi/bilesenler/blockquote.html): Başka bir kaynaktan alınan bir cümleyi metinden ayırır. Kaynağı altında yazar. Root class `trds-alinti`, React/Vue `Alinti`.
-- [Avatar (Avatar)](https://trds.chele.bi/bilesenler/avatar.html): Bir kişiyi veya kurumu fotoğraf ya da baş harflerle gösterir. Root class `trds-avatar`, React/Vue `Avatar`.
-- [Bilgi kutusu (Callout)](https://trds.chele.bi/bilesenler/callout.html): Başlıklı bir bilgi kutusu. Bir durum bildirmez, bir bilgiyi öne çıkarır. Root class `trds-bilgi-kutusu`, React/Vue `BilgiKutusu`.
-- [Etiket (Tag)](https://trds.chele.bi/bilesenler/tag.html): Bir kaydın durumunu kısa bir sözcükle gösterir. Root class `trds-etiket`, React/Vue `Etiket`.
-- [Görev listesi (Task list)](https://trds.chele.bi/bilesenler/task-list.html): Çok parçalı bir başvuruda hangi bölümün tamamlandığını gösterir. Root class `trds-gorev-listesi`, React/Vue `GorevListesi`.
-- [Görsel (Figure)](https://trds.chele.bi/bilesenler/figure.html): Bir görsel ve altında bir açıklama. Görsel içeriğin genişliğini aşmaz. Root class `trds-gorsel`, React/Vue `Gorsel`.
-- [İstatistik kutusu (Stat tile)](https://trds.chele.bi/bilesenler/stat.html): Bir kurumun büyüklüğünü dört rakamla anlatır. Kayıtlı kullanıcı, hizmet sayısı gibi. Root class `trds-istatistik`, React/Vue `Istatistik`.
-- [Kayıt listesi (Collection)](https://trds.chele.bi/bilesenler/collection.html): Haber, duyuru veya belge kayıtlarının listesi. Her kayıt başlık, tarih, özet ve etiket taşır. Root class `trds-kayitlar`, React/Vue `KayitListesi`.
-- [Kod (Code)](https://trds.chele.bi/bilesenler/code.html): Satır içi kod ve kod bloğu. API belgeleri ve teknik kılavuzlar için. Root class `trds-kod`, React/Vue `Kod`.
-- [Liste (List)](https://trds.chele.bi/bilesenler/list.html): Madde işaretli, numaralı ve aralıklı liste biçimleri. Root class `trds-liste`, React/Vue `Liste`.
-- [Özet listesi (Summary list)](https://trds.chele.bi/bilesenler/summary-list.html): Kullanıcının girdiği bilgileri gönderim öncesinde tek sayfada gösterir. Root class `trds-ozet`, React/Vue `OzetListesi`.
-- [Rozet (Badge)](https://trds.chele.bi/bilesenler/badge.html): Bir öğenin yanında küçük bir sayı veya kısa bir kelime gösterir. Etiketten küçüktür. Root class `trds-rozet`, React/Vue `Rozet`.
-- [Ses (Audio)](https://trds.chele.bi/bilesenler/audio.html): Ses kaydı ve altında dökümü. Tarayıcının kendi oynatıcısı kullanılır. Root class `trds-ses`, React/Vue `Ses`.
-- [Sıralanabilir tablo (Sortable table)](https://trds.chele.bi/bilesenler/sortable-table.html): Başlığa basınca sütuna göre sıralanan tablo. Sayı sütunları sayı olarak sıralanır. Root class `trds-tablo-kap`, behaviour `data-trds="sirala"`, React/Vue `SiralanabilirTablo`.
-- [Simge (Icon)](https://trds.chele.bi/bilesenler/icon.html): TRDS simge setinden bir simgeyi üç boyda gösterir. Yeni simge çizilmez. Root class `trds-simge`, React/Vue `Simge`.
-- [Simgeli liste (Icon list)](https://trds.chele.bi/bilesenler/icon-list.html): Her maddesi bir simge ile başlayan liste. Gerekli belgeler, koşullar. Root class `trds-simgeli-liste`, React/Vue `SimgeliListe`.
-- [Son güncelleme (Date modified)](https://trds.chele.bi/bilesenler/date-modified.html): Sayfanın en son ne zaman değiştiğini söyler. Her içerik sayfasının sonunda durur. Root class `trds-guncelleme`, React/Vue `SonGuncelleme`.
-- [Süreç listesi (Process list)](https://trds.chele.bi/bilesenler/process-list.html): Bir işin adımlarını numaralı ve açıklamalı anlatır. Başvurudan önce okunur. Root class `trds-surec`, React/Vue `SurecListesi`.
-- [Tablo (Table)](https://trds.chele.bi/bilesenler/table.html): Veriyi satır ve sütun olarak düzenler. Root class `trds-tablo-kap`, React/Vue `Tablo`.
-- [Takip et (Follow)](https://trds.chele.bi/bilesenler/follow.html): Bülten kaydı ve sosyal medya hesapları tek blokta. Alt bilginin hemen üstünde durur. Root class `trds-takip`, React/Vue `TakipEt`.
-- [Tanım listesi (Description list)](https://trds.chele.bi/bilesenler/description-list.html): Terim ve karşılık çiftlerini gösterir. Düzenleme bağlantısı yoktur, o özet listesindedir. Root class `trds-tanim`, React/Vue `TanimListesi`.
-- [Tipografi (Typography)](https://trds.chele.bi/bilesenler/typography.html): Başlık, üst başlık, alt başlık, gövde ve etiket sınıfları. Dokuz kademeli ölçek. Root class `trds-baslik`, React/Vue `Baslik`.
-- [Video (Video)](https://trds.chele.bi/bilesenler/video.html): Altyazılı video ve altında dökümü. 16:9 kutu, sayfa zıplamaz. Root class `trds-video`, React/Vue `Video`.
-- [Vurgulu metin (Inset text)](https://trds.chele.bi/bilesenler/inset-text.html): Metnin geri kalanından ayrılması gereken bir paragrafı sol çizgiyle öne çıkarır. Root class `trds-vurgu`, React/Vue `VurguluMetin`.
-- [Zaman çizelgesi (Timeline)](https://trds.chele.bi/bilesenler/timeline.html): Bir başvurunun geçtiği adımları tarih sırasıyla gösterir. En yenisi en üstte. Root class `trds-zaman`, React/Vue `ZamanCizelgesi`.
+- [Alıntı (Blockquote)](https://trds.chele.bi/bilesenler/blockquote.html): Başka bir kaynaktan alınan bir cümleyi metinden ayırır. Kaynağı altında yazar. Root class `kiris-alinti`, React/Vue `Alinti`.
+- [Avatar (Avatar)](https://trds.chele.bi/bilesenler/avatar.html): Bir kişiyi veya kurumu fotoğraf ya da baş harflerle gösterir. Root class `kiris-avatar`, React/Vue `Avatar`.
+- [Bilgi kutusu (Callout)](https://trds.chele.bi/bilesenler/callout.html): Başlıklı bir bilgi kutusu. Bir durum bildirmez, bir bilgiyi öne çıkarır. Root class `kiris-bilgi-kutusu`, React/Vue `BilgiKutusu`.
+- [Etiket (Tag)](https://trds.chele.bi/bilesenler/tag.html): Bir kaydın durumunu kısa bir sözcükle gösterir. Root class `kiris-etiket`, React/Vue `Etiket`.
+- [Görev listesi (Task list)](https://trds.chele.bi/bilesenler/task-list.html): Çok parçalı bir başvuruda hangi bölümün tamamlandığını gösterir. Root class `kiris-gorev-listesi`, React/Vue `GorevListesi`.
+- [Görsel (Figure)](https://trds.chele.bi/bilesenler/figure.html): Bir görsel ve altında bir açıklama. Görsel içeriğin genişliğini aşmaz. Root class `kiris-gorsel`, React/Vue `Gorsel`.
+- [İstatistik kutusu (Stat tile)](https://trds.chele.bi/bilesenler/stat.html): Bir kurumun büyüklüğünü dört rakamla anlatır. Kayıtlı kullanıcı, hizmet sayısı gibi. Root class `kiris-istatistik`, React/Vue `Istatistik`.
+- [Kayıt listesi (Collection)](https://trds.chele.bi/bilesenler/collection.html): Haber, duyuru veya belge kayıtlarının listesi. Her kayıt başlık, tarih, özet ve etiket taşır. Root class `kiris-kayitlar`, React/Vue `KayitListesi`.
+- [Kod (Code)](https://trds.chele.bi/bilesenler/code.html): Satır içi kod ve kod bloğu. API belgeleri ve teknik kılavuzlar için. Root class `kiris-kod`, React/Vue `Kod`.
+- [Liste (List)](https://trds.chele.bi/bilesenler/list.html): Madde işaretli, numaralı ve aralıklı liste biçimleri. Root class `kiris-liste`, React/Vue `Liste`.
+- [Özet listesi (Summary list)](https://trds.chele.bi/bilesenler/summary-list.html): Kullanıcının girdiği bilgileri gönderim öncesinde tek sayfada gösterir. Root class `kiris-ozet`, React/Vue `OzetListesi`.
+- [Rozet (Badge)](https://trds.chele.bi/bilesenler/badge.html): Bir öğenin yanında küçük bir sayı veya kısa bir kelime gösterir. Etiketten küçüktür. Root class `kiris-rozet`, React/Vue `Rozet`.
+- [Ses (Audio)](https://trds.chele.bi/bilesenler/audio.html): Ses kaydı ve altında dökümü. Tarayıcının kendi oynatıcısı kullanılır. Root class `kiris-ses`, React/Vue `Ses`.
+- [Sıralanabilir tablo (Sortable table)](https://trds.chele.bi/bilesenler/sortable-table.html): Başlığa basınca sütuna göre sıralanan tablo. Sayı sütunları sayı olarak sıralanır. Root class `kiris-tablo-kap`, behaviour `data-kiris="sirala"`, React/Vue `SiralanabilirTablo`.
+- [Simge (Icon)](https://trds.chele.bi/bilesenler/icon.html): Kiriş simge setinden bir simgeyi üç boyda gösterir. Yeni simge çizilmez. Root class `kiris-simge`, React/Vue `Simge`.
+- [Simgeli liste (Icon list)](https://trds.chele.bi/bilesenler/icon-list.html): Her maddesi bir simge ile başlayan liste. Gerekli belgeler, koşullar. Root class `kiris-simgeli-liste`, React/Vue `SimgeliListe`.
+- [Son güncelleme (Date modified)](https://trds.chele.bi/bilesenler/date-modified.html): Sayfanın en son ne zaman değiştiğini söyler. Her içerik sayfasının sonunda durur. Root class `kiris-guncelleme`, React/Vue `SonGuncelleme`.
+- [Süreç listesi (Process list)](https://trds.chele.bi/bilesenler/process-list.html): Bir işin adımlarını numaralı ve açıklamalı anlatır. Başvurudan önce okunur. Root class `kiris-surec`, React/Vue `SurecListesi`.
+- [Tablo (Table)](https://trds.chele.bi/bilesenler/table.html): Veriyi satır ve sütun olarak düzenler. Root class `kiris-tablo-kap`, React/Vue `Tablo`.
+- [Takip et (Follow)](https://trds.chele.bi/bilesenler/follow.html): Bülten kaydı ve sosyal medya hesapları tek blokta. Alt bilginin hemen üstünde durur. Root class `kiris-takip`, React/Vue `TakipEt`.
+- [Tanım listesi (Description list)](https://trds.chele.bi/bilesenler/description-list.html): Terim ve karşılık çiftlerini gösterir. Düzenleme bağlantısı yoktur, o özet listesindedir. Root class `kiris-tanim`, React/Vue `TanimListesi`.
+- [Tipografi (Typography)](https://trds.chele.bi/bilesenler/typography.html): Başlık, üst başlık, alt başlık, gövde ve etiket sınıfları. Dokuz kademeli ölçek. Root class `kiris-baslik`, React/Vue `Baslik`.
+- [Video (Video)](https://trds.chele.bi/bilesenler/video.html): Altyazılı video ve altında dökümü. 16:9 kutu, sayfa zıplamaz. Root class `kiris-video`, React/Vue `Video`.
+- [Vurgulu metin (Inset text)](https://trds.chele.bi/bilesenler/inset-text.html): Metnin geri kalanından ayrılması gereken bir paragrafı sol çizgiyle öne çıkarır. Root class `kiris-vurgu`, React/Vue `VurguluMetin`.
+- [Zaman çizelgesi (Timeline)](https://trds.chele.bi/bilesenler/timeline.html): Bir başvurunun geçtiği adımları tarih sırasıyla gösterir. En yenisi en üstte. Root class `kiris-zaman`, React/Vue `ZamanCizelgesi`.
 
 ### Türkiye’ye özgü form
 
-- [Adres (Address)](https://trds.chele.bi/bilesenler/adres.html): İl, ilçe ve mahalle alanlarını birbirine bağlar, sonra açık adresi alır. Root class `trds-alan-grubu`, behaviour `data-trds="adres"`, React/Vue `AdresGirisi`.
-- [IBAN girişi (IBAN input)](https://trds.chele.bi/bilesenler/iban-girisi.html): TR ile başlayan 26 karakterlik IBAN alır, dörderli gösterir ve mod 97 sağlamasını yapar. Root class `trds-alan`, behaviour `data-trds="iban"`, React/Vue `IbanGirisi`.
-- [Plaka girişi (Licence plate input)](https://trds.chele.bi/bilesenler/plaka-girisi.html): Türk araç plakasını alır, büyük harfe çevirir ve biçimini denetler. Root class `trds-alan`, behaviour `data-trds="plaka"`, React/Vue `PlakaGirisi`.
-- [T.C. kimlik numarası girişi (National identity number input)](https://trds.chele.bi/bilesenler/kimlik-no.html): 11 haneli T.C. kimlik numarasını alır, biçimini denetler ve sağlama toplamını doğrular. Root class `trds-alan`, behaviour `data-trds="kimlik-no"`, React/Vue `KimlikNoGirisi`.
-- [Tarih girişi (Date input)](https://trds.chele.bi/bilesenler/tarih-girisi.html): Gün, ay ve yıl için üç ayrı alan verir. Türkçe gg.aa.yyyy biçimini kullanır. Root class `trds-alan-grubu`, behaviour `data-trds="tarih"`, React/Vue `TarihGirisi`.
-- [Telefon girişi (Phone input)](https://trds.chele.bi/bilesenler/telefon-girisi.html): +90 ülke kodunu sabit tutar ve 10 haneli numarayı alır. Root class `trds-alan`, behaviour `data-trds="telefon"`, React/Vue `TelefonGirisi`.
-- [Vergi kimlik numarası girişi (Tax number input)](https://trds.chele.bi/bilesenler/vergi-no.html): 10 haneli vergi kimlik numarasını alır ve sağlama toplamını doğrular. Root class `trds-alan`, behaviour `data-trds="vergi-no"`, React/Vue `VergiNoGirisi`.
+- [Adres (Address)](https://trds.chele.bi/bilesenler/adres.html): İl, ilçe ve mahalle alanlarını birbirine bağlar, sonra açık adresi alır. Root class `kiris-alan-grubu`, behaviour `data-kiris="adres"`, React/Vue `AdresGirisi`.
+- [IBAN girişi (IBAN input)](https://trds.chele.bi/bilesenler/iban-girisi.html): TR ile başlayan 26 karakterlik IBAN alır, dörderli gösterir ve mod 97 sağlamasını yapar. Root class `kiris-alan`, behaviour `data-kiris="iban"`, React/Vue `IbanGirisi`.
+- [Plaka girişi (Licence plate input)](https://trds.chele.bi/bilesenler/plaka-girisi.html): Türk araç plakasını alır, büyük harfe çevirir ve biçimini denetler. Root class `kiris-alan`, behaviour `data-kiris="plaka"`, React/Vue `PlakaGirisi`.
+- [T.C. kimlik numarası girişi (National identity number input)](https://trds.chele.bi/bilesenler/kimlik-no.html): 11 haneli T.C. kimlik numarasını alır, biçimini denetler ve sağlama toplamını doğrular. Root class `kiris-alan`, behaviour `data-kiris="kimlik-no"`, React/Vue `KimlikNoGirisi`.
+- [Tarih girişi (Date input)](https://trds.chele.bi/bilesenler/tarih-girisi.html): Gün, ay ve yıl için üç ayrı alan verir. Türkçe gg.aa.yyyy biçimini kullanır. Root class `kiris-alan-grubu`, behaviour `data-kiris="tarih"`, React/Vue `TarihGirisi`.
+- [Telefon girişi (Phone input)](https://trds.chele.bi/bilesenler/telefon-girisi.html): +90 ülke kodunu sabit tutar ve 10 haneli numarayı alır. Root class `kiris-alan`, behaviour `data-kiris="telefon"`, React/Vue `TelefonGirisi`.
+- [Vergi kimlik numarası girişi (Tax number input)](https://trds.chele.bi/bilesenler/vergi-no.html): 10 haneli vergi kimlik numarasını alır ve sağlama toplamını doğrular. Root class `kiris-alan`, behaviour `data-kiris="vergi-no"`, React/Vue `VergiNoGirisi`.
 
 ### Türkiye’ye özgü hizmet
 
-- [e-Devlet ile giriş (e-Devlet sign in)](https://trds.chele.bi/bilesenler/edevlet-giris.html): Kullanıcıyı e-Devlet Kapısı kimlik doğrulamasına gönderen tek ve değişmez düğme. Root class `trds-edevlet`, React/Vue `EdevletGiris`.
-- [Erişilebilirlik menüsü (Accessibility menu)](https://trds.chele.bi/bilesenler/erisim-menusu.html): Kullanıcının yazı boyutunu, karşıtlığı ve temayı değiştirmesini sağlar. Root class `trds-erisim`, behaviour `data-trds="erisim-menusu"`, React/Vue `ErisimMenusu`.
-- [KVKK açık rıza (Data protection consent)](https://trds.chele.bi/bilesenler/kvkk-onay.html): 6698 sayılı kanun kapsamında açık rıza alır ve aydınlatma metnine bağlantı verir. Root class `trds-kvkk`, React/Vue `KvkkOnayi`.
+- [e-Devlet ile giriş (e-Devlet sign in)](https://trds.chele.bi/bilesenler/edevlet-giris.html): Kullanıcıyı e-Devlet Kapısı kimlik doğrulamasına gönderen tek ve değişmez düğme. Root class `kiris-edevlet`, React/Vue `EdevletGiris`.
+- [Erişilebilirlik menüsü (Accessibility menu)](https://trds.chele.bi/bilesenler/erisim-menusu.html): Kullanıcının yazı boyutunu, karşıtlığı ve temayı değiştirmesini sağlar. Root class `kiris-erisim`, behaviour `data-kiris="erisim-menusu"`, React/Vue `ErisimMenusu`.
+- [KVKK açık rıza (Data protection consent)](https://trds.chele.bi/bilesenler/kvkk-onay.html): 6698 sayılı kanun kapsamında açık rıza alır ve aydınlatma metnine bağlantı verir. Root class `kiris-kvkk`, React/Vue `KvkkOnayi`.
 
 ## Packages
 
-- [@tr-ds/core](https://github.com/woosal1337/trds/tree/main/packages/core): `dist/trds.css`, `dist/trds.js` (ESM, exports `baslat` and 39 `*Baslat` initialisers). Exports map: `@tr-ds/core`, `@tr-ds/core/css`, `@tr-ds/core/css/min`, `@tr-ds/core/js/min`.
-- [@tr-ds/react](https://github.com/woosal1337/trds/tree/main/packages/react): 114 components, `useTrdsForm`, `DugmeGrubu`, `Sutun`, `BILESENLER` map by registry id.
-- [@tr-ds/vue](https://github.com/woosal1337/trds/tree/main/packages/vue): 114 components, `Trds` plugin, `DugmeGrubu`, `Sutun`, `BILESENLER` map by registry id.
-- [@tr-ds/tanim](https://github.com/woosal1337/trds/tree/main/packages/tanim): framework-free draw functions; React and Vue are generated from it.
-- [@tr-ds/validators](https://github.com/woosal1337/trds/tree/main/packages/validators): 21 Turkish validators and formatters, zero dependencies, 36 tests.
-- [@tr-ds/tokens](https://github.com/woosal1337/trds/tree/main/packages/tokens): 161 tokens (DTCG JSON → CSS, JSON, JS), light and dark themes, 36 contrast guarantees checked at build.
-- [@tr-ds/identity](https://github.com/woosal1337/trds/tree/main/packages/identity): e-Devlet mark, flag SVG, institution logos, icon sprite. Restricted licence.
-- [@tr-ds/theme-vatandas, theme-kurumsal, theme-saglik](https://github.com/woosal1337/trds/tree/main/packages/themes): institution themes from one brand colour.
+- [@kiris-ds/core](https://github.com/woosal1337/trds/tree/main/packages/core): `dist/kiris.css`, `dist/kiris.js` (ESM, exports `baslat` and 39 `*Baslat` initialisers). Exports map: `@kiris-ds/core`, `@kiris-ds/core/css`, `@kiris-ds/core/css/min`, `@kiris-ds/core/js/min`.
+- [@kiris-ds/react](https://github.com/woosal1337/trds/tree/main/packages/react): 114 components, `useKirisForm`, `DugmeGrubu`, `Sutun`, `BILESENLER` map by registry id.
+- [@kiris-ds/vue](https://github.com/woosal1337/trds/tree/main/packages/vue): 114 components, `Kiris` plugin, `DugmeGrubu`, `Sutun`, `BILESENLER` map by registry id.
+- [@kiris-ds/tanim](https://github.com/woosal1337/trds/tree/main/packages/tanim): framework-free draw functions; React and Vue are generated from it.
+- [@kiris-ds/validators](https://github.com/woosal1337/trds/tree/main/packages/validators): 21 Turkish validators and formatters, zero dependencies, 36 tests.
+- [@kiris-ds/tokens](https://github.com/woosal1337/trds/tree/main/packages/tokens): 161 tokens (DTCG JSON → CSS, JSON, JS), light and dark themes, 36 contrast guarantees checked at build.
+- [@kiris-ds/identity](https://github.com/woosal1337/trds/tree/main/packages/identity): e-Devlet mark, flag SVG, institution logos, icon sprite. Restricted licence.
+- [@kiris-ds/theme-vatandas, theme-kurumsal, theme-saglik](https://github.com/woosal1337/trds/tree/main/packages/themes): institution themes from one brand colour.
 
 ## Integrations
 
@@ -218,4 +218,4 @@ createApp(App).use(Trds); // <TrdsKimlikNoGirisi etiket="T.C. kimlik numaranız"
 - [Architecture decisions](https://github.com/woosal1337/trds/blob/main/docs/mimari.md): eight decisions, from zero dependencies to the split licence.
 - [Component lifecycle](https://github.com/woosal1337/trds/blob/main/docs/bilesen-yasam-dongusu.md): how a part enters and leaves the system.
 - [Identity licence](https://github.com/woosal1337/trds/blob/main/LICENSE-IDENTITY.md): who may use the state identity parts.
-- [Example pages](https://trds.chele.bi/ornekler/): six government home pages built only from TRDS parts, three of them 1:1 copies of real sites.
+- [Example pages](https://trds.chele.bi/ornekler/): six government home pages built only from Kiriş parts, three of them 1:1 copies of real sites.

@@ -17,10 +17,10 @@ Bu depo bir arayüz kütüphanesidir. Kimlik doğrulaması, oturum yönetimi vey
 veri saklama yapmaz.
 
 **Önemli:** İstemci tarafındaki doğrulama bir güvenlik önlemi değildir.
-`@tr-ds/validators` paketi kullanıcıya erken geri bildirim verir. Sunucu
+`@kiris-ds/validators` paketi kullanıcıya erken geri bildirim verir. Sunucu
 tarafında aynı doğrulamayı yeniden yapın.
 
 ## Kimlik parçaları
 
-Devlet kimliğini taşıyan bileşenler (`@tr-ds/identity`) kısıtlı lisanslıdır.
+Devlet kimliğini taşıyan bileşenler (`@kiris-ds/identity`) kısıtlı lisanslıdır.
 Bu paketin bir sahte sitede kullanıldığını görürseniz bildirin.

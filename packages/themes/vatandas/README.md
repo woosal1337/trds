@@ -1,20 +1,20 @@
-# @tr-ds/theme-vatandas
+# @kiris-ds/theme-vatandas
 
-TRDS Vatandaş teması. Tek bir marka renginden üretilir.
+Kiriş Vatandaş teması. Tek bir marka renginden üretilir.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/theme-vatandas
+npm install @kiris-ds/theme-vatandas
 ```
 
 ## Kullanım
 
 ```js
-import '@tr-ds/theme-vatandas';
+import '@kiris-ds/theme-vatandas';
 ```
 
 ## Lisans

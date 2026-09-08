@@ -1,21 +1,21 @@
-# @tr-ds/core
+# @kiris-ds/core
 
-TRDS çekirdek. HTML, CSS ve ilerlemeli iyileştirme katmanı. 116 bileşen, sıfır bağımlılık.
+Kiriş çekirdek. HTML, CSS ve ilerlemeli iyileştirme katmanı. 116 bileşen, sıfır bağımlılık.
 
-TRDS, Türkiye kamu hizmetleri için bir tasarım sistemidir.
+Kiriş, Türkiye kamu hizmetleri için bir tasarım sistemidir.
 Belgeler: <https://trds.chele.bi>
 
 ## Kurulum
 
 ```bash
-npm install @tr-ds/core
+npm install @kiris-ds/core
 ```
 
 ## Kullanım
 
 ```js
-import '@tr-ds/core/css';
-import { baslat } from '@tr-ds/core';
+import '@kiris-ds/core/css';
+import { baslat } from '@kiris-ds/core';
 
 baslat();
 ```

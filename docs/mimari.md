@@ -25,7 +25,7 @@ bileşen dizini, entegrasyon tablosu, WCAG haritası ve README bundan üretilir.
 Eskiyen belge, olmayan belgeden daha zararlıdır.
 
 **Denetim.** `tools/denetle.mjs`, belgelerdeki her CSS sınıfını ve her
-`data-trds` davranışını derlenmiş kodda arar. Bulamazsa yapı durur.
+`data-kiris` davranışını derlenmiş kodda arar. Bulamazsa yapı durur.
 
 ## 0003 — Kontrast bir denetimdir, bir söz değil
 
@@ -72,13 +72,13 @@ tarayıcı çalışan HTML ve CSS alır.
 
 **Gerekçe.** Tek bir lisans iki hedefi birden karşılayamaz. Yeniden kullanım
 için serbestlik gerekir. Sahteciliğe karşı kısıtlama gerekir. Fransa
-kısıtlamayı kullanım koşullarıyla, İrlanda yönetişim belgesiyle çözer. TRDS
+kısıtlamayı kullanım koşullarıyla, İrlanda yönetişim belgesiyle çözer. Kiriş
 ikisini birleştirir.
 
 ## 0008 — Doğrulama ayrı bir pakette durur
 
 **Karar.** T.C. kimlik numarası, vergi kimlik numarası, IBAN, telefon, plaka,
-tarih ve Türkçe büyük harf kuralı `@tr-ds/validators` paketindedir ve testlidir.
+tarih ve Türkçe büyük harf kuralı `@kiris-ds/validators` paketindedir ve testlidir.
 
 **Gerekçe.** Bu algoritmalar bugün her kurumda yeniden yazılıyor ve çoğu yalnız
 hane sayısına bakıyor. Ayrı bir paket, aynı algoritmanın sunucu tarafında da

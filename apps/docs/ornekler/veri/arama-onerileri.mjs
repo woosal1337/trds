@@ -1,6 +1,6 @@
 // Arama önerileri için örnek veri. Gerçek e-Devlet aramasının üç grubu:
 // hizmetler, kurumlar, belediyeler. Sunucu yerine sayfaya gömülür.
-// Biçim, @tr-ds/core `data-trds="arama"` davranışının beklediği biçimdir.
+// Biçim, @kiris-ds/core `data-kiris="arama"` davranışının beklediği biçimdir.
 
 const hizmet = (ad, ek) => ({ ad, ek, href: '#' });
 const kurum = (ad) => ({ ad, href: '#' });

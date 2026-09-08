@@ -1,6 +1,6 @@
-// TRDS component registry — the second batch.
+// Kiriş component registry — the second batch.
 //
-// Sourced from the KERN UX (Germany) catalogue diffed against TRDS, plus the
+// Sourced from the KERN UX (Germany) catalogue diffed against Kiriş, plus the
 // components that appear in five or more of the nine national catalogues and
 // were still missing: search, language selector, combobox, side navigation,
 // switch, inset text, in-page navigation, tooltip.
@@ -29,7 +29,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="eposta2">E-posta adresiniz</label>\n  <p class="trds-yardim" id="eposta2-yardim">Başvuru sonucunu bu adrese göndereceğiz.</p>\n  <input class="trds-girdi" id="eposta2" name="eposta" type="email" autocomplete="email" spellcheck="false" aria-describedby="eposta2-yardim">\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="eposta2">E-posta adresiniz</label>\n  <p class="kiris-yardim" id="eposta2-yardim">Başvuru sonucunu bu adrese göndereceğiz.</p>\n  <input class="kiris-girdi" id="eposta2" name="eposta" type="email" autocomplete="email" spellcheck="false" aria-describedby="eposta2-yardim">\n</div>'
       }
     ]
   },
@@ -54,11 +54,11 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Tam sayı',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="kisi">Hanede yaşayan kişi sayısı</label>\n  <input class="trds-girdi trds-girdi--2" id="kisi" name="kisi" type="text" inputmode="numeric" pattern="[0-9]*">\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="kisi">Hanede yaşayan kişi sayısı</label>\n  <input class="kiris-girdi kiris-girdi--2" id="kisi" name="kisi" type="text" inputmode="numeric" pattern="[0-9]*">\n</div>'
       },
       {
         baslik: 'Ondalık',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="alan">Arsa alanı</label>\n  <p class="trds-yardim" id="alan-yardim">Metrekare. Ondalık için virgül kullanın: 245,5</p>\n  <div class="trds-girdi-grubu">\n    <input class="trds-girdi trds-girdi--10" id="alan" name="alan" type="text" inputmode="decimal" aria-describedby="alan-yardim">\n    <span class="trds-girdi-grubu__ek" aria-hidden="true">m²</span>\n  </div>\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="alan">Arsa alanı</label>\n  <p class="kiris-yardim" id="alan-yardim">Metrekare. Ondalık için virgül kullanın: 245,5</p>\n  <div class="kiris-girdi-grubu">\n    <input class="kiris-girdi kiris-girdi--10" id="alan" name="alan" type="text" inputmode="decimal" aria-describedby="alan-yardim">\n    <span class="kiris-girdi-grubu__ek" aria-hidden="true">m²</span>\n  </div>\n</div>'
       }
     ]
   },
@@ -83,7 +83,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan" data-trds="parola">\n  <label class="trds-etiket" for="parola">Parolanız</label>\n  <div class="trds-parola">\n    <input class="trds-girdi" id="parola" name="parola" type="password" autocomplete="current-password" spellcheck="false">\n    <button class="trds-button trds-button--ikincil trds-parola__dugme" type="button" aria-controls="parola" aria-pressed="false">Göster</button>\n  </div>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="parola">\n  <label class="kiris-etiket" for="parola">Parolanız</label>\n  <div class="kiris-parola">\n    <input class="kiris-girdi" id="parola" name="parola" type="password" autocomplete="current-password" spellcheck="false">\n    <button class="kiris-button kiris-button--ikincil kiris-parola__dugme" type="button" aria-controls="parola" aria-pressed="false">Göster</button>\n  </div>\n</div>'
       }
     ]
   },
@@ -104,7 +104,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="site">Kurumunuzun web sitesi</label>\n  <p class="trds-yardim" id="site-yardim">Örnek: ornek.com.tr</p>\n  <input class="trds-girdi" id="site" name="site" type="url" inputmode="url" autocomplete="url" spellcheck="false" aria-describedby="site-yardim">\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="site">Kurumunuzun web sitesi</label>\n  <p class="kiris-yardim" id="site-yardim">Örnek: ornek.com.tr</p>\n  <input class="kiris-girdi" id="site" name="site" type="url" inputmode="url" autocomplete="url" spellcheck="false" aria-describedby="site-yardim">\n</div>'
       }
     ]
   },
@@ -128,11 +128,11 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Sonek',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="tutar">Tutar</label>\n  <p class="trds-yardim" id="tutar-yardim">Türk Lirası olarak, kuruşsuz.</p>\n  <div class="trds-girdi-grubu">\n    <input class="trds-girdi trds-girdi--10" id="tutar" name="tutar" type="text" inputmode="numeric" aria-describedby="tutar-yardim">\n    <span class="trds-girdi-grubu__ek" aria-hidden="true">₺</span>\n  </div>\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="tutar">Tutar</label>\n  <p class="kiris-yardim" id="tutar-yardim">Türk Lirası olarak, kuruşsuz.</p>\n  <div class="kiris-girdi-grubu">\n    <input class="kiris-girdi kiris-girdi--10" id="tutar" name="tutar" type="text" inputmode="numeric" aria-describedby="tutar-yardim">\n    <span class="kiris-girdi-grubu__ek" aria-hidden="true">₺</span>\n  </div>\n</div>'
       },
       {
         baslik: 'Önek',
-        html: '<div class="trds-alan">\n  <label class="trds-etiket" for="oran">Katkı oranı</label>\n  <div class="trds-girdi-grubu">\n    <span class="trds-girdi-grubu__ek" aria-hidden="true">%</span>\n    <input class="trds-girdi trds-girdi--4" id="oran" name="oran" type="text" inputmode="decimal">\n  </div>\n</div>'
+        html: '<div class="kiris-alan">\n  <label class="kiris-etiket" for="oran">Katkı oranı</label>\n  <div class="kiris-girdi-grubu">\n    <span class="kiris-girdi-grubu__ek" aria-hidden="true">%</span>\n    <input class="kiris-girdi kiris-girdi--4" id="oran" name="oran" type="text" inputmode="decimal">\n  </div>\n</div>'
       }
     ]
   },
@@ -159,7 +159,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'İl seçimi',
-        html: '<div class="trds-alan" data-trds="aranabilir">\n  <label class="trds-etiket" for="il-ara">İl</label>\n  <p class="trds-yardim" id="il-ara-yardim">Yazmaya başlayın ve listeden seçin.</p>\n  <div class="trds-aranabilir">\n    <input class="trds-girdi" id="il-ara" name="il" type="text" role="combobox" aria-expanded="false" aria-controls="il-liste" aria-autocomplete="list" autocomplete="off" aria-describedby="il-ara-yardim">\n    <ul class="trds-aranabilir__liste" id="il-liste" role="listbox" aria-label="İller" hidden>\n      <li role="option" id="il-01" data-deger="01">Adana</li>\n      <li role="option" id="il-06" data-deger="06">Ankara</li>\n      <li role="option" id="il-07" data-deger="07">Antalya</li>\n      <li role="option" id="il-16" data-deger="16">Bursa</li>\n      <li role="option" id="il-21" data-deger="21">Diyarbakır</li>\n      <li role="option" id="il-27" data-deger="27">Gaziantep</li>\n      <li role="option" id="il-32" data-deger="32">Isparta</li>\n      <li role="option" id="il-34" data-deger="34">İstanbul</li>\n      <li role="option" id="il-35" data-deger="35">İzmir</li>\n      <li role="option" id="il-42" data-deger="42">Konya</li>\n      <li role="option" id="il-63" data-deger="63">Şanlıurfa</li>\n    </ul>\n  </div>\n  <p class="trds-aranabilir__durum trds-gorsel-gizli" aria-live="polite"></p>\n</div>'
+        html: '<div class="kiris-alan" data-kiris="aranabilir">\n  <label class="kiris-etiket" for="il-ara">İl</label>\n  <p class="kiris-yardim" id="il-ara-yardim">Yazmaya başlayın ve listeden seçin.</p>\n  <div class="kiris-aranabilir">\n    <input class="kiris-girdi" id="il-ara" name="il" type="text" role="combobox" aria-expanded="false" aria-controls="il-liste" aria-autocomplete="list" autocomplete="off" aria-describedby="il-ara-yardim">\n    <ul class="kiris-aranabilir__liste" id="il-liste" role="listbox" aria-label="İller" hidden>\n      <li role="option" id="il-01" data-deger="01">Adana</li>\n      <li role="option" id="il-06" data-deger="06">Ankara</li>\n      <li role="option" id="il-07" data-deger="07">Antalya</li>\n      <li role="option" id="il-16" data-deger="16">Bursa</li>\n      <li role="option" id="il-21" data-deger="21">Diyarbakır</li>\n      <li role="option" id="il-27" data-deger="27">Gaziantep</li>\n      <li role="option" id="il-32" data-deger="32">Isparta</li>\n      <li role="option" id="il-34" data-deger="34">İstanbul</li>\n      <li role="option" id="il-35" data-deger="35">İzmir</li>\n      <li role="option" id="il-42" data-deger="42">Konya</li>\n      <li role="option" id="il-63" data-deger="63">Şanlıurfa</li>\n    </ul>\n  </div>\n  <p class="kiris-aranabilir__durum kiris-gorsel-gizli" aria-live="polite"></p>\n</div>'
       }
     ]
   },
@@ -184,7 +184,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-anahtar">\n  <input class="trds-anahtar__girdi" id="bildirim" name="bildirim" type="checkbox" role="switch">\n  <label class="trds-anahtar__etiket" for="bildirim">\n    <span class="trds-anahtar__yol" aria-hidden="true"></span>\n    <span>Başvuru durumu değişince SMS gönder</span>\n  </label>\n</div>'
+        html: '<div class="kiris-anahtar">\n  <input class="kiris-anahtar__girdi" id="bildirim" name="bildirim" type="checkbox" role="switch">\n  <label class="kiris-anahtar__etiket" for="bildirim">\n    <span class="kiris-anahtar__yol" aria-hidden="true"></span>\n    <span>Başvuru durumu değişince SMS gönder</span>\n  </label>\n</div>'
       }
     ]
   },
@@ -200,7 +200,7 @@ export const ekBilesenler = [
     neZaman: [
       'Sayfa sayısı 30 üstündeki her sitede kullanın.',
       'Bir formun içindeki listeyi süzmek için aranabilir liste kullanın, arama değil.',
-      'Öneri listesini `data-trds="arama"` açar. Kaynak bir sunucu adresi (`data-kaynak`) veya sayfadaki bir JSON betiğidir (`data-kaynak-id`). İki karakterden sonra, 200 ms bekleyip sorar.',
+      'Öneri listesini `data-kiris="arama"` açar. Kaynak bir sunucu adresi (`data-kaynak`) veya sayfadaki bir JSON betiğidir (`data-kaynak-id`). İki karakterden sonra, 200 ms bekleyip sorar.',
       'Öneriler gruplanır: hizmetler, kurumlar, belediyeler. Her gruptan en çok beş satır. Son satır tam aramaya gider.'
     ],
     erisilebilirlik: [
@@ -216,15 +216,15 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<form class="trds-arama" role="search" action="#" method="get">\n  <label class="trds-etiket trds-gorsel-gizli" for="ara">Sitede ara</label>\n  <input class="trds-girdi trds-arama__girdi" id="ara" name="q" type="search" placeholder="Sitede ara" autocomplete="off">\n  <button class="trds-button trds-arama__dugme" type="submit">Ara</button>\n</form>'
+        html: '<form class="kiris-arama" role="search" action="#" method="get">\n  <label class="kiris-etiket kiris-gorsel-gizli" for="ara">Sitede ara</label>\n  <input class="kiris-girdi kiris-arama__girdi" id="ara" name="q" type="search" placeholder="Sitede ara" autocomplete="off">\n  <button class="kiris-button kiris-arama__dugme" type="submit">Ara</button>\n</form>'
       },
       {
         baslik: 'Öneri listesi ile',
-        html: '<div class="trds-arama-onerileri" data-trds="arama" data-kaynak-id="oneri-verisi">\n  <form class="trds-arama" role="search" action="#" method="get">\n    <label class="trds-etiket trds-gorsel-gizli" for="ara3">Hizmet, kurum veya belediye ara</label>\n    <input class="trds-girdi trds-arama__girdi" id="ara3" name="q" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ara3-liste" autocomplete="off" placeholder="Örnek: ikamet">\n    <button class="trds-button trds-arama__dugme" type="submit">Ara</button>\n  </form>\n  <div class="trds-arama-onerileri__liste" id="ara3-liste" role="listbox" aria-label="Öneriler" hidden></div>\n  <p class="trds-gorsel-gizli" data-trds-durum aria-live="polite"></p>\n  <script type="application/json" id="oneri-verisi">{"gruplar": [{"ad": "Hizmetler", "ogeler": [{"ad": "İkametgâh Belgesi Sorgulama", "ek": "Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü", "href": "#"}, {"ad": "Adli Sicil Kaydı Sorgulama", "ek": "Adalet Bakanlığı", "href": "#"}, {"ad": "Vergi Borcu Sorgulama ve Ödeme", "ek": "Gelir İdaresi Başkanlığı", "href": "#"}, {"ad": "SGK Tescil ve Hizmet Dökümü", "ek": "Sosyal Güvenlik Kurumu", "href": "#"}]}, {"ad": "Kurumlar", "ogeler": [{"ad": "Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü", "href": "#"}, {"ad": "Adalet Bakanlığı", "href": "#"}]}, {"ad": "Belediyeler", "ogeler": [{"ad": "Ankara Büyükşehir Belediyesi", "href": "#"}, {"ad": "İzmir Büyükşehir Belediyesi", "href": "#"}]}]}</script>\n</div>'
+        html: '<div class="kiris-arama-onerileri" data-kiris="arama" data-kaynak-id="oneri-verisi">\n  <form class="kiris-arama" role="search" action="#" method="get">\n    <label class="kiris-etiket kiris-gorsel-gizli" for="ara3">Hizmet, kurum veya belediye ara</label>\n    <input class="kiris-girdi kiris-arama__girdi" id="ara3" name="q" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ara3-liste" autocomplete="off" placeholder="Örnek: ikamet">\n    <button class="kiris-button kiris-arama__dugme" type="submit">Ara</button>\n  </form>\n  <div class="kiris-arama-onerileri__liste" id="ara3-liste" role="listbox" aria-label="Öneriler" hidden></div>\n  <p class="kiris-gorsel-gizli" data-kiris-durum aria-live="polite"></p>\n  <script type="application/json" id="oneri-verisi">{"gruplar": [{"ad": "Hizmetler", "ogeler": [{"ad": "İkametgâh Belgesi Sorgulama", "ek": "Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü", "href": "#"}, {"ad": "Adli Sicil Kaydı Sorgulama", "ek": "Adalet Bakanlığı", "href": "#"}, {"ad": "Vergi Borcu Sorgulama ve Ödeme", "ek": "Gelir İdaresi Başkanlığı", "href": "#"}, {"ad": "SGK Tescil ve Hizmet Dökümü", "ek": "Sosyal Güvenlik Kurumu", "href": "#"}]}, {"ad": "Kurumlar", "ogeler": [{"ad": "Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü", "href": "#"}, {"ad": "Adalet Bakanlığı", "href": "#"}]}, {"ad": "Belediyeler", "ogeler": [{"ad": "Ankara Büyükşehir Belediyesi", "href": "#"}, {"ad": "İzmir Büyükşehir Belediyesi", "href": "#"}]}]}</script>\n</div>'
       },
       {
         baslik: 'Başlık çubuğunda',
-        html: '<form class="trds-arama trds-arama--koyu" role="search" action="#" method="get">\n  <label class="trds-etiket trds-gorsel-gizli" for="ara2">Hizmet ara</label>\n  <input class="trds-girdi trds-arama__girdi" id="ara2" name="q" type="search" placeholder="Hizmet ara" autocomplete="off">\n  <button class="trds-button trds-arama__dugme" type="submit">Ara</button>\n</form>'
+        html: '<form class="kiris-arama kiris-arama--koyu" role="search" action="#" method="get">\n  <label class="kiris-etiket kiris-gorsel-gizli" for="ara2">Hizmet ara</label>\n  <input class="kiris-girdi kiris-arama__girdi" id="ara2" name="q" type="search" placeholder="Hizmet ara" autocomplete="off">\n  <button class="kiris-button kiris-arama__dugme" type="submit">Ara</button>\n</form>'
       }
     ]
   },
@@ -249,7 +249,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<nav class="trds-dil" aria-label="Dil seçimi">\n  <ul class="trds-dil__liste">\n    <li><span aria-current="true" lang="tr">Türkçe</span></li>\n    <li><a href="?dil=en" lang="en" hreflang="en">English</a></li>\n    <li><a href="?dil=ar" lang="ar" hreflang="ar" dir="rtl">العربية</a></li>\n    <li><a href="?dil=ku" lang="ku" hreflang="ku">Kurdî</a></li>\n    <li><a href="?dil=ru" lang="ru" hreflang="ru">Русский</a></li>\n  </ul>\n</nav>'
+        html: '<nav class="kiris-dil" aria-label="Dil seçimi">\n  <ul class="kiris-dil__liste">\n    <li><span aria-current="true" lang="tr">Türkçe</span></li>\n    <li><a href="?dil=en" lang="en" hreflang="en">English</a></li>\n    <li><a href="?dil=ar" lang="ar" hreflang="ar" dir="rtl">العربية</a></li>\n    <li><a href="?dil=ku" lang="ku" hreflang="ku">Kurdî</a></li>\n    <li><a href="?dil=ru" lang="ru" hreflang="ru">Русский</a></li>\n  </ul>\n</nav>'
       }
     ]
   },
@@ -274,7 +274,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'İki düzey',
-        html: '<nav class="trds-yan-menu" aria-label="Emeklilik bölümü">\n  <ul class="trds-yan-menu__liste">\n    <li><a href="#">Genel bilgi</a></li>\n    <li><a href="#" aria-current="page">Başvuru</a>\n      <ul>\n        <li><a href="#">Gerekli belgeler</a></li>\n        <li><a href="#">Ücretler</a></li>\n      </ul>\n    </li>\n    <li><a href="#">Sıkça sorulan sorular</a></li>\n    <li><a href="#">İletişim</a></li>\n  </ul>\n</nav>'
+        html: '<nav class="kiris-yan-menu" aria-label="Emeklilik bölümü">\n  <ul class="kiris-yan-menu__liste">\n    <li><a href="#">Genel bilgi</a></li>\n    <li><a href="#" aria-current="page">Başvuru</a>\n      <ul>\n        <li><a href="#">Gerekli belgeler</a></li>\n        <li><a href="#">Ücretler</a></li>\n      </ul>\n    </li>\n    <li><a href="#">Sıkça sorulan sorular</a></li>\n    <li><a href="#">İletişim</a></li>\n  </ul>\n</nav>'
       }
     ]
   },
@@ -299,7 +299,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<nav class="trds-icindekiler" aria-labelledby="ic-baslik">\n  <h2 class="trds-icindekiler__baslik" id="ic-baslik">Bu sayfada</h2>\n  <ol class="trds-icindekiler__liste">\n    <li><a href="#kosullar">Başvuru koşulları</a></li>\n    <li><a href="#belgeler">Gerekli belgeler</a></li>\n    <li><a href="#sure">Süreç ve süre</a></li>\n    <li><a href="#itiraz">İtiraz yolu</a></li>\n  </ol>\n</nav>'
+        html: '<nav class="kiris-icindekiler" aria-labelledby="ic-baslik">\n  <h2 class="kiris-icindekiler__baslik" id="ic-baslik">Bu sayfada</h2>\n  <ol class="kiris-icindekiler__liste">\n    <li><a href="#kosullar">Başvuru koşulları</a></li>\n    <li><a href="#belgeler">Gerekli belgeler</a></li>\n    <li><a href="#sure">Süreç ve süre</a></li>\n    <li><a href="#itiraz">İtiraz yolu</a></li>\n  </ol>\n</nav>'
       }
     ]
   },
@@ -314,7 +314,7 @@ export const ekBilesenler = [
     ozet: 'Başlık, üst başlık, alt başlık, gövde ve etiket sınıfları. Dokuz kademeli ölçek.',
     neZaman: [
       'Her sayfada tek bir `h1` bulunur. Başlık düzeyi atlanmaz.',
-      'Görsel boyut ile anlamsal düzey ayrıdır. `h2` öğesine `trds-baslik--3` sınıfı verilebilir.',
+      'Görsel boyut ile anlamsal düzey ayrıdır. `h2` öğesine `kiris-baslik--3` sınıfı verilebilir.',
       'Üst başlık kısa bir bağlam verir: kurum adı, bölüm adı veya belge türü.'
     ],
     erisilebilirlik: [
@@ -327,11 +327,11 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Başlık düzeyleri',
-        html: '<p class="trds-ust-baslik">Sosyal Güvenlik Kurumu</p>\n<h1 class="trds-baslik trds-baslik--1">Emeklilik başvurusu</h1>\n<p class="trds-alt-baslik">Yaş ve prim gün sayısı koşullarını sağlıyorsanız çevrim içi başvurun.</p>\n<h2 class="trds-baslik trds-baslik--2">Başvuru koşulları</h2>\n<h3 class="trds-baslik trds-baslik--3">Yaş koşulu</h3>\n<h4 class="trds-baslik trds-baslik--4">İstisnalar</h4>'
+        html: '<p class="kiris-ust-baslik">Sosyal Güvenlik Kurumu</p>\n<h1 class="kiris-baslik kiris-baslik--1">Emeklilik başvurusu</h1>\n<p class="kiris-alt-baslik">Yaş ve prim gün sayısı koşullarını sağlıyorsanız çevrim içi başvurun.</p>\n<h2 class="kiris-baslik kiris-baslik--2">Başvuru koşulları</h2>\n<h3 class="kiris-baslik kiris-baslik--3">Yaş koşulu</h3>\n<h4 class="kiris-baslik kiris-baslik--4">İstisnalar</h4>'
       },
       {
         baslik: 'Gövde metni',
-        html: '<p class="trds-govde trds-govde--buyuk">Başvurunuz 15 iş günü içinde sonuçlanır. Sonuç e-Devlet üzerinden bildirilir.</p>\n<p class="trds-govde">Eksik belge varsa size SMS gönderilir. Belgeyi 10 gün içinde yüklemeniz gerekir.</p>\n<p class="trds-govde trds-kucuk">Son güncelleme: 12 Mart 2026</p>'
+        html: '<p class="kiris-govde kiris-govde--buyuk">Başvurunuz 15 iş günü içinde sonuçlanır. Sonuç e-Devlet üzerinden bildirilir.</p>\n<p class="kiris-govde">Eksik belge varsa size SMS gönderilir. Belgeyi 10 gün içinde yüklemeniz gerekir.</p>\n<p class="kiris-govde kiris-kucuk">Son güncelleme: 12 Mart 2026</p>'
       }
     ]
   },
@@ -356,7 +356,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Üç biçim',
-        html: '<ul class="trds-liste trds-liste--madde">\n  <li>Nüfus cüzdanı</li>\n  <li>İkametgâh belgesi</li>\n  <li>Son üç aylık maaş bordrosu</li>\n</ul>\n<ol class="trds-liste trds-liste--sira">\n  <li>e-Devlet ile giriş yapın.</li>\n  <li>Başvuru formunu doldurun.</li>\n  <li>Belgeleri yükleyin.</li>\n</ol>\n<ul class="trds-liste trds-liste--madde trds-liste--aralikli">\n  <li>Başvurunuz alındıktan sonra 15 iş günü içinde değerlendirilir.</li>\n  <li>Eksik belge varsa SMS ile bilgilendirilirsiniz ve 10 gün ek süre verilir.</li>\n</ul>'
+        html: '<ul class="kiris-liste kiris-liste--madde">\n  <li>Nüfus cüzdanı</li>\n  <li>İkametgâh belgesi</li>\n  <li>Son üç aylık maaş bordrosu</li>\n</ul>\n<ol class="kiris-liste kiris-liste--sira">\n  <li>e-Devlet ile giriş yapın.</li>\n  <li>Başvuru formunu doldurun.</li>\n  <li>Belgeleri yükleyin.</li>\n</ol>\n<ul class="kiris-liste kiris-liste--madde kiris-liste--aralikli">\n  <li>Başvurunuz alındıktan sonra 15 iş günü içinde değerlendirilir.</li>\n  <li>Eksik belge varsa SMS ile bilgilendirilirsiniz ve 10 gün ek süre verilir.</li>\n</ul>'
       }
     ]
   },
@@ -380,7 +380,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<dl class="trds-tanim">\n  <div class="trds-tanim__satir"><dt>Başvuru numarası</dt><dd>2026-004512</dd></div>\n  <div class="trds-tanim__satir"><dt>Başvuru tarihi</dt><dd>12.03.2026</dd></div>\n  <div class="trds-tanim__satir"><dt>Durum</dt><dd><span class="trds-etiket trds-etiket--mavi">İnceleniyor</span></dd></div>\n</dl>'
+        html: '<dl class="kiris-tanim">\n  <div class="kiris-tanim__satir"><dt>Başvuru numarası</dt><dd>2026-004512</dd></div>\n  <div class="kiris-tanim__satir"><dt>Başvuru tarihi</dt><dd>12.03.2026</dd></div>\n  <div class="kiris-tanim__satir"><dt>Durum</dt><dd><span class="kiris-etiket kiris-etiket--mavi">İnceleniyor</span></dd></div>\n</dl>'
       }
     ]
   },
@@ -405,7 +405,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-vurgu">\n  <p>Yurt dışında yaşıyorsanız başvurunuzu en yakın konsolosluk üzerinden yapın. Çevrim içi başvuru yurt dışı adresini kabul etmez.</p>\n</div>'
+        html: '<div class="kiris-vurgu">\n  <p>Yurt dışında yaşıyorsanız başvurunuzu en yakın konsolosluk üzerinden yapın. Çevrim içi başvuru yurt dışı adresini kabul etmez.</p>\n</div>'
       }
     ]
   },
@@ -430,7 +430,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Sayı ve kelime',
-        html: '<a class="trds-link" href="#">Bildirimler <span class="trds-rozet trds-rozet--sayi">12</span></a>\n<span class="trds-rozet">Taslak</span>\n<span class="trds-rozet trds-rozet--kirmizi">Yeni</span>\n<span class="trds-rozet trds-rozet--mavi">Beta</span>'
+        html: '<a class="kiris-link" href="#">Bildirimler <span class="kiris-rozet kiris-rozet--sayi">12</span></a>\n<span class="kiris-rozet">Taslak</span>\n<span class="kiris-rozet kiris-rozet--kirmizi">Yeni</span>\n<span class="kiris-rozet kiris-rozet--mavi">Beta</span>'
       }
     ]
   },
@@ -455,7 +455,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'İki kalınlık',
-        html: '<p class="trds-govde">Birinci bölüm.</p>\n<hr class="trds-ayrac">\n<p class="trds-govde">İkinci bölüm.</p>\n<hr class="trds-ayrac trds-ayrac--kalin">\n<p class="trds-govde">Üçüncü bölüm.</p>'
+        html: '<p class="kiris-govde">Birinci bölüm.</p>\n<hr class="kiris-ayrac">\n<p class="kiris-govde">İkinci bölüm.</p>\n<hr class="kiris-ayrac kiris-ayrac--kalin">\n<p class="kiris-govde">Üçüncü bölüm.</p>'
       }
     ]
   },
@@ -480,7 +480,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Sekiz ve dört',
-        html: '<div class="trds-izgara">\n  <div class="trds-sutun trds-sutun--8"><div class="trds-izgara-ornek">Ana içerik · 8 sütun</div></div>\n  <div class="trds-sutun trds-sutun--4"><div class="trds-izgara-ornek">Yan bölge · 4 sütun</div></div>\n</div>\n<div class="trds-izgara">\n  <div class="trds-sutun trds-sutun--4"><div class="trds-izgara-ornek">4</div></div>\n  <div class="trds-sutun trds-sutun--4"><div class="trds-izgara-ornek">4</div></div>\n  <div class="trds-sutun trds-sutun--4"><div class="trds-izgara-ornek">4</div></div>\n</div>'
+        html: '<div class="kiris-izgara">\n  <div class="kiris-sutun kiris-sutun--8"><div class="kiris-izgara-ornek">Ana içerik · 8 sütun</div></div>\n  <div class="kiris-sutun kiris-sutun--4"><div class="kiris-izgara-ornek">Yan bölge · 4 sütun</div></div>\n</div>\n<div class="kiris-izgara">\n  <div class="kiris-sutun kiris-sutun--4"><div class="kiris-izgara-ornek">4</div></div>\n  <div class="kiris-sutun kiris-sutun--4"><div class="kiris-izgara-ornek">4</div></div>\n  <div class="kiris-sutun kiris-sutun--4"><div class="kiris-izgara-ornek">4</div></div>\n</div>'
       }
     ]
   },
@@ -496,7 +496,7 @@ export const ekBilesenler = [
       'Yeni bir bileşen kurmak için kullanmayın. Beş yardımcı sınıf bir araya geliyorsa bir bileşen eksiktir.'
     ],
     erisilebilirlik: [
-      '`trds-u-gizle-telefon` yalnız görsel olarak gizler. İçerik ekran okuyucuda kalır.',
+      '`kiris-u-gizle-telefon` yalnız görsel olarak gizler. İçerik ekran okuyucuda kalır.',
       'Tam gizlemek için `hidden` özniteliği kullanılır.'
     ],
     wcag: ['1.3.2'],
@@ -504,7 +504,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Boşluk ve hizalama',
-        html: '<p class="trds-govde trds-u-alt-0">Bu paragrafın altında boşluk yok.</p>\n<p class="trds-govde trds-u-ust-6 trds-u-metin-sag">Bu paragraf 6 birim üst boşluk taşır ve sağa yaslıdır.</p>\n<p class="trds-govde trds-u-gizle-telefon">Bu paragraf telefonda görünmez.</p>'
+        html: '<p class="kiris-govde kiris-u-alt-0">Bu paragrafın altında boşluk yok.</p>\n<p class="kiris-govde kiris-u-ust-6 kiris-u-metin-sag">Bu paragraf 6 birim üst boşluk taşır ve sağa yaslıdır.</p>\n<p class="kiris-govde kiris-u-gizle-telefon">Bu paragraf telefonda görünmez.</p>'
       }
     ]
   },
@@ -532,7 +532,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="trds-yukleniyor" role="status">\n  <span class="trds-yukleniyor__halka" aria-hidden="true"></span>\n  <span>Başvurunuz sorgulanıyor</span>\n</div>'
+        html: '<div class="kiris-yukleniyor" role="status">\n  <span class="kiris-yukleniyor__halka" aria-hidden="true"></span>\n  <span>Başvurunuz sorgulanıyor</span>\n</div>'
       }
     ]
   },
@@ -557,7 +557,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Dosya yükleme',
-        html: '<div class="trds-ilerleme">\n  <div class="trds-ilerleme__ust">\n    <span id="ilerleme-etiket">ikametgah.pdf yükleniyor</span>\n    <span class="trds-ilerleme__deger">%60</span>\n  </div>\n  <progress class="trds-ilerleme__cubuk" value="60" max="100" aria-labelledby="ilerleme-etiket">%60</progress>\n</div>'
+        html: '<div class="kiris-ilerleme">\n  <div class="kiris-ilerleme__ust">\n    <span id="ilerleme-etiket">ikametgah.pdf yükleniyor</span>\n    <span class="kiris-ilerleme__deger">%60</span>\n  </div>\n  <progress class="kiris-ilerleme__cubuk" value="60" max="100" aria-labelledby="ilerleme-etiket">%60</progress>\n</div>'
       }
     ]
   },
@@ -583,7 +583,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Simge düğmesi',
-        html: '<span class="trds-ipucu-kap" data-trds="ipucu">\n  <button class="trds-button trds-button--ikincil" type="button" aria-describedby="ipucu-yazdir">Yazdır</button>\n  <span class="trds-ipucu" id="ipucu-yazdir" role="tooltip" hidden>Bu sayfayı yazıcıya gönderir</span>\n</span>'
+        html: '<span class="kiris-ipucu-kap" data-kiris="ipucu">\n  <button class="kiris-button kiris-button--ikincil" type="button" aria-describedby="ipucu-yazdir">Yazdır</button>\n  <span class="kiris-ipucu" id="ipucu-yazdir" role="tooltip" hidden>Bu sayfayı yazıcıya gönderir</span>\n</span>'
       }
     ]
   },
@@ -610,7 +610,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Dört sayı',
-        html: '<div class="trds-istatistik">\n  <div class="trds-istatistik__kutu"><span class="trds-istatistik__deger">69.596.229</span><span class="trds-istatistik__ad">Kayıtlı kullanıcı</span></div>\n  <div class="trds-istatistik__kutu"><span class="trds-istatistik__deger">9.409</span><span class="trds-istatistik__ad">Hizmet</span></div>\n  <div class="trds-istatistik__kutu"><span class="trds-istatistik__deger">6.426</span><span class="trds-istatistik__ad">Mobil hizmet</span></div>\n  <div class="trds-istatistik__kutu"><span class="trds-istatistik__deger">1.129</span><span class="trds-istatistik__ad">Kurum</span></div>\n</div>'
+        html: '<div class="kiris-istatistik">\n  <div class="kiris-istatistik__kutu"><span class="kiris-istatistik__deger">69.596.229</span><span class="kiris-istatistik__ad">Kayıtlı kullanıcı</span></div>\n  <div class="kiris-istatistik__kutu"><span class="kiris-istatistik__deger">9.409</span><span class="kiris-istatistik__ad">Hizmet</span></div>\n  <div class="kiris-istatistik__kutu"><span class="kiris-istatistik__deger">6.426</span><span class="kiris-istatistik__ad">Mobil hizmet</span></div>\n  <div class="kiris-istatistik__kutu"><span class="kiris-istatistik__deger">1.129</span><span class="kiris-istatistik__ad">Kurum</span></div>\n</div>'
       }
     ]
   },
@@ -634,7 +634,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Beş bölüm',
-        html: '<div class="trds-izgara">\n  <a class="trds-sutun trds-sutun--4 trds-simge-kart" href="#"><span class="trds-simge-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-eservice"/></svg></span><span class="trds-simge-kart__ad">e-Hizmetler</span><p class="trds-simge-kart__aciklama">Sorgulama, başvuru ve ödeme hizmetleri.</p></a>\n  <a class="trds-sutun trds-sutun--4 trds-simge-kart" href="#"><span class="trds-simge-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-agency"/></svg></span><span class="trds-simge-kart__ad">Kurumlar</span><p class="trds-simge-kart__aciklama">Resmî kurumların hizmetleri ve iletişim bilgileri.</p></a>\n  <a class="trds-sutun trds-sutun--4 trds-simge-kart" href="#"><span class="trds-simge-kart__simge"><svg class="trds-simge" aria-hidden="true"><use href="#trds-municipality"/></svg></span><span class="trds-simge-kart__ad">Belediyeler</span><p class="trds-simge-kart__aciklama">Belediyelerin iletişim bilgileri ve hizmetleri.</p></a>\n</div>'
+        html: '<div class="kiris-izgara">\n  <a class="kiris-sutun kiris-sutun--4 kiris-simge-kart" href="#"><span class="kiris-simge-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-eservice"/></svg></span><span class="kiris-simge-kart__ad">e-Hizmetler</span><p class="kiris-simge-kart__aciklama">Sorgulama, başvuru ve ödeme hizmetleri.</p></a>\n  <a class="kiris-sutun kiris-sutun--4 kiris-simge-kart" href="#"><span class="kiris-simge-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-agency"/></svg></span><span class="kiris-simge-kart__ad">Kurumlar</span><p class="kiris-simge-kart__aciklama">Resmî kurumların hizmetleri ve iletişim bilgileri.</p></a>\n  <a class="kiris-sutun kiris-sutun--4 kiris-simge-kart" href="#"><span class="kiris-simge-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-municipality"/></svg></span><span class="kiris-simge-kart__ad">Belediyeler</span><p class="kiris-simge-kart__aciklama">Belediyelerin iletişim bilgileri ve hizmetleri.</p></a>\n</div>'
       }
     ]
   },
@@ -666,19 +666,19 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Kurumun kendi logosu',
-        html: '<div class="trds-logo-dizisi">\n  <a class="trds-logo" href="/"><img class="trds-logo__gorsel" src="{{VARLIK}}kurumlar/saglik-bakanligi-kirmizi.svg" alt="T.C. Sağlık Bakanlığı" width="1448" height="490"></a>\n  <a class="trds-logo" href="/"><img class="trds-logo__gorsel" src="{{VARLIK}}kurumlar/sgk.svg" alt="Sosyal Güvenlik Kurumu" width="150" height="73"></a>\n  <a class="trds-logo" href="/"><img class="trds-logo__gorsel" src="{{VARLIK}}e-devlet-isaret.png" alt="e-Devlet Kapısı" width="196" height="196"></a>\n</div>'
+        html: '<div class="kiris-logo-dizisi">\n  <a class="kiris-logo" href="/"><img class="kiris-logo__gorsel" src="{{VARLIK}}kurumlar/saglik-bakanligi-kirmizi.svg" alt="T.C. Sağlık Bakanlığı" width="1448" height="490"></a>\n  <a class="kiris-logo" href="/"><img class="kiris-logo__gorsel" src="{{VARLIK}}kurumlar/sgk.svg" alt="Sosyal Güvenlik Kurumu" width="150" height="73"></a>\n  <a class="kiris-logo" href="/"><img class="kiris-logo__gorsel" src="{{VARLIK}}e-devlet-isaret.png" alt="e-Devlet Kapısı" width="196" height="196"></a>\n</div>'
       },
       {
         baslik: 'Koyu zeminde beyaz sürüm',
-        html: '<div class="trds-logo-dizisi trds-logo-dizisi--koyu">\n  <a class="trds-logo" href="/"><img class="trds-logo__gorsel" src="{{VARLIK}}kurumlar/e-devlet-kapisi-beyaz.svg" alt="türkiye.gov.tr" width="250" height="60"></a>\n  <a class="trds-logo" href="/"><img class="trds-logo__gorsel" src="{{VARLIK}}kurumlar/sgk-beyaz.svg" alt="Sosyal Güvenlik Kurumu" width="1303" height="640"></a>\n  <a class="trds-logo" href="/"><img class="trds-logo__gorsel" src="{{VARLIK}}kurumlar/saglik-bakanligi-beyaz.svg" alt="T.C. Sağlık Bakanlığı" width="1448" height="490"></a>\n</div>'
+        html: '<div class="kiris-logo-dizisi kiris-logo-dizisi--koyu">\n  <a class="kiris-logo" href="/"><img class="kiris-logo__gorsel" src="{{VARLIK}}kurumlar/e-devlet-kapisi-beyaz.svg" alt="türkiye.gov.tr" width="250" height="60"></a>\n  <a class="kiris-logo" href="/"><img class="kiris-logo__gorsel" src="{{VARLIK}}kurumlar/sgk-beyaz.svg" alt="Sosyal Güvenlik Kurumu" width="1303" height="640"></a>\n  <a class="kiris-logo" href="/"><img class="kiris-logo__gorsel" src="{{VARLIK}}kurumlar/saglik-bakanligi-beyaz.svg" alt="T.C. Sağlık Bakanlığı" width="1448" height="490"></a>\n</div>'
       },
       {
         baslik: 'Bayrak ve ad kilidi',
-        html: '<a class="trds-logo" href="/">\n  <img class="trds-logo__arma" src="{{VARLIK}}turk-bayragi.svg" alt="" width="48" height="32">\n  <span class="trds-logo__metin">\n    <span class="trds-logo__ust">T.C.</span>\n    <span class="trds-logo__ad">Sağlık Bakanlığı</span>\n  </span>\n</a>'
+        html: '<a class="kiris-logo" href="/">\n  <img class="kiris-logo__arma" src="{{VARLIK}}turk-bayragi.svg" alt="" width="48" height="32">\n  <span class="kiris-logo__metin">\n    <span class="kiris-logo__ust">T.C.</span>\n    <span class="kiris-logo__ad">Sağlık Bakanlığı</span>\n  </span>\n</a>'
       },
       {
         baslik: 'Bağlı kuruluş',
-        html: '<a class="trds-logo" href="/">\n  <img class="trds-logo__arma" src="{{VARLIK}}turk-bayragi.svg" alt="" width="48" height="32">\n  <span class="trds-logo__metin">\n    <span class="trds-logo__ust">T.C. Çalışma ve Sosyal Güvenlik Bakanlığı</span>\n    <span class="trds-logo__ad">Sosyal Güvenlik Kurumu</span>\n  </span>\n</a>'
+        html: '<a class="kiris-logo" href="/">\n  <img class="kiris-logo__arma" src="{{VARLIK}}turk-bayragi.svg" alt="" width="48" height="32">\n  <span class="kiris-logo__metin">\n    <span class="kiris-logo__ust">T.C. Çalışma ve Sosyal Güvenlik Bakanlığı</span>\n    <span class="kiris-logo__ad">Sosyal Güvenlik Kurumu</span>\n  </span>\n</a>'
       }
     ]
   },
@@ -688,7 +688,7 @@ export const ekBilesenler = [
     name: 'Icon',
     grup: 'icerik',
     durum: { css: 'stable', js: 'yok', react: 'stable', vue: 'stable' },
-    ozet: 'TRDS simge setinden bir simgeyi üç boyda gösterir. Yeni simge çizilmez.',
+    ozet: 'Kiriş simge setinden bir simgeyi üç boyda gösterir. Yeni simge çizilmez.',
     neZaman: [
       'Bir eylemi veya bölümü tanımak için metnin yanında kullanın.',
       'Simgeyi tek başına anlam taşıyacak biçimde kullanmayın. Yanında metin bulunur.',
@@ -704,11 +704,11 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Üç boy',
-        html: '<p class="trds-govde">\n  <svg class="trds-simge trds-simge--kucuk" aria-hidden="true"><use href="#trds-health"/></svg>\n  <svg class="trds-simge" aria-hidden="true"><use href="#trds-health"/></svg>\n  <svg class="trds-simge trds-simge--buyuk" aria-hidden="true"><use href="#trds-health"/></svg>\n  Sağlık hizmetleri\n</p>'
+        html: '<p class="kiris-govde">\n  <svg class="kiris-simge kiris-simge--kucuk" aria-hidden="true"><use href="#kiris-health"/></svg>\n  <svg class="kiris-simge" aria-hidden="true"><use href="#kiris-health"/></svg>\n  <svg class="kiris-simge kiris-simge--buyuk" aria-hidden="true"><use href="#kiris-health"/></svg>\n  Sağlık hizmetleri\n</p>'
       },
       {
         baslik: 'Metinle',
-        html: '<a class="trds-link trds-simgeli" href="#"><svg class="trds-simge" aria-hidden="true"><use href="#trds-tool-print"/></svg> Belgeyi yazdır</a>\n<button class="trds-button trds-button--ikincil trds-simgeli" type="button"><svg class="trds-simge" aria-hidden="true"><use href="#trds-tool-refresh"/></svg> Yenile</button>'
+        html: '<a class="kiris-link kiris-simgeli" href="#"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-tool-print"/></svg> Belgeyi yazdır</a>\n<button class="kiris-button kiris-button--ikincil kiris-simgeli" type="button"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-tool-refresh"/></svg> Yenile</button>'
       }
     ]
   }

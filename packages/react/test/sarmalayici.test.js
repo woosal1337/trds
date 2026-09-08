@@ -4,8 +4,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { TANIMLAR, SARMALAYICISIZ } from '@tr-ds/tanim';
-import * as R from '@tr-ds/react';
+import { TANIMLAR, SARMALAYICISIZ } from '@kiris-ds/tanim';
+import * as R from '@kiris-ds/react';
 import { BILESENLER } from '../../../tools/registry/00-index.mjs';
 
 const ciz = (t) => renderToStaticMarkup(createElement(R[t.ad], t.ornek));
@@ -15,9 +15,9 @@ test('her tanım React ile çizilir ve kök sınıfı taşır', () => {
     assert.ok(R[t.ad], `${t.id}: ${t.ad} dışa aktarılmadı`);
     const html = ciz(t);
     assert.ok(html.length > 0, `${t.id}: boş çıktı`);
-    assert.ok(html.includes(`class="${t.kok}`) || html.includes(` ${t.kok}`) || html.includes(`class="${t.kok.replace('trds-', 'trds-')}`), `${t.id}: kök sınıf ${t.kok} yok:\n${html.slice(0, 200)}`);
+    assert.ok(html.includes(`class="${t.kok}`) || html.includes(` ${t.kok}`) || html.includes(`class="${t.kok.replace('kiris-', 'kiris-')}`), `${t.id}: kök sınıf ${t.kok} yok:\n${html.slice(0, 200)}`);
     assert.ok(!html.includes('undefined'), `${t.id}: çıktıda "undefined":\n${html.slice(0, 300)}`);
-    if (t.davranis) assert.ok(html.includes(`data-trds="${t.davranis}"`), `${t.id}: data-trds="${t.davranis}" yok`);
+    if (t.davranis) assert.ok(html.includes(`data-kiris="${t.davranis}"`), `${t.id}: data-kiris="${t.davranis}" yok`);
   }
 });
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// TRDS tema üreticisi. Bağımlılık yok.
+// Kiriş tema üreticisi. Bağımlılık yok.
 //
 //   node packages/themes/build.mjs
 //
@@ -148,12 +148,12 @@ async function main() {
     const basarisiz = denetim.filter((d) => d.oran < d.enAz);
     if (basarisiz.length > 0) hataVar = true;
 
-    const satirlar = Object.entries(degerler).map(([ad, deger]) => `  --trds-${ad}: ${deger};`);
+    const satirlar = Object.entries(degerler).map(([ad, deger]) => `  --kiris-${ad}: ${deger};`);
     const css = [
-      `/* TRDS teması: ${ayar.ad}. Üretilmiş dosya, elle değiştirmeyin. */`,
+      `/* Kiriş teması: ${ayar.ad}. Üretilmiş dosya, elle değiştirmeyin. */`,
       `/* Marka rengi: ${ayar.marka} — üretim: node packages/themes/build.mjs */`,
       '',
-      `[data-trds-tema-kurum="${klasor}"],`,
+      `[data-kiris-tema-kurum="${klasor}"],`,
       ':root {',
       ...satirlar,
       '}',

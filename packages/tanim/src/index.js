@@ -1,4 +1,4 @@
-// @tr-ds/tanim — bileşen tanımları. Çerçeveden bağımsız.
+// @kiris-ds/tanim — bileşen tanımları. Çerçeveden bağımsız.
 //
 // Her tanım bir çizim işlevi taşır: ciz(h, props, y). h(tag, attrs, ...children)
 // HTML öznitelik adlarını alır. React ve Vue paketleri aynı tanımı kendi h'leri
