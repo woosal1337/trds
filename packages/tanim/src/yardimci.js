@@ -1,8 +1,8 @@
 // Ortak yardımcılar. Her tanım aynı üç işlevi alır:
-//   h(tag, attrs, ...children)  — HTML öznitelik adlarıyla (class, for, tabindex)
-//   y.bir(...sinif)             — sınıf birleştirir, boşları atar
-//   y.kimlik(onek)              — sayfada tek olan bir id verir
-//   y.simge(ad, sinif?)         — e-Devlet simgesi, sprite'a <use> ile bağlanır
+//   h(tag, attrs, ...children)  · HTML öznitelik adlarıyla (class, for, tabindex)
+//   y.bir(...sinif)             · sınıf birleştirir, boşları atar
+//   y.kimlik(onek)              · sayfada tek olan bir id verir
+//   y.simge(ad, sinif?)         · e-Devlet simgesi, sprite'a <use> ile bağlanır
 
 export const bir = (...sinif) => sinif.filter(Boolean).join(' ');
 

@@ -64,7 +64,7 @@ async function main() {
     }
   }
 
-  // 4 — örneklerdeki her kiris- sınıfı derlenmiş CSS içinde geçmeli
+  // 4 · örneklerdeki her kiris- sınıfı derlenmiş CSS içinde geçmeli
   if (css) {
     const cssSiniflari = new Set([...css.matchAll(/\.(kiris-[a-z0-9_-]+)/g)].map((e) => e[1]));
     const eksik = new Map();
@@ -85,7 +85,7 @@ async function main() {
     }
   }
 
-  // 4b — örnek sayfalardaki her kiris- sınıfı da CSS içinde geçmeli
+  // 4b · örnek sayfalardaki her kiris- sınıfı da CSS içinde geçmeli
   if (css) {
     const { readdir } = await import('node:fs/promises');
     const cssSiniflari = new Set([...css.matchAll(/\.(kiris-[a-z0-9_-]+)/g)].map((e) => e[1]));
@@ -106,7 +106,7 @@ async function main() {
     }
   }
 
-  // 4c — üretilmiş örnek sayfada bir metin çerçevede bir kez durur.
+  // 4c · üretilmiş örnek sayfada bir metin çerçevede bir kez durur.
   // Çerçeve: başlık çubuğu, alt bilgi ve gövdedeki ikinci düzey başlıklar.
   // Aynı bağlantı metni alt bilgide iki kez, veya alt bilgi ile menüde birer
   // kez dursa denetim durur.
@@ -146,7 +146,7 @@ async function main() {
     }
   }
 
-  // 4d — React ve Vue durumu tanım paketiyle örtüşmeli. Tanımı olan parça
+  // 4d · React ve Vue durumu tanım paketiyle örtüşmeli. Tanımı olan parça
   // 'stable', olmayan 'yok'. Her tanım kayıt defterinde bir parçaya bağlanır.
   {
     const { TANIMLAR, SARMALAYICISIZ } = await import(join(KOK, 'packages', 'tanim', 'src', 'index.js'));
@@ -161,7 +161,7 @@ async function main() {
     for (const t of TANIMLAR) if (!BILESENLER.some((b) => b.id === t.id)) bildir('sarmalayici', `${t.id}: tanım var, kayıt defterinde parça yok.`);
   }
 
-  // 5 — her data-kiris davranışı JavaScript içinde başlatılmalı
+  // 5 · her data-kiris davranışı JavaScript içinde başlatılmalı
   if (js) {
     const davranislar = new Set();
     for (const b of BILESENLER) {

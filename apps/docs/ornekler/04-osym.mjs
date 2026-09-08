@@ -1,5 +1,5 @@
 // ÖSYM ana sayfası, yalnız Kiriş bileşenleri ile.
-// Gerçek site: https://www.osym.gov.tr — sınav günlerinde milyonlarca ziyaret.
+// Gerçek site: https://www.osym.gov.tr · sınav günlerinde milyonlarca ziyaret.
 
 export const ornek = {
   slug: 'osym',

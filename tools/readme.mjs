@@ -31,7 +31,7 @@ const DURUM = {
   beta: 'beta',
   alpha: 'alfa',
   degerlendiriliyor: 'değerlendiriliyor',
-  yok: '—'
+  yok: '-'
 };
 const durumAd = (d) => DURUM[d] ?? d;
 
@@ -40,7 +40,7 @@ const GORSEL = join(KOK, 'docs', 'gorseller');
 const gorsel = (b) =>
   existsSync(join(GORSEL, `${b.id}.png`))
     ? `<img src="docs/gorseller/${b.id}.png" alt="${b.ad}" width="260">`
-    : '—';
+    : '-';
 
 // --------------------------------------------------------------------- özgün
 

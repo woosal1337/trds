@@ -1,4 +1,4 @@
-// @kiris-ds/core — davranış katmanı.
+// @kiris-ds/core · davranış katmanı.
 //
 // Kural: JavaScript bir iyileştirmedir, bir gereklilik değildir. Bu dosya
 // yüklenmezse her bileşen yine okunur ve kullanılır. Akordiyon açık kalır,

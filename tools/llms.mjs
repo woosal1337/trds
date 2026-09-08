@@ -6,7 +6,7 @@
 //   node tools/llms.mjs
 //
 // Çıktı: llms.txt ve llms-full.txt, depo kökünde ve belge sitesinde.
-// Biçim: https://llmstxt.org — H1, özet alıntısı, bölümler ve bağlantılar.
+// Biçim: https://llmstxt.org · H1, özet alıntısı, bölümler ve bağlantılar.
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -80,7 +80,7 @@ const bilesenSatiri = (b) => {
   return `- [${b.ad} (${b.name})](${SITE}/bilesenler/${b.id}.html): ${b.ozet} Root class \`${kok}\`${davranis ? `, behaviour \`data-kiris="${davranis}"\`` : ''}${t ? `, React/Vue \`${t.ad}\`` : ''}.`;
 };
 
-const kisa = `# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi
+const kisa = `# Kiriş · Türkiye kamu hizmetleri için tasarım sistemi
 
 > ${ozet}
 
@@ -158,7 +158,7 @@ const bilesenBolumu = (b) => {
   const t = tanimHaritasi.get(b.id);
   const ornekler = b.ornekler.map((o) => `**${o.baslik}**\n\n\`\`\`html\n${varlikYolu(o.html)}\n\`\`\``).join('\n\n');
   const veri = davranisOznitelikleri(b.ornekler.map((o) => o.html).join('\n'));
-  return `### ${b.ad} (${b.name}) — \`${b.id}\`
+  return `### ${b.ad} (${b.name}) · \`${b.id}\`
 
 Group: ${grupAdi[b.grup]}${b.ozgun ? ' · unique to Türkiye' : ''}. Status: CSS ${b.durum.css}, JS ${b.durum.js}, React ${b.durum.react}, Vue ${b.durum.vue}. WCAG: ${b.wcag.join(', ')}.${b.kaynak.length ? ` Also in: ${b.kaynak.join(', ')}.` : ''}
 
@@ -188,7 +188,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 `;
 };
 
-const tam = `# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi (full reference)
+const tam = `# Kiriş · Türkiye kamu hizmetleri için tasarım sistemi (full reference)
 
 > ${ozet}
 
@@ -205,7 +205,7 @@ A Kiriş page has this order. Full-width parts carry their own \`.kiris-kap\` co
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hizmet adı — Kurum adı</title>
+  <title>Hizmet adı · Kurum adı</title>
   <link rel="stylesheet" href="/kiris/kiris.min.css">
 </head>
 <body>
@@ -236,7 +236,7 @@ Conventions: a live region is \`[data-kiris-durum]\` (or \`.kiris-*__durum\` in 
 
 Pure functions, no DOM. The same functions run in the browser and on the server.
 
-${dogrulayicilar.map((d) => `- \`${d.ad}(${d.imza})\` — ${d.aciklama}`).join('\n')}
+${dogrulayicilar.map((d) => `- \`${d.ad}(${d.imza})\` · ${d.aciklama}`).join('\n')}
 
 Also exported: \`AYLAR\` (Turkish month names).
 
@@ -254,7 +254,7 @@ Three institution themes override the brand tokens from one colour: \`@kiris-ds/
 
 ${kimlikLisans.split('\n').slice(0, 40).join('\n')}
 
-## Components — complete reference (${BILESENLER.length})
+## Components · complete reference (${BILESENLER.length})
 
 ${GRUPLAR.map((g) => `## ${g.ad}\n\n${g.ozet}\n\n${BILESENLER.filter((b) => b.grup === g.id).map(bilesenBolumu).join('\n')}`).join('\n')}
 

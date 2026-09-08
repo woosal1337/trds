@@ -1,4 +1,4 @@
-// Kiriş registry — the single source of truth.
+// Kiriş registry · the single source of truth.
 //
 // The documentation site, the component index, the integrations page, the
 // README table and the coverage report all read this file. Nothing about a
@@ -69,7 +69,7 @@ export const ENTEGRASYONLAR = [
     ozet: 'Çekirdek sınıfları saran ince bir bileşen katmanı. İş mantığı taşımaz.',
     paket: '@kiris-ds/react',
     durum: 'stable',
-    kurulum: 'npm install @kiris-ds/react @kiris-ds/core',
+    kurulum: 'npm install @kiris-ds/react @kiris-ds/core @kiris-ds/theme-vatandas',
     kullanim: [
       "import '@kiris-ds/core/css';",
       "import { Dugme, KimlikNoGirisi } from '@kiris-ds/react';",
@@ -95,7 +95,7 @@ export const ENTEGRASYONLAR = [
     ozet: 'App Router ile sunucu tarafında işlenir. Bileşenler istemci tarafına yalnız gerektiğinde iner.',
     paket: '@kiris-ds/react',
     durum: 'beta',
-    kurulum: 'npm install @kiris-ds/react @kiris-ds/core',
+    kurulum: 'npm install @kiris-ds/react @kiris-ds/core @kiris-ds/theme-vatandas',
     kullanim: [
       "// app/layout.tsx",
       "import '@kiris-ds/core/css';",

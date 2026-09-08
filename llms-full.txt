@@ -1,4 +1,4 @@
-# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi (full reference)
+# Kiriş · Türkiye kamu hizmetleri için tasarım sistemi (full reference)
 
 > Kiriş (Türkiye kamu hizmetleri için tasarım sistemi) is an open design system for Turkish public services. It has 116 HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.
 
@@ -54,7 +54,7 @@ A Kiriş page has this order. Full-width parts carry their own `.kiris-kap` cont
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hizmet adı — Kurum adı</title>
+  <title>Hizmet adı · Kurum adı</title>
   <link rel="stylesheet" href="/kiris/kiris.min.css">
 </head>
 <body>
@@ -123,27 +123,27 @@ Conventions: a live region is `[data-kiris-durum]` (or `.kiris-*__durum` in olde
 
 Pure functions, no DOM. The same functions run in the browser and on the server.
 
-- `trBuyuk(metin)` — Türkçe kuralına göre büyük harfe çevirir. `"istanbul".toUpperCase()` "ISTANBUL" verir. Doğrusu "İSTANBUL" olur. Bu fark bir plaka sorgusunda yanlış aracı bulur. @param {string} metin @returns {string}
-- `trKucuk(metin)` — Türkçe kuralına göre küçük harfe çevirir. @param {string} metin @returns {string}
-- `trSirala(a, b)` — Türkçe alfabe sırasına göre karşılaştırır. Liste ve tablo sıralamasında kullanın. `Array.prototype.sort` varsayılanı ç, ğ, ı, ö, ş ve ü harflerini yanlış yere koyar. @param {string} a @param {string} b @returns {number}
-- `tcKimlikGecerli(deger)` — T.C. kimlik numarasının sağlama toplamını doğrular. Kural: d10 = ((d1+d3+d5+d7+d9) * 7 - (d2+d4+d6+d8)) mod 10 d11 = (d1 + ... + d10) mod 10 Ayrıca ilk hane 0 olamaz. @param {string} deger @returns {boolean}
-- `yabanciKimlikGecerli(deger)` — Yabancı kimlik numarası biçimini doğrular. Bu numara 99 ile başlar ve T.C. kimlik numarasının sağlama toplamını taşımaz. Bu yüzden yalnız biçim denetlenir. Kesin doğrulama NVİ servisinden yapılır. @param {string} deger @returns {boolean}
-- `kimlikNoDenetle(deger, secenek = {})` — Hem T.C. hem yabancı kimlik numarasını kabul eden tek giriş noktası. @param {string} deger @param {{ yabanciKabul?: boolean }} [secenek] @returns {{ gecerli: boolean, tur: 'tc'|'yabanci'|null, hata: string|null }}
-- `vergiNoGecerli(deger)` — Vergi kimlik numarasının sağlama toplamını doğrular. 10 hanedir. @param {string} deger @returns {boolean}
-- `ibanGecerli(deger)` — IBAN sağlamasını mod 97 kuralı ile doğrular. Boşlukları ve küçük harfleri kabul eder ve temizler. @param {string} deger @returns {boolean}
-- `ibanKontrolHesapla(ulke, govde)` — Bir IBAN gövdesi için iki haneli kontrol numarasını hesaplar. Test ve veri üretimi için kullanılır. @param {string} ulke  iki harfli ülke kodu @param {string} govde kontrol haneleri olmadan IBAN gövdesi @returns {string} iki haneli kontrol numarası
-- `ibanBicimle(deger)` — IBAN’ı dörderli gruplayarak gösterime hazırlar. Gönderilen değer boşluksuz kalır, yalnız ekranda gruplanır. @param {string} deger @returns {string}
-- `ibanBankaKodu(deger)` — Türk IBAN’ından beş haneli banka kodunu çıkarır. Konum: 5. ile 9. karakter. @param {string} deger @returns {string|null}
-- `telefonNormalle(deger)` — Telefon numarasını 10 haneye indirger. Başta yazılan 0, +90, 90 ve boşluk gibi ayraçlar sessizce kaldırılır. Kullanıcı numarasını istediği gibi yazar. @param {string} deger @returns {string} 10 haneli numara, veya temizlenmiş kısmi değer
-- `telefonGecerli(deger, secenek = {})` — Türk telefon numarasını doğrular. İlk hane 2, 3, 4 veya 5 olur. 5 ile başlayan numara cep telefonudur. @param {string} deger @param {{ yalnizCep?: boolean }} [secenek] @returns {boolean}
-- `telefonBicimle(deger)` — Telefon numarasını 5XX XXX XX XX biçiminde gösterir. @param {string} deger @returns {string}
-- `plakaDenetle(deger)` — Türk araç plakasını doğrular ve parçalarına ayırır. Kabul edilen kalıplar: 1 harf ve 4 veya 5 rakam, 2 harf ve 3 veya 4 rakam, 3 harf ve 2 veya 3 rakam. @param {string} deger @returns {{ gecerli: boolean, il: string|null, harf: string|null, sayi: string|null }}
-- `plakaBicimle(deger)` — Plakayı "34 ABC 123" biçiminde gösterir. @param {string} deger @returns {string}
-- `postaKoduGecerli(deger)` — Posta kodunu doğrular. Beş hanedir ve ilk iki hane il kodudur. @param {string} deger @returns {boolean}
-- `tarihDenetle(parcalar, secenek = {})` — Üç parçalı tarih girişini doğrular. Hangi parçanın hatalı olduğunu söyler, böylece odak doğru alana gider. @param {{ gun: string|number, ay: string|number, yil: string|number }} parcalar @param {{ gelecekYasak?: boolean, enEskiYil?: number }} [secenek] @returns {{ gecerli: boolean, hata: string|null, alan: 'gun'|'ay'|'yil'|null, tarih: Date|null }}
-- `tarihBicimle(tarih)` — Tarihi Türkçe gg.aa.yyyy biçiminde yazar. @param {Date} tarih @returns {string}
-- `tarihUzunBicimle(tarih)` — Tarihi "27 Mart 1997" biçiminde yazar. Ay adı Türkçe kuralına göre yazılır. @param {Date} tarih @returns {string}
-- `tlBicimle(kurus)` — Tutarı Türk Lirası olarak yazar: 1.250,00 ₺ @param {number} kurus tam sayı olarak kuruş değeri @returns {string}
+- `trBuyuk(metin)` · Türkçe kuralına göre büyük harfe çevirir. `"istanbul".toUpperCase()` "ISTANBUL" verir. Doğrusu "İSTANBUL" olur. Bu fark bir plaka sorgusunda yanlış aracı bulur. @param {string} metin @returns {string}
+- `trKucuk(metin)` · Türkçe kuralına göre küçük harfe çevirir. @param {string} metin @returns {string}
+- `trSirala(a, b)` · Türkçe alfabe sırasına göre karşılaştırır. Liste ve tablo sıralamasında kullanın. `Array.prototype.sort` varsayılanı ç, ğ, ı, ö, ş ve ü harflerini yanlış yere koyar. @param {string} a @param {string} b @returns {number}
+- `tcKimlikGecerli(deger)` · T.C. kimlik numarasının sağlama toplamını doğrular. Kural: d10 = ((d1+d3+d5+d7+d9) * 7 - (d2+d4+d6+d8)) mod 10 d11 = (d1 + ... + d10) mod 10 Ayrıca ilk hane 0 olamaz. @param {string} deger @returns {boolean}
+- `yabanciKimlikGecerli(deger)` · Yabancı kimlik numarası biçimini doğrular. Bu numara 99 ile başlar ve T.C. kimlik numarasının sağlama toplamını taşımaz. Bu yüzden yalnız biçim denetlenir. Kesin doğrulama NVİ servisinden yapılır. @param {string} deger @returns {boolean}
+- `kimlikNoDenetle(deger, secenek = {})` · Hem T.C. hem yabancı kimlik numarasını kabul eden tek giriş noktası. @param {string} deger @param {{ yabanciKabul?: boolean }} [secenek] @returns {{ gecerli: boolean, tur: 'tc'|'yabanci'|null, hata: string|null }}
+- `vergiNoGecerli(deger)` · Vergi kimlik numarasının sağlama toplamını doğrular. 10 hanedir. @param {string} deger @returns {boolean}
+- `ibanGecerli(deger)` · IBAN sağlamasını mod 97 kuralı ile doğrular. Boşlukları ve küçük harfleri kabul eder ve temizler. @param {string} deger @returns {boolean}
+- `ibanKontrolHesapla(ulke, govde)` · Bir IBAN gövdesi için iki haneli kontrol numarasını hesaplar. Test ve veri üretimi için kullanılır. @param {string} ulke  iki harfli ülke kodu @param {string} govde kontrol haneleri olmadan IBAN gövdesi @returns {string} iki haneli kontrol numarası
+- `ibanBicimle(deger)` · IBAN’ı dörderli gruplayarak gösterime hazırlar. Gönderilen değer boşluksuz kalır, yalnız ekranda gruplanır. @param {string} deger @returns {string}
+- `ibanBankaKodu(deger)` · Türk IBAN’ından beş haneli banka kodunu çıkarır. Konum: 5. ile 9. karakter. @param {string} deger @returns {string|null}
+- `telefonNormalle(deger)` · Telefon numarasını 10 haneye indirger. Başta yazılan 0, +90, 90 ve boşluk gibi ayraçlar sessizce kaldırılır. Kullanıcı numarasını istediği gibi yazar. @param {string} deger @returns {string} 10 haneli numara, veya temizlenmiş kısmi değer
+- `telefonGecerli(deger, secenek = {})` · Türk telefon numarasını doğrular. İlk hane 2, 3, 4 veya 5 olur. 5 ile başlayan numara cep telefonudur. @param {string} deger @param {{ yalnizCep?: boolean }} [secenek] @returns {boolean}
+- `telefonBicimle(deger)` · Telefon numarasını 5XX XXX XX XX biçiminde gösterir. @param {string} deger @returns {string}
+- `plakaDenetle(deger)` · Türk araç plakasını doğrular ve parçalarına ayırır. Kabul edilen kalıplar: 1 harf ve 4 veya 5 rakam, 2 harf ve 3 veya 4 rakam, 3 harf ve 2 veya 3 rakam. @param {string} deger @returns {{ gecerli: boolean, il: string|null, harf: string|null, sayi: string|null }}
+- `plakaBicimle(deger)` · Plakayı "34 ABC 123" biçiminde gösterir. @param {string} deger @returns {string}
+- `postaKoduGecerli(deger)` · Posta kodunu doğrular. Beş hanedir ve ilk iki hane il kodudur. @param {string} deger @returns {boolean}
+- `tarihDenetle(parcalar, secenek = {})` · Üç parçalı tarih girişini doğrular. Hangi parçanın hatalı olduğunu söyler, böylece odak doğru alana gider. @param {{ gun: string|number, ay: string|number, yil: string|number }} parcalar @param {{ gelecekYasak?: boolean, enEskiYil?: number }} [secenek] @returns {{ gecerli: boolean, hata: string|null, alan: 'gun'|'ay'|'yil'|null, tarih: Date|null }}
+- `tarihBicimle(tarih)` · Tarihi Türkçe gg.aa.yyyy biçiminde yazar. @param {Date} tarih @returns {string}
+- `tarihUzunBicimle(tarih)` · Tarihi "27 Mart 1997" biçiminde yazar. Ay adı Türkçe kuralına göre yazılır. @param {Date} tarih @returns {string}
+- `tlBicimle(kurus)` · Tutarı Türk Lirası olarak yazar: 1.250,00 ₺ @param {number} kurus tam sayı olarak kuruş değeri @returns {string}
 
 Also exported: `AYLAR` (Turkish month names).
 
@@ -260,7 +260,7 @@ Also exported: `AYLAR` (Turkish month names).
 - `--kiris-aralik-9`: `3rem`
 - `--kiris-aralik-10`: `4rem`
 - `--kiris-aralik-11`: `5rem`
-- `--kiris-yazi-aile-govde`: `"Kiriş Sans", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
+- `--kiris-yazi-aile-govde`: `"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
 - `--kiris-yazi-aile-tek`: `"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`
 - `--kiris-yazi-boyut-12`: `0.75rem`
 - `--kiris-yazi-boyut-14`: `0.875rem`
@@ -355,20 +355,20 @@ Aşağıdaki parçalar bu belgeye tabidir:
 - Kurum favicon'ları ve uygulama simgeleri. Kiriş'in kendi işareti hariçtir
 - `kurumlar/` altındaki kurum logoları. Her biri kurumun kendi sitesinden
   alınmıştır ve yalnız o kurumu göstermek için kullanılır:
-  - `e-devlet-kapisi-beyaz.svg` — cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu
-  - `sgk.svg`, `sgk-beyaz.svg` — www.sgk.gov.tr
-  - `saglik-bakanligi.svg` — www.saglik.gov.tr
+  - `e-devlet-kapisi-beyaz.svg` · cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu
+  - `sgk.svg`, `sgk-beyaz.svg` · www.sgk.gov.tr
+  - `saglik-bakanligi.svg` · www.saglik.gov.tr
 
 ## İzin verilen kullanım
 
 
-## Components — complete reference (116)
+## Components · complete reference (116)
 
 ## Kimlik
 
 Kullanıcıya bunun bir devlet hizmeti olduğunu söyleyen parçalar.
 
-### Alt bilgi (Footer) — `footer`
+### Alt bilgi (Footer) · `footer`
 
 Group: Kimlik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.5. Also in: UK, US, FR, IE, KR, DK.
 
@@ -394,7 +394,7 @@ Accessibility:
   <div class="kiris-kap">
     <div class="kiris-alt-bilgi__ust">
       <div class="kiris-alt-bilgi__marka">
-        <img class="kiris-alt-bilgi__logo" src="/kiris//e-devlet-isaret.png" alt="" width="64" height="64">
+        <img class="kiris-alt-bilgi__logo" src="/kiris/e-devlet-isaret.png" alt="" width="64" height="64">
         <div><p class="kiris-alt-bilgi__kurum">e-Devlet Kapısı</p><p class="kiris-alt-bilgi__ust-kurum">T.C. Cumhurbaşkanlığı Siber Güvenlik Başkanlığı kurar ve yönetir. Türksat A.Ş. işletir.</p></div>
       </div>
       <address class="kiris-alt-bilgi__iletisim">
@@ -495,7 +495,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Aşama afişi (Phase banner) — `phase-banner`
+### Aşama afişi (Phase banner) · `phase-banner`
 
 Group: Kimlik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: UK, IE.
 
@@ -530,7 +530,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Başlık (Header) — `header`
+### Başlık (Header) · `header`
 
 Group: Kimlik. Status: CSS stable, JS mobil menü, React stable, Vue stable. WCAG: 1.3.1, 2.1.2, 2.4.1, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, DE.
 
@@ -610,7 +610,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Çerez bildirimi (Cookie banner) — `cookie-banner`
+### Çerez bildirimi (Cookie banner) · `cookie-banner`
 
 Group: Kimlik. Status: CSS stable, JS tercih saklama, React stable, Vue stable. WCAG: 1.3.1, 2.4.3, 3.2.2. Also in: UK, FR, DK, BR, CH, IT.
 
@@ -658,7 +658,7 @@ Data attributes used by the markup: `data-hep-goster`, `data-cerez`, `data-cerez
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kurum logosu (Logo lockup) — `logo`
+### Kurum logosu (Logo lockup) · `logo`
 
 Group: Kimlik · unique to Türkiye. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.1.1, 2.4.4. Also in: DE, FR.
 
@@ -735,7 +735,7 @@ Why it exists: Kurumun işaretini ve adını aynı düzende gösterir. Logo boyu
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kurum tanıtıcısı (Identifier) — `identifier`
+### Kurum tanıtıcısı (Identifier) · `identifier`
 
 Group: Kimlik · unique to Türkiye. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.1.1, 1.3.1, 2.4.5. Also in: US, KR.
 
@@ -784,7 +784,7 @@ Why it exists: Türkiye’de bir vatandaş bir hizmeti hangi kurumun yürüttü�
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Resmî site afişi (Masthead) — `masthead`
+### Resmî site afişi (Masthead) · `masthead`
 
 Group: Kimlik · unique to Türkiye. Status: CSS stable, JS aç ve kapat, React stable, Vue stable. WCAG: 1.3.1, 2.4.1, 4.1.2. Also in: US, KR.
 
@@ -840,7 +840,7 @@ Why it exists: Resmî hizmetlerde kurum kimliğini ve alan adını kontrol etme 
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sekme simgesi (Favicon) — `favicon`
+### Sekme simgesi (Favicon) · `favicon`
 
 Group: Kimlik. Status: CSS yok, JS yok, React yok, Vue yok. WCAG: 2.4.2. Also in: KR.
 
@@ -869,7 +869,7 @@ No React or Vue wrapper: this part is a set of classes or a file, use the HTML d
 
 Kullanıcının nerede olduğunu ve nereye gidebileceğini gösteren parçalar.
 
-### Adım göstergesi (Step indicator) — `step-indicator`
+### Adım göstergesi (Step indicator) · `step-indicator`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.8. Also in: US, FR, IE, KR, JP, DK.
 
@@ -911,7 +911,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Alt gezinme (Bottom navigation) — `bottom-navigation`
+### Alt gezinme (Bottom navigation) · `bottom-navigation`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.5.8, 2.4.7. Also in: IT, JP, KR.
 
@@ -950,7 +950,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Arama (Search) — `search`
+### Arama (Search) · `search`
 
 Group: Gezinme. Status: CSS stable, JS öneri listesi, React stable, Vue stable. WCAG: 1.3.1, 2.4.6, 4.1.2. Also in: US, FR, JP, DK, DE, NO.
 
@@ -1021,7 +1021,7 @@ Data attributes used by the markup: `data-kaynak-id`, `data-kiris-durum`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Başa dön (Back to top) — `back-to-top`
+### Başa dön (Back to top) · `back-to-top`
 
 Group: Gezinme. Status: CSS stable, JS görünürlük, React stable, Vue stable. WCAG: 2.4.1, 2.3.3. Also in: IT, JP, DK, FR, CH.
 
@@ -1057,7 +1057,7 @@ Data attributes used by the markup: `data-hep-goster`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Dil seçici (Language selector) — `language-selector`
+### Dil seçici (Language selector) · `language-selector`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 3.1.1, 3.1.2, 2.4.4. Also in: UK, US, KR, JP, DK.
 
@@ -1100,7 +1100,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Geniş menü (Mega menu) — `mega-menu`
+### Geniş menü (Mega menu) · `mega-menu`
 
 Group: Gezinme. Status: CSS stable, JS aç ve kapat, React stable, Vue stable. WCAG: 2.1.1, 2.4.3, 4.1.2. Also in: IT, JP, CA.
 
@@ -1154,7 +1154,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Geri bağlantısı (Back link) — `back-link`
+### Geri bağlantısı (Back link) · `back-link`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.4, 3.2.3. Also in: UK, KR, DK.
 
@@ -1198,7 +1198,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Hizmet gezinmesi (Service navigation) — `service-navigation`
+### Hizmet gezinmesi (Service navigation) · `service-navigation`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.7, 2.4.8. Also in: UK, FI, FR.
 
@@ -1237,7 +1237,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### İçeriğe atlama bağlantısı (Skip link) — `skip-link`
+### İçeriğe atlama bağlantısı (Skip link) · `skip-link`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.1, 2.4.7. Also in: UK, FR, KR, DK, NO.
 
@@ -1276,7 +1276,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sayfa içi gezinme (In-page navigation) — `in-page-navigation`
+### Sayfa içi gezinme (In-page navigation) · `in-page-navigation`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.1, 2.4.5. Also in: US, KR, JP, DK.
 
@@ -1303,6 +1303,26 @@ Accessibility:
     <li><a href="#itiraz">İtiraz yolu</a></li>
   </ol>
 </nav>
+
+<section class="kiris-bolum" id="kosullar">
+  <h3 class="kiris-baslik kiris-baslik--3">Başvuru koşulları</h3>
+  <p>Başvuru için Türkiye Cumhuriyeti vatandaşı olmanız ve 18 yaşını doldurmuş olmanız gerekir.</p>
+</section>
+
+<section class="kiris-bolum" id="belgeler">
+  <h3 class="kiris-baslik kiris-baslik--3">Gerekli belgeler</h3>
+  <p>Kimlik fotokopisi, ikametgah belgesi ve başvuru formu.</p>
+</section>
+
+<section class="kiris-bolum" id="sure">
+  <h3 class="kiris-baslik kiris-baslik--3">Süreç ve süre</h3>
+  <p>Başvurunuz en geç 15 iş günü içinde sonuçlanır.</p>
+</section>
+
+<section class="kiris-bolum" id="itiraz">
+  <h3 class="kiris-baslik kiris-baslik--3">İtiraz yolu</h3>
+  <p>Sonuca 30 gün içinde CİMER üzerinden itiraz edebilirsiniz.</p>
+</section>
 ```
 
 **React** (`import { SayfaIciGezinme } from '@kiris-ds/react'`):
@@ -1319,7 +1339,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sayfa yolu (Breadcrumb) — `breadcrumb`
+### Sayfa yolu (Breadcrumb) · `breadcrumb`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.8. Also in: UK, US, FR, IE, KR, JP, DK, NO.
 
@@ -1360,7 +1380,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sayfalama (Pagination) — `pagination`
+### Sayfalama (Pagination) · `pagination`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.8, 2.5.8, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, NO.
 
@@ -1401,7 +1421,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yan menü (Side navigation) — `side-navigation`
+### Yan menü (Side navigation) · `side-navigation`
 
 Group: Gezinme. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.7, 2.4.8. Also in: US, FR, IE, KR, DK.
 
@@ -1452,7 +1472,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 Kullanıcıdan bilgi alan parçalar.
 
-### Açılır liste (Select) — `select`
+### Açılır liste (Select) · `select`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 3.3.2, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -1497,7 +1517,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Adet seçici (Quantity stepper) — `quantity`
+### Adet seçici (Quantity stepper) · `quantity`
 
 Group: Form. Status: CSS stable, JS artır, azalt, React stable, Vue stable. WCAG: 2.1.1, 4.1.2. Also in: KR, IT.
 
@@ -1536,7 +1556,7 @@ Data attributes used by the markup: `data-adet`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Alan grubu (Fieldset) — `fieldset`
+### Alan grubu (Fieldset) · `fieldset`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 3.3.2. Also in: UK, DE, NO.
 
@@ -1573,7 +1593,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Aralık seçici (Range slider) — `range`
+### Aralık seçici (Range slider) · `range`
 
 Group: Form. Status: CSS stable, JS değer gösterimi, React stable, Vue stable. WCAG: 1.3.1, 4.1.2. Also in: US, FR, NL, KR.
 
@@ -1614,7 +1634,7 @@ Data attributes used by the markup: `data-birim`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Çok satırlı metin (Textarea) — `textarea`
+### Çok satırlı metin (Textarea) · `textarea`
 
 Group: Form. Status: CSS stable, JS karakter sayacı, React stable, Vue stable. WCAG: 1.3.1, 3.3.1, 4.1.3. Also in: UK, IE, KR, JP, DK, DE, NO.
 
@@ -1655,7 +1675,7 @@ Data attributes used by the markup: `data-sinir`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Dosya yükleme (File upload) — `file-upload`
+### Dosya yükleme (File upload) · `file-upload`
 
 Group: Form. Status: CSS stable, JS sürükle, listele, kaldır, React stable, Vue stable. WCAG: 1.3.1, 2.1.1, 3.3.2, 4.1.3. Also in: UK, US, FR, IE, KR, JP, DK, DE.
 
@@ -1701,7 +1721,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### E-posta girişi (Email input) — `email-input`
+### E-posta girişi (Email input) · `email-input`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.5, 3.3.1, 3.3.2. Also in: DE.
 
@@ -1740,7 +1760,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Girdi grubu (Input group) — `input-group`
+### Girdi grubu (Input group) · `input-group`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 3.3.2. Also in: US, DE.
 
@@ -1793,7 +1813,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Girdi maskesi (Input mask) — `input-mask`
+### Girdi maskesi (Input mask) · `input-mask`
 
 Group: Form. Status: CSS stable, JS biçimlendirme, React stable, Vue stable. WCAG: 3.3.2, 3.3.3. Also in: US.
 
@@ -1833,7 +1853,7 @@ Data attributes used by the markup: `data-maske`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Metin girişi (Text input) — `text-input`
+### Metin girişi (Text input) · `text-input`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 1.3.5, 3.3.1, 3.3.2, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -1884,7 +1904,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Parola girişi (Password input) — `password-input`
+### Parola girişi (Password input) · `password-input`
 
 Group: Form. Status: CSS stable, JS göster ve gizle, React stable, Vue stable. WCAG: 1.3.5, 3.3.2, 4.1.2. Also in: UK, FR, IE, DE.
 
@@ -1925,7 +1945,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Saat girişi (Time input) — `time-input`
+### Saat girişi (Time input) · `time-input`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 3.3.2. Also in: FI, IT, US.
 
@@ -1967,7 +1987,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sayı girişi (Number input) — `number-input`
+### Sayı girişi (Number input) · `number-input`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.5, 3.3.2. Also in: DE.
 
@@ -2018,7 +2038,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Takvim (Date picker) — `date-picker`
+### Takvim (Date picker) · `date-picker`
 
 Group: Form. Status: CSS stable, JS ay ızgarası ve klavye, React stable, Vue stable. WCAG: 1.3.1, 2.1.1, 4.1.2. Also in: NL, IT, JP, DK, NO, FI, US, BR, KR, CH.
 
@@ -2078,7 +2098,7 @@ Data attributes used by the markup: `data-en-az`, `data-en-cok`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Web adresi girişi (URL input) — `url-input`
+### Web adresi girişi (URL input) · `url-input`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.5, 3.3.2. Also in: DE.
 
@@ -2115,7 +2135,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yardım metni (Hint) — `hint`
+### Yardım metni (Hint) · `hint`
 
 Group: Form. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.3, 3.3.2. Also in: UK, IE, DK, NO.
 
@@ -2153,7 +2173,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 Kullanıcının seçenekler arasından seçim yapmasını sağlayan parçalar.
 
-### Anahtar (Switch) — `switch`
+### Anahtar (Switch) · `switch`
 
 Group: Seçim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.5.8, 4.1.2. Also in: FR, KR, JP, DK, NO.
 
@@ -2194,7 +2214,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Aranabilir liste (Combobox) — `combobox`
+### Aranabilir liste (Combobox) · `combobox`
 
 Group: Seçim. Status: CSS stable, JS süzme ve klavye, React stable, Vue stable. WCAG: 1.3.1, 2.1.1, 4.1.2, 4.1.3. Also in: US, FR, IE, JP, NO.
 
@@ -2253,7 +2273,7 @@ Data attributes used by the markup: `data-deger`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Bölümlü seçim (Segmented control) — `segmented-control`
+### Bölümlü seçim (Segmented control) · `segmented-control`
 
 Group: Seçim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 4.1.2. Also in: NO, FR.
 
@@ -2292,7 +2312,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Çoklu seçim (Multi-select) — `multi-select`
+### Çoklu seçim (Multi-select) · `multi-select`
 
 Group: Seçim. Status: CSS stable, JS süzme, seçim etiketi, React stable, Vue stable. WCAG: 1.3.1, 4.1.2, 4.1.3. Also in: FI, IE, FR, CH.
 
@@ -2339,7 +2359,7 @@ Data attributes used by the markup: `data-deger`, `data-kiris-durum`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Onay kutusu (Checkbox) — `checkbox`
+### Onay kutusu (Checkbox) · `checkbox`
 
 Group: Seçim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.5.8, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -2387,7 +2407,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Puanlama (Rating) — `rating`
+### Puanlama (Rating) · `rating`
 
 Group: Seçim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.1.1, 4.1.2. Also in: IT, IE.
 
@@ -2430,7 +2450,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Seçenek düğmesi (Radio) — `radio`
+### Seçenek düğmesi (Radio) · `radio`
 
 Group: Seçim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.1.1, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -2478,7 +2498,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Seçim etiketi (Chip) — `chip`
+### Seçim etiketi (Chip) · `chip`
 
 Group: Seçim. Status: CSS stable, JS kaldırma, React stable, Vue stable. WCAG: 4.1.2, 2.5.8. Also in: NO, IE, FI, IT, JP, CH.
 
@@ -2521,7 +2541,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 Kullanıcının bir işlem başlatmasını sağlayan parçalar.
 
-### Bağlantı (Link) — `link`
+### Bağlantı (Link) · `link`
 
 Group: Eylem. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 2.4.4, 2.4.7. Also in: US, FR, IE, KR, DK, DE, NO.
 
@@ -2563,7 +2583,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Düğme (Button) — `button`
+### Düğme (Button) · `button`
 
 Group: Eylem. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.11, 2.4.7, 2.5.5, 2.5.8. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -2632,7 +2652,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Eylem menüsü (Action menu) — `action-menu`
+### Eylem menüsü (Action menu) · `action-menu`
 
 Group: Eylem. Status: CSS stable, JS klavye desteği, React stable, Vue stable. WCAG: 2.1.1, 4.1.2. Also in: NO, DK, FI, IT, FR, JP.
 
@@ -2674,7 +2694,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### İndirme bağlantısı (Download link) — `download-link`
+### İndirme bağlantısı (Download link) · `download-link`
 
 Group: Eylem. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.4, 3.2.5. Also in: FR, CH.
 
@@ -2711,7 +2731,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Paylaş (Share) — `share`
+### Paylaş (Share) · `share`
 
 Group: Eylem. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.4, 3.2.5. Also in: FR, CH.
 
@@ -2748,7 +2768,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sayfadan çık (Exit this page) — `exit-this-page`
+### Sayfadan çık (Exit this page) · `exit-this-page`
 
 Group: Eylem. Status: CSS stable, JS hızlı çıkış, React stable, Vue stable. WCAG: 2.1.1, 2.4.3. Also in: UK.
 
@@ -2788,7 +2808,7 @@ Data attributes used by the markup: `data-kiris-durum`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yazdır (Print button) — `print`
+### Yazdır (Print button) · `print`
 
 Group: Eylem. Status: CSS stable, JS yazdırma, React stable, Vue stable. WCAG: 4.1.2. Also in: CH.
 
@@ -2821,7 +2841,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yüzen düğme (Floating action button) — `fab`
+### Yüzen düğme (Floating action button) · `fab`
 
 Group: Eylem. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.5.8, 1.4.10. Also in: KR, BR.
 
@@ -2859,7 +2879,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 Sistemin kullanıcıya durum bildiren parçaları.
 
-### Açılır bilgi (Popover) — `popover`
+### Açılır bilgi (Popover) · `popover`
 
 Group: Geri bildirim. Status: CSS stable, JS aç ve kapat, React stable, Vue stable. WCAG: 1.4.13, 4.1.2. Also in: NO, IE, IT, NL, CH.
 
@@ -2901,7 +2921,7 @@ Data attributes used by the markup: `data-kiris-kapat`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Bildirim afişi (Notification banner) — `notification-banner`
+### Bildirim afişi (Notification banner) · `notification-banner`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.3, 1.3.1, 4.1.3. Also in: UK, FR, JP, DE.
 
@@ -2938,7 +2958,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Geçici bildirim (Toast) — `toast`
+### Geçici bildirim (Toast) · `toast`
 
 Group: Geri bildirim. Status: CSS stable, JS kapatma ve süre, React stable, Vue stable. WCAG: 2.2.1, 4.1.3. Also in: DK, NO, IE, FI, IT, KR.
 
@@ -2986,7 +3006,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Hata mesajı (Error message) — `error-message`
+### Hata mesajı (Error message) · `error-message`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 3.3.1, 3.3.3. Also in: UK, US, DK, NO.
 
@@ -3021,7 +3041,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Hata özeti (Error summary) — `error-summary`
+### Hata özeti (Error summary) · `error-summary`
 
 Group: Geri bildirim. Status: CSS stable, JS odak yönetimi, React stable, Vue stable. WCAG: 2.4.3, 3.3.1, 4.1.3. Also in: UK, DK, NO.
 
@@ -3047,6 +3067,18 @@ Accessibility:
     <li><a href="#dogum">Doğum tarihi bugünden sonra olamaz</a></li>
   </ul>
 </div>
+
+<div class="kiris-alan kiris-alan--hata">
+  <label class="kiris-etiket" for="kimlik">T.C. kimlik numaranız</label>
+  <p class="kiris-hata" id="kimlik-hata">T.C. kimlik numarası 11 hane olmalıdır</p>
+  <input class="kiris-girdi kiris-girdi--11" id="kimlik" name="kimlik" type="text" inputmode="numeric" value="1234" aria-describedby="kimlik-hata" aria-invalid="true">
+</div>
+
+<div class="kiris-alan kiris-alan--hata">
+  <label class="kiris-etiket" for="dogum">Doğum tarihiniz</label>
+  <p class="kiris-hata" id="dogum-hata">Doğum tarihi bugünden sonra olamaz</p>
+  <input class="kiris-girdi kiris-girdi--10" id="dogum" name="dogum" type="text" inputmode="numeric" value="01.01.2090" aria-describedby="dogum-hata" aria-invalid="true">
+</div>
 ```
 
 **React** (`import { HataOzeti } from '@kiris-ds/react'`):
@@ -3063,7 +3095,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### İlerleme çubuğu (Progress) — `progress`
+### İlerleme çubuğu (Progress) · `progress`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 4.1.2. Also in: IE, JP, DE, NO.
 
@@ -3110,7 +3142,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### İpucu (Tooltip) — `tooltip`
+### İpucu (Tooltip) · `tooltip`
 
 Group: Geri bildirim. Status: CSS stable, JS göster ve gizle, React stable, Vue stable. WCAG: 1.4.13, 2.1.1, 4.1.2. Also in: US, FR, IE, KR, DK, NO.
 
@@ -3149,7 +3181,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### İskelet (Skeleton) — `skeleton`
+### İskelet (Skeleton) · `skeleton`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.3.3, 4.1.3. Also in: NO.
 
@@ -3188,7 +3220,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sonuç paneli (Panel) — `panel`
+### Sonuç paneli (Panel) · `panel`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.6. Also in: UK.
 
@@ -3225,7 +3257,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Uyarı (Alert) — `alert`
+### Uyarı (Alert) · `alert`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 1.4.3, 4.1.3. Also in: US, FR, IE, DK, DE, NO.
 
@@ -3270,7 +3302,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Uyarı metni (Warning text) — `warning-text`
+### Uyarı metni (Warning text) · `warning-text`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.3, 1.4.1. Also in: UK.
 
@@ -3307,7 +3339,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yönlendirme (Coach mark) — `coach-mark`
+### Yönlendirme (Coach mark) · `coach-mark`
 
 Group: Geri bildirim. Status: CSS stable, JS adımlar, React stable, Vue stable. WCAG: 2.1.1, 2.4.3, 4.1.2. Also in: KR.
 
@@ -3351,7 +3383,7 @@ Data attributes used by the markup: `data-yonlendirme-baslat`, `data-yonlendirme
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yükleniyor (Spinner) — `spinner`
+### Yükleniyor (Spinner) · `spinner`
 
 Group: Geri bildirim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.3.3, 4.1.3. Also in: IE, KR, DK, DE, NO.
 
@@ -3394,7 +3426,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 İçeriği düzenleyen ve gruplayan parçalar.
 
-### Akordiyon (Accordion) — `accordion`
+### Akordiyon (Accordion) · `accordion`
 
 Group: Yerleşim. Status: CSS stable, JS aç ve kapat, React stable, Vue stable. WCAG: 1.3.1, 2.1.1, 4.1.2. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -3438,7 +3470,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Ayraç (Divider) — `divider`
+### Ayraç (Divider) · `divider`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: IE, JP, DE, NO.
 
@@ -3475,7 +3507,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Ayrıntılar (Details) — `details`
+### Ayrıntılar (Details) · `details`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.1.1. Also in: UK, IE, KR, JP, DK, NO.
 
@@ -3512,7 +3544,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Bölüm (Section) — `section`
+### Bölüm (Section) · `section`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.4. Also in: IT, CH.
 
@@ -3551,7 +3583,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Izgara (Grid) — `grid`
+### Izgara (Grid) · `grid`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.2, 1.4.10. Also in: IE, DE.
 
@@ -3594,7 +3626,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kap (Container) — `container`
+### Kap (Container) · `container`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.8, 1.4.10. Also in: CA, IE, FI, DE.
 
@@ -3628,7 +3660,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Karo (Tile) — `tile`
+### Karo (Tile) · `tile`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.4, 2.5.8. Also in: FR.
 
@@ -3666,7 +3698,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Karşılama bloğu (Hero) — `hero`
+### Karşılama bloğu (Hero) · `hero`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.3, 2.4.6. Also in: IT, CH, FR.
 
@@ -3707,7 +3739,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kart (Card) — `card`
+### Kart (Card) · `card`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.4. Also in: US, FR, IE, JP, DK, DE, NO.
 
@@ -3744,7 +3776,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kayan pano (Carousel) — `carousel`
+### Kayan pano (Carousel) · `carousel`
 
 Group: Yerleşim. Status: CSS stable, JS düğmeler ve noktalar, React stable, Vue stable. WCAG: 2.2.2, 2.3.3, 4.1.2. Also in: IT, JP, BR, KR, CH.
 
@@ -3791,7 +3823,7 @@ Data attributes used by the markup: `data-kiris-durum`, `data-yon`, `data-durdur
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kip pencere (Modal) — `modal`
+### Kip pencere (Modal) · `modal`
 
 Group: Yerleşim. Status: CSS stable, JS odak tuzağı, React stable, Vue stable. WCAG: 2.1.2, 2.4.3, 4.1.2. Also in: US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -3846,7 +3878,7 @@ Data attributes used by the markup: `data-kiris-ac`, `data-kiris-kapat`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sekmeler (Tabs) — `tabs`
+### Sekmeler (Tabs) · `tabs`
 
 Group: Yerleşim. Status: CSS stable, JS klavye desteği, React stable, Vue stable. WCAG: 2.1.1, 2.4.3, 4.1.2. Also in: UK, FR, IE, KR, JP, DK, DE, NO.
 
@@ -3893,7 +3925,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Simge kartı (Icon card) — `icon-card`
+### Simge kartı (Icon card) · `icon-card`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.1.1, 2.4.4.
 
@@ -3931,7 +3963,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yan panel (Drawer) — `drawer`
+### Yan panel (Drawer) · `drawer`
 
 Group: Yerleşim. Status: CSS stable, JS aç ve kapat, React stable, Vue stable. WCAG: 2.1.2, 2.4.3, 4.1.2. Also in: NL, JP, IE, KR.
 
@@ -3993,7 +4025,7 @@ Data attributes used by the markup: `data-kiris-panel-ac`, `data-kiris-kapat`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Yardımcı sınıflar (Utility classes) — `utilities`
+### Yardımcı sınıflar (Utility classes) · `utilities`
 
 Group: Yerleşim. Status: CSS stable, JS yok, React yok, Vue yok. WCAG: 1.3.2. Also in: US, DE.
 
@@ -4027,7 +4059,7 @@ No React or Vue wrapper: this part is a set of classes or a file, use the HTML d
 
 Veriyi ve metni sunan parçalar.
 
-### Alıntı (Blockquote) — `blockquote`
+### Alıntı (Blockquote) · `blockquote`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: NL, JP, FR, CH.
 
@@ -4064,7 +4096,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Avatar (Avatar) — `avatar`
+### Avatar (Avatar) · `avatar`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.1.1. Also in: NL, NO, IT, BR, CH.
 
@@ -4104,7 +4136,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Bilgi kutusu (Callout) — `callout`
+### Bilgi kutusu (Callout) · `callout`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: FR, US, IT, NL, JP.
 
@@ -4141,7 +4173,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Etiket (Tag) — `tag`
+### Etiket (Tag) · `tag`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 1.4.3. Also in: UK, US, FR, IE, KR, JP, DK, NO.
 
@@ -4179,7 +4211,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Görev listesi (Task list) — `task-list`
+### Görev listesi (Task list) · `task-list`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 1.3.1. Also in: UK, DE.
 
@@ -4222,7 +4254,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Görsel (Figure) — `figure`
+### Görsel (Figure) · `figure`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.1.1, 1.4.5. Also in: NL, JP, KR, FR.
 
@@ -4259,7 +4291,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### İstatistik kutusu (Stat tile) — `stat`
+### İstatistik kutusu (Stat tile) · `stat`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 1.3.2.
 
@@ -4299,7 +4331,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kayıt listesi (Collection) — `collection`
+### Kayıt listesi (Collection) · `collection`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.4. Also in: US, KR, JP, BR.
 
@@ -4336,7 +4368,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Kod (Code) — `code`
+### Kod (Code) · `code`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.3, 1.4.10. Also in: NL.
 
@@ -4371,7 +4403,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Liste (List) — `list`
+### Liste (List) · `list`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: US, IE, KR, JP, NO, DE.
 
@@ -4419,7 +4451,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Özet listesi (Summary list) — `summary-list`
+### Özet listesi (Summary list) · `summary-list`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.4, 3.3.4. Also in: UK, FR, IE, JP, DE.
 
@@ -4464,7 +4496,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Rozet (Badge) — `badge`
+### Rozet (Badge) · `badge`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1, 1.4.3. Also in: FR, KR, DK, DE, NO.
 
@@ -4502,7 +4534,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Ses (Audio) — `audio`
+### Ses (Audio) · `audio`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.2.1, 1.4.2. Also in: CH, KR.
 
@@ -4539,7 +4571,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Sıralanabilir tablo (Sortable table) — `sortable-table`
+### Sıralanabilir tablo (Sortable table) · `sortable-table`
 
 Group: İçerik. Status: CSS stable, JS sütun sıralama, React stable, Vue stable. WCAG: 1.3.1, 4.1.3. Also in: IE, JP.
 
@@ -4579,7 +4611,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Simge (Icon) — `icon`
+### Simge (Icon) · `icon`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.1.1, 1.4.11. Also in: US, IE, DE, KR.
 
@@ -4627,7 +4659,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Simgeli liste (Icon list) — `icon-list`
+### Simgeli liste (Icon list) · `icon-list`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 1.4.1. Also in: US.
 
@@ -4665,7 +4697,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Son güncelleme (Date modified) — `date-modified`
+### Son güncelleme (Date modified) · `date-modified`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: CA, CH.
 
@@ -4699,7 +4731,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Süreç listesi (Process list) — `process-list`
+### Süreç listesi (Process list) · `process-list`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: US, FR.
 
@@ -4737,7 +4769,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Tablo (Table) — `table`
+### Tablo (Table) · `table`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 1.4.10. Also in: UK, US, FR, IE, KR, JP, DK, DE, NO.
 
@@ -4784,7 +4816,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Takip et (Follow) — `follow`
+### Takip et (Follow) · `follow`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 2.4.4. Also in: FR, CH.
 
@@ -4829,7 +4861,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Tanım listesi (Description list) — `description-list`
+### Tanım listesi (Description list) · `description-list`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1. Also in: DE, JP, IE.
 
@@ -4867,7 +4899,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Tipografi (Typography) — `typography`
+### Tipografi (Typography) · `typography`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 1.4.8, 1.4.12, 2.4.6. Also in: IE, JP, DE, NO.
 
@@ -4916,7 +4948,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Video (Video) — `video`
+### Video (Video) · `video`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.2.2, 1.2.3, 1.4.2. Also in: NL, IT, FR, CH, KR.
 
@@ -4954,7 +4986,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Vurgulu metin (Inset text) — `inset-text`
+### Vurgulu metin (Inset text) · `inset-text`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.4.1. Also in: UK, US, FR, IE.
 
@@ -4991,7 +5023,7 @@ Accessibility:
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Zaman çizelgesi (Timeline) — `timeline`
+### Zaman çizelgesi (Timeline) · `timeline`
 
 Group: İçerik. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 1.3.1, 1.3.2. Also in: IT, NL.
 
@@ -5033,7 +5065,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 Türk kimlik, adres ve finans biçimlerini alan parçalar.
 
-### Adres (Address) — `adres`
+### Adres (Address) · `adres`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS bağlı listeler, React stable, Vue stable. WCAG: 1.3.1, 3.3.2, 4.1.3. Also in: UK.
 
@@ -5092,7 +5124,7 @@ Data attributes used by the markup: `data-adres`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### IBAN girişi (IBAN input) — `iban-girisi`
+### IBAN girişi (IBAN input) · `iban-girisi`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS doğrulama, React stable, Vue stable. WCAG: 1.3.5, 3.3.1, 3.3.3.
 
@@ -5140,7 +5172,7 @@ Data attributes used by the markup: `data-kiris-hata`, `data-kiris-sayac`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Plaka girişi (Licence plate input) — `plaka-girisi`
+### Plaka girişi (Licence plate input) · `plaka-girisi`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS biçimlendirme, React stable, Vue stable. WCAG: 1.3.5, 3.3.1.
 
@@ -5183,7 +5215,7 @@ Data attributes used by the markup: `data-kiris-hata`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### T.C. kimlik numarası girişi (National identity number input) — `kimlik-no`
+### T.C. kimlik numarası girişi (National identity number input) · `kimlik-no`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS doğrulama, React stable, Vue stable. WCAG: 1.3.5, 3.3.1, 3.3.3.
 
@@ -5246,7 +5278,7 @@ Data attributes used by the markup: `data-zorunlu`, `data-kiris-hata`, `data-kir
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Tarih girişi (Date input) — `tarih-girisi`
+### Tarih girişi (Date input) · `tarih-girisi`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS doğrulama, React stable, Vue stable. WCAG: 1.3.1, 1.3.5, 3.3.1, 3.3.2. Also in: UK, KR, DK, DE.
 
@@ -5305,7 +5337,7 @@ Data attributes used by the markup: `data-kiris-hata`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Telefon girişi (Phone input) — `telefon-girisi`
+### Telefon girişi (Phone input) · `telefon-girisi`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS biçimlendirme, React stable, Vue stable. WCAG: 1.3.5, 3.3.1, 3.3.2. Also in: UK.
 
@@ -5356,7 +5388,7 @@ Data attributes used by the markup: `data-cep`, `data-zorunlu`, `data-kiris-hata
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Vergi kimlik numarası girişi (Tax number input) — `vergi-no`
+### Vergi kimlik numarası girişi (Tax number input) · `vergi-no`
 
 Group: Türkiye’ye özgü form · unique to Türkiye. Status: CSS stable, JS doğrulama, React stable, Vue stable. WCAG: 1.3.5, 3.3.1.
 
@@ -5403,7 +5435,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 
 Türk mevzuatından ve altyapısından doğan parçalar.
 
-### e-Devlet ile giriş (e-Devlet sign in) — `edevlet-giris`
+### e-Devlet ile giriş (e-Devlet sign in) · `edevlet-giris`
 
 Group: Türkiye’ye özgü hizmet · unique to Türkiye. Status: CSS stable, JS yok, React stable, Vue stable. WCAG: 2.4.4, 3.2.4. Also in: FR.
 
@@ -5447,7 +5479,7 @@ Why it exists: e-Devlet ile giriş seçeneğini tutarlı bir işaret ve etiketle
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### Erişilebilirlik menüsü (Accessibility menu) — `erisim-menusu`
+### Erişilebilirlik menüsü (Accessibility menu) · `erisim-menusu`
 
 Group: Türkiye’ye özgü hizmet · unique to Türkiye. Status: CSS stable, JS ayar saklama, React stable, Vue stable. WCAG: 1.4.4, 1.4.6, 1.4.12. Also in: FR, KR.
 
@@ -5505,7 +5537,7 @@ Data attributes used by the markup: `data-yazi`, `data-tema`.
 
 Props shown are the example props; every prop maps to the HTML above. Extra attributes pass through to the root or the input.
 
-### KVKK açık rıza (Data protection consent) — `kvkk-onay`
+### KVKK açık rıza (Data protection consent) · `kvkk-onay`
 
 Group: Türkiye’ye özgü hizmet · unique to Türkiye. Status: CSS stable, JS gönderim denetimi, React stable, Vue stable. WCAG: 1.3.1, 3.3.1, 3.3.2. Also in: FR.
 

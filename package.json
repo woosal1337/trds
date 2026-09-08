@@ -2,7 +2,7 @@
   "name": "kiris",
   "private": true,
   "version": "1.0.1",
-  "description": "Kiriş — Türkiye kamu hizmetleri için tasarım sistemi. Türkiye kamu hizmetleri için tek bir açık kaynak tasarım sistemi.",
+  "description": "Kiriş · Türkiye kamu hizmetleri için tasarım sistemi. Türkiye kamu hizmetleri için tek bir açık kaynak tasarım sistemi.",
   "type": "module",
   "license": "MIT",
   "engines": {

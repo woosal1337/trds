@@ -85,7 +85,7 @@
     "aile": {
       "govde": {
         "$type": "fontFamily",
-        "$value": "\"Kiriş Sans\", \"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "$value": "\"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         "$aciklama": "Her ağırlıkta ş, ğ, ı, İ, ö, ç ve ü harflerini taşımayan bir yazı tipi kullanmayın."
       },
       "tek": {

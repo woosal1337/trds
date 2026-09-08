@@ -1,4 +1,4 @@
-// @kiris-ds/react — çekirdeği saran ince React katmanı.
+// @kiris-ds/react · çekirdeği saran ince React katmanı.
 //
 // Kural: bu paket iş mantığı taşımaz. Her bileşen @kiris-ds/tanim içindeki tek
 // tanımı React'ın createElement'i ile çizer. Ürettiği HTML, @kiris-ds/core

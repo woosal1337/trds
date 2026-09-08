@@ -1,4 +1,4 @@
-// @kiris-ds/vue — çekirdeği saran ince Vue katmanı.
+// @kiris-ds/vue · çekirdeği saran ince Vue katmanı.
 //
 // Kural: bu paket iş mantığı taşımaz. Her bileşen @kiris-ds/tanim içindeki tek
 // tanımı Vue'nun h'si ile çizer. Ürettiği HTML, @kiris-ds/core belgelerindeki

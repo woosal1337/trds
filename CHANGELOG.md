@@ -2,7 +2,7 @@
 
 Sürümleme [anlamsal sürümleme](https://semver.org/lang/tr/) kuralına uyar.
 
-## [1.0.1] — 2026-09-08
+## [1.0.1] · 2026-09-08
 
 - Arama önerileri yalnız HTTP ve HTTPS adreslerine gider. Betik adresleri
   HTML çıktısına, seçim olayına ve gezinmeye geçmez.
@@ -15,7 +15,7 @@ Sürümleme [anlamsal sürümleme](https://semver.org/lang/tr/) kuralına uyar.
 - Araştırma notları ürün deposundan çıktı. Belge bağlantıları ve kurulum
   adımları düzeldi. Üç yeni otomatik test ve tarayıcı arama testi eklendi.
 
-## [1.0.0] — 2026-09-07
+## [1.0.0] · 2026-09-07
 
 İlk genel sürüm. Henüz hiçbir kurum tarafından benimsenmedi.
 

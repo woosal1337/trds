@@ -71,6 +71,14 @@ async function main() {
     await copyFile(join(KAYNAK, `kiris-isaret-${boyut}.png`), join(CIKTI, `kiris-isaret-${boyut}.png`));
   }
 
+  // Yazı tipleri. Yerelde dururlar: dış istek gitmez, ziyaretçinin adresi
+  // üçüncü tarafa çıkmaz ve kapalı kamu ağında da yüklenirler.
+  // Lisans: src/yazi/LICENSE-FONTS.txt (SIL OFL 1.1).
+  await mkdir(join(CIKTI, 'yazi'), { recursive: true });
+  for (const dosya of await readdir(join(KOK, 'src', 'yazi'))) {
+    await copyFile(join(KOK, 'src', 'yazi', dosya), join(CIKTI, 'yazi', dosya));
+  }
+
   await copyFile(join(KAYNAK, 'favicon-196x196.1.8.0.png'), join(CIKTI, 'e-devlet-isaret.png'));
   await copyFile(join(KAYNAK, 'favicon.ico'), join(CIKTI, 'favicon.ico'));
   await copyFile(join(KAYNAK, 'turk-bayragi.svg'), join(CIKTI, 'turk-bayragi.svg'));

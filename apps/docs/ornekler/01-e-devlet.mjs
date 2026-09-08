@@ -1,5 +1,5 @@
 // e-Devlet Kapısı ana sayfası, birebir. Yalnız Kiriş bileşenleri ile.
-// Kaynak: https://www.turkiye.gov.tr — 6 Eylül 2026 tarihli içerik.
+// Kaynak: https://www.turkiye.gov.tr · 6 Eylül 2026 tarihli içerik.
 // Bölümler gerçek sayfa ile aynı sırada ve aynı metinle durur. Yalnız görseller düşer.
 
 import { aramaOnerileri } from './veri/arama-onerileri.mjs';
@@ -11,7 +11,7 @@ const kartlar = (ogeler) => ogeler.map((o) => `
       </div>`).join('');
 
 const encokKullanilan = [
-  { kurum: 'Sosyal Güvenlik Kurumu', ad: 'SGK Tescil ve Hizmet Dökümü / İşyeri Ünvan Listesi' },
+  { kurum: 'Sosyal Güvenlik Kurumu', ad: 'SGK Tescil ve Hizmet Dökümü / İşyeri Unvan Listesi' },
   { kurum: 'e-Devlet Kapısı', ad: 'Araçlarım' },
   { kurum: 'Emniyet Genel Müdürlüğü', ad: 'Araç Plakasına Yazılan Ceza Sorgulama' },
   { kurum: 'Türkiye Noterler Birliği', ad: 'Adıma Tescilli Araç Sorgulama' },
@@ -148,7 +148,7 @@ export const ornek = {
     <h2 class="kiris-gorsel-gizli" id="uc-kutu">Hizmet grupları</h2>
     <div class="kiris-kart-izgara kiris-kart-izgara--3 kiris-u-ust-0">
       <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-business"/></svg></span><h3 class="kiris-kart__baslik">Şirket Hizmetleri</h3><p class="kiris-kart__ozet">Yetkilisi Olduğunuz Şirket Hizmetleri</p><p class="kiris-kart__alt"><a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: şirket hizmetleri</span></a></p></div>
-      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-lightning"/></svg></span><h3 class="kiris-kart__baslik">Yeni Hizmetler</h3><p class="kiris-kart__ozet">e-Devlet Kapısı'na En Son Eklenen Hizmetler</p><p class="kiris-kart__alt"><a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: yeni hizmetler</span></a></p></div>
+      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-lightning"/></svg></span><h3 class="kiris-kart__baslik">Yeni Hizmetler</h3><p class="kiris-kart__ozet">e-Devlet Kapısı’na En Son Eklenen Hizmetler</p><p class="kiris-kart__alt"><a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: yeni hizmetler</span></a></p></div>
       <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-security"/></svg></span><h3 class="kiris-kart__baslik">Evrak Doğrulama Hizmetleri</h3><p class="kiris-kart__ozet">e-Devlet Kapısı Evrak Doğrulama Hizmetleri</p><p class="kiris-kart__alt"><a class="kiris-link" href="#">Tümü<span class="kiris-gorsel-gizli">: evrak doğrulama hizmetleri</span></a></p></div>
     </div>
     </div>
@@ -166,8 +166,8 @@ export const ornek = {
   <div class="kiris-kap">
     <h2 class="kiris-bolum__baslik" id="gundem">Gündemdeki Kısayollar</h2>
     <div class="kiris-kart-izgara kiris-kart-izgara--2">
-      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-tool-list"/></svg></span><h3 class="kiris-kart__baslik"><a href="#">Belge Doğrulama</a></h3><p class="kiris-kart__ozet">e-Devlet Kapısı'ndan alınan barkodlu belgeleri burada doğrulayın.</p></div>
-      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-deaf"/></svg></span><h3 class="kiris-kart__baslik"><a href="#">e-Devlet'te Engel Yok</a></h3><p class="kiris-kart__ozet">Çağrı Merkezimize artık işaret dili kullanarak da ulaşabilirsiniz.</p></div>
+      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-tool-list"/></svg></span><h3 class="kiris-kart__baslik"><a href="#">Belge Doğrulama</a></h3><p class="kiris-kart__ozet">e-Devlet Kapısı’ndan alınan barkodlu belgeleri burada doğrulayın.</p></div>
+      <div class="kiris-kart"><span class="kiris-kart__simge"><svg class="kiris-simge" aria-hidden="true"><use href="#kiris-deaf"/></svg></span><h3 class="kiris-kart__baslik"><a href="#">e-Devlet’te Engel Yok</a></h3><p class="kiris-kart__ozet">Çağrı Merkezimize artık işaret dili kullanarak da ulaşabilirsiniz.</p></div>
     </div>
     </div>
 </section>

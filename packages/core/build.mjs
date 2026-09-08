@@ -94,7 +94,7 @@ async function main() {
   for (const dosya of stilDosyalari) katmanlar.push(await oku(join(stilKlasoru, dosya)));
 
   const css = [
-    '/*! Kiriş — Türkiye kamu hizmetleri için tasarım sistemi. Üretilmiş dosya, elle değiştirmeyin. */',
+    '/*! Kiriş · Türkiye kamu hizmetleri için tasarım sistemi. Üretilmiş dosya, elle değiştirmeyin. */',
     belirtecler,
     ...katmanlar
   ].join('\n\n');

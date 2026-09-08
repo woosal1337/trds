@@ -1,4 +1,4 @@
-// Kiriş component registry — form and action components.
+// Kiriş component registry · form and action components.
 // One source of truth. The documentation site, the component index, the
 // integrations page and the README table are all generated from this file.
 
@@ -302,7 +302,7 @@ export const formBilesenleri = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<div class="kiris-hata-ozeti" data-kiris="hata-ozeti" role="alert" tabindex="-1">\n  <h2 class="kiris-hata-ozeti__baslik">Bir sorun var</h2>\n  <ul class="kiris-hata-ozeti__liste">\n    <li><a href="#kimlik">T.C. kimlik numarası 11 hane olmalıdır</a></li>\n    <li><a href="#dogum">Doğum tarihi bugünden sonra olamaz</a></li>\n  </ul>\n</div>'
+        html: '<div class="kiris-hata-ozeti" data-kiris="hata-ozeti" role="alert" tabindex="-1">\n  <h2 class="kiris-hata-ozeti__baslik">Bir sorun var</h2>\n  <ul class="kiris-hata-ozeti__liste">\n    <li><a href="#kimlik">T.C. kimlik numarası 11 hane olmalıdır</a></li>\n    <li><a href="#dogum">Doğum tarihi bugünden sonra olamaz</a></li>\n  </ul>\n</div>\n\n<div class="kiris-alan kiris-alan--hata">\n  <label class="kiris-etiket" for="kimlik">T.C. kimlik numaranız</label>\n  <p class="kiris-hata" id="kimlik-hata">T.C. kimlik numarası 11 hane olmalıdır</p>\n  <input class="kiris-girdi kiris-girdi--11" id="kimlik" name="kimlik" type="text" inputmode="numeric" value="1234" aria-describedby="kimlik-hata" aria-invalid="true">\n</div>\n\n<div class="kiris-alan kiris-alan--hata">\n  <label class="kiris-etiket" for="dogum">Doğum tarihiniz</label>\n  <p class="kiris-hata" id="dogum-hata">Doğum tarihi bugünden sonra olamaz</p>\n  <input class="kiris-girdi kiris-girdi--10" id="dogum" name="dogum" type="text" inputmode="numeric" value="01.01.2090" aria-describedby="dogum-hata" aria-invalid="true">\n</div>'
       }
     ]
   }

@@ -32,9 +32,9 @@ Aşağıdaki parçalar bu belgeye tabidir:
 - Kurum favicon'ları ve uygulama simgeleri. Kiriş'in kendi işareti hariçtir
 - `kurumlar/` altındaki kurum logoları. Her biri kurumun kendi sitesinden
   alınmıştır ve yalnız o kurumu göstermek için kullanılır:
-  - `e-devlet-kapisi-beyaz.svg` — cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu
-  - `sgk.svg`, `sgk-beyaz.svg` — www.sgk.gov.tr
-  - `saglik-bakanligi.svg` — www.saglik.gov.tr
+  - `e-devlet-kapisi-beyaz.svg` · cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu
+  - `sgk.svg`, `sgk-beyaz.svg` · www.sgk.gov.tr
+  - `saglik-bakanligi.svg` · www.saglik.gov.tr
 
 ## İzin verilen kullanım
 

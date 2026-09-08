@@ -1,4 +1,4 @@
-// Kiriş component registry — the components that exist only because this is
+// Kiriş component registry · the components that exist only because this is
 // Türkiye. No foreign design system supplies these. They carry the national
 // identity, the national identifiers and the national legal obligations.
 

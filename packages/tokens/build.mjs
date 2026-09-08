@@ -156,7 +156,7 @@ async function main() {
 
   const css = [
     '/* Kiriş tasarım belirteçleri. Üretilmiş dosya. Elle değiştirmeyin. */',
-    `/* Kaynak: packages/tokens/src — üretim: node packages/tokens/build.mjs */`,
+    `/* Kaynak: packages/tokens/src · üretim: node packages/tokens/build.mjs */`,
     '',
     cssBlogu(acikGirdiler, ':root'),
     '',

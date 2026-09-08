@@ -151,7 +151,7 @@ async function main() {
     const satirlar = Object.entries(degerler).map(([ad, deger]) => `  --kiris-${ad}: ${deger};`);
     const css = [
       `/* Kiriş teması: ${ayar.ad}. Üretilmiş dosya, elle değiştirmeyin. */`,
-      `/* Marka rengi: ${ayar.marka} — üretim: node packages/themes/build.mjs */`,
+      `/* Marka rengi: ${ayar.marka} · üretim: node packages/themes/build.mjs */`,
       '',
       `[data-kiris-tema-kurum="${klasor}"],`,
       ':root {',

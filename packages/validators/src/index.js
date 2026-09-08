@@ -1,4 +1,4 @@
-// @kiris-ds/validators — Türkiye’ye özgü doğrulama ve biçimlendirme.
+// @kiris-ds/validators · Türkiye’ye özgü doğrulama ve biçimlendirme.
 //
 // Bu paketin var olma sebebi tek bir cümledir: bugün her kurum bu on işlevi
 // yeniden yazıyor ve çoğu yalnız hane sayısına bakıyor. Buradaki her algoritma

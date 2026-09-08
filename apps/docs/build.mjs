@@ -19,7 +19,7 @@
 //   ornekler/                      örnek kurum sayfaları dizini
 //   ornekler/<slug>/               bir kurumun ana sayfası, yalnız Kiriş ile
 
-import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, copyFile, rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -41,9 +41,30 @@ const KIMLIK = join(PAKETLER, 'identity', 'dist');
 const SURUM = JSON.parse(await readFile(join(KOK, '..', '..', 'package.json'), 'utf8')).version;
 let SPRITE = '';
 
+/**
+ * Sayfada gerçekten kullanılan simgeleri süzer.
+ *
+ * Sprite 74 sembol taşır, bir sayfa çoğu zaman birkaçını kullanır. Tamamını
+ * gömmek her belgeye onlarca kilobayt ölü işaretleme ekliyordu.
+ */
+const spriteSuz = (govde) => {
+  if (!govde.includes('href="#kiris-') || govde.includes('<symbol')) return '';
+  const kullanilan = new Set([...govde.matchAll(/href="#(kiris-[a-z0-9-]+)"/g)].map((m) => m[1]));
+  if (kullanilan.size === 0) return '';
+  const semboller = [...SPRITE.matchAll(/<symbol id="([^"]+)"[\s\S]*?<\/symbol>/g)]
+    .filter((m) => kullanilan.has(m[1]))
+    .map((m) => m[0]);
+  if (semboller.length === 0) return '';
+  return `<svg xmlns="http://www.w3.org/2000/svg" style="display:none">\n${semboller.join('\n')}\n</svg>`;
+};
+
 // Ana sayfanın sekme başlığı. Marka adıyla başlar, arkasından ne olduğunu
 // söyleyen bir tanım gelir. Unvan değil tanım: sistem resmî değil, bir öneridir.
-const ANA_BASLIK = 'Kiriş — Türkiye kamu hizmetleri için tasarım sistemi';
+// Yayın adresi. Site haritası ve canonical bağlantıları buradan kurulur.
+const SITE_ADRES = 'https://trds.chele.bi';
+const DEPO_ADRES = 'https://github.com/woosal1337/trds';
+
+const ANA_BASLIK = 'Kiriş · Türkiye kamu hizmetleri için tasarım sistemi';
 
 // Kiriş marka işareti. Başlık çubuğuna gömülü gelir ki currentColor ile
 // koyu ve açık zeminde aynı işaret çalışsın. Tek kaynağı identity paketidir.
@@ -57,6 +78,17 @@ const kacis = (m) =>
   String(m).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /** Escape, then turn `code` spans into real <code> elements. */
+/**
+ * Kurum adına yönelme eki. Son ünlü kalınsa -na, inceyse -ne.
+ * 'Sosyal Güvenlik Kurumu' → "Sosyal Güvenlik Kurumu’na"
+ * 'Merkezi Hekim Randevu Sistemi' → "Merkezi Hekim Randevu Sistemi’ne"
+ */
+const yonelmeEki = (ad) => {
+  const unluler = ad.toLocaleLowerCase('tr').match(/[aeıioöuü]/g) ?? [];
+  const son = unluler.at(-1);
+  return 'aıou'.includes(son) ? '’na' : '’ne';
+};
+
 const metin = (deger) => kacis(deger).replace(/`([^`]+)`/g, '<code>$1</code>');
 
 /** Örnek HTML içindeki varlık yolunu sayfanın derinliğine göre doldurur. */
@@ -99,7 +131,12 @@ const onizleme = (html) =>
     .replace(/<\/a>/g, '</span>')
     .replace(/<button\b[^>]*?(?=\sclass=|>)/g, '<span')
     .replace(/<\/button>/g, '</span>')
-    .replace(/<span\s+type="button"/g, '<span')
+    .replace(/(<span\b[^>]*?)\stype="button"/g, '$1')
+    // Kart bir belge değil. Landmark ve sayfa başlığı dizinin kendi yapısını bozar.
+    .replace(/<main\b/g, '<div')
+    .replace(/<\/main>/g, '</div>')
+    .replace(/<h1\b/g, '<p')
+    .replace(/<\/h1>/g, '</p>')
     .replace(/<use data-kullan=/g, '<use href=');
 
 const NAV = [
@@ -124,13 +161,13 @@ const kenarCubugu = (yukari, etkinId) => {
     <p class="dok-kenar__baslik"><a href="${yukari}bilesenler/">Bileşenler</a> <span>${BILESENLER.length}</span></p>
 ${gruplu
   .map(
-    (g) => `    <section class="dok-kenar__grup">
-      <h2 class="dok-kenar__grup-ad">${kacis(g.ad)}</h2>
+    (g) => `    <section class="dok-kenar__grup" aria-labelledby="kenar-${g.id}">
+      <p class="dok-kenar__grup-ad" id="kenar-${g.id}">${kacis(g.ad)}</p>
       <ul class="dok-kenar__liste">
 ${g.bilesenler
   .map(
     (b) =>
-      `        <li><a href="${yukari}bilesenler/${b.id}.html"${b.id === etkinId ? ' aria-current="page"' : ''}>${kacis(b.ad)}${b.ozgun ? ' <span class="dok-tr" title="Türkiye’ye özgü">TR</span>' : ''}</a></li>`
+      `        <li><a href="${yukari}bilesenler/${b.id}.html"${b.id === etkinId ? ' aria-current="page"' : ''}>${kacis(b.ad)}${b.ozgun ? ' <abbr class="dok-tr" title="Türkiye’ye özgü">TR</abbr>' : ''}</a></li>`
   )
   .join('\n')}
       </ul>
@@ -138,7 +175,7 @@ ${g.bilesenler
   )
   .join('\n')}
     <section class="dok-kenar__grup dok-kenar__grup--yz">
-      <h2 class="dok-kenar__grup-ad">Yapay zekâ için</h2>
+      <p class="dok-kenar__grup-ad" id="kenar-yapay-zeka">Yapay zekâ için</p>
       <ul class="dok-kenar__liste">
         <li><a href="${yukari}llms.txt">llms.txt</a></li>
         <li><a href="${yukari}llms-full.txt">llms-full.txt</a></li>
@@ -154,28 +191,27 @@ ${g.bilesenler
  * kenar:    render the sidebar (inner pages).
  * genis:    full-width content (home).
  */
-const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, etkinId = '', genis = false }) => {
+const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, etkinId = '', genis = false, yol = '' }) => {
   const yukari = '../'.repeat(derinlik);
   const menu = NAV.map(
     (m) => `<a href="${yukari}${m.yol}"${m.yol === etkin ? ' aria-current="page"' : ''}>${m.ad}</a>`
   ).join('\n        ');
 
-  const tamBaslik = baslik === ANA_BASLIK ? baslik : `${baslik} — Kiriş`;
+  const tamBaslik = baslik === ANA_BASLIK ? baslik : `${baslik} · Kiriş`;
 
   return `<!doctype html>
-<html lang="tr" data-kiris-tema="acik">
+<html lang="tr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${kacis(tamBaslik)}</title>
-<meta name="description" content="${kacis(ozet)}">
+<meta name="description" content="${kacis(ozet.length < 60 && baslik !== ANA_BASLIK ? `${baslik}. ${ozet} Kiriş tasarım sisteminin belgesi.` : ozet)}">
 <meta name="color-scheme" content="light dark">
+<link rel="canonical" href="${SITE_ADRES}/${yol}">
 <link rel="icon" type="image/png" sizes="196x196" href="${yukari}varliklar/kiris-isaret-196.png?v=kiris-1">
 <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="${yukari}favicon.ico?v=kiris-1">
 <link rel="apple-touch-icon" href="${yukari}varliklar/kiris-isaret-196.png?v=kiris-1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="${yukari}varliklar/yazi.css">
 <link rel="stylesheet" href="${yukari}varliklar/kiris.css">
 <link rel="stylesheet" href="${yukari}varliklar/belgeler.css">
 <script>
@@ -193,7 +229,7 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
 
 <header class="dok-ust" data-kiris="baslik-cubugu">
   <div class="dok-kap dok-ust__ic">
-    <a class="dok-marka" href="${yukari}">
+    <a class="dok-marka" href="${yukari || './'}">
       ${MARKA_ISARET}
       <span class="dok-marka__ad">Kiriş</span>
       <span class="dok-marka__alt">Türkiye kamu hizmetleri için tasarım sistemi</span>
@@ -225,7 +261,7 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
 <div class="dok-kap dok-govde${kenar ? ' dok-govde--kenarli' : ''}${genis ? ' dok-govde--genis' : ''}">
 ${kenar ? kenarCubugu(yukari, etkinId) : ''}
 <main class="dok-icerik" id="ana-icerik" tabindex="-1">
-${govde.includes('href="#kiris-') && !govde.includes('<symbol') ? SPRITE : ''}
+${spriteSuz(govde)}
 ${varlik(govde, yukari)}
 </main>
 </div>
@@ -238,7 +274,7 @@ ${varlik(govde, yukari)}
     </div>
     <nav class="dok-alt__sutun" aria-label="Depo bağlantıları">
       <p class="dok-alt__baslik">Depo</p>
-      <a href="https://github.com/woosal1337/trds">Kaynak kodu</a>
+      <a href="${DEPO_ADRES}">Kaynak kodu</a>
       <a href="${yukari}yonetisim/">Katkı ölçütleri</a>
       <a href="${yukari}erisilebilirlik/">Erişilebilirlik bildirimi</a>
     </nav>
@@ -264,20 +300,76 @@ ${varlik(govde, yukari)}
 // ---------------------------------------------------------------- parçalar
 
 /** A live example plus its source, with a small toolbar. */
-const ornekBlok = (ornek, b = {}) => `
+/** Bir kimliğe işaret eden öznitelikler. Kapsamlarken hepsi birlikte değişir. */
+const KIMLIK_OZNITELIK = ['id', 'for', 'form', 'list', 'aria-controls', 'aria-labelledby', 'aria-describedby', 'aria-owns', 'data-kiris-ac'];
+
+/**
+ * Canlı örneği sayfaya gömülebilir hale getirir.
+ *
+ * Örnekler tek başına bir belge gibi yazılmıştır: kendi `main`'i, kendi `h1`'i ve
+ * kısa kimlikleri vardır. Sayfaya olduğu gibi konunca kabukla çakışırlar; atlama
+ * bağlantısı yanlış yere gider, ekran okuyucu iki ana bölge görür, `aria-controls`
+ * yanlış öğeyi işaret eder. Burada her kimlik öneklenir, landmark ve başlık bir
+ * seviye indirilir, hedefsiz bağlantılar örneğin kendisine bağlanır.
+ */
+const ornegiKapsamla = (html, onek) => {
+  const kimlikler = new Set();
+  for (const [, deger] of html.matchAll(/\sid="([^"]+)"/g)) kimlikler.add(deger);
+
+  let cikti = html;
+  for (const eski of kimlikler) {
+    const kacisli = eski.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const yeni = `${onek}-${eski}`;
+    for (const oz of KIMLIK_OZNITELIK) {
+      cikti = cikti.replace(new RegExp(`\\s${oz}="${kacisli}"`, 'g'), ` ${oz}="${yeni}"`);
+    }
+    cikti = cikti.replace(new RegExp(`href="#${kacisli}"`, 'g'), `href="#${yeni}"`);
+  }
+
+  return (
+    cikti
+      // Sayfanın kendi ana bölgesi var. İkincisi ekran okuyucuda belirsizlik yaratır.
+      .replace(/<main\b/g, '<div')
+      .replace(/<\/main>/g, '</div>')
+      // Sayfa başlığı h1. Örneğin kendi başlığı bir seviye iner.
+      .replace(/<h1\b/g, '<h2')
+      .replace(/<\/h1>/g, '</h2>')
+      // Hedefi olmayan bağlantı sayfanın tepesine fırlatır. Örneğin kendisine bağlanır.
+      .replace(/href="#"/g, `href="#${onek}"`)
+      .replace(/href="\/"/g, `href="#${onek}"`)
+      // Aynı ada sahip radyo grupları örnekler arasında birbirini etkiler.
+      .replace(/\sname="([^"]+)"/g, ` name="${onek}-$1"`)
+  );
+};
+
+/**
+ * Canlı çalıştırılmayacak bileşenler. Davranışları belge sayfasında zarar verir:
+ * cikis bileşeni Shift tuşuna üç kez basınca kullanıcıyı siteden çıkarır ve geri
+ * dönüş bırakmaz. Kod örneği ve görünüm kalır, yalnız başlatıcı bağlanmaz.
+ */
+const CANLI_OLMAYAN = new Set(['exit-this-page']);
+
+const ornekBlok = (ornek, b = {}, sira = 0) => {
+  const onek = `ornek-${b.id ?? 'x'}-${sira + 1}`;
+  let govde = ornegiKapsamla(ornek.html, onek);
+  if (CANLI_OLMAYAN.has(b.id)) {
+    govde = govde.replace(/\sdata-kiris="/g, ' data-kiris-durgun="');
+  }
+  return `
 <figure class="dok-ornek">
   <figcaption class="dok-ornek__cubuk">
     <span class="dok-ornek__ad">${kacis(ornek.baslik)}</span>
     <span class="dok-ornek__not">${b.tamGenislik ? 'Canlı örnek · tam genişlik' : 'Canlı örnek'}</span>
   </figcaption>
-${ornek.aciklama ? `  <p class="dok-ornek__aciklama">${kacis(ornek.aciklama)}</p>\n` : ''}  <div class="dok-ornek__sahne${b.tamGenislik ? ' dok-ornek__sahne--tam' : ''}">
-${ornek.html}
+${ornek.aciklama ? `  <p class="dok-ornek__aciklama">${kacis(ornek.aciklama)}</p>\n` : ''}  <div class="dok-ornek__sahne${b.tamGenislik ? ' dok-ornek__sahne--tam' : ''}" id="${onek}">
+${govde}
   </div>
   <details class="dok-ornek__kod">
     <summary>HTML kodunu göster</summary>
     <pre><code>${kacis(ornek.html.replace(/\{\{VARLIK\}\}/g, '/kiris/'))}</code></pre>
   </details>
 </figure>`;
+};
 
 /** A component card with an inert live preview. */
 const bilesenKarti = (b, yukari) => `
@@ -288,7 +380,7 @@ ${onizleme(b.ornekler[0].html)}
     </div>
   </div>
   <div class="dok-kart__govde">
-    <h3 class="dok-kart__ad"><a href="${yukari}bilesenler/${b.id}.html">${kacis(b.ad)}</a>${b.ozgun ? ' <span class="dok-tr">TR</span>' : ''}</h3>
+    <h3 class="dok-kart__ad"><a href="${yukari}bilesenler/${b.id}.html">${kacis(b.ad)}</a>${b.ozgun ? ' <abbr class="dok-tr" title="Türkiye’ye özgü">TR</abbr>' : ''}</h3>
     <span class="dok-kart__en">${kacis(b.name)}</span>
   </div>
 </article>`;
@@ -301,6 +393,7 @@ const kartIzgara = (liste, yukari) =>
 const girisSayfasi = () => {
   const gruplu = grupla();
   return sayfa({
+    yol: '',
     baslik: ANA_BASLIK,
     ozet: 'Türkiye kamu hizmetleri için tek bir açık kaynak tasarım sistemi.',
     etkin: '',
@@ -349,7 +442,7 @@ const girisSayfasi = () => {
 ${gruplu
   .map(
     (g) =>
-      `    <li><a href="bilesenler/#${g.id}"><span class="dok-gruplar__ad">${kacis(g.ad)}</span><span class="dok-gruplar__sayi">${g.bilesenler.length}</span></a><p>${kacis(g.ozet)}</p></li>`
+      `    <li><a href="bilesenler/?grup=${g.id}"><span class="dok-gruplar__ad">${kacis(g.ad)}</span><span class="dok-gruplar__sayi">${g.bilesenler.length}</span></a><p>${kacis(g.ozet)}</p></li>`
   )
   .join('\n')}
   </ul>
@@ -372,11 +465,22 @@ const bilesenListesi = () => {
   const genelDurum = (b) => b.durum.css;
   const hazir = (deger) => deger !== 'yok' && deger !== 'degerlendiriliyor';
 
+  // Süzgeç kutuları kayıt defterinde gerçekten bulunan durumlardan kurulur.
+  // Sabit liste, hiçbir bileşenin taşımadığı bir değeri kutu yapıyor ve
+  // kullanıcı tıklayınca boş liste görüyordu.
+  const DURUM_SECENEKLERI = [...new Set(BILESENLER.map(genelDurum))]
+    .map((deger) => ({
+      deger,
+      ad: (DURUM_ETIKET[deger] ?? [deger])[0],
+      adet: BILESENLER.filter((b) => genelDurum(b) === deger).length
+    }))
+    .sort((a, b) => b.adet - a.adet);
+
   const kartlar = BILESENLER.map((b) => {
     const teknolojiler = TEK.filter((t) => hazir(b.durum[t.anahtar]));
     return `
   <li class="dok-dizin__oge"
-      data-ad="${kacis(b.ad.toLocaleLowerCase('tr'))} ${kacis(b.name.toLowerCase())}"
+      data-ad="${kacis([b.ad, b.name, b.ozet, b.grup, ...(b.wcag ?? [])].join(' ').toLocaleLowerCase('tr'))}"
       data-grup="${b.grup}"
       data-durum="${genelDurum(b)}"
       data-tek="${teknolojiler.map((t) => t.anahtar).join(' ')}"
@@ -389,7 +493,7 @@ ${onizleme(b.ornekler[0].html)}
       </div>
       <div class="dok-dizin__govde">
         <div class="dok-dizin__ust">
-          <h3 class="dok-dizin__ad"><a href="${b.id}.html">${kacis(b.ad)}</a>${b.ozgun ? ' <span class="dok-tr" title="Türkiye’ye özgü">TR</span>' : ''}</h3>
+          <h2 class="dok-dizin__ad"><a href="${b.id}.html">${kacis(b.ad)}</a>${b.ozgun ? ' <abbr class="dok-tr" title="Türkiye’ye özgü">TR</abbr>' : ''}</h2>
           ${durumRozet(genelDurum(b))}
         </div>
         <p class="dok-dizin__en">${kacis(b.name)} · ${kacis(grupAdi(b.grup))}</p>
@@ -403,6 +507,7 @@ ${teknolojiler.map((t) => `          <li>${t.ad}</li>`).join('\n')}
   }).join('\n');
 
   return sayfa({
+    yol: 'bilesenler/',
     baslik: 'Bileşenler',
     ozet: `Kiriş içindeki ${BILESENLER.length} bileşenin tamamı. Her biri canlı önizleme, durum ve hazır teknolojiler ile.`,
     derinlik: 1,
@@ -420,7 +525,7 @@ ${teknolojiler.map((t) => `          <li>${t.ad}</li>`).join('\n')}
 <p class="dok-giris">Bileşenler bir kullanıcı arayüzünün yeniden kullanılabilir parçalarıdır.
 Hazır ve denenmiş parçalarla kurumlar tutarlı hizmetler kurar.</p>
 <p>Her bileşen <a href="../yonetisim/#dongu">bayrak yarışı modeli</a> ile yapılır ve bu yüzden farklı bir
-durum taşıyabilir. <span class="dok-tr">TR</span> işareti, o bileşenin kuralının, biçiminin veya yasal
+durum taşıyabilir. <abbr class="dok-tr" title="Türkiye’ye özgü">TR</abbr> işareti, o bileşenin kuralının, biçiminin veya yasal
 dayanağının Türkiye’ye ait olduğunu gösterir. Teknolojiye göre ayrıntılı durum
 <a href="../entegrasyonlar/">entegrasyon sayfasında</a> durur.</p>
 
@@ -440,9 +545,7 @@ ${gruplu.map((g) => `        <option value="${g.id}">${kacis(g.ad)} (${g.bilesen
     <fieldset class="dok-suzgec__grup">
       <legend>Durum</legend>
       <div class="dok-suzgec__cipler">
-        <label class="dok-cip"><input type="checkbox" name="durum" value="stable"> Kararlı</label>
-        <label class="dok-cip"><input type="checkbox" name="durum" value="beta"> Beta</label>
-        <label class="dok-cip"><input type="checkbox" name="durum" value="alpha"> Alfa</label>
+${DURUM_SECENEKLERI.map((d) => `        <label class="dok-cip"><input type="checkbox" name="durum" value="${d.deger}"> ${d.ad} (${d.adet})</label>`).join('\n')}
       </div>
     </fieldset>
     <fieldset class="dok-suzgec__grup">
@@ -469,7 +572,7 @@ ${kartlar}
 
 <h2 class="dok-h2" id="katki">Bir bileşen eksik mi</h2>
 <p>Bir bileşenin sisteme girmesi için beş ölçütü karşılaması gerekir: yararlı, benzersiz,
-kullanılabilir, tutarlı ve çok yönlü. Öneriyi <a href="https://github.com/woosal1337/trds/issues/new?template=bilesen-onerisi.yml">bileşen önerisi</a>
+kullanılabilir, tutarlı ve çok yönlü. Öneriyi <a href="${DEPO_ADRES}/issues/new?template=bilesen-onerisi.yml">bileşen önerisi</a>
 olarak açın. Ölçütler <a href="../yonetisim/">yönetişim sayfasında</a> yazılıdır.</p>
 `
   });
@@ -481,7 +584,20 @@ const bilesenSayfasi = (b) => {
       ? `<p><strong>Benzer bir bileşen şu ülkelerin tasarım sistemlerinde de var:</strong> ${b.kaynak.join(', ')}.</p>`
       : `<p><strong>Bu bileşenin karşılığı hiçbir yabancı tasarım sisteminde yok.</strong></p>`;
 
+  // Bileşenin kendi kodu. "Kaynak" başlığı bugüne dek hiçbir yere bağlanmıyordu.
+  const davranisAdi = b.ornekler.map((o) => o.html).join(' ').match(/data-kiris="([a-z-]+)"/)?.[1] ?? '';
+  const depoBaglantilari = [
+    `<li><a href="${DEPO_ADRES}/tree/main/tools/registry">Kayıt defteri tanımı</a>, adı, özeti, kullanım kuralı ve örnekleri</li>`,
+    `<li><a href="${DEPO_ADRES}/tree/main/packages/core/src/styles">CSS katmanları</a>, <code>kiris-${b.id}</code> ile başlayan sınıflar</li>`,
+    // Başlatıcı adı bileşen kimliğiyle aynı değil: 35 bileşende ayrışıyor.
+    // Gerçek değeri örneğin kendi işaretlemesinden okuruz.
+    davranisAdi ? `<li><a href="${DEPO_ADRES}/blob/main/packages/core/src/scripts/kiris.js">Davranış betiği</a>, <code>data-kiris="${davranisAdi}"</code> başlatıcısı</li>` : ''
+  ]
+    .filter(Boolean)
+    .join('\n      ');
+
   return sayfa({
+    yol: `bilesenler/${b.id}.html`,
     baslik: b.ad,
     ozet: b.ozet,
     derinlik: 1,
@@ -518,7 +634,7 @@ const bilesenSayfasi = (b) => {
 </nav>
 
 <h2 class="dok-h2" id="ornekler">Örnekler</h2>
-${b.ornekler.map((o) => ornekBlok(o, b)).join('\n')}
+${b.ornekler.map((o, i) => ornekBlok(o, b, i)).join('\n')}
 
 <h2 class="dok-h2" id="ne-zaman">Ne zaman kullanılır</h2>
 <ul class="dok-liste">
@@ -536,6 +652,10 @@ ${b.neden ? `<h2 class="dok-h2" id="neden">Neden bu bileşen var</h2>\n<p>${meti
 
 <h2 class="dok-h2" id="kaynak">Kaynak</h2>
 ${kaynakSatiri}
+<p><strong>Bu bileşenin kodu depoda:</strong></p>
+<ul class="dok-liste">
+      ${depoBaglantilari}
+</ul>
 `
   });
 };
@@ -569,6 +689,7 @@ const simgelerSayfasi = async () => {
   };
 
   return sayfa({
+    yol: 'simgeler/',
     baslik: 'Simgeler',
     ozet: 'Tek çizim kuralına uyan 74 simge, tek sprite.',
     derinlik: 1,
@@ -576,6 +697,13 @@ const simgelerSayfasi = async () => {
     kenar: true,
     govde: `
 ${sprite}
+<nav class="kiris-yol dok-yol" aria-label="Sayfa yolu">
+  <ol class="kiris-yol__liste">
+    <li><a href="../">Giriş</a></li>
+    <li><span aria-current="page">Simgeler</span></li>
+  </ol>
+</nav>
+
 <h1 class="dok-h1">Simgeler</h1>
 <p class="dok-giris">${adlar.length} simge, tek bir SVG sprite içinde. Hepsi 24 birimlik kutuda,
 2 birim çizgi, yuvarlak uç ve köşe ile çizilir. Bu yüzden hepsi aynı ağırlıkta durur.
@@ -588,7 +716,7 @@ Yeni simge çizilmez. Bir hizmet bu setin dışına çıkmaz, böylece vatandaş
 </div>
 
 <h2 class="dok-h2" id="kullanim">Kullanım</h2>
-<pre class="dok-kod"><code>&lt;!-- sprite'ı sayfaya bir kez ekleyin --&gt;
+<pre class="dok-kod"><code>&lt;!-- sprite’ı sayfaya bir kez ekleyin --&gt;
 &lt;svg style="display:none"&gt;…&lt;/svg&gt;
 
 &lt;!-- sonra istediğiniz yerde --&gt;
@@ -637,7 +765,7 @@ ${izler.map((i) => `        <th scope="col">${kacis(i.ad)}</th>`).join('\n')}
     <tbody>
 ${BILESENLER.map(
   (b) => `      <tr>
-        <th scope="row"><a href="../bilesenler/${b.id}.html">${kacis(b.ad)}</a>${b.ozgun ? ' <span class="dok-tr">TR</span>' : ''}</th>
+        <th scope="row"><a href="../bilesenler/${b.id}.html">${kacis(b.ad)}</a>${b.ozgun ? ' <abbr class="dok-tr" title="Türkiye’ye özgü">TR</abbr>' : ''}</th>
         <td class="dok-silik">${kacis(grupAdi(b.grup))}</td>
 ${izler.map((i) => `        <td>${durumRozet(b.durum[i.anahtar])}</td>`).join('\n')}
       </tr>`
@@ -671,12 +799,20 @@ ${e.notlar.map((n) => `    <li>${metin(n)}</li>`).join('\n')}
   ).join('\n');
 
   return sayfa({
+    yol: 'entegrasyonlar/',
     baslik: 'Entegrasyonlar',
     ozet: 'Her bileşenin her teknolojideki durumu ve her teknoloji için kurulum.',
     derinlik: 1,
     etkin: 'entegrasyonlar/',
     kenar: true,
     govde: `
+<nav class="kiris-yol dok-yol" aria-label="Sayfa yolu">
+  <ol class="kiris-yol__liste">
+    <li><a href="../">Giriş</a></li>
+    <li><span aria-current="page">Entegrasyonlar</span></li>
+  </ol>
+</nav>
+
 <h1 class="dok-h1">Entegrasyonlar</h1>
 <p class="dok-giris">Kiriş tek bir çekirdek üzerine kurulur. Her entegrasyon o çekirdeği sarar ve
 kendi iş mantığını taşımaz. Aynı HTML her yerde üretilir, böylece erişilebilirlik davranışı
@@ -757,12 +893,20 @@ ${girdiler
   const olcek = ['48', '36', '30', '24', '20', '18', '16', '14', '12'];
 
   return sayfa({
+    yol: 'temeller/',
     baslik: 'Temeller',
     ozet: 'Renk, tipografi, aralık ve tasarım belirteçleri.',
     derinlik: 1,
     etkin: 'temeller/',
     kenar: true,
     govde: `
+<nav class="kiris-yol dok-yol" aria-label="Sayfa yolu">
+  <ol class="kiris-yol__liste">
+    <li><a href="../">Giriş</a></li>
+    <li><span aria-current="page">Temeller</span></li>
+  </ol>
+</nav>
+
 <h1 class="dok-h1">Temeller</h1>
 <p class="dok-giris">Kiriş ${Object.keys(belirtecler).length} tasarım belirteci yayımlar. Hiçbir bileşen ham bir
 renk veya ölçü kullanmaz. Her değer bir belirteçten gelir.</p>
@@ -836,12 +980,20 @@ ${['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
 const erisilebilirlikSayfasi = () => {
   const kapsam = wcagKapsami();
   return sayfa({
+    yol: 'erisilebilirlik/',
     baslik: 'Erişilebilirlik',
     ozet: 'Her WCAG 2.2 ölçütünü hangi bileşenin karşıladığını gösteren harita.',
     derinlik: 1,
     etkin: 'erisilebilirlik/',
     kenar: true,
     govde: `
+<nav class="kiris-yol dok-yol" aria-label="Sayfa yolu">
+  <ol class="kiris-yol__liste">
+    <li><a href="../">Giriş</a></li>
+    <li><span aria-current="page">Erişilebilirlik</span></li>
+  </ol>
+</nav>
+
 <h1 class="dok-h1">Erişilebilirlik</h1>
 <p class="dok-giris">Kiriş hedefi WCAG 2.2 AA seviyesidir. Bileşen belgeleri ilgili ölçütleri ve kullanım kurallarını listeler.
 Hizmet ekibi tamamlanmış sayfaları ayrıca test etmelidir.</p>
@@ -893,7 +1045,7 @@ ${kapsam
 
 const yonetisimSayfasi = () => {
   // Ölçütler bugün denetlenen şeyleri yazar. Kurum sayısına bağlı bir ölçüt
-  // yoktur, çünkü Kiriş'i henüz hiçbir kurum kullanmıyor.
+  // yoktur, çünkü Kiriş’i henüz hiçbir kurum kullanmıyor.
   const asamalar = [
     { ad: 'Aday gösterildi', ozet: 'Henüz yok, ama ihtiyaç açık.', olcut: ['Ad, Kiriş adlandırma kuralına göre belirlendi.', 'Kısa açıklama ve bir görsel var.', 'Birden çok hizmetin buna ihtiyacı olduğu yazıldı.', 'Sistemde aynı işi yapan başka bir bileşen yok.'] },
     { ad: 'Taslak', ozet: 'Kod var, belge yazılıyor.', olcut: ['HTML ve CSS yazıldı. Renk ve aralık yalnız belirteçlerden gelir.', 'Belge sayfasında canlı bir örnek var.', 'Betik olmadan çalışır. Betik yalnız davranış ekler.', 'Bütünlük denetimi geçer: her sınıf ve davranış kodda bulunur.'] },
@@ -902,12 +1054,20 @@ const yonetisimSayfasi = () => {
   ];
 
   return sayfa({
+    yol: 'yonetisim/',
     baslik: 'Yönetişim',
     ozet: 'Bir bileşen sisteme nasıl girer, kim karar verir ve hangi ölçütleri karşılar.',
     derinlik: 1,
     etkin: 'yonetisim/',
     kenar: true,
     govde: `
+<nav class="kiris-yol dok-yol" aria-label="Sayfa yolu">
+  <ol class="kiris-yol__liste">
+    <li><a href="../">Giriş</a></li>
+    <li><span aria-current="page">Yönetişim</span></li>
+  </ol>
+</nav>
+
 <h1 class="dok-h1">Yönetişim</h1>
 <p class="dok-giris">Bir tasarım sistemi kod deposu değildir. Bu sayfa, bir bileşenin sisteme nasıl
 girdiğini ve kimin karar verdiğini yazar. Bu kural yazılmadan hiçbir bileşen yazılmaz.</p>
@@ -927,7 +1087,7 @@ son üçü yayımdan önce denetlenir.</p>
 <p>Hollanda bayrak yarışı modeli temel alındı. Bir bileşen dört durumdan geçer. Her durumun yazılı
 bir tamamlanma tanımı vardır. Kararlı bir bileşen, önceki üç durumun bütün ölçütlerini de karşılar.</p>
 <div class="kiris-uyari kiris-uyari--uyari" role="status">
-  <p><strong>Kullanım kanıtı yok.</strong> Kiriş'i bugün hiçbir kamu kurumu üretimde kullanmıyor.
+  <p><strong>Kullanım kanıtı yok.</strong> Kiriş’i bugün hiçbir kamu kurumu üretimde kullanmıyor.
   Bir bileşenin “kararlı” etiketi yalnız şunu söyler: arayüzü donduruldu ve denetimden geçti.
   Bir kurum bir bileşeni gerçek bir hizmette çalıştırdığında bu, o bileşenin sayfasına yazılır.</p>
 </div>
@@ -976,13 +1136,88 @@ bir araç bulamaz.</p>
 
 // ------------------------------------------------------------------ belge CSS
 
+// Yazı yüzleri. Dosyalar varliklar/yazi altında durur, dış istek yok.
+// Public Sans değişken bir yüzdür, üç ağırlık tek dosyadan gelir.
+// Lisans: SIL OFL 1.1, bakınız packages/identity/src/yazi/LICENSE-FONTS.txt
+const YAZI_CSS = `@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('yazi/public-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('yazi/public-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('yazi/public-sans-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('yazi/public-sans-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('yazi/ibm-plex-mono-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('yazi/ibm-plex-mono-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('yazi/ibm-plex-mono-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('yazi/ibm-plex-mono-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+`;
+
 const BELGE_CSS = `/* Kiriş belge sitesi. Bileşen biçimlerinden ayrıdır, her sınıf 'dok-' ile başlar.
    Görsel dil: açık zemin, bir yazı tipi, hafif kenarlıklar, canlı önizleme.
    Renkler bileşen belirteçlerinden gelir, böylece koyu tema ve yüksek karşıtlık
    burada da çalışır. */
 
 .dok {
-  font-family: "Public Sans", var(--kiris-yazi-aile-govde);
   font-size: var(--kiris-yazi-boyut-16);
   line-height: 1.6;
 }
@@ -1056,8 +1291,9 @@ const BELGE_CSS = `/* Kiriş belge sitesi. Bileşen biçimlerinden ayrıdır, he
 .dok-ust__menu a[aria-current] { background: rgb(255 255 255 / 0.16); }
 .dok-ust__erisim .kiris-erisim__dugme { font-size: var(--kiris-yazi-boyut-14); }
 /* Dar ekranda menü, Menü düğmesi ile açılır. Çekirdek 48rem altında gizler.
-   Belge sitesi yedi bağlantı taşır, bu yüzden eşik 60rem olur. */
-@media (max-width: 60rem) {
+   Belge sitesi sekiz bağlantı ve iki satırlık marka taşır; ölçüldü, hepsi
+   ancak 78rem üstünde tek satıra sığıyor. */
+@media (max-width: 78rem) {
   .dok-ust__ic { flex-wrap: wrap; gap: var(--kiris-aralik-3); }
   .dok-ust__menu-dugmesi { display: inline-flex; align-items: center; }
   .dok-ust__menu { display: none; flex-basis: 100%; flex-direction: column; gap: 0; order: 10; }
@@ -1667,21 +1903,21 @@ ${sosyal ? `      <ul class="kiris-alt-bilgi__sosyal" aria-label="Sosyal medya h
 };
 
 const ornekSayfa = (o) => `<!doctype html>
-<html lang="tr" data-kiris-tema="acik">
+<html lang="tr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${kacis(o.ad)} — Kiriş örneği</title>
+<title>${kacis(o.ad)} · Kiriş örneği</title>
 <meta name="description" content="${kacis(o.ozet)}">
+<meta name="color-scheme" content="light dark">
+<!-- Bu sayfa gerçek kurum logosu ve resmî afiş taşıyan bir makettir.
+     Arama sonucunda kurumun kendi sitesiyle karışmasın diye dizine kapalıdır. -->
+<meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" sizes="196x196" href="../../varliklar/kiris-isaret-196.png?v=kiris-1">
 <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="../../favicon.ico?v=kiris-1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="apple-touch-icon" href="../../varliklar/kiris-isaret-196.png?v=kiris-1">
+<link rel="stylesheet" href="../../varliklar/yazi.css">
 <link rel="stylesheet" href="../../varliklar/kiris.css">
-<style>
-  body { font-family: "Public Sans", var(--kiris-yazi-aile-govde); }
-</style>
 </head>
 <body>
 <a class="kiris-atla" href="#ana-icerik">Ana içeriğe geç</a>
@@ -1689,7 +1925,7 @@ const ornekSayfa = (o) => `<!doctype html>
 <div class="kiris-asama" role="note">
   <div class="kiris-kap kiris-asama__ic">
     <span class="kiris-etiket kiris-etiket--sari">Örnek</span>
-    <p class="kiris-asama__metin"><strong>Kiriş tasarım örneği.</strong> Bu sayfa ${kacis(o.kurum)} kurumuna ait değildir. Gerçek site: <a class="kiris-link" href="${o.url}">${o.url.replace('https://', '')}</a></p>
+    <p class="kiris-asama__metin"><strong>Kiriş tasarım örneği.</strong> Bu sayfa ${kacis(o.kurum)}${yonelmeEki(o.kurum)} ait değildir. Gerçek site: <a class="kiris-link" href="${o.url}">${o.url.replace('https://', '')}</a></p>
     <a class="kiris-link" href="../">Bütün örnekler</a>
     <a class="kiris-link" href="../../">Kiriş belgeleri</a>
   </div>
@@ -1723,7 +1959,7 @@ ${o.menu.map((m) => `      <a href="#">${kacis(m)}</a>`).join('\n')}
 </header>
 
 <main id="ana-icerik" tabindex="-1">
-${SPRITE}
+${spriteSuz(o.govde)}
 ${o.govde}
 </main>
 
@@ -1757,7 +1993,9 @@ ${liste
   .map(
     (o) => `  <article class="dok-ornek-kart">
     <div class="dok-ornek-kart__cerceve">
-      <iframe src="${o.slug}/" title="${kacis(o.ad)} önizleme" loading="lazy" tabindex="-1"></iframe>
+      <!-- inert: önizleme içindeki bağlantı ve form alanları odak sırasına girmesin.
+           tabindex yalnız iframe kutusunu alır, içindeki belgeyi almaz. -->
+      <iframe src="${o.slug}/" title="${kacis(o.ad)} önizleme" loading="lazy" tabindex="-1" inert></iframe>
     </div>
     <div class="dok-ornek-kart__govde">
       <h2 class="dok-ornek-kart__ad"><a href="${o.slug}/">${kacis(o.ad)}</a></h2>
@@ -1799,14 +2037,19 @@ async function main() {
   for (const dosya of await readdir(join(KIMLIK, 'kurumlar')).catch(() => [])) {
     if (dosya.endsWith('.svg')) KURUM_LOGOLARI.set(dosya, (await readFile(join(KIMLIK, 'kurumlar', dosya), 'utf8')).trim());
   }
+  // Çıktı her yapıda sıfırdan kurulur. Yoksa eski adlandırmadan kalan dosyalar
+  // ve üçüncü parti araç artıkları yayına sızar.
+  await rm(CIKTI, { recursive: true, force: true });
+  await mkdir(CIKTI, { recursive: true });
+
   for (const k of ['varliklar', 'bilesenler', 'entegrasyonlar', 'temeller', 'simgeler', 'erisilebilirlik', 'yonetisim', 'ornekler']) {
     await mkdir(join(CIKTI, k), { recursive: true });
   }
 
-  await copyFile(join(CEKIRDEK, 'kiris.css'), join(CIKTI, 'varliklar', 'kiris.css'));
-  await copyFile(join(CEKIRDEK, 'kiris.js'), join(CIKTI, 'varliklar', 'kiris.js'));
+  await copyFile(join(CEKIRDEK, 'kiris.min.css'), join(CIKTI, 'varliklar', 'kiris.css'));
+  await copyFile(join(CEKIRDEK, 'kiris.min.js'), join(CIKTI, 'varliklar', 'kiris.js'));
   await copyFile(join(KIMLIK, 'e-devlet-isaret.png'), join(CIKTI, 'varliklar', 'e-devlet-isaret.png'));
-  // Sitenin kendi kimliği. favicon.ico Kiriş işaretidir, e-Devlet'inki değil.
+  // Sitenin kendi kimliği. favicon.ico Kiriş işaretidir, e-Devlet’inki değil.
   await copyFile(join(KIMLIK, 'kiris-favicon.ico'), join(CIKTI, 'favicon.ico'));
   await copyFile(join(KIMLIK, 'kiris-isaret.svg'), join(CIKTI, 'varliklar', 'kiris-isaret.svg'));
   for (const boyut of [16, 32, 48, 64, 128, 196]) {
@@ -1818,6 +2061,14 @@ async function main() {
   for (const dosya of await readdir(join(KIMLIK, 'kurumlar')).catch(() => [])) {
     await copyFile(join(KIMLIK, 'kurumlar', dosya), join(CIKTI, 'varliklar', 'kurumlar', dosya));
   }
+  // Yazı tipleri yerelde durur. Dış istek gitmez, ziyaretçinin adresi üçüncü
+  // tarafa çıkmaz, kapalı kamu ağında da yüklenir. Lisans: SIL OFL 1.1.
+  await mkdir(join(CIKTI, 'varliklar', 'yazi'), { recursive: true });
+  for (const dosya of await readdir(join(KIMLIK, 'yazi'))) {
+    await copyFile(join(KIMLIK, 'yazi', dosya), join(CIKTI, 'varliklar', 'yazi', dosya));
+  }
+  await writeFile(join(CIKTI, 'varliklar', 'yazi.css'), YAZI_CSS, 'utf8');
+
   await writeFile(join(CIKTI, 'varliklar', 'belgeler.css'), BELGE_CSS + ORNEK_CSS, 'utf8');
   await writeFile(join(CIKTI, 'varliklar', 'belgeler.js'), BELGE_JS, 'utf8');
 
@@ -1846,6 +2097,47 @@ async function main() {
   await writeFile(join(CIKTI, 'ornekler', 'index.html'), orneklerIndeksi(ornekler), 'utf8');
 
   await writeFile(join(CIKTI, '.nojekyll'), '', 'utf8');
+
+  // Kurum örnekleri gerçek logo ve resmî afiş taşır. Arama sonucunda kurumun
+  // kendi sitesiyle karışmamaları için hem robots.txt hem sayfa içi noindex ile
+  // dizinden tutulur, site haritasına da girmezler.
+  await writeFile(
+    join(CIKTI, 'robots.txt'),
+    [
+      '# Kiriş belge sitesi.',
+      '# Kurum örnekleri gerçek logo ve resmî afiş taşıyan maketlerdir.',
+      '# Arama sonucunda kurumun kendi sitesiyle karışmasınlar diye dizine kapalıdır.',
+      'User-agent: *',
+      'Allow: /',
+      'Disallow: /ornekler/',
+      '',
+      `Sitemap: ${SITE_ADRES}/sitemap.xml`,
+      '',
+    ].join('\n'),
+    'utf8'
+  );
+
+  const haritaYollari = [
+    '',
+    'temeller/',
+    'simgeler/',
+    'bilesenler/',
+    'entegrasyonlar/',
+    'erisilebilirlik/',
+    'yonetisim/',
+    ...BILESENLER.map((b) => `bilesenler/${b.id}.html`),
+  ];
+  await writeFile(
+    join(CIKTI, 'sitemap.xml'),
+    [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      ...haritaYollari.map((y) => `  <url><loc>${SITE_ADRES}/${y}</loc></url>`),
+      '</urlset>',
+      '',
+    ].join('\n'),
+    'utf8'
+  );
 
   console.log(`sayfa: ${8 + BILESENLER.length + ornekler.length} · bileşen: ${BILESENLER.length} · özgün: ${OZGUN_BILESENLER.length}`);
   console.log('çıktı: apps/docs/site');

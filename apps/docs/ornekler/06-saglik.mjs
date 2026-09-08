@@ -1,5 +1,5 @@
 // T.C. Sağlık Bakanlığı ana sayfası, birebir. Yalnız Kiriş bileşenleri ile.
-// Kaynak: https://www.saglik.gov.tr — 6 Eylül 2026 tarihli içerik.
+// Kaynak: https://www.saglik.gov.tr · 6 Eylül 2026 tarihli içerik.
 // Manşet fotoğrafları düşer, başlıklar kalır. İki kayan pano kayan pano kalır.
 
 const manset = [

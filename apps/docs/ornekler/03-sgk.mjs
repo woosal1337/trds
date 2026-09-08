@@ -1,5 +1,5 @@
 // Sosyal Güvenlik Kurumu ana sayfası, birebir. Yalnız Kiriş bileşenleri ile.
-// Kaynak: https://www.sgk.gov.tr — 6 Eylül 2026 tarihli içerik.
+// Kaynak: https://www.sgk.gov.tr · 6 Eylül 2026 tarihli içerik.
 // Bölümler gerçek sayfa ile aynı sırada. Manşet fotoğrafı düşer, slogan kalır.
 
 const duyurular = [

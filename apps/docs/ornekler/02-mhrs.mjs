@@ -1,5 +1,5 @@
 // Merkezi Hekim Randevu Sistemi ana sayfası, yalnız Kiriş bileşenleri ile.
-// Gerçek site: https://mhrs.gov.tr — günde 500 binden fazla randevu.
+// Gerçek site: https://mhrs.gov.tr · günde 500 binden fazla randevu.
 
 export const ornek = {
   slug: 'mhrs',

@@ -6,7 +6,7 @@ body:
     id: bilesen
     attributes:
       label: Hangi bileşen
-      placeholder: Örnek — T.C. kimlik numarası girişi
+      placeholder: Örnek · T.C. kimlik numarası girişi
     validations: { required: true }
 
   - type: textarea
@@ -43,4 +43,4 @@ body:
     id: ortam
     attributes:
       label: Tarayıcı ve yardımcı teknoloji
-      placeholder: Örnek — Windows 11, Chrome 130, NVDA 2024.4
+      placeholder: Örnek · Windows 11, Chrome 130, NVDA 2024.4

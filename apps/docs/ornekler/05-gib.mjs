@@ -1,5 +1,5 @@
 // Gelir İdaresi Başkanlığı, Dijital Vergi Dairesi ana sayfası, yalnız Kiriş ile.
-// Gerçek site: https://dijital.gib.gov.tr — vergi borcu, beyanname, ödeme.
+// Gerçek site: https://dijital.gib.gov.tr · vergi borcu, beyanname, ödeme.
 
 export const ornek = {
   slug: 'gib',

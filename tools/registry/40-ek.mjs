@@ -1,4 +1,4 @@
-// Kiriş component registry — the second batch.
+// Kiriş component registry · the second batch.
 //
 // Sourced from the KERN UX (Germany) catalogue diffed against Kiriş, plus the
 // components that appear in five or more of the nine national catalogues and
@@ -299,7 +299,7 @@ export const ekBilesenler = [
     ornekler: [
       {
         baslik: 'Temel',
-        html: '<nav class="kiris-icindekiler" aria-labelledby="ic-baslik">\n  <h2 class="kiris-icindekiler__baslik" id="ic-baslik">Bu sayfada</h2>\n  <ol class="kiris-icindekiler__liste">\n    <li><a href="#kosullar">Başvuru koşulları</a></li>\n    <li><a href="#belgeler">Gerekli belgeler</a></li>\n    <li><a href="#sure">Süreç ve süre</a></li>\n    <li><a href="#itiraz">İtiraz yolu</a></li>\n  </ol>\n</nav>'
+        html: '<nav class="kiris-icindekiler" aria-labelledby="ic-baslik">\n  <h2 class="kiris-icindekiler__baslik" id="ic-baslik">Bu sayfada</h2>\n  <ol class="kiris-icindekiler__liste">\n    <li><a href="#kosullar">Başvuru koşulları</a></li>\n    <li><a href="#belgeler">Gerekli belgeler</a></li>\n    <li><a href="#sure">Süreç ve süre</a></li>\n    <li><a href="#itiraz">İtiraz yolu</a></li>\n  </ol>\n</nav>\n\n<section class="kiris-bolum" id="kosullar">\n  <h3 class="kiris-baslik kiris-baslik--3">Başvuru koşulları</h3>\n  <p>Başvuru için Türkiye Cumhuriyeti vatandaşı olmanız ve 18 yaşını doldurmuş olmanız gerekir.</p>\n</section>\n\n<section class="kiris-bolum" id="belgeler">\n  <h3 class="kiris-baslik kiris-baslik--3">Gerekli belgeler</h3>\n  <p>Kimlik fotokopisi, ikametgah belgesi ve başvuru formu.</p>\n</section>\n\n<section class="kiris-bolum" id="sure">\n  <h3 class="kiris-baslik kiris-baslik--3">Süreç ve süre</h3>\n  <p>Başvurunuz en geç 15 iş günü içinde sonuçlanır.</p>\n</section>\n\n<section class="kiris-bolum" id="itiraz">\n  <h3 class="kiris-baslik kiris-baslik--3">İtiraz yolu</h3>\n  <p>Sonuca 30 gün içinde CİMER üzerinden itiraz edebilirsiniz.</p>\n</section>'
       }
     ]
   },
