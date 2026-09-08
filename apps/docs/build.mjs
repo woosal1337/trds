@@ -19,7 +19,7 @@
 //   ornekler/                      örnek kurum sayfaları dizini
 //   ornekler/<slug>/               bir kurumun ana sayfası, yalnız TRDS ile
 
-import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, copyFile, rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -39,6 +39,8 @@ const CEKIRDEK = join(PAKETLER, 'core', 'dist');
 const BELIRTEC = join(PAKETLER, 'tokens', 'dist');
 const KIMLIK = join(PAKETLER, 'identity', 'dist');
 const SURUM = JSON.parse(await readFile(join(KOK, '..', '..', 'package.json'), 'utf8')).version;
+const SITE_ADRESI = 'https://trds.chele.bi';
+const SOSYAL_GORSEL = `${SITE_ADRESI}/varliklar/trds-sosyal-onizleme.png?v=${SURUM}`;
 let SPRITE = '';
 
 // ---------------------------------------------------------------- yardımcılar
@@ -51,6 +53,29 @@ const metin = (deger) => kacis(deger).replace(/`([^`]+)`/g, '<code>$1</code>');
 
 /** Örnek HTML içindeki varlık yolunu sayfanın derinliğine göre doldurur. */
 const varlik = (html, yukari) => html.replace(/\{\{VARLIK\}\}/g, `${yukari}varliklar/`);
+
+const sosyalEtiketler = ({ baslik, ozet, yol = '' }) => {
+  const adres = new URL(yol, `${SITE_ADRESI}/`).href;
+  const gorselAciklamasi = 'TRDS başlığı ve örnek kamu hizmeti bileşenleri';
+  return `<link rel="canonical" href="${adres}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="TRDS">
+<meta property="og:title" content="${kacis(baslik)}">
+<meta property="og:description" content="${kacis(ozet)}">
+<meta property="og:url" content="${adres}">
+<meta property="og:image" content="${SOSYAL_GORSEL}">
+<meta property="og:image:secure_url" content="${SOSYAL_GORSEL}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${gorselAciklamasi}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${kacis(baslik)}">
+<meta name="twitter:description" content="${kacis(ozet)}">
+<meta name="twitter:image" content="${SOSYAL_GORSEL}">
+<meta name="twitter:image:alt" content="${gorselAciklamasi}">`;
+};
 
 const DURUM_ETIKET = {
   stable: ['kararlı', 'kararli'],
@@ -144,7 +169,7 @@ ${g.bilesenler
  * kenar:    render the sidebar (inner pages).
  * genis:    full-width content (home).
  */
-const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, etkinId = '', genis = false }) => {
+const sayfa = ({ baslik, ozet, govde, yol = '', derinlik = 0, etkin = '', kenar = false, etkinId = '', genis = false }) => {
   const yukari = '../'.repeat(derinlik);
   const menu = NAV.map(
     (m) => `<a href="${yukari}${m.yol}"${m.yol === etkin ? ' aria-current="page"' : ''}>${m.ad}</a>`
@@ -159,6 +184,7 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${kacis(tamBaslik)}</title>
 <meta name="description" content="${kacis(ozet)}">
+${sosyalEtiketler({ baslik: tamBaslik, ozet, yol })}
 <meta name="color-scheme" content="light dark">
 <link rel="icon" type="image/png" sizes="196x196" href="${yukari}varliklar/e-devlet-isaret.png?v=edevlet-1">
 <link rel="icon" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64" href="${yukari}favicon.ico?v=edevlet-1">
@@ -292,6 +318,7 @@ const girisSayfasi = () => {
   return sayfa({
     baslik: 'Türkiye Kamu Tasarım Sistemi',
     ozet: 'Türkiye kamu hizmetleri için tek bir açık kaynak tasarım sistemi.',
+    yol: '',
     etkin: '',
     genis: true,
     govde: `
@@ -394,6 +421,7 @@ ${teknolojiler.map((t) => `          <li>${t.ad}</li>`).join('\n')}
   return sayfa({
     baslik: 'Bileşenler',
     ozet: `TRDS içindeki ${BILESENLER.length} bileşenin tamamı. Her biri canlı önizleme, durum ve hazır teknolojiler ile.`,
+    yol: 'bilesenler/',
     derinlik: 1,
     etkin: 'bilesenler/',
     kenar: true,
@@ -473,6 +501,7 @@ const bilesenSayfasi = (b) => {
   return sayfa({
     baslik: b.ad,
     ozet: b.ozet,
+    yol: `bilesenler/${b.id}.html`,
     derinlik: 1,
     etkin: 'bilesenler/',
     kenar: true,
@@ -560,6 +589,7 @@ const simgelerSayfasi = async () => {
   return sayfa({
     baslik: 'Simgeler',
     ozet: 'Tek çizim kuralına uyan 74 simge, tek sprite.',
+    yol: 'simgeler/',
     derinlik: 1,
     etkin: 'simgeler/',
     kenar: true,
@@ -662,6 +692,7 @@ ${e.notlar.map((n) => `    <li>${metin(n)}</li>`).join('\n')}
   return sayfa({
     baslik: 'Entegrasyonlar',
     ozet: 'Her bileşenin her teknolojideki durumu ve her teknoloji için kurulum.',
+    yol: 'entegrasyonlar/',
     derinlik: 1,
     etkin: 'entegrasyonlar/',
     kenar: true,
@@ -748,6 +779,7 @@ ${girdiler
   return sayfa({
     baslik: 'Temeller',
     ozet: 'Renk, tipografi, aralık ve tasarım belirteçleri.',
+    yol: 'temeller/',
     derinlik: 1,
     etkin: 'temeller/',
     kenar: true,
@@ -827,6 +859,7 @@ const erisilebilirlikSayfasi = () => {
   return sayfa({
     baslik: 'Erişilebilirlik',
     ozet: 'Her WCAG 2.2 ölçütünü hangi bileşenin karşıladığını gösteren harita.',
+    yol: 'erisilebilirlik/',
     derinlik: 1,
     etkin: 'erisilebilirlik/',
     kenar: true,
@@ -893,6 +926,7 @@ const yonetisimSayfasi = () => {
   return sayfa({
     baslik: 'Yönetişim',
     ozet: 'Bir bileşen sisteme nasıl girer, kim karar verir ve hangi ölçütleri karşılar.',
+    yol: 'yonetisim/',
     derinlik: 1,
     etkin: 'yonetisim/',
     kenar: true,
@@ -1665,6 +1699,7 @@ const ornekSayfa = (o) => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${kacis(o.ad)} — TRDS örneği</title>
 <meta name="description" content="${kacis(o.ozet)}">
+${sosyalEtiketler({ baslik: `${o.ad} — TRDS örneği`, ozet: o.ozet, yol: `ornekler/${o.slug}/` })}
 <link rel="icon" type="image/png" sizes="196x196" href="../../varliklar/e-devlet-isaret.png?v=edevlet-1">
 <link rel="icon" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64" href="../../favicon.ico?v=edevlet-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1731,6 +1766,7 @@ const orneklerIndeksi = (liste) =>
   sayfa({
     baslik: 'Örnekler',
     ozet: 'En çok kullanılan altı kamu sitesinin ana sayfası, yalnız TRDS bileşenleri ile yeniden kurulmuş.',
+    yol: 'ornekler/',
     derinlik: 1,
     etkin: 'ornekler/',
     kenar: false,
@@ -1787,6 +1823,7 @@ const ORNEK_CSS = `
 // ------------------------------------------------------------------------ ana
 
 async function main() {
+  await rm(CIKTI, { recursive: true, force: true });
   SPRITE = await readFile(join(KIMLIK, 'trds-simgeler.svg'), 'utf8');
   for (const dosya of await readdir(join(KIMLIK, 'kurumlar')).catch(() => [])) {
     if (dosya.endsWith('.svg')) KURUM_LOGOLARI.set(dosya, (await readFile(join(KIMLIK, 'kurumlar', dosya), 'utf8')).trim());
@@ -1801,6 +1838,7 @@ async function main() {
   await copyFile(join(KIMLIK, 'favicon.ico'), join(CIKTI, 'favicon.ico'));
   await copyFile(join(KIMLIK, 'turk-bayragi.svg'), join(CIKTI, 'varliklar', 'turk-bayragi.svg'));
   await copyFile(join(KIMLIK, 'trds-simgeler.svg'), join(CIKTI, 'varliklar', 'trds-simgeler.svg'));
+  await copyFile(join(KOK, 'varliklar', 'trds-sosyal-onizleme.png'), join(CIKTI, 'varliklar', 'trds-sosyal-onizleme.png'));
   await mkdir(join(CIKTI, 'varliklar', 'kurumlar'), { recursive: true });
   for (const dosya of await readdir(join(KIMLIK, 'kurumlar')).catch(() => [])) {
     await copyFile(join(KIMLIK, 'kurumlar', dosya), join(CIKTI, 'varliklar', 'kurumlar', dosya));

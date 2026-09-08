@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="baslik aciklama">
+  <title id="baslik">TRDS sosyal paylaşım görseli</title>
+  <desc id="aciklama">Türkiye Kamu Tasarım Sistemi başlığı ve örnek kamu hizmeti bileşenleri.</desc>
+  <defs>
+    <filter id="golge" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#071426" flood-opacity="0.24"/>
+    </filter>
+    <pattern id="izgara" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#4c7cc7" stroke-opacity="0.14" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0c1e3a"/>
+  <rect width="1200" height="630" fill="url(#izgara)"/>
+  <rect width="14" height="630" fill="#e30a17"/>
+  <circle cx="660" cy="110" r="210" fill="#17376a" opacity="0.72"/>
+  <circle cx="1110" cy="570" r="250" fill="#112a51" opacity="0.9"/>
+
+  <g font-family="Public Sans, Helvetica Neue, Arial, sans-serif">
+    <g transform="translate(76 70)">
+      <rect width="72" height="72" rx="10" fill="#ffffff"/>
+      <rect x="12" y="12" width="12" height="48" rx="2" fill="#e30a17"/>
+      <path d="M35 16h25v10H49v34H38V26h-3z" fill="#0c1e3a"/>
+      <text x="92" y="31" fill="#ffffff" font-size="28" font-weight="700" letter-spacing="1.4">TRDS</text>
+      <text x="92" y="58" fill="#b0c8ec" font-size="16" font-weight="500" letter-spacing="0.8">TÜRKİYE KAMU TASARIM SİSTEMİ</text>
+    </g>
+
+    <g transform="translate(76 136)">
+      <text x="0" y="54" fill="#ffffff" font-size="54" font-weight="700" letter-spacing="-1.8">Her kamu hizmeti için</text>
+      <text x="0" y="119" fill="#ffffff" font-size="54" font-weight="700" letter-spacing="-1.8">tek bir tasarım sistemi</text>
+      <text x="0" y="206" fill="#d8e4f6" font-size="22" font-weight="400">Ortak bileşenler, açık kurallar ve</text>
+      <text x="0" y="240" fill="#d8e4f6" font-size="22" font-weight="400">erişilebilir hizmet deneyimleri.</text>
+    </g>
+
+    <g transform="translate(76 516)">
+      <line x1="0" y1="0" x2="500" y2="0" stroke="#4c7cc7" stroke-width="1"/>
+      <text x="0" y="36" fill="#ffffff" font-size="17" font-weight="600">Açık kaynak</text>
+      <circle cx="129" cy="30" r="3" fill="#e30a17"/>
+      <text x="148" y="36" fill="#ffffff" font-size="17" font-weight="600">Erişilebilir</text>
+      <circle cx="271" cy="30" r="3" fill="#e30a17"/>
+      <text x="290" y="36" fill="#ffffff" font-size="17" font-weight="600">Birlikte geliştirilen</text>
+      <text x="0" y="78" fill="#7fa4dd" font-size="16" font-weight="500">trds.chele.bi</text>
+    </g>
+
+    <g transform="translate(714 70)" filter="url(#golge)">
+      <rect width="410" height="490" rx="14" fill="#ffffff"/>
+      <rect width="410" height="64" rx="14" fill="#f4f6f8"/>
+      <path d="M0 50h410v14H0z" fill="#f4f6f8"/>
+      <circle cx="28" cy="32" r="6" fill="#e30a17"/>
+      <circle cx="50" cy="32" r="6" fill="#b7c0ca"/>
+      <circle cx="72" cy="32" r="6" fill="#b7c0ca"/>
+      <text x="104" y="39" fill="#545e6b" font-size="15" font-weight="500">kamu-hizmeti.gov.tr</text>
+
+      <g transform="translate(34 94)">
+        <rect width="88" height="25" rx="4" fill="#d8e4f6"/>
+        <text x="44" y="18" fill="#17376a" font-size="12" font-weight="700" letter-spacing="0.5" text-anchor="middle">BAŞVURU</text>
+        <text x="0" y="74" fill="#1a2027" font-size="30" font-weight="700" letter-spacing="-0.7">Başvuru bilgileri</text>
+        <text x="0" y="105" fill="#545e6b" font-size="15">Bilgilerinizi kontrol edin ve işleme devam edin.</text>
+
+        <g transform="translate(0 134)">
+          <circle cx="11" cy="11" r="11" fill="#1e4785"/>
+          <text x="7" y="16" fill="#ffffff" font-size="12" font-weight="700">1</text>
+          <line x1="27" y1="11" x2="150" y2="11" stroke="#1e4785" stroke-width="3"/>
+          <circle cx="166" cy="11" r="11" fill="#1e4785"/>
+          <text x="162" y="16" fill="#ffffff" font-size="12" font-weight="700">2</text>
+          <line x1="182" y1="11" x2="305" y2="11" stroke="#d5dbe2" stroke-width="3"/>
+          <circle cx="321" cy="11" r="10" fill="#ffffff" stroke="#8e99a6" stroke-width="2"/>
+          <text x="317" y="16" fill="#545e6b" font-size="12" font-weight="700">3</text>
+        </g>
+
+        <g transform="translate(0 184)">
+          <text x="0" y="0" fill="#1a2027" font-size="14" font-weight="700">T.C. kimlik numarası</text>
+          <rect x="0" y="15" width="342" height="50" rx="6" fill="#ffffff" stroke="#3d4650" stroke-width="2"/>
+          <text x="15" y="47" fill="#3d4650" font-size="17" font-weight="500" letter-spacing="0.8">10000000146</text>
+          <text x="0" y="93" fill="#545e6b" font-size="13">11 haneli kimlik numaranızı girin.</text>
+        </g>
+
+        <g transform="translate(0 302)">
+          <rect width="342" height="56" rx="7" fill="#1e4785"/>
+          <text x="107" y="36" fill="#ffffff" font-size="17" font-weight="700">Devam et</text>
+          <path d="M235 28h18m-6-6 6 6-6 6" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <g transform="translate(0 380)">
+          <rect width="342" height="58" rx="7" fill="#eaf5ef"/>
+          <rect width="5" height="58" rx="2.5" fill="#1e6b46"/>
+          <circle cx="28" cy="29" r="10" fill="#1e6b46"/>
+          <path d="m23 29 3 3 7-8" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="48" y="26" fill="#155134" font-size="14" font-weight="700">Bilgiler doğrulandı</text>
+          <text x="48" y="45" fill="#155134" font-size="12">İşleme güvenle devam edebilirsiniz.</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

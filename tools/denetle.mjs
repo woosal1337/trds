@@ -161,6 +161,37 @@ async function main() {
     for (const t of TANIMLAR) if (!BILESENLER.some((b) => b.id === t.id)) bildir('sarmalayici', `${t.id}: tanım var, kayıt defterinde parça yok.`);
   }
 
+  // 4e — Her sayfa sosyal paylaşım etiketlerini taşır. Görsel 1200 × 630 olur.
+  {
+    const { readdir } = await import('node:fs/promises');
+    const siteKlasoru = join(KOK, 'apps', 'docs', 'site');
+    const dosyalar = (await readdir(siteKlasoru, { recursive: true }).catch(() => []))
+      .filter((dosya) => dosya.endsWith('.html'));
+    const etiketler = [
+      'property="og:title"',
+      'property="og:description"',
+      'property="og:image"',
+      'property="og:image:width" content="1200"',
+      'property="og:image:height" content="630"',
+      'name="twitter:card" content="summary_large_image"',
+      'name="twitter:image"'
+    ];
+    for (const dosya of dosyalar) {
+      const html = await readFile(join(siteKlasoru, dosya), 'utf8');
+      for (const etiket of etiketler) {
+        if (!html.includes(etiket)) bildir('sosyal', `${dosya}: ${etiket} etiketi yok.`);
+      }
+    }
+
+    const gorselYolu = join(siteKlasoru, 'varliklar', 'trds-sosyal-onizleme.png');
+    const gorsel = await readFile(gorselYolu).catch(() => null);
+    if (!gorsel) {
+      bildir('sosyal', 'Sosyal paylaşım görseli yok.');
+    } else if (gorsel.readUInt32BE(16) !== 1200 || gorsel.readUInt32BE(20) !== 630) {
+      bildir('sosyal', 'Sosyal paylaşım görseli 1200 × 630 değil.');
+    }
+  }
+
   // 5 — her data-trds davranışı JavaScript içinde başlatılmalı
   if (js) {
     const davranislar = new Set();
