@@ -1,0 +1,46 @@
+{
+  "name": "trds",
+  "private": true,
+  "version": "1.0.1",
+  "description": "TRDS — Türkiye Kamu Tasarım Sistemi. Türkiye kamu hizmetleri için tek bir açık kaynak tasarım sistemi.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/themes/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "yapi": "npm run yapi:belirtec && npm run yapi:tema && npm run yapi:kimlik && npm run yapi:cekirdek && npm run yapi:belge && npm run yapi:llms",
+    "yapi:belirtec": "node packages/tokens/build.mjs",
+    "yapi:tema": "node packages/themes/build.mjs",
+    "yapi:cekirdek": "node packages/core/build.mjs",
+    "yapi:belge": "node apps/docs/build.mjs",
+    "test": "node --test \"packages/validators/test/*.test.js\" \"packages/react/test/*.test.js\" \"packages/vue/test/*.test.js\" \"packages/core/test/*.test.js\" \"packages/identity/test/*.test.js\"",
+    "denetle": "node tools/denetle.mjs",
+    "sun": "node apps/docs/serve.mjs 4173",
+    "yapi:kimlik": "node packages/identity/build.mjs",
+    "test:sarmalayici": "node --test \"packages/react/test/*.test.js\" \"packages/vue/test/*.test.js\"",
+    "yapi:llms": "node tools/llms.mjs",
+    "yayin:denetle": "node tools/yayin.mjs --denetle",
+    "yayin": "node tools/yayin.mjs"
+  },
+  "devDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vue": "^3.5.0",
+    "@vue/server-renderer": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woosal1337/trds.git"
+  },
+  "homepage": "https://trds.chele.bi",
+  "bugs": {
+    "url": "https://github.com/woosal1337/trds/issues"
+  },
+  "author": "Ege Chelebi <ege@chele.bi>"
+}

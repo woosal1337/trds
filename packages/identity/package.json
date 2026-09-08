@@ -1,0 +1,48 @@
+{
+  "name": "@tr-ds/identity",
+  "version": "1.0.1",
+  "description": "TRDS simge seti (MIT) ve devlet kimlik parçaları. Kimlik parçaları kısıtlıdır. Bakınız LICENSE-IDENTITY.md.",
+  "type": "module",
+  "license": "SEE LICENSE IN dist/LICENSE-IDENTITY.md",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./sprite": "./dist/trds-simgeler.svg",
+    "./isaret": "./dist/e-devlet-isaret.png",
+    "./bayrak": "./dist/turk-bayragi.svg",
+    "./simgeler/*": "./dist/simgeler/*"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "prepublishOnly": "node build.mjs"
+  },
+  "author": "Ege Chelebi <ege@chele.bi>",
+  "homepage": "https://trds.chele.bi",
+  "bugs": {
+    "url": "https://github.com/woosal1337/trds/issues"
+  },
+  "keywords": [
+    "trds",
+    "design-system",
+    "turkiye",
+    "gov",
+    "accessibility",
+    "wcag",
+    "e-devlet"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woosal1337/trds.git",
+    "directory": "packages/identity"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

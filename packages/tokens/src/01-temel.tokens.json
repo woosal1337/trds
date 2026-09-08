@@ -1,0 +1,150 @@
+{
+  "$schema": "https://tr.gov.trds/schema/tokens.json",
+  "$aciklama": "Temel belirteçler. Ham değerler. Bir bileşen bunları doğrudan kullanmaz. Anlamsal belirteçler bunlara bakar.",
+  "renk": {
+    "notr": {
+      "0":   { "$type": "color", "$value": "#ffffff" },
+      "50":  { "$type": "color", "$value": "#f4f6f8" },
+      "100": { "$type": "color", "$value": "#e8ecf0" },
+      "200": { "$type": "color", "$value": "#d5dbe2" },
+      "300": { "$type": "color", "$value": "#b7c0ca" },
+      "400": { "$type": "color", "$value": "#8e99a6" },
+      "500": { "$type": "color", "$value": "#6b7684" },
+      "600": { "$type": "color", "$value": "#545e6b" },
+      "700": { "$type": "color", "$value": "#3d4650" },
+      "800": { "$type": "color", "$value": "#2a323b" },
+      "900": { "$type": "color", "$value": "#1a2027" },
+      "950": { "$type": "color", "$value": "#10151a" }
+    },
+    "birincil": {
+      "$aciklama": "Etkileşim rengi. Bağlantı, birincil düğme, odaklanmış alan kenarlığı.",
+      "50":  { "$type": "color", "$value": "#eef3fb" },
+      "100": { "$type": "color", "$value": "#d8e4f6" },
+      "200": { "$type": "color", "$value": "#b0c8ec" },
+      "300": { "$type": "color", "$value": "#7fa4dd" },
+      "400": { "$type": "color", "$value": "#4c7cc7" },
+      "500": { "$type": "color", "$value": "#2a5da8" },
+      "600": { "$type": "color", "$value": "#1e4785" },
+      "700": { "$type": "color", "$value": "#17376a" },
+      "800": { "$type": "color", "$value": "#112a51" },
+      "900": { "$type": "color", "$value": "#0c1e3a" }
+    },
+    "tehlike": {
+      "50":  { "$type": "color", "$value": "#fdeeed" },
+      "100": { "$type": "color", "$value": "#f9d5d2" },
+      "300": { "$type": "color", "$value": "#e88a83" },
+      "500": { "$type": "color", "$value": "#d32f2f" },
+      "600": { "$type": "color", "$value": "#b3261e" },
+      "700": { "$type": "color", "$value": "#8c1d17" },
+      "900": { "$type": "color", "$value": "#4d100c" }
+    },
+    "basari": {
+      "50":  { "$type": "color", "$value": "#eaf5ef" },
+      "100": { "$type": "color", "$value": "#cbe7d8" },
+      "500": { "$type": "color", "$value": "#2e8b5b" },
+      "600": { "$type": "color", "$value": "#1e6b46" },
+      "700": { "$type": "color", "$value": "#155134" },
+      "900": { "$type": "color", "$value": "#0b2a1b" }
+    },
+    "uyari": {
+      "50":  { "$type": "color", "$value": "#fdf3e2" },
+      "100": { "$type": "color", "$value": "#f9e2b8" },
+      "500": { "$type": "color", "$value": "#c98a00" },
+      "600": { "$type": "color", "$value": "#a06e00" },
+      "700": { "$type": "color", "$value": "#7a5400" },
+      "900": { "$type": "color", "$value": "#3f2b00" }
+    },
+    "kimlik": {
+      "$aciklama": "Devlet nişanının kırmızısı. YALNIZ kimlik parçalarında kullanılır: resmî afiş şeridi, arma. Metin rengi olarak kullanmayın. Beyaz üstünde 3.94:1 kontrast verir ve normal metin için AA ölçütünü karşılamaz.",
+      "kirmizi":      { "$type": "color", "$value": "#e30a17" },
+      "kirmizi-koyu": { "$type": "color", "$value": "#a8232b" },
+      "beyaz":        { "$type": "color", "$value": "#ffffff" }
+    },
+    "odak": {
+      "$aciklama": "Odak halkası. Sarı dolgu ve siyah alt çizgi. Bu birleşim her zemin üstünde görünür.",
+      "dolgu":  { "$type": "color", "$value": "#ffdd00" },
+      "kenar":  { "$type": "color", "$value": "#0b0c0c" }
+    }
+  },
+  "aralik": {
+    "$aciklama": "4 piksel tabanlı ölçek. Ara değer kullanmayın.",
+    "0":  { "$type": "dimension", "$value": "0" },
+    "1":  { "$type": "dimension", "$value": "0.25rem" },
+    "2":  { "$type": "dimension", "$value": "0.5rem" },
+    "3":  { "$type": "dimension", "$value": "0.75rem" },
+    "4":  { "$type": "dimension", "$value": "1rem" },
+    "5":  { "$type": "dimension", "$value": "1.25rem" },
+    "6":  { "$type": "dimension", "$value": "1.5rem" },
+    "7":  { "$type": "dimension", "$value": "2rem" },
+    "8":  { "$type": "dimension", "$value": "2.5rem" },
+    "9":  { "$type": "dimension", "$value": "3rem" },
+    "10": { "$type": "dimension", "$value": "4rem" },
+    "11": { "$type": "dimension", "$value": "5rem" }
+  },
+  "yazi": {
+    "aile": {
+      "govde": {
+        "$type": "fontFamily",
+        "$value": "\"TRDS Sans\", \"Public Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        "$aciklama": "Her ağırlıkta ş, ğ, ı, İ, ö, ç ve ü harflerini taşımayan bir yazı tipi kullanmayın."
+      },
+      "tek": {
+        "$type": "fontFamily",
+        "$value": "\"IBM Plex Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+      }
+    },
+    "boyut": {
+      "$aciklama": "Dokuz kademe. Küçük ekranda 24 ve üstü kademeler küçülür.",
+      "12": { "$type": "dimension", "$value": "0.75rem" },
+      "14": { "$type": "dimension", "$value": "0.875rem" },
+      "16": { "$type": "dimension", "$value": "1rem" },
+      "18": { "$type": "dimension", "$value": "1.125rem" },
+      "20": { "$type": "dimension", "$value": "1.25rem" },
+      "24": { "$type": "dimension", "$value": "1.5rem" },
+      "30": { "$type": "dimension", "$value": "1.875rem" },
+      "36": { "$type": "dimension", "$value": "2.25rem" },
+      "48": { "$type": "dimension", "$value": "3rem" }
+    },
+    "kalinlik": {
+      "normal": { "$type": "fontWeight", "$value": "400" },
+      "orta":   { "$type": "fontWeight", "$value": "500" },
+      "kalin":  { "$type": "fontWeight", "$value": "700" }
+    },
+    "satir": {
+      "$aciklama": "Türkçe uzun sözcükler taşır. Satır yüksekliğini 1.5 altına düşürmeyin.",
+      "sik":    { "$type": "number", "$value": "1.25" },
+      "normal": { "$type": "number", "$value": "1.55" },
+      "genis":  { "$type": "number", "$value": "1.75" }
+    }
+  },
+  "kose": {
+    "0":  { "$type": "dimension", "$value": "0" },
+    "1":  { "$type": "dimension", "$value": "2px" },
+    "2":  { "$type": "dimension", "$value": "4px" },
+    "3":  { "$type": "dimension", "$value": "8px" },
+    "tam": { "$type": "dimension", "$value": "999px" }
+  },
+  "kenarlik": {
+    "ince":  { "$type": "dimension", "$value": "1px" },
+    "orta":  { "$type": "dimension", "$value": "2px" },
+    "kalin": { "$type": "dimension", "$value": "4px" }
+  },
+  "golge": {
+    "yok": { "$type": "shadow", "$value": "none" },
+    "1":   { "$type": "shadow", "$value": "0 1px 2px rgba(16, 21, 26, 0.08)" },
+    "2":   { "$type": "shadow", "$value": "0 2px 6px rgba(16, 21, 26, 0.12)" },
+    "3":   { "$type": "shadow", "$value": "0 8px 24px rgba(16, 21, 26, 0.18)" }
+  },
+  "olcu": {
+    "$aciklama": "Sabit ölçüler. Sihirli sayı kullanmayın.",
+    "dokunma":     { "$type": "dimension", "$value": "44px" },
+    "satir-uzunluk": { "$type": "dimension", "$value": "38rem" },
+    "kap-genislik":  { "$type": "dimension", "$value": "72rem" },
+    "odak-kalinlik": { "$type": "dimension", "$value": "3px" }
+  },
+  "kirilma": {
+    "telefon":  { "$type": "dimension", "$value": "30rem" },
+    "tablet":   { "$type": "dimension", "$value": "48rem" },
+    "masaustu": { "$type": "dimension", "$value": "64rem" }
+  }
+}

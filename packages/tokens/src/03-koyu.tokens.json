@@ -1,0 +1,89 @@
+{
+  "$schema": "https://tr.gov.trds/schema/tokens.json",
+  "$aciklama": "Koyu tema. YALNIZ anlamsal belirteçleri yeniden tanımlar. Bir bileşen dosyası hiçbir zaman koyu tema için ayrı kural yazmaz.",
+  "$kip": "koyu",
+  "renk": {
+    "notr": {
+      "zemin": {
+        "varsayilan": { "$type": "color", "$value": "{renk.notr.950}" },
+        "yumusak":    { "$type": "color", "$value": "{renk.notr.900}" }
+      },
+      "yuzey": {
+        "varsayilan": { "$type": "color", "$value": "{renk.notr.900}" },
+        "yumusak":    { "$type": "color", "$value": "{renk.notr.800}" },
+        "uzeri":      { "$type": "color", "$value": "{renk.notr.700}" },
+        "etkin":      { "$type": "color", "$value": "{renk.notr.600}" }
+      },
+      "kenar": {
+        "silik":      { "$type": "color", "$value": "{renk.notr.700}" },
+        "varsayilan": { "$type": "color", "$value": "{renk.notr.400}" },
+        "guclu":      { "$type": "color", "$value": "{renk.notr.0}" }
+      },
+      "metin": {
+        "silik":      { "$type": "color", "$value": "{renk.notr.300}" },
+        "varsayilan": { "$type": "color", "$value": "{renk.notr.50}" },
+        "karsit":     { "$type": "color", "$value": "{renk.notr.950}" }
+      },
+      "taban": {
+        "varsayilan": { "$type": "color", "$value": "{renk.notr.50}" },
+        "uzeri":      { "$type": "color", "$value": "{renk.notr.100}" },
+        "etkin":      { "$type": "color", "$value": "{renk.notr.200}" },
+        "karsit-varsayilan": { "$type": "color", "$value": "{renk.notr.950}" }
+      }
+    },
+    "birincil": {
+      "zemin": { "yumusak": { "$type": "color", "$value": "{renk.birincil.900}" } },
+      "yuzey": {
+        "yumusak": { "$type": "color", "$value": "{renk.birincil.800}" },
+        "uzeri":   { "$type": "color", "$value": "{renk.birincil.800}" }
+      },
+      "kenar": {
+        "silik":      { "$type": "color", "$value": "{renk.birincil.700}" },
+        "varsayilan": { "$type": "color", "$value": "{renk.birincil.300}" }
+      },
+      "metin": {
+        "varsayilan": { "$type": "color", "$value": "{renk.birincil.200}" },
+        "guclu":      { "$type": "color", "$value": "{renk.birincil.100}" },
+        "ziyaret":    { "$type": "color", "$value": "#c5b3f0" }
+      },
+      "taban": {
+        "varsayilan": { "$type": "color", "$value": "{renk.birincil.200}" },
+        "uzeri":      { "$type": "color", "$value": "{renk.birincil.100}" },
+        "etkin":      { "$type": "color", "$value": "{renk.birincil.50}" },
+        "karsit-varsayilan": { "$type": "color", "$value": "{renk.birincil.900}" }
+      }
+    },
+    "tehlike": {
+      "zemin": { "yumusak": { "$type": "color", "$value": "{renk.tehlike.900}" } },
+      "kenar": {
+        "varsayilan": { "$type": "color", "$value": "{renk.tehlike.300}" },
+        "guclu":      { "$type": "color", "$value": "{renk.tehlike.100}" }
+      },
+      "metin": { "varsayilan": { "$type": "color", "$value": "{renk.tehlike.300}" } },
+      "taban": {
+        "varsayilan": { "$type": "color", "$value": "{renk.tehlike.300}" },
+        "uzeri":      { "$type": "color", "$value": "{renk.tehlike.100}" },
+        "etkin":      { "$type": "color", "$value": "{renk.tehlike.50}" },
+        "karsit-varsayilan": { "$type": "color", "$value": "{renk.tehlike.900}" }
+      }
+    },
+    "basari": {
+      "zemin": { "yumusak": { "$type": "color", "$value": "{renk.basari.900}" } },
+      "kenar": { "varsayilan": { "$type": "color", "$value": "{renk.basari.100}" } },
+      "metin": { "varsayilan": { "$type": "color", "$value": "{renk.basari.100}" } },
+      "taban": {
+        "varsayilan": { "$type": "color", "$value": "{renk.basari.100}" },
+        "karsit-varsayilan": { "$type": "color", "$value": "{renk.basari.900}" }
+      }
+    },
+    "uyari": {
+      "zemin": { "yumusak": { "$type": "color", "$value": "{renk.uyari.900}" } },
+      "kenar": { "varsayilan": { "$type": "color", "$value": "{renk.uyari.100}" } },
+      "metin": { "varsayilan": { "$type": "color", "$value": "{renk.uyari.100}" } },
+      "taban": {
+        "varsayilan": { "$type": "color", "$value": "{renk.uyari.500}" },
+        "karsit-varsayilan": { "$type": "color", "$value": "{renk.notr.950}" }
+      }
+    }
+  }
+}

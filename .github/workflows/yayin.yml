@@ -1,0 +1,48 @@
+name: Yayın
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+concurrency:
+  group: npm-yayin
+  cancel-in-progress: false
+
+jobs:
+  yayimla:
+    name: npm yayını
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: Yapı, test ve bütünlük
+        run: |
+          npm run yapi
+          npm test
+          npm run denetle
+
+      - name: Paket arşivlerini denetle
+        run: npm run yayin:denetle
+
+      - name: Paketleri yayımla
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM_TOKEN sırrını GitHub Actions ayarlarına ekleyin."
+            exit 1
+          fi
+          npm run yayin
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: ${{ !github.event.repository.private }}

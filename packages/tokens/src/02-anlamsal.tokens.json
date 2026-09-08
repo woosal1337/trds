@@ -1,0 +1,372 @@
+{
+  "$schema": "https://tr.gov.trds/schema/tokens.json",
+  "$aciklama": "Anlamsal belirteçler. Ad üç parçadan kurulur: ölçek, grup, çeşit. Norveç Designsystemet adlandırma kuralı temel alındı. Bir bileşen YALNIZ bu belirteçleri kullanır.",
+  "$adlandirma": {
+    "kalip": "renk-<olcek>-<grup>-<cesit>",
+    "olcekler": [
+      "notr",
+      "birincil",
+      "tehlike",
+      "basari",
+      "uyari"
+    ],
+    "gruplar": {
+      "zemin": "Sayfanın altındaki en geniş yüzey",
+      "yuzey": "Kart, tablo satırı, panel gibi yükseltilmiş yüzeyler",
+      "kenar": "Kenarlık ve ayraç",
+      "metin": "Metin ve simge",
+      "taban": "Dolu düğme gibi renkli yüzeyler"
+    },
+    "cesitler": {
+      "varsayilan": "Öntanımlı değer",
+      "yumusak": "Renk tonu taşıyan, hafif değer",
+      "uzeri": "İşaretçi üstündeyken",
+      "etkin": "Basılıyken",
+      "silik": "Daha düşük karşıtlık, ama yine 4.5 üzerinde",
+      "guclu": "Daha yüksek karşıtlık"
+    },
+    "garanti": [
+      "renk-notr-metin-varsayilan her zemin ve yüzey renginin üstünde 7:1 üzerindedir.",
+      "renk-notr-metin-silik her zemin renginin ve yuzey-varsayilan renginin üstünde 4.5:1 üzerindedir.",
+      "renk-<olcek>-taban-varsayilan üstünde renk-<olcek>-taban-karsit-varsayilan 4.5:1 üzerindedir."
+    ]
+  },
+  "renk": {
+    "notr": {
+      "zemin": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        },
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.notr.50}"
+        }
+      },
+      "yuzey": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        },
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.notr.100}"
+        },
+        "uzeri": {
+          "$type": "color",
+          "$value": "{renk.notr.100}"
+        },
+        "etkin": {
+          "$type": "color",
+          "$value": "{renk.notr.200}"
+        }
+      },
+      "kenar": {
+        "silik": {
+          "$type": "color",
+          "$value": "{renk.notr.200}"
+        },
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.400}"
+        },
+        "guclu": {
+          "$type": "color",
+          "$value": "{renk.notr.900}"
+        }
+      },
+      "metin": {
+        "silik": {
+          "$type": "color",
+          "$value": "{renk.notr.600}"
+        },
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.900}"
+        },
+        "karsit": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        }
+      },
+      "taban": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.900}"
+        },
+        "uzeri": {
+          "$type": "color",
+          "$value": "{renk.notr.800}"
+        },
+        "etkin": {
+          "$type": "color",
+          "$value": "{renk.notr.950}"
+        },
+        "karsit-varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        }
+      },
+      "ortu": {
+        "$type": "color",
+        "$value": "rgb(16 21 26 / 0.55)",
+        "$aciklama": "Kip pencere, yan panel ve yönlendirme arka örtüsü. Her temada aynı."
+      }
+    },
+    "birincil": {
+      "zemin": {
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.birincil.50}"
+        }
+      },
+      "yuzey": {
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.birincil.100}"
+        },
+        "uzeri": {
+          "$type": "color",
+          "$value": "{renk.birincil.100}"
+        }
+      },
+      "kenar": {
+        "silik": {
+          "$type": "color",
+          "$value": "{renk.birincil.200}"
+        },
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.birincil.600}"
+        }
+      },
+      "metin": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.birincil.600}"
+        },
+        "guclu": {
+          "$type": "color",
+          "$value": "{renk.birincil.800}"
+        },
+        "ziyaret": {
+          "$type": "color",
+          "$value": "#4c2c92"
+        }
+      },
+      "taban": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.birincil.600}"
+        },
+        "uzeri": {
+          "$type": "color",
+          "$value": "{renk.birincil.700}"
+        },
+        "etkin": {
+          "$type": "color",
+          "$value": "{renk.birincil.800}"
+        },
+        "karsit-varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        }
+      }
+    },
+    "tehlike": {
+      "zemin": {
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.tehlike.50}"
+        }
+      },
+      "kenar": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.tehlike.600}"
+        },
+        "guclu": {
+          "$type": "color",
+          "$value": "{renk.tehlike.700}"
+        }
+      },
+      "metin": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.tehlike.600}"
+        }
+      },
+      "taban": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.tehlike.600}"
+        },
+        "uzeri": {
+          "$type": "color",
+          "$value": "{renk.tehlike.700}"
+        },
+        "etkin": {
+          "$type": "color",
+          "$value": "{renk.tehlike.900}"
+        },
+        "karsit-varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        }
+      }
+    },
+    "basari": {
+      "zemin": {
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.basari.50}"
+        }
+      },
+      "kenar": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.basari.600}"
+        }
+      },
+      "metin": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.basari.600}"
+        }
+      },
+      "taban": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.basari.600}"
+        },
+        "karsit-varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.0}"
+        }
+      }
+    },
+    "uyari": {
+      "zemin": {
+        "yumusak": {
+          "$type": "color",
+          "$value": "{renk.uyari.50}"
+        }
+      },
+      "kenar": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.uyari.600}"
+        }
+      },
+      "metin": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.uyari.700}"
+        }
+      },
+      "taban": {
+        "varsayilan": {
+          "$type": "color",
+          "$value": "{renk.uyari.500}"
+        },
+        "karsit-varsayilan": {
+          "$type": "color",
+          "$value": "{renk.notr.950}"
+        }
+      }
+    },
+    "kimlik": {
+      "$aciklama": "Odak renkleri temel katmanda tanımlıdır: renk-odak-dolgu ve renk-odak-kenar. Burada yeniden tanımlanmaz.",
+      "serit": {
+        "$type": "color",
+        "$value": "{renk.kimlik.kirmizi}"
+      },
+      "arma": {
+        "$type": "color",
+        "$value": "{renk.kimlik.beyaz}"
+      }
+    }
+  },
+  "metin": {
+    "govde": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.18}"
+    },
+    "kucuk": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.16}"
+    },
+    "yardim": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.16}"
+    },
+    "baslik-1": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.36}"
+    },
+    "baslik-2": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.30}"
+    },
+    "baslik-3": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.24}"
+    },
+    "baslik-4": {
+      "$type": "dimension",
+      "$value": "{yazi.boyut.20}"
+    }
+  },
+  "bilesen": {
+    "dugme": {
+      "dolgu-y": {
+        "$type": "dimension",
+        "$value": "{aralik.3}"
+      },
+      "dolgu-x": {
+        "$type": "dimension",
+        "$value": "{aralik.5}"
+      },
+      "en-az-yukseklik": {
+        "$type": "dimension",
+        "$value": "{olcu.dokunma}"
+      },
+      "kose": {
+        "$type": "dimension",
+        "$value": "{kose.2}"
+      }
+    },
+    "girdi": {
+      "dolgu-y": {
+        "$type": "dimension",
+        "$value": "{aralik.2}"
+      },
+      "dolgu-x": {
+        "$type": "dimension",
+        "$value": "{aralik.3}"
+      },
+      "kenarlik": {
+        "$type": "dimension",
+        "$value": "{kenarlik.orta}"
+      },
+      "kenarlik-hata": {
+        "$type": "dimension",
+        "$value": "{kenarlik.kalin}"
+      },
+      "yukseklik": {
+        "$type": "dimension",
+        "$value": "{olcu.dokunma}"
+      }
+    },
+    "kart": {
+      "dolgu": {
+        "$type": "dimension",
+        "$value": "{aralik.6}"
+      },
+      "kose": {
+        "$type": "dimension",
+        "$value": "{kose.2}"
+      }
+    }
+  }
+}

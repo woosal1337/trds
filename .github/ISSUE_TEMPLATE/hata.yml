@@ -1,0 +1,46 @@
+name: Hata bildirimi
+description: Beklendiği gibi çalışmayan bir şey bildirin
+labels: ["hata"]
+body:
+  - type: input
+    id: bilesen
+    attributes:
+      label: Hangi bileşen
+      placeholder: Örnek — T.C. kimlik numarası girişi
+    validations: { required: true }
+
+  - type: textarea
+    id: adimlar
+    attributes:
+      label: Yeniden üretme adımları
+      value: |
+        1.
+        2.
+        3.
+    validations: { required: true }
+
+  - type: textarea
+    id: beklenen
+    attributes:
+      label: Ne olmasını bekliyordunuz
+    validations: { required: true }
+
+  - type: textarea
+    id: olan
+    attributes:
+      label: Ne oldu
+    validations: { required: true }
+
+  - type: dropdown
+    id: erisilebilirlik
+    attributes:
+      label: Erişilebilirliği etkiliyor mu
+      description: Erişilebilirliği etkileyen konular her zaman önceliklidir.
+      options: ["Evet", "Hayır", "Emin değilim"]
+    validations: { required: true }
+
+  - type: input
+    id: ortam
+    attributes:
+      label: Tarayıcı ve yardımcı teknoloji
+      placeholder: Örnek — Windows 11, Chrome 130, NVDA 2024.4

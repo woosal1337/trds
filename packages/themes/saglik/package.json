@@ -1,0 +1,47 @@
+{
+  "name": "@tr-ds/theme-saglik",
+  "version": "1.0.1",
+  "description": "TRDS Sağlık teması. Tek bir marka renginden üretilir.",
+  "license": "MIT",
+  "main": "dist/tema.css",
+  "exports": {
+    ".": "./dist/tema.css"
+  },
+  "files": [
+    "dist",
+    "tema.config.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@tr-ds/core": "1.0.1"
+  },
+  "author": "Ege Chelebi <ege@chele.bi>",
+  "homepage": "https://trds.chele.bi",
+  "bugs": {
+    "url": "https://github.com/woosal1337/trds/issues"
+  },
+  "keywords": [
+    "trds",
+    "design-system",
+    "turkiye",
+    "gov",
+    "accessibility",
+    "wcag",
+    "e-devlet"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woosal1337/trds.git",
+    "directory": "packages/themes/saglik"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prepublishOnly": "node ../build.mjs"
+  }
+}

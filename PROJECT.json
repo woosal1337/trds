@@ -1,0 +1,22 @@
+{
+  "name": "trds",
+  "board": {
+    "key": "TRDS",
+    "org": "Personal",
+    "tool": "elliptic"
+  },
+  "remote": "git@github.com:woosal1337/trds.git",
+  "machines": {
+    "macbook": {
+      "repo": "/Users/ege/Documents/GitHub/trds",
+      "backup": "/Users/ege/backup/trds"
+    }
+  },
+  "deployment": {
+    "provider": "vercel",
+    "projectName": "trds",
+    "url": "https://trds.chele.bi",
+    "dnsProvider": "cloudflare",
+    "outputDirectory": "apps/docs/site"
+  }
+}

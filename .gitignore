@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+.claude/
+.vercel/
+
+# Üretilen çıktı. Depo yalnız kaynağı taşır.
+packages/*/dist/
+packages/themes/*/dist/
+apps/docs/site/

@@ -1,0 +1,11 @@
+{
+  "name": "@tr-ds/docs",
+  "private": true,
+  "version": "1.0.1",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node serve.mjs 4173"
+  }
+}

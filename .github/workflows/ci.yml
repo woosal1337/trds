@@ -1,0 +1,62 @@
+name: Denetim
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  yapi-ve-test:
+    name: Yapı, test ve bütünlük
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Bağımlılık kurulmaz. Bu kasıtlıdır: bir kamu kurumu bu depoyu
+      # kapalı bir ağda da derleyebilmelidir.
+      - name: Belirteçleri üret ve kontrastı denetle
+        run: node packages/tokens/build.mjs
+
+      - name: Temaları üret ve kontrastı denetle
+        run: node packages/themes/build.mjs
+
+      - name: Kimlik varlıklarını üret
+        run: node packages/identity/build.mjs
+
+      - name: Çekirdeği derle
+        run: node packages/core/build.mjs
+
+      - name: Doğrulama testleri
+        run: node --test packages/validators/test/*.test.js
+
+      - name: Belge sitesini üret
+        run: node apps/docs/build.mjs
+
+      - name: Bütünlük denetimi
+        run: node tools/denetle.mjs
+
+      # React ve Vue sarmalayıcı testleri iki çerçeveyi kurar. Yalnız test için.
+      - name: Sarmalayıcı bağımlılıklarını kur
+        run: npm ci
+
+      - name: Tüm testler
+        run: npm test
+
+      - name: Paket arşivlerini denetle
+        run: npm run yayin:denetle
+
+      - name: llms.txt üret
+        run: node tools/llms.mjs
+
+      - name: README güncel mi
+        run: |
+          node tools/readme.mjs
+          if ! git diff --quiet README.md; then
+            echo "README güncel değil. Yerelde 'node tools/readme.mjs' çalıştırın."
+            git diff README.md
+            exit 1
+          fi

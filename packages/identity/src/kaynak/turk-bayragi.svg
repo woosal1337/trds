@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -30000 90000 60000" aria-hidden="true" focusable="false">
+  <!--
+    Türk Bayrağı. Ölçüler 2893 sayılı Türk Bayrağı Kanunu ve Türk Bayrağı
+    Tüzüğü'ne göredir. G = 60000 birim.
+      en           L = 1,5 G  → 90000
+      dış çember   F = G/2    → r 15000, merkez hoist'ten G/2 sağda
+      iç çember    D = 2G/5   → r 12000, merkez dış merkezden G/16 sağda
+      yıldız       B = G/4    → çevrel çember çapı 15000
+    Kırmızı: #e30a17. Bu dosya devlet kimliğidir, LICENSE-IDENTITY.md geçerlidir.
+  -->
+  <path fill="#e30a17" d="m0-30000h90000v60000H0z"/>
+  <path fill="#fff" d="m41750 0 13568-4408-8386 11541V-7133l8386 11541zm925 8021a15000 15000 0 1 1 0-16042 12000 12000 0 1 0 0 16042z"/>
+</svg>

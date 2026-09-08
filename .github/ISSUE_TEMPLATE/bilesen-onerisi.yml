@@ -1,0 +1,55 @@
+name: Bileşen önerisi
+description: Sisteme yeni bir bileşen veya kalıp önerin
+labels: ["bileşen önerisi", "değerlendiriliyor"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Önce [katkı ölçütlerini](../../CONTRIBUTING.md) okuyun. Bir bileşen
+        beş ölçütü karşılamadan sisteme girmez.
+
+  - type: input
+    id: ad
+    attributes:
+      label: Bileşenin adı
+      placeholder: Örnek — Randevu seçici
+    validations: { required: true }
+
+  - type: textarea
+    id: sorun
+    attributes:
+      label: Hangi sorunu çözüyor
+      description: Kullanıcının karşılaştığı sorunu anlatın. Çözümü değil.
+    validations: { required: true }
+
+  - type: textarea
+    id: yararli
+    attributes:
+      label: Yararlı olduğuna dair kanıt
+      description: |
+        Bu bileşene birden çok kurumun ihtiyacı olduğunu gösterin. Farklı
+        hizmetlerden ekran görüntüsü veya bağlantı verin.
+    validations: { required: true }
+
+  - type: textarea
+    id: benzersiz
+    attributes:
+      label: Sistemde benzeri var mı
+      description: Varsa, bu önerinin ondan farkını yazın.
+    validations: { required: true }
+
+  - type: textarea
+    id: arastirma
+    attributes:
+      label: Kullanıcı araştırması
+      description: Engelli kullanıcılarla yapılan test sonuçlarını da yazın.
+
+  - type: checkboxes
+    id: onay
+    attributes:
+      label: Onay
+      options:
+        - label: Katkı ölçütlerini okudum.
+          required: true
+        - label: Bu bileşenin bir kamu hizmeti kullanım gerekçesi var.
+          required: true
