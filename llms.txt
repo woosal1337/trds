@@ -1,6 +1,6 @@
-# Kiriş — Türkiye Kamu Tasarım Sistemi
+# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi
 
-> Kiriş (Türkiye Kamu Tasarım Sistemi) is an open design system for Turkish public services. It has 116 HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.
+> Kiriş (Türkiye kamu hizmetleri için tasarım sistemi) is an open design system for Turkish public services. It has 116 HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.
 
 Version 1.0.1. Source: https://github.com/woosal1337/trds. Docs: https://trds.chele.bi. For a local site, run `npm ci && npm run yapi && npm run sun` and open http://localhost:4173. The docs use `tools/registry/*.mjs` as their source. Read `llms-full.txt` for the markup of each component.
 

@@ -1,4 +1,4 @@
-# Kiriş — Türkiye Kamu Tasarım Sistemi
+# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi
 
 Türkiye'deki kamu hizmetleri için bileşen kütüphanesi, tasarım belirteçleri ve
 uygulama rehberi. HTML/CSS çekirdeği, React ve Vue sarmalayıcıları içerir.

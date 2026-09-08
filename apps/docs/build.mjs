@@ -41,6 +41,10 @@ const KIMLIK = join(PAKETLER, 'identity', 'dist');
 const SURUM = JSON.parse(await readFile(join(KOK, '..', '..', 'package.json'), 'utf8')).version;
 let SPRITE = '';
 
+// Ana sayfanın sekme başlığı. Marka adıyla başlar, arkasından ne olduğunu
+// söyleyen bir tanım gelir. Unvan değil tanım: sistem resmî değil, bir öneridir.
+const ANA_BASLIK = 'Kiriş — Türkiye kamu hizmetleri için tasarım sistemi';
+
 // Kiriş marka işareti. Başlık çubuğuna gömülü gelir ki currentColor ile
 // koyu ve açık zeminde aynı işaret çalışsın. Tek kaynağı identity paketidir.
 const MARKA_ISARET = (await readFile(join(KIMLIK, 'kiris-isaret.svg'), 'utf8'))
@@ -156,7 +160,7 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
     (m) => `<a href="${yukari}${m.yol}"${m.yol === etkin ? ' aria-current="page"' : ''}>${m.ad}</a>`
   ).join('\n        ');
 
-  const tamBaslik = baslik === 'Türkiye Kamu Tasarım Sistemi' ? baslik : `${baslik} — Kiriş`;
+  const tamBaslik = baslik === ANA_BASLIK ? baslik : `${baslik} — Kiriş`;
 
   return `<!doctype html>
 <html lang="tr" data-kiris-tema="acik">
@@ -192,7 +196,7 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
     <a class="dok-marka" href="${yukari}">
       ${MARKA_ISARET}
       <span class="dok-marka__ad">Kiriş</span>
-      <span class="dok-marka__alt">Türkiye Kamu Tasarım Sistemi</span>
+      <span class="dok-marka__alt">Türkiye kamu hizmetleri için tasarım sistemi</span>
     </a>
     <button class="kiris-baslik-cubugu__menu-dugmesi dok-ust__menu-dugmesi" type="button" aria-expanded="false" aria-controls="dok-ana-menu">Menü</button>
     <nav class="dok-ust__menu kiris-baslik-cubugu__menu" id="dok-ana-menu" aria-label="Ana menü">
@@ -297,7 +301,7 @@ const kartIzgara = (liste, yukari) =>
 const girisSayfasi = () => {
   const gruplu = grupla();
   return sayfa({
-    baslik: 'Türkiye Kamu Tasarım Sistemi',
+    baslik: ANA_BASLIK,
     ozet: 'Türkiye kamu hizmetleri için tek bir açık kaynak tasarım sistemi.',
     etkin: '',
     genis: true,

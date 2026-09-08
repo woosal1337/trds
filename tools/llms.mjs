@@ -71,7 +71,7 @@ const kimlikLisans = await oku('LICENSE-IDENTITY.md');
 const paketSurumu = JSON.parse(await oku('packages/core/package.json')).version;
 
 // --------------------------------------------------------------- llms.txt
-const ozet = `Kiriş (Türkiye Kamu Tasarım Sistemi) is an open design system for Turkish public services. It has ${BILESENLER.length} HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.`;
+const ozet = `Kiriş (Türkiye kamu hizmetleri için tasarım sistemi) is an open design system for Turkish public services. It has ${BILESENLER.length} HTML and CSS components with JavaScript, React and Vue wrappers, Turkish validators, DTCG tokens, and Tabler icons. Build tools use the Node.js standard library. Tests need React and Vue. Code and icons use MIT licences. State identity assets have separate terms. Kiriş has no government endorsement.`;
 
 const bilesenSatiri = (b) => {
   const t = tanimHaritasi.get(b.id);
@@ -80,7 +80,7 @@ const bilesenSatiri = (b) => {
   return `- [${b.ad} (${b.name})](${SITE}/bilesenler/${b.id}.html): ${b.ozet} Root class \`${kok}\`${davranis ? `, behaviour \`data-kiris="${davranis}"\`` : ''}${t ? `, React/Vue \`${t.ad}\`` : ''}.`;
 };
 
-const kisa = `# Kiriş — Türkiye Kamu Tasarım Sistemi
+const kisa = `# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi
 
 > ${ozet}
 
@@ -188,7 +188,7 @@ Props shown are the example props; every prop maps to the HTML above. Extra attr
 `;
 };
 
-const tam = `# Kiriş — Türkiye Kamu Tasarım Sistemi (full reference)
+const tam = `# Kiriş — Türkiye kamu hizmetleri için tasarım sistemi (full reference)
 
 > ${ozet}
 
