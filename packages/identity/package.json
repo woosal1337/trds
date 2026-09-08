@@ -1,7 +1,7 @@
 {
   "name": "@tr-ds/identity",
   "version": "1.0.1",
-  "description": "TRDS simge seti (MIT) ve devlet kimlik parçaları. Kimlik parçaları kısıtlıdır. Bakınız LICENSE-IDENTITY.md.",
+  "description": "TRDS simge seti ve marka işareti (MIT), devlet kimlik parçaları. Kimlik parçaları kısıtlıdır. Bakınız LICENSE-IDENTITY.md.",
   "type": "module",
   "license": "SEE LICENSE IN dist/LICENSE-IDENTITY.md",
   "files": [
@@ -12,6 +12,9 @@
   ],
   "exports": {
     "./sprite": "./dist/trds-simgeler.svg",
+    "./marka": "./dist/trds-isaret.svg",
+    "./marka/*": "./dist/trds-isaret-*.png",
+    "./favicon": "./dist/trds-favicon.ico",
     "./isaret": "./dist/e-devlet-isaret.png",
     "./bayrak": "./dist/turk-bayragi.svg",
     "./simgeler/*": "./dist/simgeler/*"

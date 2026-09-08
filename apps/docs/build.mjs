@@ -41,6 +41,12 @@ const KIMLIK = join(PAKETLER, 'identity', 'dist');
 const SURUM = JSON.parse(await readFile(join(KOK, '..', '..', 'package.json'), 'utf8')).version;
 let SPRITE = '';
 
+// TRDS marka işareti. Başlık çubuğuna gömülü gelir ki currentColor ile
+// koyu ve açık zeminde aynı işaret çalışsın. Tek kaynağı identity paketidir.
+const MARKA_ISARET = (await readFile(join(KIMLIK, 'trds-isaret.svg'), 'utf8'))
+  .replace(/<svg /, '<svg class="dok-marka__isaret" ')
+  .trim();
+
 // ---------------------------------------------------------------- yardımcılar
 
 const kacis = (m) =>
@@ -160,8 +166,9 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
 <title>${kacis(tamBaslik)}</title>
 <meta name="description" content="${kacis(ozet)}">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" type="image/png" sizes="196x196" href="${yukari}varliklar/e-devlet-isaret.png?v=edevlet-1">
-<link rel="icon" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64" href="${yukari}favicon.ico?v=edevlet-1">
+<link rel="icon" type="image/png" sizes="196x196" href="${yukari}varliklar/trds-isaret-196.png?v=trds-1">
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="${yukari}favicon.ico?v=trds-1">
+<link rel="apple-touch-icon" href="${yukari}varliklar/trds-isaret-196.png?v=trds-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -183,7 +190,7 @@ const sayfa = ({ baslik, ozet, govde, derinlik = 0, etkin = '', kenar = false, e
 <header class="dok-ust" data-trds="baslik-cubugu">
   <div class="dok-kap dok-ust__ic">
     <a class="dok-marka" href="${yukari}">
-      <img class="dok-marka__isaret" src="${yukari}varliklar/e-devlet-isaret.png" alt="" width="36" height="36">
+      ${MARKA_ISARET}
       <span class="dok-marka__ad">TRDS</span>
       <span class="dok-marka__alt">Türkiye Kamu Tasarım Sistemi</span>
     </a>
@@ -1027,10 +1034,7 @@ const BELGE_CSS = `/* TRDS belge sitesi. Bileşen biçimlerinden ayrıdır, her 
 .dok-marka__isaret {
   grid-row: span 2;
   width: 2.25rem; height: 2.25rem;
-  background: #fff;
-  border-radius: 50%;
-  padding: 0.15rem;
-  object-fit: contain;
+  fill: currentColor;
 }
 .dok-marka__ad { font-weight: 700; font-size: var(--trds-yazi-boyut-18); line-height: 1.1; letter-spacing: 0.01em; }
 .dok-marka__alt { font-size: var(--trds-yazi-boyut-12); opacity: 0.8; line-height: 1.2; }
@@ -1665,8 +1669,8 @@ const ornekSayfa = (o) => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${kacis(o.ad)} — TRDS örneği</title>
 <meta name="description" content="${kacis(o.ozet)}">
-<link rel="icon" type="image/png" sizes="196x196" href="../../varliklar/e-devlet-isaret.png?v=edevlet-1">
-<link rel="icon" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64" href="../../favicon.ico?v=edevlet-1">
+<link rel="icon" type="image/png" sizes="196x196" href="../../varliklar/trds-isaret-196.png?v=trds-1">
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="../../favicon.ico?v=trds-1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1798,7 +1802,12 @@ async function main() {
   await copyFile(join(CEKIRDEK, 'trds.css'), join(CIKTI, 'varliklar', 'trds.css'));
   await copyFile(join(CEKIRDEK, 'trds.js'), join(CIKTI, 'varliklar', 'trds.js'));
   await copyFile(join(KIMLIK, 'e-devlet-isaret.png'), join(CIKTI, 'varliklar', 'e-devlet-isaret.png'));
-  await copyFile(join(KIMLIK, 'favicon.ico'), join(CIKTI, 'favicon.ico'));
+  // Sitenin kendi kimliği. favicon.ico TRDS işaretidir, e-Devlet'inki değil.
+  await copyFile(join(KIMLIK, 'trds-favicon.ico'), join(CIKTI, 'favicon.ico'));
+  await copyFile(join(KIMLIK, 'trds-isaret.svg'), join(CIKTI, 'varliklar', 'trds-isaret.svg'));
+  for (const boyut of [16, 32, 48, 64, 128, 196]) {
+    await copyFile(join(KIMLIK, `trds-isaret-${boyut}.png`), join(CIKTI, 'varliklar', `trds-isaret-${boyut}.png`));
+  }
   await copyFile(join(KIMLIK, 'turk-bayragi.svg'), join(CIKTI, 'varliklar', 'turk-bayragi.svg'));
   await copyFile(join(KIMLIK, 'trds-simgeler.svg'), join(CIKTI, 'varliklar', 'trds-simgeler.svg'));
   await mkdir(join(CIKTI, 'varliklar', 'kurumlar'), { recursive: true });

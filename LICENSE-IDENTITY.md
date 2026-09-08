@@ -8,6 +8,13 @@ izin vermez. Haklar ilgili kurumlara aittir. Bu dosyaların depoda bulunması
 resmî onay veya kullanım izni anlamına gelmez. Kullanım ve dağıtım için
 gerekli izinleri ilgili hak sahibinden alın.
 
+## TRDS marka işareti bu belgenin dışındadır
+
+TRDS'nin kendi marka işareti (`trds-isaret.svg` ve PNG, ICO türevleri) özgün bir
+çizimdir. Hiçbir devlet sembolü, kurum logosu ya da resmî işaret içermez. Deponun
+MIT lisansı kapsamındadır ve serbestçe kullanılır. Türevleri kaynaktan
+`node tools/marka-turev.mjs` ile yeniden üretilir.
+
 ## Simgeler bu belgenin dışındadır
 
 Simge seti [Tabler Icons](https://tabler.io/icons) setinden gelir ve MIT
@@ -22,7 +29,7 @@ Aşağıdaki parçalar bu belgeye tabidir:
 - Resmî site afişi (`trds-resmi-afis`) ve metni
 - e-Devlet giriş düğmesi (`trds-edevlet`) ve işareti
 - Kurum tanıtıcısı (`trds-tanitici`) ve kurum armaları
-- Favicon ve uygulama simgeleri
+- Kurum favicon'ları ve uygulama simgeleri. TRDS'nin kendi işareti hariçtir
 - `kurumlar/` altındaki kurum logoları. Her biri kurumun kendi sitesinden
   alınmıştır ve yalnız o kurumu göstermek için kullanılır:
   - `e-devlet-kapisi-beyaz.svg` — cdn.e-devlet.gov.tr, türkiye.gov.tr başlık logosu

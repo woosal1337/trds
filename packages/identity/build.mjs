@@ -63,6 +63,14 @@ async function main() {
   await writeFile(join(CIKTI, 'trds-simgeler.svg'), sprite, 'utf8');
   await writeFile(join(CIKTI, 'simgeler.json'), JSON.stringify(adlar, null, 2) + '\n', 'utf8');
 
+  // TRDS'nin kendi marka işareti. Devlet kimliği taşımaz, LICENSE-IDENTITY.md
+  // kapsamı dışındadır. Kaynağı trds-isaret.svg, türevleri tools/marka-turev.mjs üretir.
+  await copyFile(join(KAYNAK, 'trds-isaret.svg'), join(CIKTI, 'trds-isaret.svg'));
+  await copyFile(join(KAYNAK, 'trds-favicon.ico'), join(CIKTI, 'trds-favicon.ico'));
+  for (const boyut of [16, 32, 48, 64, 128, 196]) {
+    await copyFile(join(KAYNAK, `trds-isaret-${boyut}.png`), join(CIKTI, `trds-isaret-${boyut}.png`));
+  }
+
   await copyFile(join(KAYNAK, 'favicon-196x196.1.8.0.png'), join(CIKTI, 'e-devlet-isaret.png'));
   await copyFile(join(KAYNAK, 'favicon.ico'), join(CIKTI, 'favicon.ico'));
   await copyFile(join(KAYNAK, 'turk-bayragi.svg'), join(CIKTI, 'turk-bayragi.svg'));
