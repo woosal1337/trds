@@ -39,7 +39,8 @@ try {
     assert.ok(dosyalar.has('README.md'), `${paket.name}: README arşivde yok.`);
     if (paket.name === '@kiris-ds/identity') {
       assert.ok(dosyalar.has('src/simgeler/LICENSE-TABLER.txt'));
-      assert.ok(![...dosyalar].some((dosya) => /(?:edk\.|instagram3\.svg|\.woff2?$)/i.test(dosya)), 'Kimlik arşivinde eski simge dosyası var.');
+      assert.ok(dosyalar.has('src/yazi/LICENSE-FONTS.txt'), 'Kimlik arşivinde yazı tipi lisansı yok.');
+      assert.ok(![...dosyalar].some((dosya) => /(?:edk\.|instagram3\.svg)/i.test(dosya)), 'Kimlik arşivinde eski simge dosyası var.');
     }
     paketler.push({ ...arsiv, name: paket.name });
     console.log(`${paket.name}@${paket.version}: ${dosyalar.size} dosya, lisans ve dışa aktarımlar tam.`);
