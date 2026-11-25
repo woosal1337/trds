@@ -1,0 +1,12 @@
+{
+  "name": "site-trds",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  // Static site only. `npm run yapi` writes apps/docs/site.
+  "assets": {
+    "directory": "apps/docs/site",
+    "html_handling": "auto-trailing-slash"
+  }
+}
